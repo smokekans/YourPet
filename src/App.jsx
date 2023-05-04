@@ -17,23 +17,15 @@ export const App = () => {
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
+          <Route path="" element={<MainPage />} />
+          <Route path="news" element={<NewsPage />} />
+          <Route path="notices/:categoryName" element={<NoticesPage />} />
+          <Route path="friends" element={<OurFriendsPage />} />
           <Route path="" element={<PublicRoute redirectTo="" restricted />}>
-            <Route path="" element={<MainPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-            <Route path="news" element={<NewsPage />} />
-            <Route path="notices">
-              <Route path="sell" element={<NoticesPage />} />
-              <Route path="lost-found" element={<NoticesPage />} />
-              <Route path="for-free" element={<NoticesPage />} />
-            </Route>
-            <Route path="friends" element={<OurFriendsPage />} />
           </Route>
           <Route path="" element={<PrivateRoute />}>
-            <Route path="notices">
-              <Route path="favorite" element={<NoticesPage />} />
-              <Route path="own" element={<NoticesPage />} />
-            </Route>
             <Route path="user" element={<UserPage />} />
             <Route path="add-pet" element={<AddPetPage />} />
           </Route>

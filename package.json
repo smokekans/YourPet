@@ -4,7 +4,10 @@
   "private": true,
   "homepage": "https://smokekans.github.io/YourPet/",
   "dependencies": {
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
     "@mui/material": "^5.12.3",
+    "@mui/system": "^5.12.3",
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.3",
