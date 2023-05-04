@@ -1,7 +1,10 @@
+import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import React from 'react';
 
 function NoticesPage() {
-  return <div>NoticesPage</div>;
+  return <div>
+    <NoticesSearch/>
+  </div>;
 }
 
 export default NoticesPage;

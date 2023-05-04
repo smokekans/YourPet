@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://smokekans.github.io/YourPet/",
   "dependencies": {
+    "@mui/material": "^5.12.3",
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.3",
