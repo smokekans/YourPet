@@ -17,13 +17,15 @@ export const register = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       await axios.post('users/register', credentials);
-      const { email, password } = credentials
-      dispatch(login({
+      const { email, password } = credentials;
+      dispatch(
+        login({
           email,
           password,
-        }))
+        })
+      );
     } catch (error) {
-      console.log(error.response.data)
+      console.log(error.response.data);
       return rejectWithValue(error.message);
     }
   }
@@ -38,7 +40,7 @@ export const login = createAsyncThunk(
       dispatch(getCurrentUser());
       return data;
     } catch (error) {
-      console.log(error.response.data)
+      console.log(error.response.data);
       return rejectWithValue(error.message);
     }
   }
