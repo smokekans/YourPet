@@ -1,9 +1,9 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import {
   login,
-  // logout,
+  logout,
   register,
-  // getCurrentUser
+  getCurrentUser
 } from './authOperations';
 
 const authInitialState = {
@@ -20,28 +20,28 @@ function registerFulfilled(state) {
 }
 
 function loginFulfilled(state, { payload }) {
-  state.user = payload.userData;
-  state.token = payload.accessToken;
+  state.user = payload.user;
+  state.token = payload.token;
   state.isLoading = false;
   state.isLoggedIn = true;
   state.error = null;
 }
 
-// function logOutFulfilled(state) {
-//   state.isLoading = false;
-//   state.isLoggedIn = false;
-//   state.user = {};
-//   state.token = null;
-// }
+function logOutFulfilled(state) {
+  state.isLoading = false;
+  state.isLoggedIn = false;
+  state.user = {};
+  state.token = null;
+}
 
-// function getUserFulfilled(state, { payload }) {
-//   state.user = payload;
-//   state.isLoading = false;
-//   state.isLoggedIn = true;
-//   state.error = null;
-// }
+function getUserFulfilled(state, { payload }) {
+  state.user = payload;
+  state.isLoading = false;
+  state.isLoggedIn = true;
+  state.error = null;
+}
 
-export const addAccessToken = createAction('auth/addtoken');
+export const addAccessToken = createAction('auth/token');
 
 const authSlice = createSlice({
   name: 'auth',
@@ -66,24 +66,24 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      // .addCase(getCurrentUser.pending, state => {
-      //   state.isLoading = true;
-      //   state.error = null;
-      // })
-      // .addCase(getCurrentUser.fulfilled, getUserFulfilled)
-      // .addCase(getCurrentUser.rejected, (state, { payload }) => {
-      //   state.isLoading = false;
-      //   state.error = payload;
-      // })
-      // .addCase(logout.pending, state => {
-      //   state.isLoading = true;
-      //   state.error = null;
-      // })
-      // .addCase(logout.fulfilled, logOutFulfilled)
-      // .addCase(logout.rejected, (state, { payload }) => {
-      //   state.isLoading = false;
-      //   state.error = payload;
-      // })
+      .addCase(getCurrentUser.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getCurrentUser.fulfilled, getUserFulfilled)
+      .addCase(getCurrentUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(logout.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logout.fulfilled, logOutFulfilled)
+      .addCase(logout.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
       .addCase(addAccessToken, (state, { payload }) => {
         state.token = payload;
       });
