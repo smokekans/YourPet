@@ -33,11 +33,9 @@ const theme = createTheme({
       default: 'rgba(140, 200, 253, 0.44)', //неактивна
       disabled: '#CCE4FB', //непрацююча
     },
-    shadow: {
-      default: '3px 8px 14px rgba(136, 198, 253, 0.19)',
-      hover: '7px 13px 14px rgba(116, 177, 232, 0.24)',
-    },
+
   },
+
   typography: {
     fontFamily: 'Manrope, Inter',
     h1: {
@@ -53,6 +51,11 @@ const theme = createTheme({
       desktop: 1280,
     },
   },
+  shadows: [
+    "none",
+    '3px 8px 14px rgba(136, 198, 253, 0.19)',
+    '7px 13px 14px rgba(116, 177, 232, 0.24)',
+  ],
 });
 
 export default theme;
