@@ -13,12 +13,12 @@ export const token = {
 };
 
 export const register = createAsyncThunk(
-  'users/register',
+  'auth/register',
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       await axios.post('users/register', credentials);
       const { email, password } = credentials;
-      dispatch(
+     await dispatch(
         login({
           email,
           password,
@@ -32,12 +32,13 @@ export const register = createAsyncThunk(
 );
 
 export const login = createAsyncThunk(
-  'users/login',
+  'auth/login',
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axios.post('users/login', credentials);
-      token.set(data.accessToken);
-      dispatch(getCurrentUser());
+      console.log(data)
+      token.set(data.token);
+    // dispatch(getCurrentUser());
       return data;
     } catch (error) {
       console.log(error.response.data);
@@ -47,7 +48,7 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk(
-  'users/logout',
+  'auth/logout',
   async (_, { rejectWithValue, getState }) => {
     try {
       const value = getState().auth.token;
@@ -55,13 +56,14 @@ export const logout = createAsyncThunk(
       await axios.post('users/logout');
       token.unset();
     } catch (error) {
+      console.log(error.response.data);
       return rejectWithValue(error.message);
     }
   }
 );
 
 export const getCurrentUser = createAsyncThunk(
-  'users/current',
+  'auth/current',
   async (_, { rejectWithValue, getState }) => {
     try {
       const value = getState().auth.token;
@@ -72,6 +74,7 @@ export const getCurrentUser = createAsyncThunk(
       const { data } = await axios.get('users/current');
       return data;
     } catch (e) {
+      console.log(e.response.data);
       return rejectWithValue(e.message);
     }
   }
