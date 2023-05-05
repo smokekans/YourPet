@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/YourPet/static/js/main.eb6d3e50.js",
+    "main.js": "/YourPet/static/js/main.1311ce7e.js",
     "index.html": "/YourPet/index.html",
-    "main.eb6d3e50.js.map": "/YourPet/static/js/main.eb6d3e50.js.map"
+    "main.1311ce7e.js.map": "/YourPet/static/js/main.1311ce7e.js.map"
   },
   "entrypoints": [
-    "static/js/main.eb6d3e50.js"
+    "static/js/main.1311ce7e.js"
   ]
 }
