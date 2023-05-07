@@ -5,10 +5,10 @@ import { AppBar, Box, Container, Toolbar } from '@mui/material';
 
 function Header() {
   return (
-    <AppBar position="static" sx={{ pr: 2, pl: 0 }}>
+    <AppBar position="static" sx={{ pr: 2, pl: 0, bgcolor: 'background.default' }}>
       <Container>
         <Toolbar
-          sx={{ p: 0, width: 1280 }}
+          sx={{ p: 0 }}
           // sx={{
           //   display: 'flex',
           //   // flexDirection: { xs: 'column', md: 'row' },
