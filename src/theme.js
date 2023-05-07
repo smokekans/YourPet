@@ -6,7 +6,7 @@ import { createTheme } from '@mui/material';
 
 const theme = createTheme({
   palette: {
-    backgroud: {
+    background: {
       default: '#CCCCCC',
     },
     text: {
@@ -18,6 +18,7 @@ const theme = createTheme({
     primary: {
       main: '#54ADFF', //темносиній
       secondary: '#CCE4FB', //світлосиній
+      contrastText: '#FDF7F2', // білий
     },
     accent: {
       main: '#FFC107', //жовтий
@@ -28,16 +29,20 @@ const theme = createTheme({
     success: {
       main: '#00C3AD', //зелений
     },
-    buttons: {
-      active: '#54ADFF', //активна
-      default: 'rgba(140, 200, 253, 0.44)', //неактивна
-      disabled: '#CCE4FB', //непрацююча
-    },
-    shadow: {
-      default: '3px 8px 14px rgba(136, 198, 253, 0.19)',
-      hover: '7px 13px 14px rgba(116, 177, 232, 0.24)',
+    action: {
+      active: '#777777', //активна
+      disabled: '#331188', //непрацююча
+      selected: 'rgba(140, 200, 253, 0.44)', //неактивна
+      hover: '#000000',
     },
   },
+  shadows: [
+    'none',
+    '3px 8px 14px 0px #88C6FD30',
+    '7px 13px 14px 0px #74B1E83D',
+  ],
+  // boxShadow: 1,
+  // boxShadow: 2,
   typography: {
     fontFamily: 'Manrope, Inter',
     h1: {
