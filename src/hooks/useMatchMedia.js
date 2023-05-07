@@ -7,7 +7,7 @@ const queries = [
   `${device.desktop}`,
 ];
 
-const userMatchMedia = () => {
+const useMatchMedia = () => {
   const mediaQueryLists = queries.map(query => matchMedia(query));
 
   const getValues = () => mediaQueryLists.map(list => list.matches);
@@ -38,4 +38,4 @@ const userMatchMedia = () => {
   );
 };
 
-export default userMatchMedia;
+export default useMatchMedia;
