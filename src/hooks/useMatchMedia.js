@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import device from './device';
 
 const queries = [
@@ -12,14 +12,19 @@ const useMatchMedia = () => {
 
   const getValues = () => mediaQueryLists.map(list => list.matches);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [values, setValues] = useState(getValues);
 
-  useLayoutEffect(() => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
     const handler = () => setValues(getValues);
 
     mediaQueryLists.forEach(list => list.addEventListener('change', handler));
 
-    return () => mediaQueryLists.forEach(list => list.removeEventListener('change', handler));
+    return () =>
+      mediaQueryLists.forEach(list =>
+        list.removeEventListener('change', handler)
+      );
   });
 
   const typesOfScreen = ['isMobile', 'isTablet', 'isDesktop'];
