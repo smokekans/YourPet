@@ -1,5 +1,5 @@
-const { useState, useLayoutEffect } = require('react');
-const { default: device } = require('./device');
+import { useLayoutEffect, useState } from 'react';
+import device from './device';
 
 const queries = [
   `${device.mobile} and (max-width: 767px)`,
@@ -7,7 +7,7 @@ const queries = [
   `${device.desktop}`,
 ];
 
-const userMatchMedia = () => {
+const useMatchMedia = () => {
   const mediaQueryLists = queries.map(query => matchMedia(query));
 
   const getValues = () => mediaQueryLists.map(list => list.matches);
@@ -33,4 +33,4 @@ const userMatchMedia = () => {
   );
 };
 
-export default userMatchMedia;
+export default useMatchMedia;
