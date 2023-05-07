@@ -35,6 +35,7 @@ function Header() {
               alignItems: 'center',
               bgcolor: 'background.default',
               flexDirection: 'row',
+              width: 1,
             }}
           >
             <Logo />
