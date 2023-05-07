@@ -2,17 +2,16 @@ import React from 'react';
 import Link from '@mui/material/Link';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Box, Stack } from '@mui/material';
 import Logo from 'components/Logo/Logo';
-import { useSelector } from 'react-redux/es';
-import { getIsLoggedIn } from 'redux/auth/authSelectors';
+// import { useSelector } from 'react-redux';
+// import { getIsLoggedIn } from 'redux/auth/authSelectors';
 import { NavLink as RouterLink } from 'react-router-dom';
-import { theme } from '../../theme';
 
 function Header() {
-  const userIsLoggerIn = useSelector(getIsLoggedIn);
+  // const userIsLoggerIn = useSelector(getIsLoggedIn);
 
   return (
     <AppBar position="static">
@@ -79,7 +78,7 @@ function Header() {
               height: 40,
               width: 165,
               '&.active': {
-                bgcolor: 'background.paper',
+                bgcolor: 'background.default',
                 color: 'primary.main',
               },
             }}
@@ -95,7 +94,7 @@ function Header() {
               height: 40,
               width: 165,
               '&.active': {
-                bgcolor: 'background.paper',
+                bgcolor: 'background.default',
                 color: 'primary.main',
               },
             }}

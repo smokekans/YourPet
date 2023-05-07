@@ -1,5 +1,5 @@
-const { useState, useLayoutEffect } = require('react');
-const { default: device } = require('./device');
+import { useEffect, useState } from 'react';
+import device from './device';
 
 const queries = [
   `${device.mobile} and (max-width: 767px)`,
@@ -12,14 +12,19 @@ const userMatchMedia = () => {
 
   const getValues = () => mediaQueryLists.map(list => list.matches);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [values, setValues] = useState(getValues);
 
-  useLayoutEffect(() => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
     const handler = () => setValues(getValues);
 
     mediaQueryLists.forEach(list => list.addEventListener('change', handler));
 
-    return () => mediaQueryLists.forEach(list => list.removeEventListener('change', handler));
+    return () =>
+      mediaQueryLists.forEach(list =>
+        list.removeEventListener('change', handler)
+      );
   });
 
   const typesOfScreen = ['isMobile', 'isTablet', 'isDesktop'];
