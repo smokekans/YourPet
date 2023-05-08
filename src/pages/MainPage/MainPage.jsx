@@ -1,11 +1,13 @@
 import React from 'react';
+import Container from 'components/Container';
+import s from './MainPage.module.css';
 
-function MainPage() {
+export default function HomePage() {
   return (
-    <>
-      <div>MainPage</div>
-    </>
+    <div className={s.HomePage}>
+      <Container>
+        <h1 className={s.Title}>Take good care of your small pets</h1>
+      </Container>
+    </div>
   );
 }
-
-export default MainPage;

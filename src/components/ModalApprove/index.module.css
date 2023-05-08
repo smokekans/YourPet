@@ -1,0 +1,33 @@
+.AccessContainer {
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+/* .AccessTitle {
+
+} */
+.BttonsWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.Btn {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.Btn:hover {
+	cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+	.BttonsWrapper {
+		flex-direction: row;
+	}
+}
