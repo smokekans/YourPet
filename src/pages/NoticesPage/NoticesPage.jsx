@@ -1,3 +1,4 @@
+// import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
@@ -6,27 +7,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import { getUser } from 'redux/auth/authSelectors';
 import { getNoticeByCategory } from 'redux/notices/noticesOperation';
-import { getNoteceIsLoadig, getNotices } from 'redux/notices/noticesSelectors';
+import {  getNotices } from 'redux/notices/noticesSelectors';
 import { clearNotices } from 'redux/notices/noticesSlice';
 
 function NoticesPage() {
-  const { route } = useParams();
-  const notices = useSelector(getNotices);
-  const isLoading = useSelector(getNoteceIsLoadig);
+  const { categoryName } = useParams();
+  const notices = useSelector(getNotices)
+  // const dataArray = Object.values(notices)
+  console.log(getNotices);
+  // const isLoading = useSelector(getNoteceIsLoadig);
   // const isLoggedIn = useSelector(getUser);
-
+console.log('data:', notices, 'categoryName:', categoryName);
   const dispatch = useDispatch();
 
   const [searchQwery, setSearchQwery] = useState('');
 
   useEffect(() => {
     if (searchQwery !== '') {
-      dispatch(getNoticeByCategory({ category: route, qwery: searchQwery }));
+      dispatch(getNoticeByCategory({ category: categoryName, qwery: searchQwery }));
     } else {
-      dispatch(getNoticeByCategory({ category: route }));
+      dispatch(getNoticeByCategory({ category: categoryName }));
     }
     return () => dispatch(clearNotices([]));
-  }, [dispatch, route, searchQwery]);
+  }, [dispatch, categoryName, searchQwery]);
 
   const onSearch = (searchTitle) => {
     setSearchQwery(searchTitle);
@@ -34,11 +37,19 @@ function NoticesPage() {
   return <div>
     <NoticesSearch onSearch={onSearch} />
     <NoticesCategoriesNavigation/>
-    {notices?.length > 0 ?
-      <NoticesCategoriesList
-        route={route}
-        data={notices} /> : !isLoading && console.log('Sorry, no data matching your search query.')}
+   
+    {/* {isLoading
+      ? <Loader /> : */}
+       {notices !== undefined && <NoticesCategoriesList categoryName={categoryName} data={notices} />}
+      {/* <NoticesCategoriesList
+    //     categoryName={categoryName}
+    //   data={notices}
+    // />
+   
+    // }
+  */}
     
+  
   </div>;
 }
 

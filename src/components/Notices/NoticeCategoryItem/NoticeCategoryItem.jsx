@@ -6,12 +6,12 @@ import { getIsLoggedIn, getUserFavorite } from 'redux/auth/authSelectors';
 import CATEGORY from 'utils/constants';
 import defaultImage from '../../../images/not-found.jpg';
 import {ReactComponent as IconHeart} from '../../../images/icons/heart.svg'
-import { getSingleNotice } from 'redux/notices/noticesOperation';
+import { addToFavorites, deleteFromFavorite, getSingleNotice } from 'redux/notices/noticesOperation';
 // import { getNoteceIsLoadig, getOneNotice } from 'redux/notices/noticesSelectors';
 
 
 
-function NoticeCategoryItem({ data, route }) {
+function NoticeCategoryItem({ data, categoryName }) {
   const { _id, image, category, title, } = data;
   console.log(data)
    const dispatch = useDispatch();
@@ -30,6 +30,14 @@ function NoticeCategoryItem({ data, route }) {
   const addToFavorite = () => {
     if (!isLoggedIn) {
       return toast.info('You must be registered or logged in, to continue the operation')
+    }
+    if (isLoggedIn) {
+      toast('Added to favorite')
+      dispatch(addToFavorites(_id))
+    } else if (categoryName === 'favorite') {
+      toast.error('Removed from favorite')
+      dispatch(deleteFromFavorite(_id))
+      
     }
 
     // тут должно быть добавление и удаление
