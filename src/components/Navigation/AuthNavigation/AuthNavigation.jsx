@@ -9,14 +9,19 @@ function AuthNavigation() {
         component={Routerlink}
         to="/login"
         variant="outlined"
-        color="inherit"
+        color="accent"
         sx={{
-          height: 5,
-          width: 20,
+          height: 40,
+          width: 165,
           borderRadius: 5,
+          border: 2,
+          '&:hover': {
+            border: 2,
+          },
           '&.active': {
-            bgcolor: 'background.paper',
-            color: 'primary.main',
+            backgroundColor: 'accent.main',
+            color: 'text.light',
+            borderColor: 'accent.main',
           },
         }}
       >
@@ -26,14 +31,19 @@ function AuthNavigation() {
         component={Routerlink}
         to="/register"
         variant="outlined"
-        color="inherit"
+        color="accent"
         sx={{
-          height: 5,
-          width: 20,
+          height: 40,
+          width: 165,
           borderRadius: 5,
+          border: 2,
+          '&:hover': {
+            border: 2,
+          },
           '&.active': {
-            bgcolor: 'background.paper',
-            color: 'primary.main',
+            backgroundColor: 'accent.main',
+            color: 'text.light',
+            borderColor: 'accent.main',
           },
         }}
       >
