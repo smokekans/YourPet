@@ -37,7 +37,7 @@ function NoticesPage() {
     {notices?.length > 0 ?
       <NoticesCategoriesList
         route={route}
-        data={notices} /> : !isLoading && <title>message={ 'Sorry, no data matching your search query.'}</title>}
+        data={notices} /> : !isLoading && console.log('Sorry, no data matching your search query.')}
     
   </div>;
 }
