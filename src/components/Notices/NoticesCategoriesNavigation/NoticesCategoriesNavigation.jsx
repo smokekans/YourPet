@@ -17,7 +17,7 @@ function NoticesCategoriesNavigation() {
                     <NavLink to='/notices/lost-found'>lost/found</NavLink>
                   </li>
                   <li>
-                    <NavLink to='/notices/in-good-hands'>in good hands</NavLink>
+                    <NavLink to='/notices/for-free'>in good hands</NavLink>
                   </li>
 
                   {userToken && 

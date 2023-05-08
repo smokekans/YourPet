@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getIsLoggedIn, getUser, getUserFavorite } from 'redux/auth/authSelectors';
+import { getIsLoggedIn, getUserFavorite } from 'redux/auth/authSelectors';
 import CATEGORY from 'utils/constants';
 import defaultImage from '../../../images/not-found.jpg';
 import {ReactComponent as IconHeart} from '../../../images/icons/heart.svg'
@@ -15,7 +15,7 @@ function NoticeCategoryItem({ data, route }) {
   const { _id, image, category, title, } = data;
   console.log(data)
    const dispatch = useDispatch();
-  const [active, setActive] = useState(false);
+  const [ setActive] = useState(false);
   // const { pathname } = useLocation();
  
   const isLoggedIn = useSelector(getIsLoggedIn);
