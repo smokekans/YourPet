@@ -1,7 +1,14 @@
+import { Container } from '@mui/material';
 import React from 'react';
 
 function OurFriendsPage() {
-  return <div>OurFriendsPage</div>;
+  return (
+    <>
+      <Container>
+        <div>OurFriendsPage</div>
+      </Container>
+    </>
+  );
 }
 
 export default OurFriendsPage;

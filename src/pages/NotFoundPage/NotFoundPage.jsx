@@ -1,7 +1,14 @@
+import { Container } from '@mui/material';
 import React from 'react';
 
 function NotFoundPage() {
-  return <div>NotFoundPage</div>;
+  return (
+    <>
+      <Container>
+        <div>NotFoundPage</div>
+      </Container>
+    </>
+  );
 }
 
 export default NotFoundPage;

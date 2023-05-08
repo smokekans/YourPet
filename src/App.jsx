@@ -1,6 +1,7 @@
 import SharedLayout from 'components/SharedLayout/SharedLayout';
 import AddPetPage from 'pages/AddPetPage/AddPetPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
+import MUI from 'pages/MUI/MUI';
 import MainPage from 'pages/MainPage/MainPage';
 import NewsPage from 'pages/NewsPage/NewsPage';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
@@ -21,6 +22,8 @@ export const App = () => {
           <Route path="news" element={<NewsPage />} />
           <Route path="notices/:categoryName" element={<NoticesPage />} />
           <Route path="friends" element={<OurFriendsPage />} />
+          <Route path="mui" element={<MUI />} />
+
           <Route path="" element={<PublicRoute redirectTo="" restricted />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />

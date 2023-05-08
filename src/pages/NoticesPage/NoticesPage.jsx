@@ -1,3 +1,4 @@
+import { Container } from '@mui/material';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
@@ -28,18 +29,23 @@ function NoticesPage() {
     return () => dispatch(clearNotices([]));
   }, [dispatch, route, searchQwery]);
 
-  const onSearch = (searchTitle) => {
+  const onSearch = searchTitle => {
     setSearchQwery(searchTitle);
   };
-  return <div>
-    <NoticesSearch onSearch={onSearch} />
-    <NoticesCategoriesNavigation/>
-    {notices?.length > 0 ?
-      <NoticesCategoriesList
-        route={route}
-        data={notices} /> : !isLoading && console.log('Sorry, no data matching your search query.')}
-    
-  </div>;
+  return (
+    <>
+      <Container>
+        <NoticesSearch onSearch={onSearch} />
+        <NoticesCategoriesNavigation />
+        {notices?.length > 0 ? (
+          <NoticesCategoriesList route={route} data={notices} />
+        ) : (
+          !isLoading &&
+          console.log('Sorry, no data matching your search query.')
+        )}
+      </Container>
+    </>
+  );
 }
 
 export default NoticesPage;
