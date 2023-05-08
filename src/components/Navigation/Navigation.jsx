@@ -15,7 +15,7 @@ function Navigation() {
   const isLoggedIn = useSelector(getIsLoggedIn);
 
   return (
-    <Box display="flex" justifyContent="space-between">
+    <Box display="flex" justifyContent="space-between" alignItems="center">
       {isDesktop && (
         <>
           <Nav />
