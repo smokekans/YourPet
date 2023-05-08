@@ -1,10 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import {
-  login,
-  logout,
-  register,
-  getCurrentUser
-} from './authOperations';
+import { login, logout, register, getCurrentUser } from './authOperations';
 
 const authInitialState = {
   user: {},
