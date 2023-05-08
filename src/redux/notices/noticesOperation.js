@@ -3,22 +3,44 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
-export const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
 
-export const getPets = createAsyncThunk(
-  '',
-  async (credentials, { rejectWithValue }) => {
+export const getNoticeByCategory = createAsyncThunk(
+  'notices/getNoticeByCategory',
+  async ({ category = 'sell' }, { rejectWithValue }) => {
     try {
-      await axios.get('', credentials);
+      const { data } = await axios.get(`/notices?category=${category}`);
+      console.log(data)
+      return data;
+
+    } catch (error) {
+      return rejectWithValue(error.message);
+    };
+  }
+);
+
+export const getSingleNotice = createAsyncThunk(
+  'notices/getSingleNotice',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`/notices/:${id}`);
+      console.log(data)
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    };
+  }
+);
+
+export const getNewNotice = createAsyncThunk(
+  'notices/getNewNotice',
+  async (newNotice, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`/notices/`, newNotice);
+      console.log(data)
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
-);
+)
+
