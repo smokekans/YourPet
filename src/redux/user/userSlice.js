@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {getUser} from '../../redux/user/userOperations'
 const userInitialState = {
-  user: {},
-  
+  user: [],
+  token: null,
   error: null
 };
-function UserFulfilled(state, { payload }) {
-  console.log(payload)
+function UserFulfilled(state,  {payload} ) {
   state.user = payload;
   state.error = null;
 }

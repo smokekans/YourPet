@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
+import {getNameUser} from '../../../redux/user/userSelectors'
 
-import {getUser} from '../../../redux/auth/authSelectors'
 function UserDataItem() {
-  const user = useSelector(getUser)
-  const {name, birthday,email,phone,city, }= user
+  const user = useSelector(getNameUser)
+  const {name, birthday,email,phone,city, }= user.user
   return <div>
     <ul>
 <li>Name: < input  type="text"value={name}/></li>
