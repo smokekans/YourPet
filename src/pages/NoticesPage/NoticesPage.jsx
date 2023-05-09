@@ -15,7 +15,7 @@ function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
   // const dataArray = Object.values(notices)
-  console.log(getNotices);
+  // console.log(getNotices);
   // const isLoading = useSelector(getNoteceIsLoadig);
   // const isLoggedIn = useSelector(getUser);
   console.log('data:', notices, 'categoryName:', categoryName);
@@ -48,13 +48,7 @@ function NoticesPage() {
         {notices !== undefined && (
           <NoticesCategoriesList categoryName={categoryName} data={notices} />
         )}
-        {/* <NoticesCategoriesList
-    //     categoryName={categoryName}
-    //   data={notices}
-    // />
-   
-    // }
-  */}
+        <NoticesCategoriesList categoryName={categoryName} data={notices} />
       </Container>
     </>
   );

@@ -3,18 +3,16 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
-
 export const getNoticeByCategory = createAsyncThunk(
   'notices/getNoticeByCategory',
   async ({ category = 'sell' }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/notices?category=${category}`);
-      console.log(data)
+      console.log(data);
       return data;
-
     } catch (error) {
       return rejectWithValue(error.message);
-    };
+    }
   }
 );
 
@@ -23,11 +21,11 @@ export const getSingleNotice = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/notices/${id}`);
-      console.log(data)
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
-    };
+    }
   }
 );
 
@@ -36,7 +34,7 @@ export const getNewNotice = createAsyncThunk(
   async (newNotice, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(`/notices/`, newNotice);
-      console.log(data)
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -52,7 +50,7 @@ export const addToFavorites = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error);
-    };
+    }
   }
 );
 
@@ -60,12 +58,13 @@ export const getFavorite = createAsyncThunk(
   'notices/getFavorite',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(" /user/favorite");
+      const { data } = await axios.get(' /user/favorite');
       return data;
     } catch (error) {
       return rejectWithValue(error);
-    };
-  })
+    }
+  }
+);
 
 export const deleteFromFavorite = createAsyncThunk(
   'notices/deleteFavorite',
@@ -75,8 +74,6 @@ export const deleteFromFavorite = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error);
-    };
-  })
-
-
-
+    }
+  }
+);
