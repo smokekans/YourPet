@@ -24,10 +24,11 @@ export const App = () => {
           <Route path="" element={<PublicRoute redirectTo="" restricted />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
+             <Route path="add-pet" element={<AddPetPage />} />
           </Route>
           <Route path="" element={<PrivateRoute />}>
             <Route path="user" element={<UserPage />} />
-            <Route path="add-pet" element={<AddPetPage />} />
+           
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
