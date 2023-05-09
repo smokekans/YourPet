@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getIsLoggedIn, getUserFavorite } from 'redux/auth/authSelectors';
+import { getIsLoggedIn } from 'redux/auth/authSelectors';
 import CATEGORY from 'utils/constants';
 import defaultImage from '../../../images/not-found.jpg';
 import {ReactComponent as IconHeart} from '../../../images/icons/heart.svg'
@@ -12,7 +12,7 @@ import { addToFavorites, deleteFromFavorite, getSingleNotice } from 'redux/notic
 
 
 function NoticeCategoryItem({ data, categoryName }) {
-  const { _id, image, category, title, } = data;
+  const { _id, image, category, title, } = data || {};;
   console.log(data)
    const dispatch = useDispatch();
   const [ setActive] = useState(false);
@@ -20,8 +20,8 @@ function NoticeCategoryItem({ data, categoryName }) {
  
   const isLoggedIn = useSelector(getIsLoggedIn);
   // const currentUser = useSelector(getUser);
-  const favoriteElement = useSelector(getUserFavorite);
-  const isFavorite = favoriteElement.includes(_id);
+  // const favoriteElement = useSelector(getUserFavorite);
+  // const isFavorite = favoriteElement.includes(_id);
   // const dataInfo = useSelector(getOneNotice);
   // const isLoading = useSelector(getNoteceIsLoadig);
 
@@ -65,7 +65,10 @@ function NoticeCategoryItem({ data, categoryName }) {
       <div>
         <img src={image ? image : defaultImage} alt="Pet" />
         <span>{CATEGORY[category]}</span>
-        <button type = "button" favorite={isFavorite} onClick={addToFavorite}>
+        <button type="button"
+          // favorite={isFavorite}
+          onClick={addToFavorite}
+        >
           <IconHeart/>
         </button>
       </div>
