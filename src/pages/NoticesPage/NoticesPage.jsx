@@ -1,4 +1,5 @@
-// import Loader from 'components/Loader/Loader';
+import Loader from 'components/Loader/Loader';
+import NoticeCategoryItem from 'components/Notices/NoticeCategoryItem/NoticeCategoryItem';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
@@ -7,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import { getUser } from 'redux/auth/authSelectors';
 import { getNoticeByCategory } from 'redux/notices/noticesOperation';
-import {  getNotices } from 'redux/notices/noticesSelectors';
+import {  getNoteceIsLoadig, getNotices } from 'redux/notices/noticesSelectors';
 import { clearNotices } from 'redux/notices/noticesSlice';
 
 function NoticesPage() {
@@ -15,7 +16,7 @@ function NoticesPage() {
   const notices = useSelector(getNotices)
   // const dataArray = Object.values(notices)
   console.log(getNotices);
-  // const isLoading = useSelector(getNoteceIsLoadig);
+  const isLoading = useSelector(getNoteceIsLoadig);
   // const isLoggedIn = useSelector(getUser);
 console.log('data:', notices, 'categoryName:', categoryName);
   const dispatch = useDispatch();
@@ -38,18 +39,17 @@ console.log('data:', notices, 'categoryName:', categoryName);
     <NoticesSearch onSearch={onSearch} />
     <NoticesCategoriesNavigation/>
    
-    {/* {isLoading
-      ? <Loader /> : */}
-       {notices !== undefined && <NoticesCategoriesList categoryName={categoryName} data={notices} />}
-      {/* <NoticesCategoriesList
-    //     categoryName={categoryName}
-    //   data={notices}
-    // />
+    {isLoading
+      ? <Loader /> :
    
-    // }
-  */}
-    
+      <NoticesCategoriesList
+       categoryName={categoryName}
+      data={notices.notices}/>
   
+     }
+  
+     <NoticeCategoryItem data={notices.notices} categoryName={categoryName}/>
+      {/* {notices !== undefined && <NoticesCategoriesList categoryName={categoryName} data={notices} />} */}
   </div>;
 }
 
