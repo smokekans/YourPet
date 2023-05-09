@@ -16,7 +16,7 @@ export const getPets = createAsyncThunk(
   'current/user',
   async (credentials, { rejectWithValue }) => {
     try {
-      await axios.get('user/current', credentials);
+      await axios.get('/user/current', credentials);
     } catch (error) {
       return rejectWithValue(error.message);
     }
