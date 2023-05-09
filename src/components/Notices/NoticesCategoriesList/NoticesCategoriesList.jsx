@@ -4,9 +4,11 @@ import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
 function NoticesCategoriesList({ data, categoryName }) {
   const dataArray = Array.isArray(data) ? data : [data];
   console.log(dataArray);
+
   return (
     <div>
       {dataArray
+        .slice()
         .reverse()
         .filter(
           item =>
