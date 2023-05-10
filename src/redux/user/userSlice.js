@@ -1,13 +1,61 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import {getUser} from '../../redux/user/userOperations'
+import { addToFavorites,getFavorite,deleteFromFavorite } from '../../redux/user/userOperations';
 const userInitialState = {
-  name: '',
+  user: [],
+  notices: [],
+  favorite: [],
+  token: null,
+  error: null,
+  isLoading:false,
 };
-
+function UserFulfilled(state,  {payload} ) {
+  state.user = payload;
+  state.error = null;
+}
 const userSlice = createSlice({
   name: 'user',
   initialState: userInitialState,
-  extraReducers: builder => {},
+  extraReducers: builder => {
+    builder
+  .addCase(getUser.fulfilled, UserFulfilled)
+  .addCase(getUser.rejected, (state, { payload }) => {
+    
+    state.error = payload;
+  })
+  .addCase(addToFavorites.fulfilled, (state, { payload }) => {
+    state.isLoading = false;
+    // state.favorite.push(payload);
+    state.favorite = payload;
+
+  })
+  .addCase(addToFavorites.rejected, (state, { payload }) => {
+    state.notices = { data: [] }
+  state.isLoading = false;
+  state.error = payload
+  })
+  .addCase(getFavorite.pending, state => {
+    state.isLoading = true;
+  })
+  .addCase(getFavorite.fulfilled, (state, { payload }) => {
+    state.isLoading = false;
+    state.error = null;
+    state.favorite = payload;
+  })
+  .addCase(getFavorite.rejected, (state, { payload }) => {
+    state.notices = { data: [] }
+  state.isLoading = false;
+  state.error = payload
+  })
+  .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
+    state.isLoading = false;
+    state.favorite = payload;
+  })
+  .addCase(deleteFromFavorite.rejected, (state, { payload }) => {
+    state.notices = { data: [] }
+  state.isLoading = false;
+  state.error = payload
+  })},
 });
 
 export const userReducer = userSlice.reducer;
