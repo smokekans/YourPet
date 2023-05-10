@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { getNameUser } from '../../../redux/user/userSelectors';
 
 function PetsData() {
+ 
+
   const user = useSelector(getNameUser);
 
   const pets = user.user.pets;
