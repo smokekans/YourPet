@@ -44,6 +44,7 @@ function NoticesPage() {
 
   const favoriteNotices = useSelector(getFavorites); 
   const favoriteAds = favoriteNotices.user.favorite;
+  // console.log(favoriteAds)
 
   const dataToRender = categoryName === 'favorite' ? favoriteAds : notices.notices; 
   
