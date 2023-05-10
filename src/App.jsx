@@ -27,7 +27,10 @@ export const App = () => {
           <Route path="friends" element={<OurFriendsPage />} />
           <Route path="mui" element={<MUI />} />
 
-          <Route path="" element={<PublicRoute redirectTo="user" restricted />}>
+          <Route
+            path=""
+            element={<PublicRoute redirectTo="notices/sell" restricted />}
+          >
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
           </Route>
