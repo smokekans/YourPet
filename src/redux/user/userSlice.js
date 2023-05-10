@@ -11,6 +11,7 @@ const userInitialState = {
 };
 function UserFulfilled(state,  {payload} ) {
   state.user = payload;
+  state.isLoading = false;
   state.error = null;
 }
 const userSlice = createSlice({
@@ -18,6 +19,9 @@ const userSlice = createSlice({
   initialState: userInitialState,
   extraReducers: builder => {
     builder
+    .addCase(getUser.pending, state => {
+      state.isLoading = true;
+    })
   .addCase(getUser.fulfilled, UserFulfilled)
   .addCase(getUser.rejected, (state, { payload }) => {
     
