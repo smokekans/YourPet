@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import Loader from 'components/Loader/Loader';
+// import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
@@ -8,7 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import { getUser } from 'redux/auth/authSelectors';
 import { getNoticeByCategory } from 'redux/notices/noticesOperation';
-import { getNoteceIsLoadig, getNotices } from 'redux/notices/noticesSelectors';
+import {
+  // getNoteceIsLoadig,
+  getNotices,
+} from 'redux/notices/noticesSelectors';
 import { clearNotices } from 'redux/notices/noticesSlice';
 import { getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
@@ -17,7 +20,7 @@ function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
   // const dataArray = Object.values(notices)
-  const isLoading = useSelector(getNoteceIsLoadig);
+  // const isLoading = useSelector(getNoteceIsLoadig);
   // const isLoggedIn = useSelector(getUser);
   // console.log('data:', notices, 'categoryName:', categoryName);
   const dispatch = useDispatch();
@@ -45,7 +48,7 @@ function NoticesPage() {
   };
 
   const favoriteNotices = useSelector(getFavorites);
-  const favoriteAds = favoriteNotices.user.favorite;
+  const favoriteAds = favoriteNotices;
   const dataToRender =
     categoryName === 'favorite' ? favoriteAds : notices.notices;
 
@@ -55,14 +58,14 @@ function NoticesPage() {
         <NoticesSearch onSearch={onSearch} />
         <NoticesCategoriesNavigation />
 
-        {isLoading ? (
+        {/* {isLoading ? (
           <Loader />
-        ) : (
-          <NoticesCategoriesList
-            categoryName={categoryName}
-            data={dataToRender}
-          />
-        )}
+        ) : ( */}
+        <NoticesCategoriesList
+          categoryName={categoryName}
+          data={dataToRender}
+        />
+        {/* )} */}
 
         {/* {notices !== undefined && <NoticesCategoriesList categoryName={categoryName} data={notices} />} */}
       </Container>

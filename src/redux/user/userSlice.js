@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCurrentUser } from '../../redux/user/userOperations';
 import {
+  getCurrentUser,
   addToFavorites,
   getFavorite,
   deleteFromFavorite,
@@ -17,6 +17,7 @@ const userInitialState = {
 };
 
 function UserFulfilled(state, { payload }) {
+  console.log(payload);
   state.user = payload;
   state.userName = payload.name;
   state.isLoading = false;
