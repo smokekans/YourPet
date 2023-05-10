@@ -1,12 +1,12 @@
 import React from 'react';
-import MUITypography from './Typography';
-import MUIButtons from './Buttons';
+// import MUITypography from './Typography';
+// import MUIButtons from './Buttons';
 
 function MUI() {
   return (
     <>
       {/* <MUITypography /> */}
-      <MUIButtons />
+      {/* <MUIButtons /> */}
     </>
   );
 }

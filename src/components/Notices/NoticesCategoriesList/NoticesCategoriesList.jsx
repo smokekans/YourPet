@@ -1,12 +1,13 @@
 import React from 'react';
+import { CardContent, Grid } from '@mui/material';
+
 import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
 
 function NoticesCategoriesList({ data, categoryName }) {
   const dataArray = Array.isArray(data) ? data : [data];
-  console.log(dataArray);
 
   return (
-    <div>
+    <Grid container spacing={2} sx={{ flexGrow: 1 }}>
       {dataArray
         .slice()
         .reverse()
@@ -19,15 +20,38 @@ function NoticesCategoriesList({ data, categoryName }) {
               categoryName === 'favorite')
         )
         .map(item => (
-          <NoticeCategoryItem
-            key={item._id}
-            data={item}
-            categoryName={categoryName}
-          />
+          <Grid item key={item._id} xs={6} md={4}>
+            <CardContent>
+              <NoticeCategoryItem data={item} categoryName={categoryName} />
+            </CardContent>
+          </Grid>
         ))}
-    </div>
+    </Grid>
   );
 }
+
+// import React from 'react';
+// import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
+
+// function NoticesCategoriesList({ data, categoryName }) {
+//   const dataArray = Array.isArray(data) ? data : [data];
+//   console.log(dataArray);
+
+//   return <div>
+//     {
+//       dataArray
+//       .slice()
+//       .reverse()
+//       .filter(
+//         item =>
+//           item && item.category && (item.category === categoryName || categoryName === 'owner' || categoryName === 'favorite')
+//       )
+//       .map(item => (
+//         <NoticeCategoryItem key={item._id} data={item} categoryName={categoryName}/>
+//       ))
+//     }
+//   </div>;
+// }
 
 // function NoticesCategoriesList({ data, categoryName }) {
 //   const dataArray = Object.values(data)

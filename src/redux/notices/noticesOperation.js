@@ -77,3 +77,27 @@ export const deleteFromFavorite = createAsyncThunk(
     }
   }
 );
+
+export const addNotices = createAsyncThunk(
+  'notices/addNotices',
+  async (newNotice, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`/notices`, newNotice);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteNotice = createAsyncThunk(
+  'notices/deleteNotice',
+  async (id, { rejectWithValue }) => {
+    try {
+      await axios.delete(`notices/${id}`);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

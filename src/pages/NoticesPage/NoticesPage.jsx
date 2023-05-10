@@ -1,6 +1,5 @@
 import { Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
-import NoticeCategoryItem from 'components/Notices/NoticeCategoryItem/NoticeCategoryItem';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
@@ -16,10 +15,9 @@ function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
   // const dataArray = Object.values(notices)
-  console.log(getNotices);
   const isLoading = useSelector(getNoteceIsLoadig);
   // const isLoggedIn = useSelector(getUser);
-  console.log('data:', notices, 'categoryName:', categoryName);
+  // console.log('data:', notices, 'categoryName:', categoryName);
   const dispatch = useDispatch();
 
   const [searchQwery, setSearchQwery] = useState('');
@@ -53,10 +51,6 @@ function NoticesPage() {
           />
         )}
 
-        <NoticeCategoryItem
-          data={notices.notices}
-          categoryName={categoryName}
-        />
         {/* {notices !== undefined && <NoticesCategoriesList categoryName={categoryName} data={notices} />} */}
       </Container>
     </>

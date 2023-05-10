@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  addNotices,
   addToFavorites,
   deleteFromFavorite,
+  deleteNotice,
   getFavorite,
   getNewNotice,
   getNoticeByCategory,
@@ -9,38 +11,11 @@ import {
 } from './noticesOperation';
 
 const noticesInitialState = {
-  notices: [
-    {
-      _id: '637216768f895fcabfd83e60',
-      title: 'Cute Puppy',
-      name: 'Buddy',
-      birthday: '02.10.2020',
-      breed: 'Golden Retriever',
-      location: 'Los Angeles',
-      sex: 'male',
-      category: 'sell',
-      price: '1500$',
-      email: 'user2@net.com',
-      phone: '+380661234567',
-      comments: 'He is very playful and loves children!',
-      image: 'https://source.unsplash.com/random?animals&cat&dog',
-    },
-    {
-      _id: '637216768f895fcabfd83e61',
-      title: 'Adorable kitten',
-      name: 'Snowball',
-      birthday: '15.05.2021',
-      breed: 'Siamese',
-      location: 'London',
-      sex: 'female',
-      category: 'sell',
-      price: '800$',
-      email: 'user3@net.com',
-      phone: '+380661234567',
-      comments: 'She is litter box trained and loves to cuddle!',
-      image: 'https://source.unsplash.com/random?animals&cat&dog',
-    },
-  ],
+  notices: [],
+  user: {
+    favorite: [],
+  },
+  pets: [],
   oneNotice: null,
   favorite: [],
   own: [],
@@ -89,28 +64,45 @@ const noticesSlice = createSlice({
       .addCase(getNewNotice.rejected, (state, { payload }) => {
         handleReject(state, payload);
       })
-      .addCase(addToFavorites.fulfilled, (state, action) => {
+      .addCase(addToFavorites.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        // state.favorite.push(payload);
+        state.favorite = payload;
       })
-      .addCase(addToFavorites.rejected, (state, action) => {
-        handleReject(state, action);
+      .addCase(addToFavorites.rejected, (state, { payload }) => {
+        handleReject(state, payload);
       })
       .addCase(getFavorite.pending, state => {
         handlePending(state);
       })
-      .addCase(getFavorite.fulfilled, (state, action) => {
+      .addCase(getFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.favorite = action.payload;
+        state.favorite = payload;
       })
-      .addCase(getFavorite.rejected, (state, action) => {
-        handleReject(state, action);
+      .addCase(getFavorite.rejected, (state, { payload }) => {
+        handleReject(state, payload);
       })
-      .addCase(deleteFromFavorite.fulfilled, (state, action) => {
+      .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.favorite = payload;
+      })
+      .addCase(deleteFromFavorite.rejected, (state, { payload }) => {
+        handleReject(state, payload);
+      })
+      .addCase(addNotices.fulfilled, (state, { payload }) => {
+        state.notices.push(payload);
         state.isLoading = false;
       })
-      .addCase(deleteFromFavorite.rejected, (state, action) => {
-        handleReject(state, action);
+      .addCase(addNotices.rejected, (state, { payload }) => {
+        handleReject(state, payload);
+      })
+      .addCase(deleteNotice.fulfilled, (state, { payload }) => {
+        state.notices = state.notices.filter(({ _id }) => _id !== payload);
+        state.isLoading = false;
+      })
+      .addCase(deleteNotice.rejected, (state, { payload }) => {
+        handleReject(state, payload);
       });
   },
   reducers: {
