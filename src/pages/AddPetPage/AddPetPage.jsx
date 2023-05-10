@@ -1,5 +1,24 @@
 // import AddPetForm from 'components/AddPetForm/AddPetForm';
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import { Formik, ErrorMessage, Field, Form } from 'formik';
+import { petvalidationSchema } from '../../components/AddPetForm/Yup';
+
+import ChooseOption from "../../components/AddPetForm/ChooseOption";
+import PersonalDetails from "../../components/AddPetForm/PersonalDetails";
+import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
+
+
+const INITIAL_VALUES = {
+  category: '',
+  name: '',
+  birthday: '',
+  breed: '',
+  file: null,
+  sex: '',
+  location: '',
+  price: '',
+  comments: '',
+};
 
 const AddPetPage = () => {
   const [step, setStep] = useState(1);
@@ -8,230 +27,86 @@ const AddPetPage = () => {
 
   const steps = ['Choose Option', 'Personal Details', 'More Info'];
 
-   const handleChangeStep = (value) => {
-    setStep(value);
+  const components = {
+    1: (
+      <ChooseOption
+        nextStep={() => setStep(step + 1)}
+        setCategory={setCategory}
+      />
+    ),
+    2: (
+      <PersonalDetails
+        prevStep={() => setStep(step - 1)}
+        nextStep={() => setStep(step + 1)}
+        category={category}
+      />
+    ),
+    3: (
+      <MoreInfo
+        prevStep={() => setStep(step - 1)}
+        setTitle={setTitle}
+        category={category}
+      />
+    ),
   };
 
   const getPageTitle = () => {
-    let pageTitle = 'Add Pet';
-    if ( category) {
-      switch (category) {
-        case 'your-pet':
-          pageTitle = 'Add my pet';
-          break;
-        case 'sell':
-          pageTitle = 'Add pet for sell';
-          break;
-        case 'lost-found':
-          pageTitle = 'Add to lost or found pet';
-          break;
-        case 'good-hands':
-          pageTitle = 'Add to give a Pet for Adoption';
-          break;
-        default:
-          pageTitle = 'Add Pet';
-      }
-    }
-    return pageTitle;
+    const titles = {
+      'your-pet': 'Add my pet',
+      sell: 'Add pet for sell',
+      'lost-found': 'Add to lost or found pet',
+      'good-hands': 'Add to give a Pet for Adoption',
+      '': 'Add Pet',
+    };
+    return titles[category] || 'Add Pet';
   };
 
-  const components = {
-    1: <ChooseOption nextStep={() => setStep(step + 1)} setCategory={setCategory} />,
-    2: <PersonalDetails prevStep={() => setStep(step - 1)} nextStep={() => setStep(step + 1)} setTitle={setTitle} category={category} />,
-    3: <MoreInfo prevStep={() => setStep(step - 1)} category={category} />,
-  };
+  useEffect(() => {
+    setTitle(getPageTitle());
+  }, [category]);
 
   return (
-        <div>
-      <h1>{getPageTitle()}</h1>
+    <div>
+      <h1>{title}</h1>
       <ul>
         {steps.map((step, index) => (
           <li
             key={index}
-            className={
-              step === index + 1
-                ? 'current'
-                : step > index + 1
-                ? 'completed'
-                : ''
-            }
+            className={`step ${step <= step ? 'current' : 'completed'}`}
           >
             {step}
           </li>
         ))}
       </ul>
-        {components[step]}
+      {components[step]}
     </div>
   );
 };
 
-const ChooseOption = ({ nextStep, setCategory }) => {
-  const [category, setCategoryLocal] = useState('');
-
-  const handleCategoryChange = event => {
-    setCategoryLocal(event.target.value);
-  };
-
-  const handleNextClick = () => {
-    setCategory(category);
-    nextStep();
-  };
-
-  return (
-    <div>
-      {/* <h2>Choose option</h2> */}
-      <form>
-        <label>
-          Your pet
-          <input
-            type="radio"
-            name="category"
-            value="your-pet"
-            checked={category === 'your-pet'}
-            onChange={handleCategoryChange}
-          />
-        </label>
-        <label>
-          Sell
-          <input
-            type="radio"
-            name="category"
-            value="sell"
-            checked={category === 'sell'}
-            onChange={handleCategoryChange}
-          />
-        </label>
-        <label>
-          Lost/found
-          <input
-            type="radio"
-            name="category"
-            value="lost-found"
-            checked={category === 'lost-found'}
-            onChange={handleCategoryChange}
-          />
-        </label>
-        <label>
-          In good hands
-          <input
-            type="radio"
-            name="category"
-            value="good-hands"
-            checked={category === 'good-hands'}
-            onChange={handleCategoryChange}
-          />
-        </label>
-        // TODO:повернути на попердню сторінку
-        <button>Сancel</button>
-        <button disabled={!category} onClick={handleNextClick}>
-          Next
-        </button>
-      </form>
-    </div>
-  );
-};
-
-const PersonalDetails = ({ prevStep, nextStep, category }) => {
-  const [title, setTitle] = useState('');
-  const [name, setName] = useState('');
-  const [birthday, setBirthday] = useState('');
-  const [breed, setBreed] = useState('');
-
-  const handleTitleChange = event => {
-    setTitle(event.target.value);
-  };
-  const handleNameChange = event => {
-    setName(event.target.value);
-  };
-
-  const handleBirthdayChange = event => {
-    setBirthday(event.target.value);
-  };
-
-  const handleBreedChange = event => {
-    setBreed(event.target.value);
-  };
-
-  const handleNextClick = () => {
-    // if (title && name && birthday && breed) {
-    nextStep();
-    // }
-    // alert ('ayyyyy')
-  };
-
-  const handlePrevClick = () => {
-    prevStep();
-  };
-
-  return (
-    <div>
-      {/* <h2>Personal Details</h2> */}
-      <form>
-        {category !== 'your-pet' && (
-          <label>
-            Title of add:
-            <input placeholder="Type name pet" type="text" value={title} onChange={handleTitleChange} />
-          </label>
-        )}
-         <br />
-        <label>
-          Name:
-          <input placeholder="Type name pet" type="text" value={name} onChange={handleNameChange} />
-        </label>
-        <br />
-        <label>
-          Birthday:
-          <input placeholder="Type date of birth" type="text" value={birthday} onChange={handleBirthdayChange} />
-        </label>
-        <br />
-        <label>
-          Breed:
-          <input placeholder="Type breed" type="text" value={breed} onChange={handleBreedChange} />
-        </label>
-        <br />
-        <button onClick={handlePrevClick}>Back</button>
-        // TODO:disabled={}
-        <button onClick={handleNextClick}>Next</button>
-      </form>
-    </div>
-  );
-};
-// import React, { useState } from 'react';
-
+  // const MoreInfo = ({ prevStep, category }) => {
+  // const [selectedSex, setSelectedSex] = useState('');
+  //   const [petImage, setPetImage] = useState(null);
 const MoreInfo = ({ prevStep, category }) => {
-  const [sex, setSex] = useState('');
-  const [petImage, setPetImage] = useState(null);
-  const [location, setLocation] = useState('');
-  const [price, setPrice] = useState('');
-  const [comments, setComments] = useState('');
+  const [previewImageUrl, setPreviewImageUrl] = useState(null);
+  const [selectedSex, setSelectedSex] = useState('');
+const [petImage, setPetImage] = useState(null);
+  
+  useEffect(() => {
+  if (petImage) {
+    const imageUrl = URL.createObjectURL(petImage);
+    setPreviewImageUrl(imageUrl);
+  }
+  }, [petImage]);
 
-  const handleSexChange = event => {
-    setSex(event.target.value);
+  const handleSexSelect = event => {
+    setSelectedSex(event.target.value);
   };
 
   const handleImageChange = event => {
     const file = event.target.files[0];
     setPetImage(file);
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      document.getElementById('preview-image').setAttribute('src', imageUrl);
-    }
   };
-  // setPetImage(event.target.files[0]);
-  // };
-
-  const handleLocationChange = event => {
-    setLocation(event.target.value);
-  };
-
-  const handlePriceChange = event => {
-    setPrice(event.target.value);
-  };
-
-  const handleCommentsChange = event => {
-    setComments(event.target.value);
-  };
-
+  
   const handlePrevClick = event => {
     event.preventDefault();
     prevStep();
@@ -240,70 +115,136 @@ const MoreInfo = ({ prevStep, category }) => {
   const handleSubmit = event => {
     event.preventDefault();
     // TODO:  логіка для надсилання даних форми на сервер
-    console.log('Sex:', sex);
-    console.log('Pet Image:', petImage);
-    console.log('Location:', location);
-    console.log('Price:', price);
-    console.log('Comments:', comments);
   };
 
   return (
     <div>
-      {/* <h2>More info</h2> */}
-      <form onSubmit={handleSubmit}>
-        {category !== 'your-pet' && (
-          <label>
-            The Sex
-            <select value={sex} onChange={handleSexChange}>
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-            </select>
-          </label>
+      <Formik
+        initialValues={INITIAL_VALUES}
+        validationSchema={petvalidationSchema}
+        // onSubmit={handleSubmit}
+      >
+        {({ values, setFieldValue }) => (
+          <Form autoComplete="on">
+            {category !== 'your-pet' && (
+              <>
+                <p>The Sex</p>
+                <label>
+                  <Field
+                    type="radio"
+                    id="female"
+                    name="sex"
+                    value="female"
+                    checked={selectedSex === 'female'}
+                    onChange={handleSexSelect}
+                  // hidden={true}
+                  />
+                  <span>
+                    <BsGenderFemale fill="#F43F5E" />
+                  </span>
+                  <p>Female</p>
+                </label>
+                <label>
+                  <Field
+                    type="radio"
+                    id="male"
+                    name="sex"
+                    value="male"
+                    checked={selectedSex === 'male'}
+                    onChange={handleSexSelect}
+                  // hidden={true}
+                  />
+                  <span>
+                    <BsGenderMale fill="#54ADFF" />
+                  </span>
+                  <p>Male</p>
+                </label>
+              </>
+            )}
+            {/* Load the pet’s image: */}
+            <label htmlFor="pet-image">
+               {!petImage ? (
+                 <Field
+                type="file"
+                id="image"
+                    name="image"
+                    accept=".png, .jpg, .jpeg, .webp"
+                    onChange={handleImageChange}
+                    // hidden
+                  />
+              ) : (
+                <>
+                  <img
+                    src={URL.createObjectURL(petImage)}
+                    alt="Pet Preview"
+                    style={{ maxWidth: '181px', maxHeight: '182px' }}
+                    />
+                    // TODO: видалити кнопку видалення
+                  <button
+                    onClick={() => {
+                      setFieldValue('image', null);
+                      setPetImage(null);
+                    }}
+                  >
+                    <span>Remove Image</span>
+                  </button>
+                </>
+              )}
+                 
+              <ErrorMessage name="pet-image" component="div" />
+            </label>
+            
+            {category !== 'your-pet' && (
+              <label htmlFor="location">
+                Location
+                <Field
+                  placeholder="Type of location"
+                  type="text"
+                  name="location"
+                />
+                <ErrorMessage name="location" component="div" />
+              </label>
+            )}
+            {category === 'sell' && (
+              <label htmlFor="price">
+                Price
+                <Field
+                  placeholder="Type of price"
+                  type="text"
+                  name="price"
+                />
+                <ErrorMessage name="price" component="div" />
+              </label>
+            )}
+            <label htmlFor="comments">
+              Comments
+              <textarea
+                placeholder="Lorim is a friendly and outgoing dog that loves to meet new people and make new friends. He's playful and enjoys running around in the yard, playing fetch, and going for walks. Lorim is also a cuddly dog that loves to snuggle up with his humans and get belly rubs."
+                name="comments"
+              />
+              <ErrorMessage name="comments" component="div" />
+            </label>
+            <button onClick={handlePrevClick}>Back</button>
+          // TODO:disabled={ }
+            <button type="submit">Done</button>
+          </Form>
         )}
-        <label>
-          Pet Image
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-        </label>
-        <img
-          id="preview-image"
-          style={{ maxWidth: '181px', maxHeight: '182px' }}
-        />
-        {category !== 'your-pet' && (
-          <label>
-            Location
-            <input
-              placeholder="Type of location"
-              type="text"
-              value={location}
-              onChange={handleLocationChange}
-            />
-          </label>
-        )}
-        {category === 'sell' && (
-          <label>
-            Price
-            <input
-              placeholder="Type of price"
-              type="text"
-              value={price}
-              onChange={handlePriceChange}
-            />
-          </label>
-        )}
-        <label>
-          Comments
-          <textarea
-            placeholder="Type breed"
-            value={comments}
-            onChange={handleCommentsChange}
-          />
-        </label>
-        <button onClick={handlePrevClick}>Back</button>
-        // TODO:disabled={}
-        <button type="submit">Submit</button>
-      </form>
+      </Formik>
     </div>
   );
-};
+  };
+  
+  export default AddPetPage;
 
-export default AddPetPage;
+
+   {/* <Field type="file" name="image" accept=".png, .jpg, .jpeg, .webp" onChange={handleImageChange} hidden
+              // style={{ display: "none" }}
+              // hidden={true}
+              />
+              <ErrorMessage name="pet-image" component="div" />
+            </label> */}
+            {/* <img
+              id="preview-image"
+              style={{ maxWidth: '181px', maxHeight: '182px' }}
+              src={previewImageUrl}
+            /> */}
