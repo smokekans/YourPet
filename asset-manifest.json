@@ -1,12 +1,13 @@
 {
   "files": {
     "main.css": "/YourPet/static/css/main.cb52e8c8.css",
-    "main.js": "/YourPet/static/js/main.50b90f43.js",
+    "main.js": "/YourPet/static/js/main.2cc6ad30.js",
     "static/media/petTablet1x.png": "/YourPet/static/media/petTablet1x.4d31730a9437e7858118.png",
     "static/media/petDesk1x.png": "/YourPet/static/media/petDesk1x.5f8ccdcd486a91ce7dd9.png",
     "static/media/petPhone1x.png": "/YourPet/static/media/petPhone1x.0e4facd7b0eb67d4b710.png",
     "static/media/not-found.jpg": "/YourPet/static/media/not-found.4c4c476c4efbfbc10edd.jpg",
     "static/media/bg-tablet@1x.png": "/YourPet/static/media/bg-tablet@1x.68e24f5ec7af94661b18.png",
+    "static/media/logo.svg": "/YourPet/static/media/logo.6e2f51eeb062dc6472f5e4aa1de019f4.svg",
     "static/media/bg-desktop@1x.png": "/YourPet/static/media/bg-desktop@1x.9a27caa66920ee30a180.png",
     "static/media/bg-mobile@1x.png": "/YourPet/static/media/bg-mobile@1x.3dbc8c2599d652ed7615.png",
     "index.html": "/YourPet/index.html",
@@ -18,10 +19,10 @@
     "static/media/clock.svg": "/YourPet/static/media/clock.3979a112cb7d81ef39c97d2b523678b6.svg",
     "static/media/cross-small.svg": "/YourPet/static/media/cross-small.0539b678d0b17943edfcf7942cbd6ce5.svg",
     "main.cb52e8c8.css.map": "/YourPet/static/css/main.cb52e8c8.css.map",
-    "main.50b90f43.js.map": "/YourPet/static/js/main.50b90f43.js.map"
+    "main.2cc6ad30.js.map": "/YourPet/static/js/main.2cc6ad30.js.map"
   },
   "entrypoints": [
     "static/css/main.cb52e8c8.css",
-    "static/js/main.50b90f43.js"
+    "static/js/main.2cc6ad30.js"
   ]
 }
