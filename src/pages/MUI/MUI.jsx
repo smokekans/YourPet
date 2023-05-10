@@ -5,7 +5,7 @@ import MUIButtons from './Buttons';
 function MUI() {
   return (
     <>
-      <MUITypography />
+      {/* <MUITypography /> */}
       <MUIButtons />
     </>
   );
