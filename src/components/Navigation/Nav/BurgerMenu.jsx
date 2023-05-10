@@ -45,7 +45,14 @@ function BurgerMenu() {
           },
         }}
       >
-        <MenuItem onClick={handleMenuClose}>
+        <MenuItem
+          onClick={handleMenuClose}
+          sx={{
+            flexDirection: 'column',
+            cursor: 'auto',
+            '&:hover': { bgcolor: 'background.default' },
+          }}
+        >
           {isMobile && !isLoggedIn && <AuthNavigation />}
           {isMobile && <Nav />}
           {isTablet && <Nav />}

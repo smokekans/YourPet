@@ -1,3 +1,4 @@
+import { Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import OurFriendsList from 'components/OurFriends/OurFriendsList/OurFriendsList';
 import React, { useEffect } from 'react';
@@ -16,8 +17,10 @@ function OurFriendsPage() {
 
   return (
     <>
-      <h2>Our friends</h2>
-      {isLoad ? <OurFriendsList /> : <Loader />}
+      <Container>
+        <h2>Our friends</h2>
+        {isLoad ? <OurFriendsList /> : <Loader />}
+      </Container>
     </>
   );
 }

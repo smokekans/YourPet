@@ -3,18 +3,16 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
-
 export const getNoticeByCategory = createAsyncThunk(
   'notices/getNoticeByCategory',
   async ({ category }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/notices?category=${category}`);
-      console.log(data)
+      console.log(data);
       return data;
-
     } catch (error) {
       return rejectWithValue(error.message);
-    };
+    }
   }
 );
 
@@ -23,11 +21,11 @@ export const getSingleNotice = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/notices/${id}`);
-      console.log(data)
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
-    };
+    }
   }
 );
 
@@ -36,7 +34,7 @@ export const getNewNotice = createAsyncThunk(
   async (newNotice, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(`/notices/`, newNotice);
-      console.log(data)
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -100,6 +98,4 @@ export const deleteNotice = createAsyncThunk(
       return rejectWithValue(error.message);
     }
   }
-)
-
-
+);
