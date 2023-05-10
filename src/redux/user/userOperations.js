@@ -18,7 +18,7 @@ export const token = {
 //   async (credentials, { rejectWithValue }) => {
 //     try {
 //       const { data } = await axios.get('/user/current', credentials);
-    
+
 
 //       console.log(data)
 //       return data
@@ -40,10 +40,11 @@ export const addToFavorites = createAsyncThunk(
 );
 
 export const getFavorite = createAsyncThunk(
-  'notices/getFavorite',
+  'user/getFavorite',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get('/user/favorite' );
+      const { data } = await axios.get('/user/favorite');
+      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -51,7 +52,7 @@ export const getFavorite = createAsyncThunk(
   })
 
 export const deleteFromFavorite = createAsyncThunk(
-  'notices/deleteFavorite',
+  'user/deleteFavorite',
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.delete(`/user/favorite/${id}`);
@@ -63,12 +64,12 @@ export const deleteFromFavorite = createAsyncThunk(
 
 export const getUser = createAsyncThunk(
   'user/current',
- 
+
   async () => {
     try {
       const { data } = await axios.get('/user/current');
-    
-      
+
+
       console.log(data)
       return data
     } catch (error) {
