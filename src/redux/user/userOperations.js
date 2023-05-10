@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import { useEffect } from 'react';
 
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
@@ -13,20 +12,24 @@ export const token = {
   },
 };
 
-// export const getUser = createAsyncThunk(
-//   'user/current',
-//   async (credentials, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.get('/user/current', credentials);
-    
+export const getCurrentUser = createAsyncThunk(
+  'user/current',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const value = getState().auth.token;
+      if (value === null) {
+        return rejectWithValue('Unable to fetch user');
+      }
+      token.set(value);
+      const { data } = await axios.get('user/current');
+      return data;
+    } catch (e) {
+      console.log(e.response.data);
+      return rejectWithValue(e.message);
+    }
+  }
+);
 
-//       console.log(data)
-//       return data
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
 export const addToFavorites = createAsyncThunk(
   'user/addFavorite',
   async (id, { rejectWithValue }) => {
@@ -35,7 +38,7 @@ export const addToFavorites = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error);
-    };
+    }
   }
 );
 
@@ -43,12 +46,13 @@ export const getFavorite = createAsyncThunk(
   'notices/getFavorite',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get('/user/favorite' );
+      const { data } = await axios.get('/user/favorite');
       return data;
     } catch (error) {
       return rejectWithValue(error);
-    };
-  })
+    }
+  }
+);
 
 export const deleteFromFavorite = createAsyncThunk(
   'notices/deleteFavorite',
@@ -58,21 +62,35 @@ export const deleteFromFavorite = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error);
-    };
-  })
-
-export const getUser = createAsyncThunk(
-  'user/current',
- 
-  async () => {
-    try {
-      const { data } = await axios.get('/user/current');
-    
-      
-      console.log(data)
-      return data
-    } catch (error) {
-      return error.message;
     }
   }
 );
+
+// export const getUser = createAsyncThunk(
+//   'user/current',
+
+//   async () => {
+//     try {
+//       const { data } = await axios.get('/user/current');
+
+//       console.log(data);
+//       return data;
+//     } catch (error) {
+//       return error.message;
+//     }
+//   }
+// );
+
+// export const getUser = createAsyncThunk(
+//   'user/current',
+//   async (credentials, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.get('/user/current', credentials);
+
+//       console.log(data)
+//       return data
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
