@@ -10,12 +10,12 @@ import { ReactComponent as Clock } from '../../../images/icons/clock.svg';
 import { ReactComponent as Male } from '../../../images/icons/male.svg';
 import { ReactComponent as Female } from '../../../images/icons/female.svg';
 import {
-  addToFavorites,
-  deleteFromFavorite,
+  // addToFavorites,
+  // deleteFromFavorite,
   // deleteNotice,
   getSingleNotice,
 } from 'redux/notices/noticesOperation';
-import { getFavorite } from 'redux/notices/noticesSelectors';
+
 import styles from './styles';
 
 import {
@@ -28,6 +28,8 @@ import {
   Box,
   Button,
 } from '@mui/material';
+import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
+import { getFavorite } from 'redux/user/userSelectors';
 
 const NoticeCategoryItem = ({ data, categoryName }) => {
   const { _id, image, category, title, location, sex, birthday } = data || {};

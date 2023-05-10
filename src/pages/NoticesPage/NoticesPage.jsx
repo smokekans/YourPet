@@ -10,6 +10,8 @@ import { useParams } from 'react-router-dom';
 import { getNoticeByCategory } from 'redux/notices/noticesOperation';
 import { getNoteceIsLoadig, getNotices } from 'redux/notices/noticesSelectors';
 import { clearNotices } from 'redux/notices/noticesSlice';
+import { getFavorite } from 'redux/user/userOperations';
+import { getFavorites } from 'redux/user/userSelectors';
 
 function NoticesPage() {
   const { categoryName } = useParams();
@@ -25,17 +27,28 @@ function NoticesPage() {
   useEffect(() => {
     if (searchQwery !== '') {
       dispatch(
-        getNoticeByCategory({ category: categoryName, qwery: searchQwery })
+        getNoticeByCategory({ category: categoryName, query: searchQwery })
       );
-    } else {
+    } else if (categoryName !== 'favorite') {
       dispatch(getNoticeByCategory({ category: categoryName }));
     }
+
+    if (categoryName === 'favorite') {
+      dispatch(getFavorite());
+    }
+
     return () => dispatch(clearNotices([]));
   }, [dispatch, categoryName, searchQwery]);
 
   const onSearch = searchTitle => {
     setSearchQwery(searchTitle);
   };
+
+  const favoriteNotices = useSelector(getFavorites);
+  const favoriteAds = favoriteNotices.user.favorite;
+  const dataToRender =
+    categoryName === 'favorite' ? favoriteAds : notices.notices;
+
   return (
     <>
       <Container>
@@ -47,7 +60,7 @@ function NoticesPage() {
         ) : (
           <NoticesCategoriesList
             categoryName={categoryName}
-            data={notices.notices}
+            data={dataToRender}
           />
         )}
 

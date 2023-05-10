@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   addNotices,
-  addToFavorites,
-  deleteFromFavorite,
+  // addToFavorites,
+  // deleteFromFavorite,
   deleteNotice,
-  getFavorite,
+  // getFavorite,
   getNewNotice,
   getNoticeByCategory,
   getSingleNotice,
@@ -64,32 +64,33 @@ const noticesSlice = createSlice({
       .addCase(getNewNotice.rejected, (state, { payload }) => {
         handleReject(state, payload);
       })
-      .addCase(addToFavorites.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        // state.favorite.push(payload);
-        state.favorite = payload;
-      })
-      .addCase(addToFavorites.rejected, (state, { payload }) => {
-        handleReject(state, payload);
-      })
-      .addCase(getFavorite.pending, state => {
-        handlePending(state);
-      })
-      .addCase(getFavorite.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
-        state.favorite = payload;
-      })
-      .addCase(getFavorite.rejected, (state, { payload }) => {
-        handleReject(state, payload);
-      })
-      .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.favorite = payload;
-      })
-      .addCase(deleteFromFavorite.rejected, (state, { payload }) => {
-        handleReject(state, payload);
-      })
+      // .addCase(addToFavorites.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   // state.favorite.push(payload);
+      //   state.favorite = payload;
+
+      // })
+      // .addCase(addToFavorites.rejected, (state, { payload }) => {
+      //   handleReject(state, payload)
+      // })
+      // .addCase(getFavorite.pending, state => {
+      //   handlePending(state)
+      // })
+      // .addCase(getFavorite.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.favorite = payload;
+      // })
+      // .addCase(getFavorite.rejected, (state, { payload }) => {
+      //   handleReject(state, payload)
+      // })
+      // .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.favorite = payload;
+      // })
+      // .addCase(deleteFromFavorite.rejected, (state, { payload }) => {
+      //   handleReject(state, payload)
+      // })
       .addCase(addNotices.fulfilled, (state, { payload }) => {
         state.notices.push(payload);
         state.isLoading = false;

@@ -5,7 +5,7 @@ axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
 export const getNoticeByCategory = createAsyncThunk(
   'notices/getNoticeByCategory',
-  async ({ category = 'sell' }, { rejectWithValue }) => {
+  async ({ category }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/notices?category=${category}`);
       console.log(data);
@@ -42,41 +42,39 @@ export const getNewNotice = createAsyncThunk(
   }
 );
 
-export const addToFavorites = createAsyncThunk(
-  'notices/addFavorite',
-  async (id, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post(`/user/${id}/favorite`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
+// export const addToFavorites = createAsyncThunk(
+//   'user/addFavorite',
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.post(`/user/favorite/${id}`);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     };
+//   }
+// );
 
-export const getFavorite = createAsyncThunk(
-  'notices/getFavorite',
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.get(' /user/favorite');
-      return data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
+// export const getFavorite = createAsyncThunk(
+//   'notices/getFavorite',
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.get(" /user/favorite");
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     };
+//   })
 
-export const deleteFromFavorite = createAsyncThunk(
-  'notices/deleteFavorite',
-  async (id, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.delete(`/user/favorite/${id}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
+// export const deleteFromFavorite = createAsyncThunk(
+//   'notices/deleteFavorite',
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.delete(`/user/favorite/${id}`);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     };
+//   })
 
 export const addNotices = createAsyncThunk(
   'notices/addNotices',
