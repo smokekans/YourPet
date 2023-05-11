@@ -7,7 +7,7 @@ function UserData() {
   const user = useSelector(getUser);
 
   const { image } = user;
-  console.log(image);
+  console.log(image)
   return (
     <>
       <div>

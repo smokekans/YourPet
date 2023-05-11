@@ -1,7 +1,11 @@
 import React from 'react';
+import {logout} from '../../../redux/auth/authOperations'
+import { useDispatch} from 'react-redux';
 
 function UserLogOut() {
-  return <><button>Log Out</button></>;
+  const dispatch = useDispatch();
+  
+  return <><button onClick={() => dispatch(logout())}>Log Out</button></>;
 }
 
 export default UserLogOut;
