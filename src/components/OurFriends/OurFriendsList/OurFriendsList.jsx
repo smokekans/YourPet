@@ -2,14 +2,16 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectFriends } from 'redux/friends/friendsSelectors';
 import OurFriendsItem from '../OurFriendsItem/OurFriendsItem';
+import styles from './styles';
+import { Container, List } from '@mui/material';
 
 function OurFriendsList() {
   const friends = useSelector(selectFriends);
   return (
     <>
       {friends && (
-        <div>
-          <div>
+        <Container sx={styles.container}>
+          <List sx={styles.list}>
             {friends[0] &&
               friends.map(friend => (
                 <OurFriendsItem
@@ -28,8 +30,8 @@ function OurFriendsList() {
                   phone={friend.phone ? friend.phone : 'email only'}
                 />
               ))}
-          </div>
-        </div>
+          </List>
+        </Container>
       )}
     </>
   );
