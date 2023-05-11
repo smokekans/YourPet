@@ -2,16 +2,14 @@ import { Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
+import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import { getUser } from 'redux/auth/authSelectors';
 import { getNoticeByCategory } from 'redux/notices/noticesOperation';
-import {
-  getNoteceIsLoadig,
-  getNotices,
-} from 'redux/notices/noticesSelectors';
+import { getNoteceIsLoadig, getNotices } from 'redux/notices/noticesSelectors';
 import { clearNotices } from 'redux/notices/noticesSlice';
 import { getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
@@ -48,9 +46,9 @@ function NoticesPage() {
   };
 
   const favoriteNotices = useSelector(getFavorites);
-  console.log(favoriteNotices)
+  console.log(favoriteNotices);
   const favoriteAds = favoriteNotices.user.favorite;
-  console.log(favoriteAds)
+  console.log(favoriteAds);
   const dataToRender =
     categoryName === 'favorite' ? favoriteAds : notices.notices;
 
@@ -63,14 +61,15 @@ function NoticesPage() {
         {isLoading ? (
           <Loader />
         ) : (
-        <NoticesCategoriesList
-          categoryName={categoryName}
-          data={dataToRender}
-        />
-         )} 
+          <NoticesCategoriesList
+            categoryName={categoryName}
+            data={dataToRender}
+          />
+        )}
 
         {/* {notices !== undefined && <NoticesCategoriesList categoryName={categoryName} data={notices} />} */}
       </Container>
+      <NoticesPagination />
     </>
   );
 }
