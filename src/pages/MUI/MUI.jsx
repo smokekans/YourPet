@@ -1,12 +1,18 @@
 import React from 'react';
+// import MUIRadioButton from './RadioButton';
+// import MUITextField from './TextField';
+// import MUIBreakpoints from './Breakpoints';
 // import MUITypography from './Typography';
-// import MUIButtons from './Buttons';
+import MUIButtons from './Buttons';
 
 function MUI() {
   return (
     <>
       {/* <MUITypography /> */}
-      {/* <MUIButtons /> */}
+      <MUIButtons />
+      {/* <MUIBreakpoints /> */}
+      {/* <MUITextField /> */}
+      {/* <MUIRadioButton /> */}
     </>
   );
 }
