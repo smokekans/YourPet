@@ -25,6 +25,13 @@ const styled = {
     fontSize: { mobile: '24px', tablet: '68px' },
     lineHeight: { mobile: '33px', tablet: '100px', desktop: '88,4px' },
   },
+  button: {
+    display: 'flex',
+    m: 'auto',
+    mt: '220px',
+    width: '248px',
+    borderRadius: '40px',
+  },
 };
 
 export default styled;

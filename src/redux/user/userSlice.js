@@ -9,6 +9,7 @@ import {
 const userInitialState = {
   user: {},
   userName: '',
+  pets: null,
   notices: [],
   favorite: [],
   token: null,
@@ -20,6 +21,7 @@ function UserFulfilled(state, { payload }) {
   console.log(payload);
   state.user = payload;
   state.userName = payload.name;
+  state.pets = payload.pets;
   state.isLoading = false;
   state.error = null;
 }

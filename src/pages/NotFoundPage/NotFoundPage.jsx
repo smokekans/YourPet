@@ -15,14 +15,8 @@ function NotFoundPage() {
         </Typography>
         <Button
           variant="contained"
-          sx={{
-            display: 'flex',
-            m: 'auto',
-            mt: '220px',
-            width: '248px',
-            borderRadius: '40px',
-          }}
-          endIcon={<PawPrint fill="white" />}
+          sx={styled.button}
+          startIcon={<PawPrint fill="green" />}
         >
           <NavLink to={'/'}>To main page</NavLink>
         </Button>

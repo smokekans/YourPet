@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const OurFriendsItem = ({
   avatar,
@@ -10,6 +10,14 @@ const OurFriendsItem = ({
   email,
   phone,
 }) => {
+  const [display, setDisplay] = useState('none');
+
+  const days = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+
+  const timeArr = time
+    .filter(el => el.isOpen !== false)
+    .map((el, index) => el.isOpen && { day: days[index], ...el });
+
   return (
     <>
       <div>
@@ -18,27 +26,54 @@ const OurFriendsItem = ({
         </a>
         <div>
           <div>
-            <img alt={title} src={avatar} />
+            <img src={avatar} alt={title} />
           </div>
           <div>
             <p>Time:</p>
-            <p>
+            <p
+              onMouseEnter={() => {
+                if (time[0]) {
+                  setDisplay('flex');
+                }
+              }}
+            >
               {time[0] ? (
                 <p>
-                  {time[0].from} - {time[0].to}
+                  {timeArr[0].from} - {timeArr[0].to}
                 </p>
               ) : (
                 <p>day and night</p>
               )}
             </p>
+            <div
+              onMouseLeave={() => {
+                setTimeout(() => {
+                  setDisplay('none');
+                }, 300);
+              }}
+              style={{ display: display }}
+            >
+              <div>
+                {timeArr.map((_el, index) => (
+                  <p key={index}>{days[index]}</p>
+                ))}
+              </div>
+              <div>
+                {timeArr.map((el, index) => (
+                  <p key={index}>
+                    {el.from} - {el.to}
+                  </p>
+                ))}
+              </div>
+            </div>
             <p>Address:</p>
             <a href={addresssite} target="_blank" rel="noreferrer">
               {address}
             </a>
             <p>Email:</p>
-            <a href="mailto:{email}">{email}</a>
+            <a href={`mailto:${email}`}>{email}</a>
             <p>Phone:</p>
-            <a href="tel:{phone}">{phone}</a>
+            <a href={`tel:${phone}`}>{phone}</a>
           </div>
         </div>
       </div>

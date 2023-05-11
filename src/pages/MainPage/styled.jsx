@@ -18,9 +18,10 @@ const styled = {
     },
   },
   title: {
-    pt: { mobile: '108px', tablet: '148px' },
-    pr: { tablet: '148px', desktop: '0' },
-    p: { desktop: 'auto' },
+    p: 2,
+    // pt: { mobile: '108px', tablet: '148px' },
+    // pr: { tablet: '148px', desktop: '0' },
+    // p: { desktop: 'auto' },
     textAlign: { mobile: 'center', tablet: 'left' },
     display: { desktop: 'flex' },
     alingItems: { desktop: 'center' },

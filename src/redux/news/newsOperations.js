@@ -1,24 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
-
-export const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
-
-export const getNews = createAsyncThunk(
-  '',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      await axios.get('', credentials);
-    } catch (error) {
-      return rejectWithValue(error.message);
+export const getNews = createAsyncThunk('get/news', async (query, { rejectWithValue }) => {
+  try {
+    if (query === undefined || query === '') {
+      const { data } = await axios.get('news?page=1&limit=6');
+      return data;
     }
+    if (query) {
+      const { data } = await axios.get(`news/title?title=${query}&page=1&limit=6`);
+      return data;
+    }
+  } catch (error) {
+    return rejectWithValue(error.message);
   }
-);
+});
