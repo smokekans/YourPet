@@ -10,13 +10,13 @@ function UserPage() {
 
   const Loading = useSelector(isLoading);
   return (
-    <>
+    <div>
     {Loading?<Loader/>:<Container>
         <UserData />
         <PetsData />
       </Container>}
       
-    </>
+    </div>
   );
 
 }
