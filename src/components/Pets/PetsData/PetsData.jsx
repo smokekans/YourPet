@@ -1,17 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getUser } from '../../../redux/user/userSelectors';
+import {
+  getPets,
+  // getUser
+} from '../../../redux/user/userSelectors';
 
 function PetsData() {
-  const user = useSelector(getUser);
-  const { pets } = user;
+  // const user = useSelector(getPets);
+  const pets = useSelector(getPets);
+
+  // const { pets } = user;
   console.log(pets);
   return (
     <div>
       <h2>My pets:</h2>
       <button>Add pets +</button>
       <ul>
-        {pets.map(({ _id, birthday, comments, image, name, breed }) => {
+        {pets?.map(({ _id, birthday, comments, image, name, breed }) => {
           return (
             <>
               <li key={_id}>

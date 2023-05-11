@@ -5,7 +5,7 @@ import { AppBar, Box, Toolbar } from '@mui/material';
 
 function Header() {
   return (
-    <AppBar position="fixed" sx={{ bgcolor: 'background.default' }}>
+    <AppBar position="relative" sx={{ bgcolor: 'background.default' }}>
       <Toolbar>
         <Box
           sx={{

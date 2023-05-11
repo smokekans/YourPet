@@ -6,7 +6,16 @@ import { ReactComponent as StarIcon } from '../../images/icons/male.svg';
 function MUIButtons() {
   return (
     <>
-      <Button variant="contained">variant="contained"</Button>
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: 'accent.main',
+          borderRadius: '50px',
+          '&:hover': { backgroundColor: 'error.main' },
+        }}
+      >
+        variant="contained"
+      </Button>
       <Button variant="outlined">variant="outlined"</Button>
       <Button variant="text">variant="text"</Button>
       <br />
