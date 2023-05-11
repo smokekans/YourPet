@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Container, Typography } from '@mui/material';
 import styled from './styled';
 
@@ -11,9 +10,7 @@ function MainPage() {
           Take good care of your small pets
         </Typography>
       </Container>
-
     </>
-    
   );
 }
 
