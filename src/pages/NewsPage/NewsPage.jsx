@@ -1,3 +1,4 @@
+import { Container } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Search } from '../../images/icons/search.svg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,7 +32,8 @@ function NewsPage() {
   };
 
   return (
-    <div>
+    <>
+     <Container>
       <h1>News</h1>
       <form onSubmit={onSubmit}>
         <input type="search" name="search" placeholder="Search" onInput={changeInput} />
@@ -53,7 +55,8 @@ function NewsPage() {
           <p>{query}</p>
         </div>
       )}
-    </div>
+       </Container>
+    </>
   );
 }
 

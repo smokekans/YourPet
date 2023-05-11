@@ -41,14 +41,10 @@ const theme = createTheme({
     '3px 8px 14px 0px #88C6FD30',
     '7px 13px 14px 0px #74B1E83D',
     '9px 17px 18px 0px #74B1E83D',
+    'none',
   ],
   typography: {
     fontFamily: 'Manrope, Inter',
-    h1: {
-      fontWeight: 700,
-      fontSize: 48,
-      lineHeight: 1.375,
-    },
   },
   breakpoints: {
     values: {

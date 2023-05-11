@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { getToken } from 'redux/auth/authSelectors'
 
 function NoticesCategoriesNavigation() {
-    const userToken = useSelector(getToken);
+  const userToken = useSelector(getToken);
 
   return (
       <>

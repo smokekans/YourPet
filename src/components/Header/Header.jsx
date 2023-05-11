@@ -1,48 +1,26 @@
 import React from 'react';
 import Logo from 'components/Logo/Logo';
 import Navigation from 'components/Navigation/Navigation';
-import { AppBar, Box, Container, Toolbar } from '@mui/material';
+import { AppBar, Box, Toolbar } from '@mui/material';
 
 function Header() {
   return (
-    <AppBar
-      position="static"
-      sx={{ pr: 2, pl: 0, bgcolor: 'background.default' }}
-    >
-      <Container>
-        <Toolbar
-          sx={{ p: 0 }}
-          // sx={{
-          //   display: 'flex',
-          //   // flexDirection: { xs: 'column', md: 'row' },
-          //   justifyContent: 'space-between',
-          //   alignItems: 'center',
-          //   bgcolor: 'background.default',
-          //   flexDirection: 'row',
-          // }}
+    <AppBar position="fixed" sx={{ bgcolor: 'background.default' }}>
+      <Toolbar>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            bgcolor: 'background.default',
+            flexDirection: 'row',
+            width: 1,
+          }}
         >
-          {/* <div sx={{ display: 'flex', alignItems: 'center' }}>
-            <Logo sx={{ mr: 2 }} />
-            <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-              <Navigation />
-            </div>
-          </div> */}
-          <Box
-            sx={{
-              display: 'flex',
-              // flexDirection: { xs: 'column', md: 'row' },
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              bgcolor: 'background.default',
-              flexDirection: 'row',
-              width: 1,
-            }}
-          >
-            <Logo />
-            <Navigation />
-          </Box>
-        </Toolbar>
-      </Container>
+          <Logo />
+          <Navigation />
+        </Box>
+      </Toolbar>
     </AppBar>
   );
 }

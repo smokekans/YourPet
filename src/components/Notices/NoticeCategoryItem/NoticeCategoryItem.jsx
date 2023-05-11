@@ -10,12 +10,12 @@ import { ReactComponent as Clock } from '../../../images/icons/clock.svg';
 import { ReactComponent as Male } from '../../../images/icons/male.svg';
 import { ReactComponent as Female } from '../../../images/icons/female.svg';
 import {
-  addToFavorites,
-  deleteFromFavorite,
+  // addToFavorites,
+  // deleteFromFavorite,
   // deleteNotice,
   getSingleNotice,
 } from 'redux/notices/noticesOperation';
-import { getFavorite } from 'redux/notices/noticesSelectors';
+
 import styles from './styles';
 
 import {
@@ -26,8 +26,10 @@ import {
   Typography,
   IconButton,
   Box,
-  Button
+  Button,
 } from '@mui/material';
+import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
+import { getFavorite } from 'redux/user/userSelectors';
 
 const NoticeCategoryItem = ({ data, categoryName }) => {
   const { _id, image, category, title, location, sex, birthday } = data || {};
@@ -87,7 +89,8 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
           image={image || defaultImage}
           title={title}
         />
-        <Typography sx={styles.category}
+        <Typography
+          sx={styles.category}
           // variant="subtitle2"
         >
           {CATEGORY[category]}
@@ -100,26 +103,26 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
             <IconHeart />
           </IconButton>
         </Box>
-        
-          <Box sx={styles.components}>
-            <Typography sx={styles.component} variant="subtitle2">
-              <Location /> {location}
-            </Typography>
-            <Typography sx={styles.component} variant="subtitle2">
-              <Clock /> {calcAge(birthday)} year
-            </Typography>
-            <Typography sx={styles.component} variant="subtitle2">
-              <GenderIcon sex={sex} /> {sex}
-            </Typography>
+
+        <Box sx={styles.components}>
+          <Typography sx={styles.component} variant="subtitle2">
+            <Location /> {location}
+          </Typography>
+          <Typography sx={styles.component} variant="subtitle2">
+            <Clock /> {calcAge(birthday)} year
+          </Typography>
+          <Typography sx={styles.component} variant="subtitle2">
+            <GenderIcon sex={sex} /> {sex}
+          </Typography>
         </Box>
         <CardContent sx={styles.content}>
           <Box>
             <Typography variant="h6">{title}</Typography>
           </Box>
           <Box>
-            < Button type="button" onClick={handleLearnMore}>
+            <Button type="button" onClick={handleLearnMore}>
               Learn more
-            </ Button>
+            </Button>
           </Box>
         </CardContent>
       </CardActionArea>

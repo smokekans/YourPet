@@ -1,7 +1,28 @@
-import React from 'react';
+import { Container } from '@mui/material';
+import Loader from 'components/Loader/Loader';
+import OurFriendsList from 'components/OurFriends/OurFriendsList/OurFriendsList';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFriends } from 'redux/friends/friendsOperations';
+import { selectIsisLoaded } from 'redux/friends/friendsSelectors';
 
 function OurFriendsPage() {
-  return <div>OurFriendsPage</div>;
+  const dispatch = useDispatch();
+
+  const isLoad = useSelector(selectIsisLoaded);
+
+  useEffect(() => {
+    dispatch(getFriends());
+  }, [dispatch]);
+
+  return (
+    <>
+      <Container>
+        <h2>Our friends</h2>
+        {isLoad ? <OurFriendsList /> : <Loader />}
+      </Container>
+    </>
+  );
 }
 
 export default OurFriendsPage;
