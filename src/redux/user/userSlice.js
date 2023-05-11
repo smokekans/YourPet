@@ -7,7 +7,7 @@ import {
 } from '../../redux/user/userOperations';
 
 const userInitialState = {
-  user: [],
+  user: {},
   userName: '',
   pets: null,
   notices: [],

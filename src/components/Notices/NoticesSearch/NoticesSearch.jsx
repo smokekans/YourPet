@@ -27,7 +27,7 @@ const NoticesSearch = ({ onSearch }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "254px",
+        marginTop: "40px",
       }}
     >
       <Input
