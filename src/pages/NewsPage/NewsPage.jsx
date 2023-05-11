@@ -29,6 +29,7 @@ function NewsPage() {
       setQuery(e.target.value);
     }
   };
+
   return (
     <div>
       <h1>News</h1>
