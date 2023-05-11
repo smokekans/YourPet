@@ -12,6 +12,7 @@ export const token = {
   },
 };
 
+
 export const getCurrentUser = createAsyncThunk(
   'user/current',
   async (_, { rejectWithValue, getState }) => {
@@ -27,6 +28,7 @@ export const getCurrentUser = createAsyncThunk(
     } catch (e) {
       console.log(e.response.data);
       return rejectWithValue(e.message);
+
     }
   }
 );
