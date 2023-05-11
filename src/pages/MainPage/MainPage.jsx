@@ -1,13 +1,17 @@
 import React from 'react';
-import s from './MainPage.module.css';
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
+import styled from './styled';
 
-export default function HomePage() {
+function MainPage() {
   return (
-    <Container>
-      <div className={s.HomePage}>
-        <h1 className={s.Title}>Take good care of your small pets</h1>
-      </div>
-    </Container>
+    <>
+      <Container sx={styled.animal}>
+        <Typography variant="h3" sx={styled.title}>
+          Take good care of your small pets
+        </Typography>
+      </Container>
+    </>
   );
 }
+
+export default MainPage;
