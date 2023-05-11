@@ -58,7 +58,7 @@ export const getFavorite = createAsyncThunk(
       }
       token.set(value);
       const { data } = await axios.get('/user/favorite');
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
