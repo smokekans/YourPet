@@ -15,6 +15,7 @@ import {
 import { clearNotices } from 'redux/notices/noticesSlice';
 import { getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
+import Typography from '@mui/material/Typography';
 
 function NoticesPage() {
   const { categoryName } = useParams();
@@ -49,7 +50,7 @@ function NoticesPage() {
 
   const favoriteNotices = useSelector(getFavorites);
   console.log(favoriteNotices)
-  const favoriteAds = favoriteNotices.user.favorite;
+ const favoriteAds = favoriteNotices?.user?.favorite || [];
   console.log(favoriteAds)
   const dataToRender =
     categoryName === 'favorite' ? favoriteAds : notices.notices;
@@ -57,6 +58,10 @@ function NoticesPage() {
   return (
     <>
       <Container>
+        <Typography sx={
+          { display: 'flex', justifyContent: 'center', marginTop: '148px', fontWeight: 700, fontSize: 48 }}
+          variant="h1">Find your favorite pet</Typography>
+        
         <NoticesSearch onSearch={onSearch} />
         <NoticesCategoriesNavigation />
 

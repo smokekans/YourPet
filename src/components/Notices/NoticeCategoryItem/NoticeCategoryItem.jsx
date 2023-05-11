@@ -37,9 +37,15 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   const [setActive] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const favoriteElement = useSelector(getFavorite);
-  const isFavorite = favoriteElement.includes(_id);
+const dataArray = Array.isArray(favoriteElement) ? favoriteElement : [favoriteElement];
+  console.log(dataArray);
+
+  console.log(favoriteElement); // Проверка значения favoriteElement
+  const isFavorite = dataArray.includes(_id);
 
   const addToFavorite = () => {
+
+
     if (!isLoggedIn) {
       return toast.info(
         'You must be registered or logged in to continue the operation'
