@@ -5,10 +5,20 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/authOperations';
 import { Container } from '@mui/material';
+// import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
 // import { toast } from 'react-toastify';
 
 function RegisterPage() {
   const dispatch = useDispatch();
+  //  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
   const regValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -97,9 +107,14 @@ function RegisterPage() {
                 <ErrorMessage component="div" name="confirmPassword" />
               </label>
 
-              <button type="submit" disabled={isSubmitting}>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                // onClick={openModal}
+              >
                 Registration
               </button>
+              {/* {isModalOpen && <ModalCongrats onClose={closeModal} />} */}
               <div>
                 <p>Already have an account?</p>
                 <Link to="/login">Login</Link>
