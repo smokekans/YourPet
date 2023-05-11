@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/YourPet/static/js/main.96eac72f.js",
+    "main.js": "/YourPet/static/js/main.a2b78a60.js",
     "static/media/animal-tablet@2x.png": "/YourPet/static/media/animal-tablet@2x.4d1e95051182a7a631fc.png",
     "static/media/animal-desktop@2x.png": "/YourPet/static/media/animal-desktop@2x.18472f6da63d45cbfe1e.png",
     "static/media/animal-mobile@2x.png": "/YourPet/static/media/animal-mobile@2x.4fa7383725458230514b.png",
@@ -14,16 +14,19 @@
     "static/media/logo.svg": "/YourPet/static/media/logo.6e2f51eeb062dc6472f5e4aa1de019f4.svg",
     "static/media/pawprint.svg": "/YourPet/static/media/pawprint.efa79226166a37bdbaeb737aa7b4649e.svg",
     "index.html": "/YourPet/index.html",
+    "static/media/edit.svg": "/YourPet/static/media/edit.8f394d4128bbe14a9429e841fcf6d51d.svg",
     "static/media/search.svg": "/YourPet/static/media/search.41d49a9ae2e0cf1b87a3b9eb48d223c9.svg",
     "static/media/location.svg": "/YourPet/static/media/location.2caa05211d36d5a4e3249714b524dbc3.svg",
     "static/media/heart.svg": "/YourPet/static/media/heart.134f481623a2c9a120f1cc64e3a6653c.svg",
     "static/media/male.svg": "/YourPet/static/media/male.0d5758fa579f7fd86b3959d8e9b7d1bc.svg",
     "static/media/female.svg": "/YourPet/static/media/female.1a02967a0110bf4bb69281f7e799ce48.svg",
     "static/media/clock.svg": "/YourPet/static/media/clock.3979a112cb7d81ef39c97d2b523678b6.svg",
+    "static/media/trash.svg": "/YourPet/static/media/trash.d48355dc4a76b61eea23bd868f4b2f36.svg",
+    "static/media/logout.svg": "/YourPet/static/media/logout.8790af7bde245471313fc2a3bdb4b2da.svg",
     "static/media/cross.svg": "/YourPet/static/media/cross.f651fc886fa4d31a3c8de6c31d316c5d.svg",
-    "main.96eac72f.js.map": "/YourPet/static/js/main.96eac72f.js.map"
+    "main.a2b78a60.js.map": "/YourPet/static/js/main.a2b78a60.js.map"
   },
   "entrypoints": [
-    "static/js/main.96eac72f.js"
+    "static/js/main.a2b78a60.js"
   ]
 }
