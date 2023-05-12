@@ -73,6 +73,7 @@ export const deleteFromFavorite = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.delete(`/user/favorite/${id}`);
+      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error);

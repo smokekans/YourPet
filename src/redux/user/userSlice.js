@@ -63,7 +63,7 @@ const userSlice = createSlice({
       })
       .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.favorite = payload;
+        state.favorite = state.favorite.filter(id => id !== payload.id)
       })
       .addCase(deleteFromFavorite.rejected, (state, { payload }) => {
         state.notices = { data: [] };
