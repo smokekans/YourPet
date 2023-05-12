@@ -21,7 +21,7 @@ import {
   Box,
   Button,
 } from '@mui/material';
-import { getFavorite } from 'redux/user/userSelectors';
+// import { getFavorite } from 'redux/user/userSelectors';
 import FavoriteIconButton from 'components/Button/AddToFavoriteButton/AddToFavoriteButton';
 import ModalNotice from 'components/Modal/ModalNotice/ModalNotice';
 import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
@@ -33,14 +33,14 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFavorites, setIsFavorites] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedIn);
-  const favoriteElement = useSelector(getFavorite);
-  const dataArray = Array.isArray(favoriteElement)
-    ? favoriteElement
-    : [favoriteElement];
-  const isFavorite = dataArray.includes(_id);
+  // const favoriteElement = useSelector(getFavorite);
+  // const dataArray = Array.isArray(favoriteElement)
+  //   ? favoriteElement
+  //   : [favoriteElement];
+  // const isFavorite = dataArray.includes(_id);
 
-  console.log(isFavorite)
-  console.log(_id)
+  // console.log(isFavorite)
+  // console.log(_id)
 
 const handleLearnMore = () => {
     setIsModalOpen(!isModalOpen);

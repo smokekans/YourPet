@@ -8,7 +8,6 @@ export const getNoticeByCategory = createAsyncThunk(
   async ({ category, page = 1, limit = 0 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/notices?category=${category}&page=${page}&limit=${limit}`);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -21,7 +20,6 @@ export const getSingleNotice = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/notices/${id}`);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -34,7 +32,6 @@ export const getNewNotice = createAsyncThunk(
   async (newNotice, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(`/notices/`, newNotice);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -78,4 +75,16 @@ export const getUserNotices = createAsyncThunk(
     }
   }
 
-)
+);
+
+export const getNoticesByQwery = createAsyncThunk(
+  'notices/getNoticesByQwery',
+  async ({ query, category, page = 1, limit = 0 }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`notices/find?title=${query}&category=${category}&page=${page}&limit=${limit}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
