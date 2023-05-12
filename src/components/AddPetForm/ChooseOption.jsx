@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
+import { PetvalidationSchema } from './Yup';
 import { useNavigate } from 'react-router-dom';
-import { petvalidationSchema } from '../../components/AddPetForm/Yup';
 
 const INITIAL_VALUES = {
   category: '',
+  title: '',
   name: '',
   birthday: '',
   breed: '',
-  file: null,
   sex: '',
+  image: null,
   location: '',
   price: '',
   comments: '',
@@ -17,28 +18,25 @@ const INITIAL_VALUES = {
 
 const ChooseOption = ({ nextStep, setCategory }) => {
   const [category, setCategoryLocal] = useState('');
-
   const navigate = useNavigate();
 
   const handleCategoryChange = event => {
     setCategoryLocal(event.target.value);
   };
-
   const handleNextClick = () => {
     setCategory(category);
     nextStep();
   };
 
   const handleCancelClick = () => {
-    navigate(-1); // Повернення на попередню сторінку
+    navigate(-1);
   };
 
   return (
     <div>
       <Formik
         initialValues={INITIAL_VALUES}
-        validationSchema={petvalidationSchema}
-        // onSubmit={handleSubmit}
+        validationSchema={PetvalidationSchema}
       >
         <Form autoComplete="on">
           <label>
@@ -49,6 +47,7 @@ const ChooseOption = ({ nextStep, setCategory }) => {
               value="your-pet"
               checked={category === 'your-pet'}
               onChange={handleCategoryChange}
+              // hidden
             />
           </label>
           <label>
@@ -59,6 +58,7 @@ const ChooseOption = ({ nextStep, setCategory }) => {
               value="sell"
               checked={category === 'sell'}
               onChange={handleCategoryChange}
+              // hidden
             />
           </label>
           <label>
@@ -69,6 +69,7 @@ const ChooseOption = ({ nextStep, setCategory }) => {
               value="lost-found"
               checked={category === 'lost-found'}
               onChange={handleCategoryChange}
+              // hidden
             />
           </label>
           <label>
@@ -79,16 +80,13 @@ const ChooseOption = ({ nextStep, setCategory }) => {
               value="good-hands"
               checked={category === 'good-hands'}
               onChange={handleCategoryChange}
+              // hidden
             />
           </label>
           <button type="button" onClick={handleCancelClick}>
             Cancel
           </button>
-          <button
-            type="button"
-            disabled={category === ''}
-            onClick={handleNextClick}
-          >
+          <button type="button" disabled={!category} onClick={handleNextClick}>
             Next
           </button>
         </Form>

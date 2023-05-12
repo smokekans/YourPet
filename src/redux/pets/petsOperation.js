@@ -21,4 +21,34 @@ export const getPets = createAsyncThunk(
       return rejectWithValue(error.message);
     }
   }
-);
+);  
+
+
+
+
+
+// export const addPetCard = createAsyncThunk(
+//   'petForm/addPetCard',
+//   async (formData, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.post('/pets', formData);
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
+
+// export const createPetCard = formData => {
+//   return async dispatch => {
+//     try {
+//       const result = await dispatch(addPetCard(formData));
+//       // handle successful result here
+//       console.log(result);
+//     } catch (error) {
+//       // handle error here
+//       console.log(error);
+//     }
+//   };
+// };
+

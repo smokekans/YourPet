@@ -1,14 +1,18 @@
 import * as Yup from 'yup';
 
-export const petvalidationSchema = Yup.object().shape({
+export const PetvalidationSchema = Yup.object().shape({
   category: Yup.string()
     .required('Required')
     .oneOf(['your-pet', 'sell', 'lost-found', 'good-hands']),
+   title: Yup.string()
+    .min(2)
+    .max(48)
+    .required('Field is required!'),
   name: Yup.string()
     .required('Required')
     .min(2, 'Too Short!')
     .max(16, 'Too Long!'),
-  date: Yup.string()
+  birthday: Yup.string()
     .required('Required')
     .matches(
       /^([0-9]{2}).([0-9]{2}).([0-9]{4})$/,
@@ -18,7 +22,8 @@ export const petvalidationSchema = Yup.object().shape({
     .min(2, "Breed should be at least 2 characters")
     .max(16, "Breed should not exceed 16 characters")
     .required("Breed is required"),
-  file: Yup.mixed()
+  image: Yup.mixed()
+    .required('Image is required!')
    .test(
     'fileSize',
     'File size too large',
@@ -45,6 +50,9 @@ export const petvalidationSchema = Yup.object().shape({
       otherwise: Yup.number()
     }),
   comments: Yup.string()
+    .required('Comments is required!')
     .min(8, "Comments should be at least 8 characters")
-    .max(120, "Comments should not exceed 120 characters"),
+    .max(120, "Comments should not exceed 120 characters")
+    
 }); 
+
