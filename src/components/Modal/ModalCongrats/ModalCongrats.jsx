@@ -1,40 +1,34 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import css from './Modal.module.css';
+const modalRoot = document.querySelector('#modal-root');
 
-function ModalCongrats({onClose}) {
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (event.keyCode === 27) { // Код клавіші Esc
-        onClose();
-      }
-    };
-
-    const handleClickOutside = (event) => {
-      if (event.target.classList.contains('modal')) {
-        onClose();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyPress);
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress);
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [onClose]);
-
-  const handleCloseButtonClick = () => {
-    onClose();
-  };
+function ModalCongrats({ onClick }) {
   
-  return (
-    <div>
-      <div className="modal">
+  useEffect(() => {
+    window.addEventListener('keydown', handleEscape);
+    function handleEscape(e) {
+      if (e.code === 'Escape') onClick();
+    }
+    return () => {
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [onClick]);
+
+  const handleBackdrop = e => {
+    if (e.target === e.currentTarget) onClick();
+  };
+
+  return createPortal(
+    <div className={css.Overlay} onClick={handleBackdrop}>
+      <div className={css.Modal}>
         <h1>Congrats!</h1>
-        <p>Your registration is success</p>
-        <button onClick={handleCloseButtonClick}>Go to profile</button>
+     <p>Your registration is success</p>
+     <button onClick={()=>{onClick()}}>Go to profile</button>
       </div>
     </div>
+    ,
+    modalRoot
   );
 }
 
