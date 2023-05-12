@@ -80,6 +80,25 @@ export const deleteFromFavorite = createAsyncThunk(
   }
 );
 
+export const updateInfoUser = createAsyncThunk(
+  'user/updateInfoUser',
+  async (upDateUser, { rejectWithValue, getState }) => {
+    
+    try {
+      const value = getState().auth.token;
+      if (value === null) {
+        return rejectWithValue('Unable to patch user');
+      }
+      token.set(value);
+      
+      const { data } = await axios.patch('/user/update', upDateUser);
+      console.log(data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 // export const getUser = createAsyncThunk(
 //   'user/current',
 

@@ -4,6 +4,7 @@ import {
   addToFavorites,
   getFavorite,
   deleteFromFavorite,
+  updateInfoUser
 } from '../../redux/user/userOperations';
 
 const userInitialState = {
@@ -69,7 +70,20 @@ const userSlice = createSlice({
         state.notices = { data: [] };
         state.isLoading = false;
         state.error = payload;
-      });
+      }).addCase(updateInfoUser.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(updateInfoUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.user = payload;
+        state.error = null;
+        
+      })
+      .addCase(updateInfoUser.rejected, (state, { payload }) => {
+       
+        state.isLoading = false;
+        state.error = payload;
+      })
   },
 });
 
