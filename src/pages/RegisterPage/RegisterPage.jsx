@@ -1,25 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/authOperations';
 import { Container } from '@mui/material';
+import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
 // import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
 // import { toast } from 'react-toastify';
 
 function RegisterPage() {
   const dispatch = useDispatch();
-  //  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // const openModal = () => {
-  //   setIsModalOpen(true);
-  // };
-
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
-
+  // на стор профілю
+  const [isModalOpen, setIsModalOpen] = useState(false);
+// на стор профілю
+  
+  
   const regValidationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email format')
@@ -110,11 +107,27 @@ function RegisterPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                // onClick={openModal}
+
+                // на стор профілю
+                onClick={() => {
+                  setIsModalOpen(!isModalOpen);
+                }}
+                // на стор профілю
+
               >
                 Registration
               </button>
-              {/* {isModalOpen && <ModalCongrats onClose={closeModal} />} */}
+              {
+              // на стор профілю
+              isModalOpen && (
+                <ModalCongrats
+                    onClick={() => {
+                      setIsModalOpen(!isModalOpen);
+                    }
+                      // на стор профілю
+                    }
+                />
+              )}
               <div>
                 <p>Already have an account?</p>
                 <Link to="/login">Login</Link>
