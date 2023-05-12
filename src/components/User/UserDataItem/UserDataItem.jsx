@@ -1,39 +1,164 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from '../../../redux/user/userSelectors';
 import styled from './styledUserDataItem';
-import { Typography,Input,Button } from '@mui/material';
+import {
+  Typography,
+  FormControl,
+  FilledInput,
+  InputAdornment,
+} from '@mui/material';
 import { ReactComponent as PawPrint } from '../../../images/icons/edit.svg';
+
+import { updateInfoUser } from 'redux/user/userOperations';
 
 function UserDataItem() {
   const user = useSelector(getUser);
-  const changeData = e => {
-    console.log(e.currentTarget);
+  const updateInfo = {
+    email: user.email,
+    name: user.name,
+    birthday: user.birthday,
+    phone: user.phone,
+    city: user.city,
   };
+  const dispatch = useDispatch();
+  
 
+  const ChangeData = e => {
+    
+
+    const id = e.currentTarget.id;
+
+    const value = e.currentTarget.value;
+
+    if (id === 'name') {
+      updateInfo.name = value;
+    } else if (id === 'email') {
+      updateInfo.email = value;
+    } else if (id === 'city') {
+      updateInfo.city = value;
+    } else if (id === 'birthday') {
+      updateInfo.birthday = value;
+    } else if (id === 'phone') {
+      updateInfo.phone = value;
+    }
+
+    console.log(updateInfo);
+    return updateInfo;
+  };
+function handleClick (){
+  dispatch(updateInfoUser(updateInfo))
+}
   const { name, birthday, email, phone, city } = user;
   return (
     <div>
       <Typography variant="div" sx={styled.ul}>
-        <Typography variant="p"className="name" sx={styled.li}>
-          Name: <Input type="text"  defaultValue={name} className="name" sx={styled.input}/>
-          <Button  sx={styled.btn} onClick={changeData} startIcon={<PawPrint  />}></Button>
+        <Typography variant="p" className="name" sx={styled.li}>
+          Name:
+          <FormControl variant="filled">
+            <FilledInput
+              id="name"
+              sx={styled.input}
+              onChange={ChangeData}
+              defaultValue={name}
+              endAdornment={
+                <InputAdornment position="end">
+                  <PawPrint
+                    class="name"
+                    onClick={handleClick}
+                    edge="end"
+                  ></PawPrint>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+       
         </Typography>
-        <Typography variant="p"className="email" sx={styled.li}>
-          Email: <Input type="text" defaultValue={email} sx={styled.input}/>
-          <Button sx={styled.btn} className="email" startIcon={<PawPrint  />}></Button>
+        <Typography variant="p" className="email" sx={styled.li}>
+          Email:{' '}
+          <FormControl variant="filled">
+            <FilledInput
+              id="email"
+              type='email'
+              sx={styled.input}
+              onChange={ChangeData}
+              defaultValue={email}
+              endAdornment={
+                <InputAdornment position="end">
+                  <PawPrint
+                    class="email"
+                    onClick={handleClick}
+
+                    edge="end"
+                  ></PawPrint>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
         </Typography>
-        <Typography variant="p"className="birthday" sx={styled.li}>
-          Birthday: <Input type="text" defaultValue={birthday} sx={styled.input}/>
-          <Button sx={styled.btn} className="birthday" startIcon={<PawPrint  />}></Button>
+        <Typography variant="p" className="birthday" sx={styled.li}>
+          Birthday:{' '}
+          <FormControl variant="filled">
+            <FilledInput
+              id="birthday"
+              type='data'
+              sx={styled.input}
+              onChange={ChangeData}
+              defaultValue={birthday}
+              endAdornment={
+                <InputAdornment position="end">
+                  <PawPrint
+                    class="birthday"
+                    onClick={handleClick}
+
+                    edge="end"
+                  ></PawPrint>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
         </Typography>
-        <Typography variant="p"className="phone" sx={styled.li}>
-          Phone: <Input type="text" defaultValue={phone} sx={styled.input}/>
-          <Button sx={styled.btn} className="phone" startIcon={<PawPrint  />}></Button>
+        <Typography variant="p" className="phone" sx={styled.li}>
+          Phone:{' '}
+          <FormControl variant="filled">
+            <FilledInput
+              id="phone"
+              sx={styled.input}
+              onChange={ChangeData}
+              defaultValue={phone}
+              endAdornment={
+                <InputAdornment position="end">
+                  <PawPrint
+                    class="phone"
+                    onClick={handleClick}
+
+                    edge="end"
+                  ></PawPrint>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
         </Typography>
-        <Typography variant="p"className="city" sx={styled.li}>
-          City: <Input type="text" defaultValue={city}sx={styled.input}/>
-          <Button sx={styled.btn} className="city" startIcon={<PawPrint  />}></Button>
+        <Typography variant="p" className="city" sx={styled.li}>
+          City:{' '}
+          <FormControl variant="filled">
+            <FilledInput
+              id="city"
+              sx={styled.input}
+              onChange={ChangeData}
+              defaultValue={city}
+              endAdornment={
+                <InputAdornment position="end">
+                  <PawPrint
+                    class="city"
+                    onClick={handleClick}
+
+                    edge="end"
+                  ></PawPrint>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
         </Typography>
       </Typography>
     </div>
