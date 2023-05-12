@@ -1,38 +1,34 @@
 import React from 'react';
-import { CardContent, Grid} from '@mui/material';
+import { CardContent, Grid } from '@mui/material';
 
 import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
-
 
 function NoticesCategoriesList({ data, categoryName }) {
   const dataArray = Array.isArray(data) ? data : [data];
 
   return (
-    <Grid container spacing={2} sx={{flexGrow: 1 }}>
+    <Grid container spacing={2} sx={{ flexGrow: 1 }}>
       {dataArray
         .slice()
         .reverse()
         .filter(
           item =>
-            item && item.category && (item.category === categoryName || categoryName === 'owner' || categoryName === 'favorite')
+            item &&
+            item.category &&
+            (item.category === categoryName ||
+              categoryName === 'owner' ||
+              categoryName === 'favorite')
         )
         .map(item => (
           <Grid item key={item._id} xs={6} md={4}>
-          
-              <CardContent>
-                <NoticeCategoryItem data={item} categoryName={categoryName} />
-              </CardContent>
-        
+            <CardContent>
+              <NoticeCategoryItem data={item} categoryName={categoryName} />
+            </CardContent>
           </Grid>
         ))}
     </Grid>
   );
 }
-
-
-
-
-
 
 // import React from 'react';
 // import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
@@ -40,11 +36,11 @@ function NoticesCategoriesList({ data, categoryName }) {
 // function NoticesCategoriesList({ data, categoryName }) {
 //   const dataArray = Array.isArray(data) ? data : [data];
 //   console.log(dataArray);
- 
+
 //   return <div>
 //     {
 //       dataArray
-//       .slice()  
+//       .slice()
 //       .reverse()
 //       .filter(
 //         item =>
@@ -57,7 +53,6 @@ function NoticesCategoriesList({ data, categoryName }) {
 //   </div>;
 // }
 
-
 // function NoticesCategoriesList({ data, categoryName }) {
 //   const dataArray = Object.values(data)
 //     console.log(Array.isArray(data));
@@ -65,7 +60,7 @@ function NoticesCategoriesList({ data, categoryName }) {
 //     {
 //       // (data || [])
 //       dataArray
-     
+
 //       .reverse()
 //       .filter(
 //         item =>

@@ -4,11 +4,21 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/authOperations';
+import { Container } from '@mui/material';
+// import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
 // import { toast } from 'react-toastify';
 
 function RegisterPage() {
-  // return <div>RegisterPage</div>;
   const dispatch = useDispatch();
+  //  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
   const regValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -28,85 +38,92 @@ function RegisterPage() {
   });
 
   return (
-    <div>
-      <h1>Registration</h1>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-          confirmPassword: '',
-        }}
-        validationSchema={regValidationSchema}
-        onSubmit={(values, { resetForm }) => {
-          const newUser = {
-            email: values.email,
-            password: values.password,
-          };
-          dispatch(register(newUser));
-          resetForm();
-          console.log(newUser);
-        }}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="email">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-              {/* {errors.email && touched.email && errors.email} */}
-              <ErrorMessage component="div" name="email" />
-            </label>
+    <>
+      <Container>
+        <h1>Registration</h1>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
+          validationSchema={regValidationSchema}
+          onSubmit={(values, { resetForm }) => {
+            const newUser = {
+              email: values.email,
+              password: values.password,
+            };
+            dispatch(register(newUser));
+            resetForm();
+            console.log(newUser);
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="email">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                {/* {errors.email && touched.email && errors.email} */}
+                <ErrorMessage component="div" name="email" />
+              </label>
 
-            <label htmlFor="password">
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-              {/* {errors.password && touched.password && errors.password} */}
-              <ErrorMessage component="div" name="password" />
-            </label>
+              <label htmlFor="password">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                />
+                {/* {errors.password && touched.password && errors.password} */}
+                <ErrorMessage component="div" name="password" />
+              </label>
 
-            <label htmlFor="passwordRepeat">
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.confirmPassword}
-              />
-              {/* {errors.password && touched.password && errors.password} */}
-              <ErrorMessage component="div" name="confirmPassword" />
-            </label>
+              <label htmlFor="passwordRepeat">
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.confirmPassword}
+                />
+                {/* {errors.password && touched.password && errors.password} */}
+                <ErrorMessage component="div" name="confirmPassword" />
+              </label>
 
-            <button type="submit" disabled={isSubmitting}>
-              Registration
-            </button>
-            <div>
-              <p>Already have an account?</p>
-              <Link to="/login">Login</Link>
-            </div>
-          </form>
-        )}
-      </Formik>
-    </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                // onClick={openModal}
+              >
+                Registration
+              </button>
+              {/* {isModalOpen && <ModalCongrats onClose={closeModal} />} */}
+              <div>
+                <p>Already have an account?</p>
+                <Link to="/login">Login</Link>
+              </div>
+            </form>
+          )}
+        </Formik>
+      </Container>
+    </>
   );
 }
 

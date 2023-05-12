@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { getCurrentUser } from 'redux/user/userOperations';
 
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
@@ -38,7 +39,7 @@ export const login = createAsyncThunk(
       const { data } = await axios.post('auth/login', credentials);
       console.log(data);
       token.set(data.token);
-      // dispatch(getCurrentUser());
+      dispatch(getCurrentUser());
       return data;
     } catch (error) {
       console.log(error.response.data);
@@ -58,24 +59,6 @@ export const logout = createAsyncThunk(
     } catch (error) {
       console.log(error.response.data);
       return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const getCurrentUser = createAsyncThunk(
-  'auth/current',
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      const value = getState().auth.token;
-      if (value === null) {
-        return rejectWithValue('Unable to fetch user');
-      }
-      token.set(value);
-      const { data } = await axios.get('users/current');
-      return data;
-    } catch (e) {
-      console.log(e.response.data);
-      return rejectWithValue(e.message);
     }
   }
 );

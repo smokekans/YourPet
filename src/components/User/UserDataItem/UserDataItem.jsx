@@ -1,43 +1,41 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getNameUser } from '../../../redux/user/userSelectors';
-
-
-function changeData (e)  {
- 
-  console.log(e.currentTarget)
-}
-
+import { getUser } from '../../../redux/user/userSelectors';
+import styled from './styledUserDataItem';
+import { Typography,Input,Button } from '@mui/material';
+import { ReactComponent as PawPrint } from '../../../images/icons/edit.svg';
 
 function UserDataItem() {
+  const user = useSelector(getUser);
+  const changeData = e => {
+    console.log(e.currentTarget);
+  };
 
-  const user = useSelector(getNameUser);
-
-  const { name, birthday, email, phone, city } = user.user;
+  const { name, birthday, email, phone, city } = user;
   return (
     <div>
-      <ul>
-        <li className="name">
-          Name: <input type="text" value={name} className="name"/>
-          <button  onClick={changeData}>+</button>
-        </li>
-        <li >
-          Email: <input type="text" value={email} />
-          <button className="email">+</button>
-        </li>
-        <li >
-          Birthday: <input type="text" value={birthday} />
-          <button className="birthday">+</button>
-        </li>
-        <li>
-          Phone: <input type="text" value={phone} />
-          <button  className="phone">+</button>
-        </li>
-        <li >
-          City: <input type="text" value={city} />
-          <button className="city">+</button>
-        </li>
-      </ul>
+      <Typography variant="div" sx={styled.ul}>
+        <Typography variant="p"className="name" sx={styled.li}>
+          Name: <Input type="text"  defaultValue={name} className="name" sx={styled.input}/>
+          <Button  sx={styled.btn} onClick={changeData} startIcon={<PawPrint  />}></Button>
+        </Typography>
+        <Typography variant="p"className="email" sx={styled.li}>
+          Email: <Input type="text" defaultValue={email} sx={styled.input}/>
+          <Button sx={styled.btn} className="email" startIcon={<PawPrint  />}></Button>
+        </Typography>
+        <Typography variant="p"className="birthday" sx={styled.li}>
+          Birthday: <Input type="text" defaultValue={birthday} sx={styled.input}/>
+          <Button sx={styled.btn} className="birthday" startIcon={<PawPrint  />}></Button>
+        </Typography>
+        <Typography variant="p"className="phone" sx={styled.li}>
+          Phone: <Input type="text" defaultValue={phone} sx={styled.input}/>
+          <Button sx={styled.btn} className="phone" startIcon={<PawPrint  />}></Button>
+        </Typography>
+        <Typography variant="p"className="city" sx={styled.li}>
+          City: <Input type="text" defaultValue={city}sx={styled.input}/>
+          <Button sx={styled.btn} className="city" startIcon={<PawPrint  />}></Button>
+        </Typography>
+      </Typography>
     </div>
   );
 }

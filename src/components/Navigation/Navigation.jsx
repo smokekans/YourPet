@@ -5,7 +5,6 @@ import { getIsLoggedIn } from 'redux/auth/authSelectors';
 import Nav from './Nav/Nav';
 import UserNavigation from './UserNavigation/UserNavigation';
 import AuthNavigation from './AuthNavigation/AuthNavigation';
-import { Box } from '@mui/material';
 import BurgerMenu from './Nav/BurgerMenu';
 
 function Navigation() {
@@ -15,7 +14,7 @@ function Navigation() {
   const isLoggedIn = useSelector(getIsLoggedIn);
 
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center">
+    <>
       {isDesktop && (
         <>
           <Nav />
@@ -30,7 +29,7 @@ function Navigation() {
       )}
       {isMobile && isLoggedIn && <UserNavigation />}
       {isMobile && <BurgerMenu />}
-    </Box>
+    </>
   );
 }
 

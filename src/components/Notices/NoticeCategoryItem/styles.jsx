@@ -40,9 +40,8 @@ const styles = {
     bottom: 180,
     display: 'flex',
     justifyContent: 'center',
-      alignItems: 'center',
-      gap: 1,
-   
+    alignItems: 'center',
+    gap: 1,
   },
   component: {
     bgcolor: 'primary.secondary',
@@ -50,11 +49,10 @@ const styles = {
     borderRadius: 16,
     height: 28,
     width: 80,
-      margin: '0 5px',
-         display: 'flex',
+    margin: '0 5px',
+    display: 'flex',
     justifyContent: 'center',
-      alignItems: 'center',
-      
+    alignItems: 'center',
   },
 };
 

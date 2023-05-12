@@ -1,5 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import { login, logout, register, getCurrentUser } from './authOperations';
+import { login, logout, register } from './authOperations';
 
 const authInitialState = {
   user: {},
@@ -29,12 +29,21 @@ function logOutFulfilled(state) {
   state.token = null;
 }
 
-function getUserFulfilled(state, { payload }) {
-  state.user = payload;
-  state.isLoading = false;
-  state.isLoggedIn = true;
-  state.error = null;
-}
+// function getUserFulfilled(state, { payload }) {
+//   state.user = payload;
+//   state.isLoading = false;
+//   state.isLoggedIn = true;
+//   state.error = null;
+// }
+//       .addCase(getCurrentUser.pending, state => {
+//         state.isLoading = true;
+//         state.error = null;
+//       })
+//       .addCase(getCurrentUser.fulfilled, getUserFulfilled)
+//       .addCase(getCurrentUser.rejected, (state, { payload }) => {
+//         state.isLoading = false;
+//         state.error = payload;
+//       })
 
 export const addAccessToken = createAction('auth/token');
 
@@ -58,15 +67,6 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, loginFulfilled)
       .addCase(login.rejected, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = payload;
-      })
-      .addCase(getCurrentUser.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(getCurrentUser.fulfilled, getUserFulfilled)
-      .addCase(getCurrentUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       })
