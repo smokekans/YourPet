@@ -7,3 +7,4 @@ export const isPets = state => state.user.user.pets;
 export const getFavorites = state => state.user.favorite;
 // console.log(getFavorites())
 export const getFavorite = state => state.user.favorite;
+

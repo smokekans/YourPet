@@ -4,17 +4,11 @@ import { toast } from 'react-toastify';
 import { getIsLoggedIn } from 'redux/auth/authSelectors';
 import CATEGORY from 'utils/constants';
 import defaultImage from '../../../images/not-found.jpg';
-import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
 import { ReactComponent as Location } from '../../../images/icons/location.svg';
 import { ReactComponent as Clock } from '../../../images/icons/clock.svg';
 import { ReactComponent as Male } from '../../../images/icons/male.svg';
 import { ReactComponent as Female } from '../../../images/icons/female.svg';
-import {
-  // addToFavorites,
-  // deleteFromFavorite,
-  // deleteNotice,
-  getSingleNotice,
-} from 'redux/notices/noticesOperation';
+import { getSingleNotice } from 'redux/notices/noticesOperation';
 
 import styles from './styles';
 
@@ -24,46 +18,58 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  IconButton,
   Box,
   Button,
 } from '@mui/material';
-import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
 import { getFavorite } from 'redux/user/userSelectors';
+import FavoriteIconButton from 'components/Button/AddToFavoriteButton/AddToFavoriteButton';
+import ModalNotice from 'components/Modal/ModalNotice/ModalNotice';
+import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
 
 const NoticeCategoryItem = ({ data, categoryName }) => {
   const { _id, image, category, title, location, sex, birthday } = data || {};
   const dispatch = useDispatch();
-  const [setActive] = useState(false);
+  // const [active, setActive] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFavorites, setIsFavorites] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const favoriteElement = useSelector(getFavorite);
-const dataArray = Array.isArray(favoriteElement) ? favoriteElement : [favoriteElement];
-  console.log(dataArray);
-
-  console.log(favoriteElement); // Проверка значения favoriteElement
+  const dataArray = Array.isArray(favoriteElement)
+    ? favoriteElement
+    : [favoriteElement];
   const isFavorite = dataArray.includes(_id);
 
-  const addToFavorite = () => {
+  console.log(isFavorite)
+  console.log(_id)
 
-
-    if (!isLoggedIn) {
-      return toast.info(
-        'You must be registered or logged in to continue the operation'
-      );
-    }
-    if (isLoggedIn) {
-      toast('Added to favorites');
-      dispatch(addToFavorites(_id));
-    } else if (categoryName === 'favorite') {
-      toast.error('Removed from favorites');
-      dispatch(deleteFromFavorite(_id));
-    }
-  };
-
-  const handleLearnMore = () => {
-    setActive(true);
+const handleLearnMore = () => {
+    setIsModalOpen(!isModalOpen);
     dispatch(getSingleNotice(_id));
   };
+
+
+  const onClose = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+const handleFavoriteClick = () => {
+  if (!isLoggedIn) {
+    toast.info('You must be registered or logged in to continue the operation');
+    return;
+  }
+
+  if (isFavorites) {
+    toast.error('Removed from favorites');
+    dispatch(deleteFromFavorite(_id));
+     setIsFavorites(false);
+  } else {
+    toast('Added to favorites');
+    dispatch(addToFavorites(_id));
+     setIsFavorites(true);
+  }
+  };
+
+
 
   // const deletePet = () => {
   // dispatch(deleteNotice({ id: _id }));
@@ -89,7 +95,7 @@ const dataArray = Array.isArray(favoriteElement) ? favoriteElement : [favoriteEl
 
   return (
     <Card sx={styles.root}>
-      <CardActionArea>
+      <CardActionArea >
         <CardMedia
           sx={styles.media}
           image={image || defaultImage}
@@ -102,12 +108,7 @@ const dataArray = Array.isArray(favoriteElement) ? favoriteElement : [favoriteEl
           {CATEGORY[category]}
         </Typography>
         <Box sx={styles.favorite}>
-          <IconButton
-            color={isFavorite ? 'secondary' : 'default'}
-            onClick={addToFavorite}
-          >
-            <IconHeart />
-          </IconButton>
+         <FavoriteIconButton noticeId={_id} />
         </Box>
 
         <Box sx={styles.components}>
@@ -132,105 +133,19 @@ const dataArray = Array.isArray(favoriteElement) ? favoriteElement : [favoriteEl
           </Box>
         </CardContent>
       </CardActionArea>
+      {
+    
+        isModalOpen && (
+          <ModalNotice
+            onClose={onClose}
+            onAddToFavorite={handleFavoriteClick}
+          />
+        )
+      
+      }
     </Card>
   );
 };
 
 export default NoticeCategoryItem;
 
-// import React, { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// // import { useLocation } from 'react-router-dom';
-// import { toast } from 'react-toastify';
-// import { getIsLoggedIn } from 'redux/auth/authSelectors';
-// import CATEGORY from 'utils/constants';
-// import defaultImage from '../../../images/not-found.jpg';
-// import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
-// import { ReactComponent as Location } from '../../../images/icons/location.svg';
-// import { addToFavorites, deleteFromFavorite, deleteNotice, getSingleNotice } from 'redux/notices/noticesOperation';
-// import { getFavorite } from 'redux/notices/noticesSelectors';
-// // import { getNoteceIsLoadig, getOneNotice } from 'redux/notices/noticesSelectors';
-
-// function NoticeCategoryItem({ data, categoryName }) {
-//   const { _id, image, category, title, sex, location, birthday, owner } = data || {};;
-//   console.log(data)
-//    const dispatch = useDispatch();
-//   const [ setActive] = useState(false);
-//   // const { pathname } = useLocation();
-
-//   const isLoggedIn = useSelector(getIsLoggedIn);
-//   // const currentUser = useSelector(getUser);
-//   const favoriteElement = useSelector(getFavorite);
-//   const isFavorite = favoriteElement.includes(_id);
-//   // const dataInfo = useSelector(getOneNotice);
-//   // const isLoading = useSelector(getNoteceIsLoadig);
-
-//   const addToFavorite = () => {
-//     if (!isLoggedIn) {
-//       return toast.info('You must be registered or logged in, to continue the operation')
-//     }
-//     if (isLoggedIn) {
-//       toast('Added to favorite')
-//       dispatch(addToFavorites(_id))
-//     } else if (categoryName === 'favorite') {
-//       toast.error('Removed from favorite')
-//       dispatch(deleteFromFavorite(_id))
-
-//     }
-
-//   }
-
-//   // const checkedFavorite = () => {
-//   //   if (!isLoggedIn) {
-//   //     return favorite = false
-//   //   }
-//   //   const inFavorite = favoriteElement?.find(element => element === _id)
-//   //   if (inFavorite) {
-//   //     return favorite = true
-//   //   }
-
-//   //   return favorite = false
-//   // }
-
-//   const handleLearnMore = () => {
-//     setActive(true)
-//     dispatch(getSingleNotice(_id));
-//   };
-
-//   const deletePet = () => {
-//     dispatch(deleteNotice({ id: _id }));
-//   }
-
-//   return <>
-//     <li>
-//       <div>
-//         <img src={image ? image : defaultImage} alt="Pet" />
-//         <span>{CATEGORY[category]}</span>
-//         <button type="button"
-//           favorite={isFavorite}
-//           onClick={addToFavorite}
-//         >
-//           <IconHeart/>
-//         </button>
-//       </div>
-//       <div>
-//         <ul>
-//           <li key={`${_id}+location`}>
-//             <Location />
-//             <h2>{ location}</h2>
-//           </li>
-//           <li></li>
-//           <li></li>
-//         </ul>
-//       </div>
-//       <div>
-//         <h2>{title}</h2>
-//       </div>
-//       <div>
-//         <button type = "button" onClick={handleLearnMore}>
-//           Learn more
-//         </button>
-//       </div>
-// </li>
-//   </>;
-// }

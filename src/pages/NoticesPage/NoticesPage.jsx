@@ -17,6 +17,7 @@ import { getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
 import Typography from '@mui/material/Typography';
 
+
 function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
