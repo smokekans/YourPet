@@ -1,19 +1,37 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Input, InputAdornment, IconButton } from "@mui/material";
 import { ReactComponent as IconSearch } from "../../../images/icons/search.svg";
 import { ReactComponent as IconCross } from "../../../images/icons/cross.svg";
+import { useDispatch } from "react-redux";
+import { getNoticesByQwery } from "redux/notices/noticesOperation";
+import { useParams } from "react-router-dom";
 
 const NoticesSearch = ({ onSearch }) => {
   const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
+  const { categoryName } = useParams();
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    onSearch(query);
-  };
+  useEffect(() => {
+    dispatch(getNoticesByQwery());
+  }, [dispatch]);
 
-  const handleQueryChange = (event) => {
-    setQuery(event.target.value);
-  };
+const onSubmit = (event) => {
+  event.preventDefault();
+
+  const newQuery = event.target.elements.search.value;
+  dispatch(getNoticesByQwery({ query: newQuery, category: categoryName }));
+  onSearch(newQuery);
+  setQuery(""); 
+};
+
+ const handleQueryChange = (event) => {
+  const newQuery = event.target.value;
+  setQuery(newQuery);
+
+  if (!newQuery.trim()) {
+    dispatch(getNoticesByQwery({ query: "", category: categoryName }));
+  }
+};
 
   const handleClearQuery = () => {
     setQuery("");
@@ -32,6 +50,7 @@ const NoticesSearch = ({ onSearch }) => {
     >
       <Input
         placeholder="Search"
+        name="search"
         value={query}
         onChange={handleQueryChange}
         disableUnderline
