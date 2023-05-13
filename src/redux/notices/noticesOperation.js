@@ -55,9 +55,11 @@ export const addNotices = createAsyncThunk(
 export const deleteNotice = createAsyncThunk(
   'notices/deleteNotice',
   async (id, { rejectWithValue }) => {
+    console.log(id)
     try {
       await axios.delete(`notices/${id}`);
       return id;
+
     } catch (error) {
       return rejectWithValue(error.message);
     }
