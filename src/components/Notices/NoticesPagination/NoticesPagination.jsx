@@ -8,11 +8,11 @@ import { getNotices } from 'redux/notices/noticesSelectors';
 export const NoticesPagination = () => {
   const noticesItems = useSelector(getNotices).notices;
   const [page, setPage] = useState(1);
+
   const dispatch = useDispatch();
   const { categoryName } = useParams();
 
   const handleChangePag = async e => {
-    console.dir(e.target);
     const numberLink = e.target.localName;
     if (numberLink === 'a' || numberLink === 'span') {
       dispatch(
@@ -33,8 +33,8 @@ export const NoticesPagination = () => {
           between={4}
           total={noticesItems.length}
           limit={10}
-          changePage={page => {
-            setPage(page);
+          changePage={async page => {
+            await setPage(page);
           }}
         />
       ) : (
