@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import newsSelectors from 'redux/news/newsSelectors';
 import News from 'components/News/News';
 import { getNews } from 'redux/news/newsOperations';
+import { NewsPagination } from 'components/News/NewsPagination';
 
 function NewsPage() {
   const dispatch = useDispatch();
@@ -33,29 +34,35 @@ function NewsPage() {
 
   return (
     <>
-     <Container>
-      <h1>News</h1>
-      <form onSubmit={onSubmit}>
-        <input type="search" name="search" placeholder="Search" onInput={changeInput} />
-        <button type="submit">
-          <Search />
-        </button>
-      </form>
-      {!status && news.length > 0 && (
-        <ul>
-          {news.map(item => (
-            <News key={item._id} news={item} />
-          ))}
-        </ul>
-      )}
+      <Container>
+        <h1>News</h1>
+        <form onSubmit={onSubmit}>
+          <input
+            type="search"
+            name="search"
+            placeholder="Search"
+            onInput={changeInput}
+          />
+          <button type="submit">
+            <Search />
+          </button>
+        </form>
+        {!status && news.length > 0 && (
+          <ul>
+            {news.map(item => (
+              <News key={item._id} news={item} />
+            ))}
+          </ul>
+        )}
 
-      {!status && news.length === 0 && (
-        <div>
-          <p>No result</p>
-          <p>{query}</p>
-        </div>
-      )}
-       </Container>
+        {!status && news.length === 0 && (
+          <div>
+            <p>No result</p>
+            <p>{query}</p>
+          </div>
+        )}
+      </Container>
+      <NewsPagination />
     </>
   );
 }
