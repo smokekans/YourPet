@@ -6,7 +6,8 @@ import PetsData from 'components/Pets/PetsData/PetsData';
 import Loader from './loader';
 import { isLoading } from '../../redux/user/userSelectors';
 import styled from './styledUser';
-import { Typography, Button } from '@mui/material';
+import { Typography } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 function UserPage() {
   const Loading = useSelector(isLoading);
@@ -17,8 +18,11 @@ function UserPage() {
           My information:
         </Typography>
         <Typography variant="h2" sx={styled.pets}>
+          {' '}
           My pets:
-          <Button sx={styled.btnAdd}>Add pets +</Button>
+          <NavLink to="/add-pet" sx={styled.btnAdd}>
+            Add pets +
+          </NavLink>
         </Typography>
       </Container>
 
