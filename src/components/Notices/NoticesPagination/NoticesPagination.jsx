@@ -11,12 +11,17 @@ export const NoticesPagination = () => {
   const dispatch = useDispatch();
   const { categoryName } = useParams();
 
-  const numberOfPages = noticesItems.length / 10;
-
   const handleChangePag = async e => {
+    console.dir(e.target);
     const numberLink = e.target.localName;
-    if (numberLink === 'a') {
-      dispatch(getNoticeByCategory({ category: categoryName, page: page + 1 }));
+    if (numberLink === 'a' || numberLink === 'span') {
+      dispatch(
+        getNoticeByCategory({
+          category: categoryName,
+          page: page,
+          limit: 10,
+        })
+      );
     }
   };
 
@@ -26,7 +31,7 @@ export const NoticesPagination = () => {
         <PaginationControl
           page={page}
           between={4}
-          total={numberOfPages}
+          total={noticesItems.length}
           limit={10}
           changePage={page => {
             setPage(page);

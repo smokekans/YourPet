@@ -7,7 +7,9 @@ export const getNoticeByCategory = createAsyncThunk(
   'notices/getNoticeByCategory',
   async ({ category, page = 1, limit = 0 }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`/notices?category=${category}&page=${page}&limit=${limit}`);
+      const { data } = await axios.get(
+        `/notices?category=${category}&page=${page}&limit=${limit}`
+      );
       console.log(data);
       return data;
     } catch (error) {
