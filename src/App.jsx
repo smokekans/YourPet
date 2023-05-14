@@ -12,6 +12,8 @@ import UserPage from 'pages/UserPage/UserPage';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from 'route/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'route/PublicRoute/PublicRoute';
+  import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   return (
@@ -42,6 +44,7 @@ export const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
+       <ToastContainer />
     </>
   );
 };

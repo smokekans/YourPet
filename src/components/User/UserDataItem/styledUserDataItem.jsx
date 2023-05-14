@@ -95,7 +95,8 @@ const styled = {
     color: '#888888',
   },
   btn:{
-    marginLeft:"-50px"
+    marginLeft:"2px",
+   
   }
 };
 

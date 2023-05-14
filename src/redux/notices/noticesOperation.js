@@ -23,7 +23,6 @@ export const getSingleNotice = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/notices/${id}`);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -36,7 +35,6 @@ export const getNewNotice = createAsyncThunk(
   async (newNotice, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(`/notices/`, newNotice);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -44,39 +42,6 @@ export const getNewNotice = createAsyncThunk(
   }
 );
 
-// export const addToFavorites = createAsyncThunk(
-//   'user/addFavorite',
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.post(`/user/favorite/${id}`);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     };
-//   }
-// );
-
-// export const getFavorite = createAsyncThunk(
-//   'notices/getFavorite',
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.get(" /user/favorite");
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     };
-//   })
-
-// export const deleteFromFavorite = createAsyncThunk(
-//   'notices/deleteFavorite',
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.delete(`/user/favorite/${id}`);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     };
-//   })
 
 export const addNotices = createAsyncThunk(
   'notices/addNotices',
@@ -93,9 +58,36 @@ export const addNotices = createAsyncThunk(
 export const deleteNotice = createAsyncThunk(
   'notices/deleteNotice',
   async (id, { rejectWithValue }) => {
+    console.log(id)
     try {
       await axios.delete(`notices/${id}`);
       return id;
+
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getUserNotices = createAsyncThunk(
+  'notices/getUserNotices',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`notices/user`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+
+);
+
+export const getNoticesByQwery = createAsyncThunk(
+  'notices/getNoticesByQwery',
+  async ({ query, category, page = 1, limit = 0 }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`notices/find?title=${query}&category=${category}&page=${page}&limit=${limit}`);
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

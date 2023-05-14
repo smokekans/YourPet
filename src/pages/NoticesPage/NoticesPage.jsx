@@ -6,12 +6,8 @@ import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-// import { getUser } from 'redux/auth/authSelectors';
-import { getNoticeByCategory } from 'redux/notices/noticesOperation';
-import {
-  getNoteceIsLoadig,
-  getNotices,
-} from 'redux/notices/noticesSelectors';
+import { getNoticeByCategory, getUserNotices } from 'redux/notices/noticesOperation';
+import { getNoteceIsLoadig, getNotices, getOwnNotices } from 'redux/notices/noticesSelectors';
 import { clearNotices } from 'redux/notices/noticesSlice';
 import { getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
@@ -20,61 +16,60 @@ import Typography from '@mui/material/Typography';
 function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
-  // const dataArray = Object.values(notices)
   const isLoading = useSelector(getNoteceIsLoadig);
-  // const isLoggedIn = useSelector(getUser);
-  // console.log('data:', notices, 'categoryName:', categoryName);
+  const favoriteNotices = useSelector(getFavorites);
+  const favoriteAds = favoriteNotices?.user?.favorite || [];
+  const ownNotices = useSelector(getOwnNotices);
   const dispatch = useDispatch();
 
-  const [searchQwery, setSearchQwery] = useState('');
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
-    if (searchQwery !== '') {
-      dispatch(
-        getNoticeByCategory({ category: categoryName, query: searchQwery })
-      );
-    } else if (categoryName !== 'favorite') {
-      dispatch(getNoticeByCategory({ category: categoryName }));
-    }
-
     if (categoryName === 'favorite') {
       dispatch(getFavorite());
+    } else if (categoryName === 'owner') {
+      dispatch(getUserNotices());
+    } else {
+      dispatch(getNoticeByCategory({ category: categoryName }));
     }
-
     return () => dispatch(clearNotices([]));
-  }, [dispatch, categoryName, searchQwery]);
+  }, [dispatch, categoryName]);
 
-  const onSearch = searchTitle => {
-    setSearchQwery(searchTitle);
-  };
-
-  const favoriteNotices = useSelector(getFavorites);
-  console.log(favoriteNotices)
- const favoriteAds = favoriteNotices?.user?.favorite || [];
-  console.log(favoriteAds)
   const dataToRender =
-    categoryName === 'favorite' ? favoriteAds : notices.notices;
+    categoryName === 'favorite'
+      ? favoriteAds
+      : categoryName === 'owner'
+      ? ownNotices
+        : notices.notices;
+  
+  const handleSearch = (newQuery) => {
+  setQuery(newQuery);
+};
+
+  const handleClearQuery = () => {
+    setQuery("");
+  };
 
   return (
     <>
       <Container>
-        <Typography sx={
-          { display: 'flex', justifyContent: 'center', marginTop: '148px', fontWeight: 700, fontSize: 48 }}
-          variant="h1">Find your favorite pet</Typography>
-        
-        <NoticesSearch onSearch={onSearch} />
+        <Typography
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '148px',
+            fontWeight: 700,
+            fontSize: 48,
+          }}
+          variant="h1"
+        >
+          Find your favorite pet
+        </Typography>
+
+         <NoticesSearch query={query} onSearch={handleSearch} onClearQuery={handleClearQuery} />
         <NoticesCategoriesNavigation />
 
-        {isLoading ? (
-          <Loader />
-        ) : (
-        <NoticesCategoriesList
-          categoryName={categoryName}
-          data={dataToRender}
-        />
-         )} 
-
-        {/* {notices !== undefined && <NoticesCategoriesList categoryName={categoryName} data={notices} />} */}
+        {isLoading ? <Loader /> : <NoticesCategoriesList categoryName={categoryName} data={dataToRender} />}
       </Container>
     </>
   );
