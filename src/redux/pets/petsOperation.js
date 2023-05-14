@@ -11,8 +11,8 @@ export const token = {
     axios.defaults.headers.common.Authorization = '';
   },
 };
-
-export const getPets = createAsyncThunk(
+// змінила назву з getPet на getFriends
+export const getFriends = createAsyncThunk(
   'current/user',
   async (credentials, { rejectWithValue }) => {
     try {
@@ -21,34 +21,30 @@ export const getPets = createAsyncThunk(
       return rejectWithValue(error.message);
     }
   }
-);  
+);
 
-
-
-
-
-// export const addPetCard = createAsyncThunk(
-//   'petForm/addPetCard',
-//   async (formData, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.post('/pets', formData);
-//       return response.data;
-//     } catch (error) {
-//       return rejectWithValue(error.response.data);
-//     }
-//   }
-// );
-
-// export const createPetCard = formData => {
-//   return async dispatch => {
-//     try {
-//       const result = await dispatch(addPetCard(formData));
-//       // handle successful result here
-//       console.log(result);
-//     } catch (error) {
-//       // handle error here
-//       console.log(error);
-//     }
-//   };
-// };
-
+// додає картку улюбленця
+export const createPet = createAsyncThunk(
+  'pets/create',
+  async ({ values, token, image }, thunkAPI) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', image);
+      const header = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      const { data } = await axios.post(
+        '/pets',
+        { ...values, formData },
+        header
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);

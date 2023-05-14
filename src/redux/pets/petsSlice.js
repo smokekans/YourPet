@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getFriends } from './petsOperation';
-// import { addPetCard } from './petsOperation';
+import { createPet} from './petsOperation';
 
 const userInitialState = {
   user: {},
@@ -24,45 +24,46 @@ const friendsSlice = createSlice({
   },
 });
 
-// const petInitialState = {
-//   petForm: {
-//     category: '',
-//     title: '',
-//     name: '',
-//     birthday: '',
-//     breed: '',
-//     sex: '',
-//     image: null,
-//     location: '',
-//     price: '',
-//     comments: '',
-//   },
-//   status: 'idle',
-//   error: null,
-// };
+const petsInitialState = {
+  pets: [],
+  error: null,
+  isLoading: false,
+};
 
-// const petFormSlice = createSlice({
-//   name: 'petForm',
-//   petInitialState,
-//   reducers: {
-//     setPetForm: (state, action) => {
-//       state.petForm = action.payload;
-//     },
-//   },
-//   extraReducers: builder => {
-//     builder
-//       .addCase(addPetCard.pending, state => {
-//         state.status = 'loading';
-//       })
-//       .addCase(addPetCard.fulfilled, state => {
-//         state.status = 'succeeded';
-//       })
-//       .addCase(addPetCard.rejected, (state, action) => {
-//         state.status = 'failed';
-//         state.error = action.payload;
-//       });
-//   },
-// });
+const handlePending = state => {
+  state.isLoading = true;
+};
 
-// export const petsFormReducer = petFormSlice.reducer;
+const handleReject = (state, { payload }) => {
+  state.pets = [];
+  state.isLoading = false;
+  state.error = payload;
+};
+
+const petsSlice = createSlice({
+  name: 'pets',
+  initialState: petsInitialState,
+  extraReducers: builder => {
+    builder
+      .addCase(createPet.pending, state => {
+        handlePending(state);
+      })
+      .addCase(createPet.fulfilled, (state, { payload }) => {
+        state.pets.push(payload);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(createPet.rejected, (state, { payload }) => {
+        handleReject(state, payload);
+      });
+  },
+  reducers: {
+    clearPets(state, { payload }) {
+      state.pets = [];
+    },
+  },
+});
+
+export const petsReducer = petsSlice.reducer;
+export const { clearPets } = petsSlice.actions;
 export const friendsReducer = friendsSlice.reducer;

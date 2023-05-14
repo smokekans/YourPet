@@ -8,6 +8,7 @@ import {
   getNewNotice,
   getNoticeByCategory,
   getSingleNotice,
+  createNotice,
 } from './noticesOperation';
 
 const noticesInitialState = {
@@ -103,6 +104,18 @@ const noticesSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteNotice.rejected, (state, { payload }) => {
+        handleReject(state, payload);
+      })
+      // додає оголошення
+      .addCase(createNotice.pending, state => {
+        handlePending(state);
+      })
+      .addCase(createNotice.fulfilled, (state, { payload }) => {
+        state.notices.push(payload);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(createNotice.rejected, (state, { payload }) => {
         handleReject(state, payload);
       });
   },
