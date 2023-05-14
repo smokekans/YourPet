@@ -42,7 +42,7 @@ function NewsPage() {
         </button>
       </form>
       {!status && news.length > 0 && (
-        <ul>
+        <ul >
           {news.map(item => (
             <News key={item._id} news={item} />
           ))}
