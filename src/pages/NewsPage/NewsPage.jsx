@@ -1,16 +1,20 @@
-import { Container } from '@mui/material';
+import { Box, Container, IconButton, Input, InputAdornment, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Search } from '../../images/icons/search.svg';
+import { ReactComponent as Cross } from '../../images/icons/cross.svg';
+
 import { useDispatch, useSelector } from 'react-redux';
-import newsSelectors from 'redux/news/newsSelectors';
-import News from 'components/News/News';
 import { getNews } from 'redux/news/newsOperations';
+import styles from './styles';
+import NewsList from 'components/News/NewsList/NewsList';
+import Loader from 'components/Loader/Loader';
+import { getStatus } from 'redux/news/newsSelectors';
 
 function NewsPage() {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
-  const news = useSelector(newsSelectors.getNews);
-  const status = useSelector(newsSelectors.getStatus);
+  const [input, setInput] = useState('');
+  const isLoad = useSelector(getStatus);
 
   useEffect(() => {
     dispatch(getNews());
@@ -18,44 +22,62 @@ function NewsPage() {
 
   const onSubmit = e => {
     e.preventDefault();
-
     dispatch(getNews(e.target.search.value));
     setQuery(e.target.search.value);
   };
 
   const changeInput = e => {
-    e.preventDefault();
     if (e.target.value === '') {
       dispatch(getNews(e.target.value));
       setQuery(e.target.value);
     }
   };
 
+  const handleChange = event => {
+    setInput(event.target.value);
+  };
+
+  const clearInput = e => {
+    setQuery('');
+    dispatch(getNews(e.target.value));
+    setInput('');
+  };
+
   return (
     <>
-     <Container>
-      <h1>News</h1>
-      <form onSubmit={onSubmit}>
-        <input type="search" name="search" placeholder="Search" onInput={changeInput} />
-        <button type="submit">
-          <Search />
-        </button>
-      </form>
-      {!status && news.length > 0 && (
-        <ul>
-          {news.map(item => (
-            <News key={item._id} news={item} />
-          ))}
-        </ul>
-      )}
-
-      {!status && news.length === 0 && (
-        <div>
-          <p>No result</p>
-          <p>{query}</p>
-        </div>
-      )}
-       </Container>
+      <Container sx={styles.container}>
+        <Typography sx={styles.title} variant="h2">
+          News
+        </Typography>
+        <Box component="form" onSubmit={onSubmit} sx={styles.box}>
+          <Input
+            placeholder="Search"
+            name="search"
+            value={input}
+            onInput={changeInput}
+            onChange={handleChange}
+            disableUnderline
+            sx={styles.input}
+            endAdornment={
+              <>
+                {query && (
+                  <InputAdornment position="end">
+                    <IconButton onClick={clearInput} size="small">
+                      <Cross sx={{ pl: '10px' }} />
+                    </IconButton>
+                  </InputAdornment>
+                )}
+                <InputAdornment position="end" sx={{ position: 'absolute', right: 0, pr: '14px' }}>
+                  <IconButton type="submit" size="small">
+                    <Search />
+                  </IconButton>
+                </InputAdornment>
+              </>
+            }
+          />
+        </Box>
+        {!isLoad ? <NewsList query={query} /> : <Loader />}
+      </Container>
     </>
   );
 }
