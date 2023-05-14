@@ -10,6 +10,7 @@ export const getNoticeByCategory = createAsyncThunk(
       const { data } = await axios.get(
         `/notices?category=${category}&page=${page}&limit=${limit}`
       );
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -88,6 +89,31 @@ export const getNoticesByQwery = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
+    }
+  }
+);
+// додає оголошення
+export const createNotice = createAsyncThunk(
+  'notices/create',
+  async ({ values, token, image }, thunkAPI) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', image);
+      const header = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      const { data } = await axios.post(
+        '/notices',
+        { ...values, formData },
+        header
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue();
     }
   }
 );
