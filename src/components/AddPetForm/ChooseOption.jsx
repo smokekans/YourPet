@@ -1,17 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {Form, Field, useFormikContext } from 'formik';
+import { Form, Field, useFormikContext } from 'formik';
 
-
-const ChooseOption = ({nextStep, setTitle}) => {
+const ChooseOption = ({ nextStep, setTitle }) => {
   const navigate = useNavigate();
-   const { values, handleChange } = useFormikContext();
+  const { values, handleChange } = useFormikContext();
 
   const categoryTitles = {
     'your-pet': 'Add my pet',
-    'sell': 'Add pet for sell',
+    sell: 'Add pet for sell',
     'lost-found': 'Add to lost or found pet',
-    'for-free': 'Add to give a Pet for Adoption'
+    'for-free': 'Add to give a Pet for Adoption',
   };
 
   const handleCancelClick = () => {
@@ -25,58 +24,58 @@ const ChooseOption = ({nextStep, setTitle}) => {
 
   return (
     <div>
-          <Form>
-            <label htmlFor="category">
-              Your pet
-              <Field
-                type="radio"
-                id="your-pet"
-                name="category"
+      <Form>
+        <label htmlFor="category">
+          Your pet
+          <Field
+            type="radio"
+            id="your-pet"
+            name="category"
             value="your-pet"
             onChange={handleChange}
             // hidden
-              />
-            </label>
-            <label htmlFor="category">
-              Sell
-              <Field
-                type="radio"
-                id="sell"
-                name="category"
+          />
+        </label>
+        <label htmlFor="category">
+          Sell
+          <Field
+            type="radio"
+            id="sell"
+            name="category"
             value="sell"
             onChange={handleChange}
-             // hidden
-              />
-            </label>
-            <label htmlFor="category">
-              Lost/found
-              <Field
-                type="radio"
-                id="lost-found"
-                name="category"
+            // hidden
+          />
+        </label>
+        <label htmlFor="category">
+          Lost/found
+          <Field
+            type="radio"
+            id="lost-found"
+            name="category"
             value="lost-found"
             onChange={handleChange}
-             // hidden
-              />
-            </label>
-            <label htmlFor="category">
-              In good hands
-              <Field
-                type="radio"
-                id="for-free"
-                name="category"
+            // hidden
+          />
+        </label>
+        <label htmlFor="category">
+          In good hands
+          <Field
+            type="radio"
+            id="for-free"
+            name="category"
             value="for-free"
             onChange={handleChange}
-             // hidden
-              />
-            </label>
-            <button type="button" onClick={handleCancelClick}>
-              Cancel
-            </button>
-             <button type="button" onClick={handleNextClick}>
-            Next
-          </button>
-          </Form>
+            // hidden
+          />
+        </label>
+        <button type="button" onClick={handleCancelClick}>
+          Cancel
+        </button>
+        <button type="button" onClick={handleNextClick}>
+          Next
+        </button>
+      </Form>
     </div>
   );
 };
