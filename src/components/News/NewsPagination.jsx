@@ -1,25 +1,18 @@
-import React, {
-  // useEffect,
-  useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
-import {
-  // useDispatch,
-  useSelector,
-} from 'react-redux';
-// import newsSelectors from '../../redux/news/newsSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNews } from 'redux/news/newsOperations';
 
 export const NewsPagination = () => {
   const total = useSelector(state => state.news.total);
   const [page, setPage] = useState(1);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getNews({ page }));
-  }, [categoryName, dispatch, page]);
+  }, [dispatch, page]);
 
-  console.log(total);
   return (
     <div>
       <PaginationControl

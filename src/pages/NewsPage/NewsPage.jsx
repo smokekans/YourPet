@@ -87,8 +87,8 @@ function NewsPage() {
           />
         </Box>
         {!isLoad ? <NewsList query={query} /> : <Loader />}
+        <NewsPagination />
       </Container>
-      <NewsPagination />
     </>
   );
 }
