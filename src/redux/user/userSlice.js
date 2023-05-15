@@ -13,7 +13,7 @@ const userInitialState = {
   user: {},
   userName: '',
   pets: null,
-  image:'',
+  image: '',
   notices: [],
   favorite: [],
   token: null,
@@ -23,27 +23,28 @@ const userInitialState = {
 };
 
 function UserFulfilled(state, { payload }) {
- 
+
   state.user = payload;
   state.image = payload.image
   state.userName = payload.name;
   state.pets = payload.pets;
   state.isLoading = false;
   state.error = null;
-  console.log(payload);
+  // console.log(payload);
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState: userInitialState,
   reducers: {
-  deletePet: (state,{payload}) =>{
+    deletePet: (state, { payload }) => {
 
-   
-    state.user.user.pets=payload
-    state.user.pets = payload
+
+      state.user.user.pets = payload
+      state.user.pets = payload
       // state.startDate = payload;
-    }},
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(getCurrentUser.pending, state => {
@@ -111,12 +112,12 @@ const userSlice = createSlice({
       .addCase(updateAvatar.fulfilled, (state, { payload }) => {
         console.log(payload)
         state.isLoading = false;
-      state.user.image = payload.image;
+        state.user.image = payload.image;
         state.error = null;
-        
+
       })
-      .addCase(updateAvatar.rejected, (state, {payload} ) => {
-       
+      .addCase(updateAvatar.rejected, (state, { payload }) => {
+
         state.isLoading = false;
         state.error = payload;
       })
@@ -126,12 +127,12 @@ const userSlice = createSlice({
       .addCase(deletePets.fulfilled, (state, { payload }) => {
         console.log(payload)
         state.isLoading = false;
-        
+
         state.error = null;
-        
+
       })
-      .addCase(deletePets.rejected, (state, {payload} ) => {
-       
+      .addCase(deletePets.rejected, (state, { payload }) => {
+
         state.isLoading = false;
         state.error = payload;
       })
