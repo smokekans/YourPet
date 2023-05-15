@@ -14,6 +14,7 @@ import { updateInfoUser } from 'redux/user/userOperations';
 
 function UserDataItem() {
   const user = useSelector(getUser);
+  console.log(user)
   const updateInfo = {
     email: user.email,
     name: user.name,

@@ -5,7 +5,7 @@ axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
 export const getNoticeByCategory = createAsyncThunk(
   'notices/getNoticeByCategory',
-  async ({ category, page = 1, limit = 0 }, { rejectWithValue }) => {
+  async ({ category, page = 1, limit = 10 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `/notices?category=${category}&page=${page}&limit=${limit}`
@@ -116,3 +116,4 @@ export const createNotice = createAsyncThunk(
     }
   }
 );
+
