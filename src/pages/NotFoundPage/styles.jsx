@@ -1,23 +1,16 @@
-const styled = {
+const styles = {
   image: {
-    height: { mobile: '601px', tablet: '1193px', desktop: '768px' },
+    height: '100vh',
     backgroundImage: {
       mobile: `url(${require('../../images/background/bg-mobile@2x.png')}), url(${require('../../images/notFound/notFound-mobile@2x.png')})`,
       tablet: `url(${require('../../images/background/bg-tablet@2x.png')}), url(${require('../../images/notFound/notFound-tablet@2x.png')})`,
       desktop: `url(${require('../../images/background/bg-desktop@2x.png')}), url(${require('../../images/notFound/notFound-desktop@2x.png')})`,
     },
-    backgroundRepeat: { mobile: 'no-repeat' },
-    backgroundPosition: {
-      mobile: 'center',
-      desktop: 'center, right bottom',
-    },
-    backgroundSize: {
-      mobile: 'contain',
-      desktop: 'contain, 60% 100%',
-    },
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'contain',
   },
   title: {
-    pt: { mobile: '128px', tablet: '148px' },
     pr: { tablet: '148px', desktop: '0' },
     textAlign: { mobile: 'center' },
     fontFamily: 'Manrope',
@@ -34,4 +27,4 @@ const styled = {
   },
 };
 
-export default styled;
+export default styles;
