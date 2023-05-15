@@ -16,12 +16,17 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
   const navigate = useNavigate();
   const token = useSelector(getToken);
 
-   const { values, handleChange, handleSubmit, setFieldValue  } = useFormikContext();
+  const {
+    // values,
+    handleChange,
+    // handleSubmit,
+    setFieldValue,
+  } = useFormikContext();
 
-   const handleAddAvatar = e => {
+  const handleAddAvatar = e => {
     if (e.target.files[0]) {
       setFileInput(e.target.files[0]);
-      setFieldValue('image', e.target.files[0]); 
+      setFieldValue('image', e.target.files[0]);
     }
   };
 
@@ -29,7 +34,7 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
     prevStep();
   };
 
-  const onSubmit = async (values) => {
+  const onSubmit = async values => {
     console.log(values);
     setFormData(values);
     if (values.category === 'your-pet') {
@@ -51,12 +56,12 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
     }
     console.log(formData);
   };
- 
+
   const { category } = formData;
 
   return (
     <div>
-       <Form autoComplete='on' onSubmit={onSubmit}>
+      <Form autoComplete="on" onSubmit={onSubmit}>
         {category !== 'your-pet' && (
           <>
             <p>The Sex</p>
@@ -110,10 +115,9 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
             name="image"
             accept=".png, .jpg, .jpeg, .webp"
             // onChange={handleAddAvatar}
-            onChange={(event) => {
+            onChange={event => {
               handleAddAvatar(event);
               handleChange(event);
-             
             }}
           />
           <ErrorMessage name="image" render={msg => <div> {msg} </div>} />
@@ -160,35 +164,34 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
 };
 export default MoreInfo;
 
+// const handleAddAvatar = e => {
+//   if (e.target.files[0]) {
+//     setFileInput(e.target.files[0]);
+//     setFormData({ ...formData, image: e.target.files[0] });
+//   }
+// };
 
-  // const handleAddAvatar = e => {
-  //   if (e.target.files[0]) {
-  //     setFileInput(e.target.files[0]);
-  //     setFormData({ ...formData, image: e.target.files[0] });
-  //   }
-  // };
-
- // const handleSubmit = async values => {
-  //   setFormData({
-  //     ...values,
-  //     image: fileInput,
-  //   });
-  //   if (values.category === 'your-pet') {
-  //     try {
-  //       dispatch(createPet({ values, token, image: fileInput }));
-  //       toast.success('Pet card created successfully');
-  //       navigate('/user');
-  //     } catch (error) {
-  //       toast.error(`Error creating pet card: ${error.message}`);
-  //     }
-  //   } else {
-  //     try {
-  //       dispatch(createNotice({ values, token }));
-  //       toast.success('Notice created successfully');
-  //       navigate('/notices/sell');
-  //     } catch (error) {
-  //       toast.error(`Error creating notice: ${error.message}`);
-  //     }
-  //   }
-  //   console.log(formData);
-  // };
+// const handleSubmit = async values => {
+//   setFormData({
+//     ...values,
+//     image: fileInput,
+//   });
+//   if (values.category === 'your-pet') {
+//     try {
+//       dispatch(createPet({ values, token, image: fileInput }));
+//       toast.success('Pet card created successfully');
+//       navigate('/user');
+//     } catch (error) {
+//       toast.error(`Error creating pet card: ${error.message}`);
+//     }
+//   } else {
+//     try {
+//       dispatch(createNotice({ values, token }));
+//       toast.success('Notice created successfully');
+//       navigate('/notices/sell');
+//     } catch (error) {
+//       toast.error(`Error creating notice: ${error.message}`);
+//     }
+//   }
+//   console.log(formData);
+// };

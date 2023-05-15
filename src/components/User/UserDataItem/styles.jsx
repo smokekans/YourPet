@@ -1,4 +1,4 @@
-const styled = {
+const styles = {
   //   animal: {
   //     height: { mobile: '601px', tablet: '1193px', desktop: '768px' },
   //     backgroundColor: {
@@ -94,10 +94,9 @@ const styled = {
 
     color: '#888888',
   },
-  btn:{
-    marginLeft:"2px",
-   
-  }
+  btn: {
+    marginLeft: '2px',
+  },
 };
 
-export default styled;
+export default styles;

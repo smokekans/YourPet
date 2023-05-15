@@ -7,10 +7,8 @@ function AddPetPage() {
   return (
     <>
       <Container>
-        <div>
-          <AddPetForm />
-           <ToastContainer />
-        </div>
+        <AddPetForm />
+        <ToastContainer />
       </Container>
     </>
   );
