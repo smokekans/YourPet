@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useDispatch, useSelector } from 'react-redux';
-import newsSelectors from '../../redux/news/newsSelectors';
+import { useParams } from 'react-router';
 
 export const NewsPagination = () => {
   const news = useSelector(state => state.news);
   const [page, setPage] = useState(1);
-
+  const { categoryName } = useParams();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch();
-  // }, [categoryName, dispatch, page]);
+  useEffect(() => {
+    dispatch();
+  }, [categoryName, dispatch, page]);
 
   console.log(news);
   return (

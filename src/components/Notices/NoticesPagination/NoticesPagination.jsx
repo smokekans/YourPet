@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/dist';
@@ -8,7 +9,6 @@ import { getNotices } from 'redux/notices/noticesSelectors';
 export const NoticesPagination = () => {
   const { total } = useSelector(getNotices).notices;
   const [page, setPage] = useState(1);
-
   const dispatch = useDispatch();
   const { categoryName } = useParams();
 
@@ -30,6 +30,7 @@ export const NoticesPagination = () => {
           between={4}
           total={total}
           limit={10}
+          last={true}
           changePage={page => {
             setPage(page);
             console.log(page);
