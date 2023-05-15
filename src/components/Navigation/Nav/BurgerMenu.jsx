@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
-import Nav from './Nav';
+import Nav from './Nav/Nav';
 import MenuIcon from '@mui/icons-material/Menu';
 import useMatchMedia from 'hooks/useMatchMedia';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';

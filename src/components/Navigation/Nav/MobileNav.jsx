@@ -5,7 +5,7 @@ import { getIsLoggedIn } from 'redux/auth/authSelectors';
 import BurgerMenu from './BurgerMenu';
 import UserNavigation from '../UserNavigation/UserNavigation';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
-import Nav from './Nav';
+import Nav from './Nav/Nav';
 
 function MobileNav() {
   const { isMobile } = useMatchMedia();

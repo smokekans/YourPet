@@ -2,7 +2,7 @@ import useMatchMedia from 'hooks/useMatchMedia';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from 'redux/auth/authSelectors';
-import Nav from './Nav/Nav';
+import Nav from './Nav/Nav/Nav';
 import UserNavigation from './UserNavigation/UserNavigation';
 import AuthNavigation from './AuthNavigation/AuthNavigation';
 import BurgerMenu from './Nav/BurgerMenu';

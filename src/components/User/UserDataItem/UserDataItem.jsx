@@ -64,7 +64,7 @@ function handleClick (){
               endAdornment={
                 <InputAdornment position="end">
                   <PawPrint
-                    class="name"
+                    className="name"
                     onClick={handleClick}
                     edge="end"
                   ></PawPrint>
@@ -86,7 +86,7 @@ function handleClick (){
               endAdornment={
                 <InputAdornment position="end">
                   <PawPrint
-                    class="email"
+                    className="email"
                     onClick={handleClick}
 
                     edge="end"
@@ -108,7 +108,7 @@ function handleClick (){
               endAdornment={
                 <InputAdornment position="end">
                   <PawPrint
-                    class="birthday"
+                    className="birthday"
                     onClick={handleClick}
 
                     edge="end"
@@ -129,7 +129,7 @@ function handleClick (){
               endAdornment={
                 <InputAdornment position="end">
                   <PawPrint
-                    class="phone"
+                    className="phone"
                     onClick={handleClick}
 
                     edge="end"
@@ -150,7 +150,7 @@ function handleClick (){
               endAdornment={
                 <InputAdornment position="end">
                   <PawPrint
-                    class="city"
+                    className="city"
                     onClick={handleClick}
 
                     edge="end"
