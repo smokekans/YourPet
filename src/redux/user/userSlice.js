@@ -88,8 +88,9 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(updateInfoUser.fulfilled, (state, { payload }) => {
+        console.log(payload)
         state.isLoading = false;
-        state.user.img = payload;
+        // state.user.img = payload;
         state.error = null;
         
       })
@@ -102,8 +103,9 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(updateAvatar.fulfilled, (state, { payload }) => {
+        console.log(payload)
         state.isLoading = false;
-        state.image = payload;
+      state.user.image = payload.image;
         state.error = null;
         
       })

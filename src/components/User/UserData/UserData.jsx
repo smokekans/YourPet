@@ -19,12 +19,11 @@ function UserData() {
   const user = useSelector(getUser);
   const avatar = useRef(null)
 
-  function avatars (e){
-   console.log(e.target.files[0])
-   const imgAvatar = URL.createObjectURL(e.target.files[0])
-   console.log(imgAvatar)
-    
-    dispatch(updateAvatar({avatar:`${imgAvatar}`}))
+  function OnSumbit (e){
+   
+const avatars = e.target.files[0]
+  console.log(0)
+   
   }
   
   function handelAvatar(){
@@ -39,8 +38,9 @@ function UserData() {
         
         <Avatar variant="img" src={image} sx={styled.images}  alt={image}/>
         <br />
-        <FilledInput autoComplete='Edit photo' inputRef={avatar} type="file"  sx={styled.input} onChange={avatars}></FilledInput>
+        <FilledInput autoComplete='Edit photo' inputRef={avatar} type="file" sx={styled.input}  onChange={OnSumbit}></FilledInput>
         <Button onClick={handelAvatar}>Button</Button>
+       
         <UserDataItem />
 
       </div>

@@ -102,8 +102,8 @@ export const updateInfoUser = createAsyncThunk(
 );
 export const updateAvatar = createAsyncThunk(
   'user/updateAvatar',
-  async (upDateAvatar, { rejectWithValue, getState }) => {
-    console.log(upDateAvatar)
+  async (formData, { rejectWithValue, getState }) => {
+    console.log(formData)
     try {
       const value = getState().auth.token;
       if (value === null) {
@@ -111,10 +111,11 @@ export const updateAvatar = createAsyncThunk(
       }
       token.set(value);
       
-      const { data } = await axios.patch('/user/avatars', upDateAvatar,{
+      const { data } = await axios.patch('/user/avatars', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }});
+          "Content-type": "multipart/form-data",
+        },
+      });
       console.log(data);
       return data;
     } catch (error) {
