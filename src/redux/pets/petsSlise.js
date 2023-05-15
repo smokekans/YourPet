@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getFriends } from './petsOperation';
+import { getFriends,deletePets } from './petsOperation';
 const userInitialState = {
     user:{},
   pets: {},
@@ -20,7 +20,24 @@ const friendsSlice = createSlice({
     .addCase(getFriends.rejected, (state, { payload }) => {
       
       state.error = payload;
-    })},
+    })
+    .addCase(deletePets.pending, state => {
+      state.isLoading = true;
+    })
+    .addCase(deletePets.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.image = payload;
+      state.error = null;
+      
+    })
+    .addCase(deletePets.rejected, (state, {payload} ) => {
+     
+      state.isLoading = false;
+      state.error = payload;
+    })
+  
+  
+  },
   
 });
 
