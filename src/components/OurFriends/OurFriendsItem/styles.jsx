@@ -16,6 +16,10 @@ const styles = {
     color: 'primary',
     textDecoration: 'none',
     mb: '16px',
+    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+    '&:hover': {
+      color: '#3291e9;',
+    },
   },
   relative: {
     position: 'relative',
@@ -43,6 +47,10 @@ const styles = {
     fontSize: { mobile: '12px', tablet: '14px', desktop: '16px' },
     lineHeight: { mobile: '16px', tablet: '19px', desktop: '22px' },
     color: 'inherit',
+    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+    '&:hover': {
+      color: 'text.secondary',
+    },
     textDecoration: 'none',
     m: 0,
   },

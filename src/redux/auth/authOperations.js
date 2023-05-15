@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { getCurrentUser } from 'redux/user/userOperations';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
@@ -26,7 +27,7 @@ export const register = createAsyncThunk(
         })
       );
     } catch (error) {
-      console.log(error.response.data);
+      toast.error("Missing or not valid field password or email");
       return rejectWithValue(error.message);
     }
   }
@@ -42,7 +43,7 @@ export const login = createAsyncThunk(
       dispatch(getCurrentUser());
       return data;
     } catch (error) {
-      console.log(error.response.data);
+      toast.error("Missing or not valid field password");
       return rejectWithValue(error.message);
     }
   }
@@ -57,7 +58,7 @@ export const logout = createAsyncThunk(
       await axios.post('auth/logout');
       token.unset();
     } catch (error) {
-      console.log(error.response.data);
+      toast.error(error.response.data);
       return rejectWithValue(error.message);
     }
   }

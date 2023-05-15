@@ -6,13 +6,13 @@ import {
   getNoticeByCategory,
   getNoticesByQwery,
   getSingleNotice,
+  createNotice,
   getUserNotices,
 } from './noticesOperation';
 
 const noticesInitialState = {
   notices: [],
-  user: {
-  },
+  user: {},
   pets: [],
   oneNotice: null,
   favorite: [],
@@ -73,16 +73,28 @@ const noticesSlice = createSlice({
         state.notices = state.notices.filter(({ _id }) => _id !== payload);
         state.isLoading = false;
       })
-      .addCase(deleteNotice.rejected, (state, action) => {
-        handleReject(state, action);
+      .addCase(deleteNotice.rejected, (state, { payload }) => {
+        handleReject(state, payload);
+      })
+      // додає оголошення
+      .addCase(createNotice.pending, state => {
+        handlePending(state);
+      })
+      .addCase(createNotice.fulfilled, (state, { payload }) => {
+        state.notices.push(payload);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(createNotice.rejected, (state, { payload }) => {
+        handleReject(state, payload);
       })
       .addCase(getUserNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.own = payload
+        state.own = payload;
       })
       .addCase(getUserNotices.rejected, (state, action) => {
-        handleReject(state, action)
+        handleReject(state, action);
       })
       .addCase(getNoticesByQwery.pending, state => {
         handlePending(state);
@@ -94,7 +106,7 @@ const noticesSlice = createSlice({
       })
       .addCase(getNoticesByQwery.rejected, (state, action) => {
         handleReject(state, action);
-      })
+      });
   },
   reducers: {
     clearNotices(state, { payload }) {

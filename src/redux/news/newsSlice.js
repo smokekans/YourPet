@@ -14,11 +14,12 @@ const newsSlice = createSlice({
       state.status = true;
     });
     builder.addCase(getNews.fulfilled, (state, action) => {
-      state.news = action.payload;
+      state.news = action.payload.news;
       state.status = false;
     });
     builder.addCase(getNews.rejected, (state, _) => {
       state.status = false;
+      state.news = [];
     });
   },
 });
