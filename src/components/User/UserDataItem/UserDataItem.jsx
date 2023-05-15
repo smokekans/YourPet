@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from '../../../redux/user/userSelectors';
-import styled from './styledUserDataItem';
+import styles from './styles';
 import {
   Typography,
   FormControl,
@@ -14,7 +14,7 @@ import { updateInfoUser } from 'redux/user/userOperations';
 
 function UserDataItem() {
   const user = useSelector(getUser);
-  console.log(user)
+  console.log(user);
   const updateInfo = {
     email: user.email,
     name: user.name,
@@ -23,11 +23,8 @@ function UserDataItem() {
     city: user.city,
   };
   const dispatch = useDispatch();
-  
 
   const ChangeData = e => {
-    
-
     const id = e.currentTarget.id;
 
     const value = e.currentTarget.value;
@@ -47,19 +44,19 @@ function UserDataItem() {
     console.log(updateInfo);
     return updateInfo;
   };
-function handleClick (){
-  dispatch(updateInfoUser(updateInfo))
-}
+  function handleClick() {
+    dispatch(updateInfoUser(updateInfo));
+  }
   const { name, birthday, email, phone, city } = user;
   return (
     <div>
-      <Typography variant="div" sx={styled.ul}>
-        <Typography variant="p" className="name" sx={styled.li}>
+      <Typography variant="div" sx={styles.ul}>
+        <Typography variant="p" className="name" sx={styles.li}>
           Name:
           <FormControl variant="filled">
             <FilledInput
               id="name"
-              sx={styled.input}
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={name}
               endAdornment={
@@ -73,15 +70,14 @@ function handleClick (){
               }
             />
           </FormControl>
-       
         </Typography>
-        <Typography variant="p" className="email" sx={styled.li}>
+        <Typography variant="p" className="email" sx={styles.li}>
           Email:{' '}
           <FormControl variant="filled">
             <FilledInput
               id="email"
-              type='email'
-              sx={styled.input}
+              type="email"
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={email}
               endAdornment={
@@ -89,7 +85,6 @@ function handleClick (){
                   <PawPrint
                     className="email"
                     onClick={handleClick}
-
                     edge="end"
                   ></PawPrint>
                 </InputAdornment>
@@ -97,13 +92,13 @@ function handleClick (){
             />
           </FormControl>
         </Typography>
-        <Typography variant="p" className="birthday" sx={styled.li}>
+        <Typography variant="p" className="birthday" sx={styles.li}>
           Birthday:{' '}
           <FormControl variant="filled">
             <FilledInput
               id="birthday"
-              type='data'
-              sx={styled.input}
+              type="data"
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={birthday}
               endAdornment={
@@ -111,7 +106,6 @@ function handleClick (){
                   <PawPrint
                     className="birthday"
                     onClick={handleClick}
-
                     edge="end"
                   ></PawPrint>
                 </InputAdornment>
@@ -119,12 +113,12 @@ function handleClick (){
             />
           </FormControl>
         </Typography>
-        <Typography variant="p" className="phone" sx={styled.li}>
+        <Typography variant="p" className="phone" sx={styles.li}>
           Phone:{' '}
           <FormControl variant="filled">
             <FilledInput
               id="phone"
-              sx={styled.input}
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={phone}
               endAdornment={
@@ -132,7 +126,6 @@ function handleClick (){
                   <PawPrint
                     className="phone"
                     onClick={handleClick}
-
                     edge="end"
                   ></PawPrint>
                 </InputAdornment>
@@ -140,12 +133,12 @@ function handleClick (){
             />
           </FormControl>
         </Typography>
-        <Typography variant="p" className="city" sx={styled.li}>
+        <Typography variant="p" className="city" sx={styles.li}>
           City:{' '}
           <FormControl variant="filled">
             <FilledInput
               id="city"
-              sx={styled.input}
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={city}
               endAdornment={
@@ -153,7 +146,6 @@ function handleClick (){
                   <PawPrint
                     className="city"
                     onClick={handleClick}
-
                     edge="end"
                   ></PawPrint>
                 </InputAdornment>

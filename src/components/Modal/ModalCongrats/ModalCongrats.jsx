@@ -43,33 +43,11 @@
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import React, { useEffect } from 'react';
+import React from // useEffect
+'react';
 import { createPortal } from 'react-dom';
 import css from './Modal.module.css';
 import { Modal } from '@mui/material';
-
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -94,19 +72,25 @@ function ModalCongrats({ onClick }) {
 
   return createPortal(
     <Modal
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="parent-modal-title"
-      aria-describedby="parent-modal-description" className={css.Overlay}
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="parent-modal-title"
+      aria-describedby="parent-modal-description"
+      className={css.Overlay}
       // onClick={handleBackdrop}
     >
       <div className={css.Modal}>
         <h1>Congrats!</h1>
-     <p>Your registration is success</p>
-     <button onClick={()=>{onClick()}}>Go to profile</button>
+        <p>Your registration is success</p>
+        <button
+          onClick={() => {
+            onClick();
+          }}
+        >
+          Go to profile
+        </button>
       </div>
-    </Modal>
-    ,
+    </Modal>,
     modalRoot
   );
 }
