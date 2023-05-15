@@ -24,7 +24,7 @@ function NewsPage() {
   const isLoad = useSelector(getStatus);
 
   useEffect(() => {
-    dispatch(getNews());
+    dispatch(getNews({ page: 1 }));
   }, [dispatch]);
 
   const onSubmit = e => {

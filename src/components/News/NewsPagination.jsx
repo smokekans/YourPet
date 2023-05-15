@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { getNews } from 'redux/news/newsOperations';
 
 export const NewsPagination = () => {
   const total = useSelector(state => state.news.total);
@@ -9,9 +10,9 @@ export const NewsPagination = () => {
   const { categoryName } = useParams();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch();
-  // }, [categoryName, dispatch, page]);
+  useEffect(() => {
+    dispatch(getNews({ page }));
+  }, [categoryName, dispatch, page]);
 
   console.log(total);
   return (

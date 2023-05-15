@@ -7,7 +7,7 @@ import { getNoticeByCategory } from 'redux/notices/noticesOperation';
 import { getNotices } from 'redux/notices/noticesSelectors';
 
 export const NoticesPagination = () => {
-  const { total } = useSelector(getNotices).notices;
+  const { total } = useSelector(getNotices);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const { categoryName } = useParams();
@@ -21,7 +21,7 @@ export const NoticesPagination = () => {
       })
     );
   }, [categoryName, dispatch, page]);
-
+  console.log(total);
   return (
     <div>
       {total > 10 ? (
@@ -33,7 +33,6 @@ export const NoticesPagination = () => {
           last={true}
           changePage={page => {
             setPage(page);
-            console.log(page);
           }}
         />
       ) : (
