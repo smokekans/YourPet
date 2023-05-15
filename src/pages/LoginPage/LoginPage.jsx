@@ -4,7 +4,19 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/authOperations';
-import { Container } from '@mui/material';
+// import { Container } from '@mui/material';
+// import { toast } from 'react-toastify';
+import styles from './styles';
+import {
+  Card,
+  TextField,
+  CardContent,
+  Typography,
+  Box,
+  Button,
+  InputLabel,
+  FormHelperText,
+} from '@mui/material';
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -20,9 +32,9 @@ function LoginPage() {
   });
 
   return (
-    <Container>
-      <div>
-        <h1>Login</h1>
+    <Card sx={styles.root}>
+      <CardContent sx={styles.box}>
+        <Typography sx={styles.title}>Login</Typography>
         <Formik
           initialValues={{
             email: '',
@@ -45,45 +57,58 @@ function LoginPage() {
             handleSubmit,
             isSubmitting,
           }) => (
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="email">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                />
-                {/* {errors.email && touched.email && errors.email} */}
-                <ErrorMessage component="div" name="email" />
-              </label>
+            <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
+              }}
+              noValidate
+              // autoComplete="off"
+              onSubmit={handleSubmit}
+            >
+              <Box sx={styles.component} >
+                <InputLabel htmlFor="email" >
+                  <TextField
+                    // sx={styles.input}
+                    // id="outlined-basic" variant="outlined"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                  {/* {errors.email && touched.email && errors.email} */}
+                  <ErrorMessage component="div" name="email" />
+                </InputLabel>
 
-              <label htmlFor="password">
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                />
-                {/* {errors.password && touched.password && errors.password} */}
-                <ErrorMessage component="div" name="password" />
-              </label>
+                <InputLabel htmlFor="password">
+                  <TextField
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
+                  {/* {errors.password && touched.password && errors.password} */}
+                  <ErrorMessage component="div" name="password" />
+                </InputLabel>
 
-              <button type="submit" disabled={isSubmitting}>
-                Login
-              </button>
-              <div>
-                <p>Don't have an account?</p>
-                <Link to="/register">Register</Link>
-              </div>
-            </form>
+                
+              </Box>
+              <Button variant="contained" sx={styles.button} type="submit" disabled={isSubmitting}>
+                  Login
+                </Button>
+            </Box>
           )}
         </Formik>
-      </div>
-    </Container>
+        <Box sx={styles.text}>
+          <Typography >Don't have an account?</Typography>
+          <Link to="/register">Register</Link>
+        </Box>
+      </CardContent>
+    </Card>
   );
 }
 
