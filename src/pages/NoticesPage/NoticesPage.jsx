@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
-// import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
+import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,7 +69,7 @@ function NoticesPage() {
             justifyContent: 'center',
             marginTop: { mobile: '40px', tablet: '80px', desktop: '80px' },
             fontWeight: 700,
-            fontSize: { mobile: '24px', tablet: '48px' }, 
+            fontSize: { mobile: '24px', tablet: '48px' },
           }}
           variant="h1"
         >
@@ -92,7 +92,7 @@ function NoticesPage() {
           />
         )}
       </Container>
-      {/* <NoticesPagination /> */}
+      <NoticesPagination />
     </>
   );
 }
