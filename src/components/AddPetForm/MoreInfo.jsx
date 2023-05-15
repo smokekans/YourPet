@@ -30,6 +30,7 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
   };
 
   const onSubmit = async (values) => {
+    console.log(values);
     setFormData(values);
     if (values.category === 'your-pet') {
       try {
