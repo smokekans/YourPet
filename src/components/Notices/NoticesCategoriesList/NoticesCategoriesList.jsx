@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   // CardContent,
-  Grid
+  Grid,
 } from '@mui/material';
 
 import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
@@ -11,7 +11,7 @@ function NoticesCategoriesList({ data, categoryName }) {
   console.log('NoticesCategoriesList ~ dataArray:', dataArray);
 
   return (
-    <Grid container spacing={2} sx={{ flexGrow: 1,  marginLeft: 0  }}>
+    <Grid container spacing={2} sx={{ flexGrow: 1, marginLeft: 0 }}>
       {dataArray
         .slice()
         .reverse()
@@ -24,10 +24,12 @@ function NoticesCategoriesList({ data, categoryName }) {
               categoryName === 'favorite')
         )
         .map(item => (
-          <Grid item key={item._id}
-           sx={{ paddingLeft: 0, paddingTop: 0, paddingBottom: 0 }}
+          <Grid
+            item
+            key={item._id}
+            sx={{ paddingLeft: 0, paddingTop: 0, paddingBottom: 0 }}
           >
-            <div sx={{ padding: '8px '}}>
+            <div sx={{ padding: '8px ' }}>
               <NoticeCategoryItem data={item} categoryName={categoryName} />
             </div>
           </Grid>

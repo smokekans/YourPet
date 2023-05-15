@@ -6,44 +6,39 @@ import {
   deleteFromFavorite,
   updateInfoUser,
   updateAvatar,
-  deletePets
+  deletePets,
 } from '../../redux/user/userOperations';
 
 const userInitialState = {
   user: {},
   userName: '',
   pets: null,
-  image:'',
+  image: '',
   notices: [],
-  favorite: [],
   token: null,
   error: null,
   isLoading: false,
-
 };
 
 function UserFulfilled(state, { payload }) {
- 
   state.user = payload;
-  state.image = payload.image
+  state.image = payload.image;
   state.userName = payload.name;
   state.pets = payload.pets;
   state.isLoading = false;
   state.error = null;
-  console.log(payload);
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState: userInitialState,
   reducers: {
-  deletePet: (state,{payload}) =>{
-
-   
-    state.user.user.pets=payload
-    state.user.pets = payload
+    deletePet: (state, { payload }) => {
+      state.user.user.pets = payload;
+      state.user.pets = payload;
       // state.startDate = payload;
-    }},
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getCurrentUser.pending, state => {
@@ -57,7 +52,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         // state.favorite.push(payload);
         state.favorite = payload;
-        state.error = null
+        state.error = null;
       })
 
       .addCase(addToFavorites.rejected, (state, { payload }) => {
@@ -90,18 +85,17 @@ const userSlice = createSlice({
         state.notices = { data: [] };
         state.isLoading = false;
         state.error = payload;
-      }).addCase(updateInfoUser.pending, state => {
+      })
+      .addCase(updateInfoUser.pending, state => {
         state.isLoading = true;
       })
       .addCase(updateInfoUser.fulfilled, (state, { payload }) => {
-        console.log(payload)
+        console.log(payload);
         state.isLoading = false;
         // state.user.img = payload;
         state.error = null;
-
       })
       .addCase(updateInfoUser.rejected, (state, { payload }) => {
-
         state.isLoading = false;
         state.error = payload;
       })
@@ -109,14 +103,12 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(updateAvatar.fulfilled, (state, { payload }) => {
-        console.log(payload)
+        console.log(payload);
         state.isLoading = false;
-      state.user.image = payload.image;
+        state.user.image = payload.image;
         state.error = null;
-        
       })
-      .addCase(updateAvatar.rejected, (state, {payload} ) => {
-       
+      .addCase(updateAvatar.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       })
@@ -124,21 +116,17 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(deletePets.fulfilled, (state, { payload }) => {
-        console.log(payload)
+        console.log(payload);
         state.isLoading = false;
-        
+
         state.error = null;
-        
       })
-      .addCase(deletePets.rejected, (state, {payload} ) => {
-       
+      .addCase(deletePets.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
-      })
+      });
   },
 });
 
 export const userReducer = userSlice.reducer;
-export const {
-  deletePet
-} = userSlice.actions;
+export const { deletePet } = userSlice.actions;
