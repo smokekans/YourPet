@@ -2,13 +2,13 @@ import { Box, Container, IconButton, Input, InputAdornment, Typography } from '@
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Search } from '../../images/icons/search.svg';
 import { ReactComponent as Cross } from '../../images/icons/cross.svg';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { getNews } from 'redux/news/newsOperations';
 import styles from './styles';
 import NewsList from 'components/News/NewsList/NewsList';
 import Loader from 'components/Loader/Loader';
 import { getStatus } from 'redux/news/newsSelectors';
+import { NewsPagination } from 'components/News/NewsPagination';
 
 function NewsPage() {
   const dispatch = useDispatch();
@@ -78,6 +78,7 @@ function NewsPage() {
         </Box>
         {!isLoad ? <NewsList query={query} /> : <Loader />}
       </Container>
+      <NewsPagination />
     </>
   );
 }

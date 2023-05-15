@@ -16,6 +16,7 @@ import { friendsReducer } from './friends/friendsSlice';
 import { newsReducer } from './news/newsSlice';
 import { noticesReducer } from './notices/noticesSlice';
 import { userReducer } from './user/userSlice';
+import { petsReducer } from './pets/petsSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   notices: noticesReducer,
   friends: friendsReducer,
   user: userReducer,
+  pets: petsReducer,
 });
 
 const rootPersistedReducer = persistReducer(rootRersistConfig, rootReducer);

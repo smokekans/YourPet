@@ -8,7 +8,7 @@ import { ReactComponent as Location } from '../../../images/icons/location.svg';
 import { ReactComponent as Clock } from '../../../images/icons/clock.svg';
 import { ReactComponent as Male } from '../../../images/icons/male.svg';
 import { ReactComponent as Female } from '../../../images/icons/female.svg';
-import { getSingleNotice } from 'redux/notices/noticesOperation';
+import { deleteNotice, getSingleNotice } from 'redux/notices/noticesOperation';
 
 import styles from './styles';
 
@@ -21,26 +21,22 @@ import {
   Box,
   Button,
 } from '@mui/material';
-// import { getFavorite } from 'redux/user/userSelectors';
 import FavoriteIconButton from 'components/Button/AddToFavoriteButton/AddToFavoriteButton';
 import ModalNotice from 'components/Modal/ModalNotice/ModalNotice';
 import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
+import ModalApproveAction from 'components/Modal/ModalApproveAction/ModalApproveAction';
+import { getUserId } from 'redux/user/userSelectors';
 
 const NoticeCategoryItem = ({ data, categoryName }) => {
-  const { _id, image, category, title, location, sex, birthday } = data || {};
+  const { _id, image, category, title, location, sex, birthday, owner } = data || {};
   const dispatch = useDispatch();
-  // const [active, setActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFavorites, setIsFavorites] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedIn);
-  // const favoriteElement = useSelector(getFavorite);
-  // const dataArray = Array.isArray(favoriteElement)
-  //   ? favoriteElement
-  //   : [favoriteElement];
-  // const isFavorite = dataArray.includes(_id);
+  const userId = useSelector(getUserId);
+  console.log(userId)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // console.log(isFavorite)
-  // console.log(_id)
 
 const handleLearnMore = () => {
     setIsModalOpen(!isModalOpen);
@@ -69,19 +65,29 @@ const handleFavoriteClick = () => {
   }
   };
 
-
-
-  // const deletePet = () => {
-  // dispatch(deleteNotice({ id: _id }));
-  // };
-
-  const calcAge = dob => {
-    if (dob === null) return '?';
-    const diffMs = Date.now() - new Date(dob);
-    const ageDt = new Date(diffMs);
-
-    return Math.abs(ageDt.getUTCFullYear() - 1970);
+  const handleDeleteModalOpen = () => {
+    setIsDeleteModalOpen(true);
   };
+
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleDeleteNotice = () => {
+    dispatch(deleteNotice( _id ));
+    handleDeleteModalClose();
+  };
+
+const calcAge = dob => {
+  if (dob === null) return '?';
+
+  const parts = dob.split('.');
+  const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+  const diffMs = Date.now() - new Date(formattedDate);
+  const ageDt = new Date(diffMs);
+
+  return Math.abs(ageDt.getUTCFullYear() - 1970);
+};
 
   const GenderIcon = ({ sex }) => {
     const IconComponent = sex === 'male' ? Male : Female;
@@ -108,7 +114,10 @@ const handleFavoriteClick = () => {
           {CATEGORY[category]}
         </Typography>
         <Box sx={styles.favorite}>
-         <FavoriteIconButton noticeId={_id} />
+          <FavoriteIconButton noticeId={_id} />
+         {(owner === userId && isLoggedIn) ? <Button type="button" noticeId={_id} onClick={handleDeleteModalOpen} >
+            Delete
+          </Button>: ''}
         </Box>
 
         <Box sx={styles.components}>
@@ -143,6 +152,14 @@ const handleFavoriteClick = () => {
         )
       
       }
+
+      {isDeleteModalOpen && (
+        <ModalApproveAction
+          title={title}
+          onClose={handleDeleteModalClose}
+          onDelete={handleDeleteNotice}
+        />
+      )}
     </Card>
   );
 };

@@ -2,12 +2,20 @@ import { Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
+import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getNoticeByCategory, getUserNotices } from 'redux/notices/noticesOperation';
-import { getNoteceIsLoadig, getNotices, getOwnNotices } from 'redux/notices/noticesSelectors';
+import {
+  getNoticeByCategory,
+  getUserNotices,
+} from 'redux/notices/noticesOperation';
+import {
+  getNoteceIsLoadig,
+  getNotices,
+  getOwnNotices,
+} from 'redux/notices/noticesSelectors';
 import { clearNotices } from 'redux/notices/noticesSlice';
 import { getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
@@ -22,7 +30,7 @@ function NoticesPage() {
   const ownNotices = useSelector(getOwnNotices);
   const dispatch = useDispatch();
 
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     if (categoryName === 'favorite') {
@@ -40,14 +48,14 @@ function NoticesPage() {
       ? favoriteAds
       : categoryName === 'owner'
       ? ownNotices
-        : notices.notices;
-  
-  const handleSearch = (newQuery) => {
-  setQuery(newQuery);
-};
+      : notices.notices;
+
+  const handleSearch = newQuery => {
+    setQuery(newQuery);
+  };
 
   const handleClearQuery = () => {
-    setQuery("");
+    setQuery('');
   };
 
   return (
@@ -66,11 +74,23 @@ function NoticesPage() {
           Find your favorite pet
         </Typography>
 
-         <NoticesSearch query={query} onSearch={handleSearch} onClearQuery={handleClearQuery} />
+        <NoticesSearch
+          query={query}
+          onSearch={handleSearch}
+          onClearQuery={handleClearQuery}
+        />
         <NoticesCategoriesNavigation />
 
-        {isLoading ? <Loader /> : <NoticesCategoriesList categoryName={categoryName} data={dataToRender} />}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <NoticesCategoriesList
+            categoryName={categoryName}
+            data={dataToRender}
+          />
+        )}
       </Container>
+      <NoticesPagination />
     </>
   );
 }
