@@ -8,18 +8,20 @@ import { ReactComponent as Location } from '../../../images/icons/location.svg';
 import { ReactComponent as Clock } from '../../../images/icons/clock.svg';
 import { ReactComponent as Male } from '../../../images/icons/male.svg';
 import { ReactComponent as Female } from '../../../images/icons/female.svg';
+import { ReactComponent as Busket } from '../../../images/icons/trash.svg';
 import { deleteNotice, getSingleNotice } from 'redux/notices/noticesOperation';
 
 import styles from './styles';
 
 import {
   Card,
-  CardActionArea,
+  // CardActionArea,
   CardMedia,
   CardContent,
   Typography,
   Box,
   Button,
+  IconButton,
 } from '@mui/material';
 import FavoriteIconButton from 'components/Button/AddToFavoriteButton/AddToFavoriteButton';
 import ModalNotice from 'components/Modal/ModalNotice/ModalNotice';
@@ -28,13 +30,17 @@ import ModalApproveAction from 'components/Modal/ModalApproveAction/ModalApprove
 import { getUserId } from 'redux/user/userSelectors';
 
 const NoticeCategoryItem = ({ data, categoryName }) => {
+  
   const { _id, image, category, title, location, sex, birthday, owner } = data || {};
+  // console.log(data)
+  
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFavorites, setIsFavorites] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const userId = useSelector(getUserId);
-  console.log(userId)
+ 
+  // console.log(userId)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
 
@@ -101,7 +107,9 @@ const calcAge = dob => {
 
   return (
     <Card sx={styles.root}>
-      <CardActionArea >
+      <Box
+        // sx={styles.wrapper}
+      >
         <CardMedia
           sx={styles.media}
           image={image || defaultImage}
@@ -113,13 +121,13 @@ const calcAge = dob => {
         >
           {CATEGORY[category]}
         </Typography>
+     
         <Box sx={styles.favorite}>
-          <FavoriteIconButton noticeId={_id} />
-         {(owner === userId && isLoggedIn) ? <Button type="button" noticeId={_id} onClick={handleDeleteModalOpen} >
-            Delete
-          </Button>: ''}
+          <FavoriteIconButton noticeid={_id} />
         </Box>
-
+        {(owner === userId && isLoggedIn) ?<Box sx={styles.delete}>
+           <IconButton><Busket noticeid={_id} onClick={handleDeleteModalOpen} /></IconButton> 
+          </Box> : ''}
         <Box sx={styles.components}>
           <Typography sx={styles.component} variant="subtitle2">
             <Location /> {location}
@@ -133,15 +141,17 @@ const calcAge = dob => {
         </Box>
         <CardContent sx={styles.content}>
           <Box>
-            <Typography variant="h6">{title}</Typography>
+            <Typography 
+              variant="h5" sx={styles.title}
+            >{title}</Typography>
           </Box>
-          <Box>
-            <Button type="button" onClick={handleLearnMore}>
+          <Box sx={styles.buttonWraper}>
+            <Button type="button" onClick={handleLearnMore} sx={styles.button}>
               Learn more
             </Button>
           </Box>
         </CardContent>
-      </CardActionArea>
+      </Box>
       {
     
         isModalOpen && (
