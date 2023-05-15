@@ -8,6 +8,7 @@ import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
 
 function NoticesCategoriesList({ data, categoryName }) {
   const dataArray = Array.isArray(data) ? data : [data];
+  console.log('NoticesCategoriesList ~ dataArray:', dataArray);
 
   return (
     <Grid container spacing={2} sx={{ flexGrow: 1,  marginLeft: 0  }}>

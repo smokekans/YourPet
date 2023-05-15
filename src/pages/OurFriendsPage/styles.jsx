@@ -1,7 +1,7 @@
 const styles = {
   container: {
     p: 0,
-    pt: { mobile: '20px', tablet: '56px', desktop: '60px' },
+    pt: { mobile: '40px', tablet: '80px', desktop: '80px' },
     pb: { mobile: '20px', tablet: '56px', desktop: '60px' },
   },
   title: {
