@@ -14,7 +14,7 @@ import { updateInfoUser } from 'redux/user/userOperations';
 
 function UserDataItem() {
   const user = useSelector(getUser);
-  console.log(user)
+  console.log(user);
   const updateInfo = {
     email: user.email,
     name: user.name,
@@ -23,11 +23,8 @@ function UserDataItem() {
     city: user.city,
   };
   const dispatch = useDispatch();
-  
 
   const ChangeData = e => {
-    
-
     const id = e.currentTarget.id;
 
     const value = e.currentTarget.value;
@@ -47,13 +44,13 @@ function UserDataItem() {
     console.log(updateInfo);
     return updateInfo;
   };
-function handleClick (){
-  dispatch(updateInfoUser(updateInfo))
-}
+  function handleClick() {
+    dispatch(updateInfoUser(updateInfo));
+  }
   const { name, birthday, email, phone, city } = user;
   return (
     <div>
-      <Typography variant="div" sx={styled.ul}>
+      <Typography variant="ul" sx={styled.ul}>
         <Typography variant="p" className="name" sx={styled.li}>
           Name:
           <FormControl variant="filled">
@@ -73,14 +70,13 @@ function handleClick (){
               }
             />
           </FormControl>
-       
         </Typography>
         <Typography variant="p" className="email" sx={styled.li}>
           Email:{' '}
           <FormControl variant="filled">
             <FilledInput
               id="email"
-              type='email'
+              type="email"
               sx={styled.input}
               onChange={ChangeData}
               defaultValue={email}
@@ -89,7 +85,6 @@ function handleClick (){
                   <PawPrint
                     className="email"
                     onClick={handleClick}
-
                     edge="end"
                   ></PawPrint>
                 </InputAdornment>
@@ -102,7 +97,7 @@ function handleClick (){
           <FormControl variant="filled">
             <FilledInput
               id="birthday"
-              type='data'
+              type="data"
               sx={styled.input}
               onChange={ChangeData}
               defaultValue={birthday}
@@ -111,7 +106,6 @@ function handleClick (){
                   <PawPrint
                     className="birthday"
                     onClick={handleClick}
-
                     edge="end"
                   ></PawPrint>
                 </InputAdornment>
@@ -132,7 +126,6 @@ function handleClick (){
                   <PawPrint
                     className="phone"
                     onClick={handleClick}
-
                     edge="end"
                   ></PawPrint>
                 </InputAdornment>
@@ -153,7 +146,6 @@ function handleClick (){
                   <PawPrint
                     className="city"
                     onClick={handleClick}
-
                     edge="end"
                   ></PawPrint>
                 </InputAdornment>
