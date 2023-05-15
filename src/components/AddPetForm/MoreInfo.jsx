@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Field, ErrorMessage, Form, useFormikContext } from 'formik';
-// import { petsValidationSchema } from './Yup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPet } from 'redux/pets/petsOperation';
@@ -10,18 +9,21 @@ import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
 import { ReactComponent as IconPlus } from '../../images/icons/plus.svg';
 import { toast } from 'react-toastify';
 
-const MoreInfo = ({ prevStep, formData, setFormData }) => {
+const MoreInfo = ({ prevStep, setFormData }) => {
   const [fileInput, setFileInput] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(getToken);
 
-   const { values, handleChange, handleSubmit, setFieldValue  } = useFormikContext();
+   const { values, handleChange, setFieldValue  } = useFormikContext();
 
-   const handleAddAvatar = e => {
-    if (e.target.files[0]) {
-      setFileInput(e.target.files[0]);
-      setFieldValue('image', e.target.files[0]); 
+  const handleAddAvatar = e => {
+    const file = e.target.files[0];
+    console.log(file)
+    if (file) {
+      setFileInput(file);
+      setFieldValue('avatar',file); 
+           setFormData(values => ({ ...values, avatar: file }));
     }
   };
 
@@ -29,31 +31,32 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
     prevStep();
   };
 
-  const onSubmit = async (values) => {
-    console.log(values);
-    setFormData(values);
+  const onSubmit =async (event) => {
+    event.preventDefault();
+    setFormData({...values, avatar: fileInput});
+     console.log(values);
     if (values.category === 'your-pet') {
       try {
-        await dispatch(createPet({ values, token }));
+        await dispatch(createPet({ values, token, avatar:fileInput  }));
         toast.success('Pet card created successfully');
         navigate('/user');
-      } catch (error) {
+      }
+      catch (error) {
         toast.error(`Error creating pet card: ${error.message}`);
       }
     } else {
       try {
-        await dispatch(createNotice({ values, token, image: fileInput }));
+        await dispatch(createNotice({ values, token, avatar:fileInput }));
         toast.success('Notice created successfully');
         navigate('/notices/sell');
+    
       } catch (error) {
         toast.error(`Error creating notice: ${error.message}`);
       }
     }
-    console.log(formData);
   };
- 
-  const { category } = formData;
 
+  const { category } = values;
   return (
     <div>
        <Form autoComplete='on' onSubmit={onSubmit}>
@@ -92,7 +95,7 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
             </label>
           </>
         )}
-        <label htmlFor="image">
+        <label htmlFor="avatar">
           Load the pet’s image:
           {fileInput ? (
             <img
@@ -106,14 +109,12 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
           )}
           <Field
             type="file"
-            id="image"
-            name="image"
+            id="avatar"
+            name="avatar"
             accept=".png, .jpg, .jpeg, .webp"
-            // onChange={handleAddAvatar}
             onChange={(event) => {
               handleAddAvatar(event);
               handleChange(event);
-             
             }}
           />
           <ErrorMessage name="image" render={msg => <div> {msg} </div>} />
@@ -158,37 +159,5 @@ const MoreInfo = ({ prevStep, formData, setFormData }) => {
     </div>
   );
 };
+
 export default MoreInfo;
-
-
-  // const handleAddAvatar = e => {
-  //   if (e.target.files[0]) {
-  //     setFileInput(e.target.files[0]);
-  //     setFormData({ ...formData, image: e.target.files[0] });
-  //   }
-  // };
-
- // const handleSubmit = async values => {
-  //   setFormData({
-  //     ...values,
-  //     image: fileInput,
-  //   });
-  //   if (values.category === 'your-pet') {
-  //     try {
-  //       dispatch(createPet({ values, token, image: fileInput }));
-  //       toast.success('Pet card created successfully');
-  //       navigate('/user');
-  //     } catch (error) {
-  //       toast.error(`Error creating pet card: ${error.message}`);
-  //     }
-  //   } else {
-  //     try {
-  //       dispatch(createNotice({ values, token }));
-  //       toast.success('Notice created successfully');
-  //       navigate('/notices/sell');
-  //     } catch (error) {
-  //       toast.error(`Error creating notice: ${error.message}`);
-  //     }
-  //   }
-  //   console.log(formData);
-  // };

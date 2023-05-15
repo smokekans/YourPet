@@ -20,7 +20,6 @@ const noticesInitialState = {
   error: null,
   isLoading: false,
   total: 0,
-
 };
 
 const handlePending = state => {

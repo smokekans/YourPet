@@ -14,7 +14,7 @@ export const petsValidationSchema = Yup.object().shape({
     .min(2, 'Breed must be at least 2 characters')
     .max(16, 'Breed must be at most 16 characters')
     .required('Breed is required'),
-  image: Yup.mixed()
+  avatar: Yup.mixed()
     .required('File is required')
     .test(
       'fileSize',
