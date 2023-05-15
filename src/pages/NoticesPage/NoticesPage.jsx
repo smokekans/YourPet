@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
-import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
+// import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,6 +28,8 @@ function NoticesPage() {
   const favoriteNotices = useSelector(getFavorites);
   const favoriteAds = favoriteNotices?.user?.favorite || [];
   const ownNotices = useSelector(getOwnNotices);
+  // console.log(ownNotices)
+
   const dispatch = useDispatch();
 
   const [query, setQuery] = useState('');
@@ -65,9 +67,9 @@ function NoticesPage() {
           sx={{
             display: 'flex',
             justifyContent: 'center',
-            marginTop: '148px',
+            marginTop: { mobile: '40px', tablet: '80px', desktop: '80px' },
             fontWeight: 700,
-            fontSize: 48,
+            fontSize: { mobile: '24px', tablet: '48px' }, 
           }}
           variant="h1"
         >
@@ -90,7 +92,7 @@ function NoticesPage() {
           />
         )}
       </Container>
-      <NoticesPagination />
+      {/* <NoticesPagination /> */}
     </>
   );
 }

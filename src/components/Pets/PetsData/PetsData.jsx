@@ -1,14 +1,32 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { isPets } from '../../../redux/user/userSelectors';
 import { Container } from '@mui/material';
 import { Typography,Button } from '@mui/material';
 import styled from './styledPets';
 import { Avatar } from '@mui/material';
 import { ReactComponent as Trash } from '../../../images/icons/trash.svg';
+import { deletePets } from 'redux/user/userOperations';
+import { getCurrentUser } from 'redux/user/userOperations';
+
 function PetsData() {
   const Pets = useSelector(isPets);
+const dispatch = useDispatch()
 
+console.log(Pets)
+
+ function delet (id){
+  console.log(id)
+ 
+ const peeet=  Pets.filter((item) => item._id !==id);
+  
+  console.log(peeet)
+ dispatch(deletePets(id)).unwrap()
+ 
+ dispatch(getCurrentUser())
+  
+  
+}
   return (
     <Container sx={styled.container}>
      
@@ -32,7 +50,7 @@ function PetsData() {
                       <Typography sx={styled.infoPets} variant="p" key={_id+6}>Comments: {comments}</Typography><br/>
                     </Typography>
                   </Typography>
-                  <Button sx={styled.btnTrash}startIcon={<Trash  />}></Button>
+                  <Button sx={styled.btnTrash}startIcon={<Trash  />} onClick={()=>delet(_id)}></Button>
                 </Typography>
               );
             })}

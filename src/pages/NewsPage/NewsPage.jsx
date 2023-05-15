@@ -2,13 +2,13 @@ import { Box, Container, IconButton, Input, InputAdornment, Typography } from '@
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Search } from '../../images/icons/search.svg';
 import { ReactComponent as Cross } from '../../images/icons/cross.svg';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { getNews } from 'redux/news/newsOperations';
+import { getNews, getNewsTitle } from 'redux/news/newsOperations';
 import styles from './styles';
 import NewsList from 'components/News/NewsList/NewsList';
 import Loader from 'components/Loader/Loader';
 import { getStatus } from 'redux/news/newsSelectors';
+import { NewsPagination } from 'components/News/NewsPagination';
 
 function NewsPage() {
   const dispatch = useDispatch();
@@ -17,18 +17,21 @@ function NewsPage() {
   const isLoad = useSelector(getStatus);
 
   useEffect(() => {
-    dispatch(getNews());
+    const data = { page: 1 };
+
+    dispatch(getNews(data));
   }, [dispatch]);
 
   const onSubmit = e => {
     e.preventDefault();
-    dispatch(getNews(e.target.search.value));
+    const data = { query: e.target.search.value, page: 1 };
+
+    dispatch(getNewsTitle(data));
     setQuery(e.target.search.value);
   };
 
   const changeInput = e => {
     if (e.target.value === '') {
-      dispatch(getNews(e.target.value));
       setQuery(e.target.value);
     }
   };
@@ -39,7 +42,9 @@ function NewsPage() {
 
   const clearInput = e => {
     setQuery('');
-    dispatch(getNews(e.target.value));
+    const data = { page: 1 };
+    dispatch(getNews(data));
+
     setInput('');
   };
 
@@ -77,6 +82,7 @@ function NewsPage() {
           />
         </Box>
         {!isLoad ? <NewsList query={query} /> : <Loader />}
+        <NewsPagination />
       </Container>
     </>
   );
