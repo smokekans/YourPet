@@ -20,6 +20,7 @@ import {
   FormHelperText,
 
 } from '@mui/material';
+import BasicModal from 'components/Modal/ModalCongrats/ModalCongrats';
 // import {
 //   // Typography,
 //   FormControl,
@@ -34,7 +35,6 @@ function RegisterPage() {
   // на стор профілю
   const [isModalOpen, setIsModalOpen] = useState(false);
 // на стор профілю
-  
   
   const regValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -155,13 +155,15 @@ function RegisterPage() {
                 disabled={isSubmitting}
 
                 // на стор профілю
-                onClick={() => {
-                  setIsModalOpen(!isModalOpen);
-                }}
+                // onClick={() => {
+                //   setIsModalOpen(!isModalOpen);
+                // }}
                 // на стор профілю
 
-              >
-                Registration
+                >
+                  Registration
+                  {/* <BasicModal /> */}
+  
               </Button>
               {
               // на стор профілю
@@ -180,7 +182,8 @@ function RegisterPage() {
               </Box>
             </Box>
           )}
-        </Formik></CardContent>
+          </Formik>
+        </CardContent>
       </Card>
     </>
   );
