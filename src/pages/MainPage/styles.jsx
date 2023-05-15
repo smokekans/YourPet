@@ -11,7 +11,7 @@ const styles = {
     backgroundPosition: {
       mobile: 'left, bottom',
       tablet: 'left, bottom 450px',
-      desktop: 'center, right bottom -150px',
+      desktop: 'center, right -115px',
     },
     backgroundSize: {
       mobile: 'cover, 140%',

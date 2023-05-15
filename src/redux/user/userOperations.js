@@ -100,31 +100,47 @@ export const updateInfoUser = createAsyncThunk(
     }
   }
 );
-// export const getUser = createAsyncThunk(
-//   'user/current',
-
-//   async () => {
-//     try {
-//       const { data } = await axios.get('/user/current');
-
-//       console.log(data);
-//       return data;
-//     } catch (error) {
-//       return error.message;
-//     }
-//   }
-// );
-
-// export const getUser = createAsyncThunk(
-//   'user/current',
-//   async (credentials, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.get('/user/current', credentials);
-
-//       console.log(data)
-//       return data
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const updateAvatar = createAsyncThunk(
+  'user/updateAvatar',
+  async (formData, { rejectWithValue, getState }) => {
+    console.log(formData)
+    try {
+      const value = getState().auth.token;
+      if (value === null) {
+        return rejectWithValue('Unable to patch user');
+      }
+      token.set(value);
+      
+      const { data } = await axios.patch('/user/avatars', formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      console.log(data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+  
+);
+export const deletePets = createAsyncThunk(
+  'user/deletePets',
+  async (id, { rejectWithValue, getState }) => {
+   
+    try {
+      const value = getState().auth.token;
+      if (value === null) {
+        return rejectWithValue('Unable to patch user');
+      }
+      token.set(value);
+      
+      const { data } = await axios.delete(`/pets/${id}`, );
+      console.log(data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+  
+);
