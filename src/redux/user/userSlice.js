@@ -43,11 +43,13 @@ const userSlice = createSlice({
         state.isLoading = false;
         // state.favorite.push(payload);
         state.favorite = payload;
+        state.error = null
       })
+
       .addCase(addToFavorites.rejected, (state, { payload }) => {
         state.notices = { data: [] };
         state.isLoading = false;
-        state.error = payload;
+        state.error = payload.message;
       })
       .addCase(getFavorite.pending, state => {
         state.isLoading = true;
@@ -64,8 +66,12 @@ const userSlice = createSlice({
       })
       .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.favorite = state.favorite.filter(id => id !== payload.id)
+
+        if (Array.isArray(state.favorite)) {
+          state.favorite = state.favorite.filter(id => id !== payload.id);
+        }
       })
+
       .addCase(deleteFromFavorite.rejected, (state, { payload }) => {
         state.notices = { data: [] };
         state.isLoading = false;
@@ -77,10 +83,10 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = payload;
         state.error = null;
-        
+
       })
       .addCase(updateInfoUser.rejected, (state, { payload }) => {
-       
+
         state.isLoading = false;
         state.error = payload;
       })

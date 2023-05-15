@@ -7,15 +7,15 @@ import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
 import { getFavorite } from 'redux/user/userSelectors';
 import { getIsLoggedIn } from 'redux/auth/authSelectors';
 
-const FavoriteIconButton = ({ noticeId }) => {
+const FavoriteIconButton = ({ noticeid }) => {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(getIsLoggedIn);
   const [isFavorites, setIsFavorites] = useState(false);
   const favoriteElement = useSelector(getFavorite);
   const dataArray = Array.isArray(favoriteElement)
-    ? favoriteElement
-    : [favoriteElement];
-  const isFavorite = dataArray.includes(noticeId);
+  ? favoriteElement
+  : Array.from(favoriteElement);
+  const isFavorite = dataArray.includes(noticeid);
 
   const handleFavoriteClick = () => {
     if (!isLoggedIn) {
@@ -25,11 +25,11 @@ const FavoriteIconButton = ({ noticeId }) => {
 
     if (isFavorites) {
       toast.error('Removed from favorites');
-      dispatch(deleteFromFavorite(noticeId));
+      dispatch(deleteFromFavorite(noticeid));
       setIsFavorites(false);
     } else {
       toast('Added to favorites');
-      dispatch(addToFavorites(noticeId));
+      dispatch(addToFavorites(noticeid));
       setIsFavorites(true);
     }
   };

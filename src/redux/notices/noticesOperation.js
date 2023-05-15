@@ -87,6 +87,7 @@ export const getNoticesByQwery = createAsyncThunk(
   async ({ query, category, page = 1, limit = 0 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`notices/find?title=${query}&category=${category}&page=${page}&limit=${limit}`);
+      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -118,3 +119,4 @@ export const createNotice = createAsyncThunk(
     }
   }
 );
+

@@ -3,10 +3,19 @@ import theme from 'theme';
 const styles = {
   navigationContainer: {
     marginTop: '43px',
+    marginBottom: '42px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: '12px',
+    [theme.breakpoints.down(1267)]: {
+       marginTop: '40px',
+    marginBottom: '87px',
+    },
+    [theme.breakpoints.down(767)]: {
+       marginTop: '20px',
+    marginBottom: '24px',
+    },
   },
   linksContainer: {
     display: 'flex',
