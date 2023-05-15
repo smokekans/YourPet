@@ -23,6 +23,7 @@ export const getFriends = createAsyncThunk(
   }
 );
 
+
 // додає картку улюбленця
 export const createPet = createAsyncThunk(
   'pets/create',

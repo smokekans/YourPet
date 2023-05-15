@@ -18,7 +18,7 @@ const styled = {
 
     borderRadius: '40px',
   },
-  input: { border: 'none', width: '94px', height: '24px',textDecoration:'none' },
+  input: {opacity:'0',width:'0',height:'0', overflow:'hidden',padding:'0',margin:'0' },
 };
 
 export default styled;
