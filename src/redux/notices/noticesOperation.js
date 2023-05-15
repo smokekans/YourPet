@@ -42,7 +42,6 @@ export const getNewNotice = createAsyncThunk(
   }
 );
 
-
 export const addNotices = createAsyncThunk(
   'notices/addNotices',
   async (newNotice, { rejectWithValue }) => {
@@ -58,11 +57,10 @@ export const addNotices = createAsyncThunk(
 export const deleteNotice = createAsyncThunk(
   'notices/deleteNotice',
   async (id, { rejectWithValue }) => {
-    console.log(id)
+    console.log(id);
     try {
       await axios.delete(`notices/${id}`);
       return id;
-
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -79,14 +77,15 @@ export const getUserNotices = createAsyncThunk(
       return rejectWithValue(error.message);
     }
   }
-
 );
 
 export const getNoticesByQwery = createAsyncThunk(
   'notices/getNoticesByQwery',
   async ({ query, category, page = 1, limit = 0 }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`notices/find?title=${query}&category=${category}&page=${page}&limit=${limit}`);
+      const { data } = await axios.get(
+        `notices/find?title=${query}&category=${category}&page=${page}&limit=${limit}`
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -100,6 +99,9 @@ export const createNotice = createAsyncThunk(
     try {
       const formData = new FormData();
       formData.append('image', image);
+      for (const key in values) {
+        formData.append(key, values[key]);
+      }
       const header = {
         headers: {
           Accept: 'application/json',
@@ -107,11 +109,7 @@ export const createNotice = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await axios.post(
-        '/notices',
-        { ...values, formData },
-        header
-      );
+      const { data } = await axios.post('/notices', formData, header);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue();
