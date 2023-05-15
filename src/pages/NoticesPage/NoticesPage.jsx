@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
-import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
+// import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
