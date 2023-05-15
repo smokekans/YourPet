@@ -4,26 +4,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
 export const NewsPagination = () => {
-  const news = useSelector(state => state.news);
+  const total = useSelector(state => state.news.total);
   const [page, setPage] = useState(1);
   const { categoryName } = useParams();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch();
-  }, [categoryName, dispatch, page]);
+  // useEffect(() => {
+  //   dispatch();
+  // }, [categoryName, dispatch, page]);
 
-  console.log(news);
+  console.log(total);
   return (
     <div>
       <PaginationControl
         page={page}
         between={4}
-        total={100}
+        total={total}
         limit={10}
+        last={true}
         changePage={page => {
           setPage(page);
         }}
+        ellipsis={3}
       />
     </div>
   );
