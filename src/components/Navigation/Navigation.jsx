@@ -1,34 +1,63 @@
 import useMatchMedia from 'hooks/useMatchMedia';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getIsLoggedIn } from 'redux/auth/authSelectors';
-import Nav from './Nav/Nav';
+import { getAccessToken } from 'redux/auth/authSelectors';
+import Nav from './Nav/Nav/Nav';
 import UserNavigation from './UserNavigation/UserNavigation';
 import AuthNavigation from './AuthNavigation/AuthNavigation';
 import BurgerMenu from './Nav/BurgerMenu';
+import { Box } from '@mui/system';
 
 function Navigation() {
   const { isMobile } = useMatchMedia();
   const { isTablet } = useMatchMedia();
   const { isDesktop } = useMatchMedia();
-  const isLoggedIn = useSelector(getIsLoggedIn);
+  const accessToken = useSelector(getAccessToken);
 
   return (
     <>
       {isDesktop && (
         <>
-          <Nav />
-          {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
+          <Box
+            sx={{
+              width: '100%',
+              alignItems: 'center',
+              display: 'flex',
+              // flexDirection: { tablet: 'row' },
+            }}
+          >
+            <Nav />
+            {accessToken ? <UserNavigation /> : <AuthNavigation />}
+          </Box>
         </>
       )}
+
       {isTablet && (
         <>
-          {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
-          <BurgerMenu />
+          <Box
+            sx={{
+              width: '100%',
+              alignItems: 'center',
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          >
+            {accessToken ? <UserNavigation /> : <AuthNavigation />}
+            <BurgerMenu />
+          </Box>
         </>
       )}
-      {isMobile && isLoggedIn && <UserNavigation />}
-      {isMobile && <BurgerMenu />}
+      <Box
+        sx={{
+          width: '100%',
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}
+      >
+        {isMobile && accessToken && <UserNavigation />}
+        {isMobile && <BurgerMenu />}
+      </Box>
     </>
   );
 }
