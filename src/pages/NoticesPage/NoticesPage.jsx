@@ -127,7 +127,7 @@ function NoticesPage() {
   const notices = useSelector(getNotices);
   const isLoading = useSelector(getNoteceIsLoadig);
   const favoriteNotices = useSelector(getFavorites);
-  const favoriteAds = favoriteNotices?.user?.favorite || [];
+  const favoriteAds = favoriteNotices || [];
   const ownNotices = useSelector(getOwnNotices);
 
   const dispatch = useDispatch();

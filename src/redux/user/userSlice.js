@@ -38,6 +38,9 @@ const userSlice = createSlice({
       state.user.pets = payload;
       // state.startDate = payload;
     },
+    deleteFavoriteObj: (state, { payload }) => {
+      state.favorite = state.favorite.filter(item => item._id !== payload);
+    },
   },
   extraReducers: builder => {
     builder
@@ -51,7 +54,7 @@ const userSlice = createSlice({
       .addCase(addToFavorites.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         // state.favorite.push(payload);
-        state.favorite = payload;
+        state.favorite = payload.user.favorite;
         state.error = null;
       })
       .addCase(addToFavorites.rejected, (state, { payload }) => {
@@ -125,4 +128,4 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const { deletePet } = userSlice.actions;
+export const { deletePet, deleteFavoriteObj } = userSlice.actions;

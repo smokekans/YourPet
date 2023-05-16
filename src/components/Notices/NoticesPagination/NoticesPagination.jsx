@@ -21,7 +21,6 @@ export const NoticesPagination = () => {
       })
     );
   }, [categoryName, dispatch, page]);
-  console.log(total);
   return (
     <div>
       {total > 10 ? (
