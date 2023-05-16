@@ -1,11 +1,7 @@
 import React from 'react';
 import { Form, Field, ErrorMessage, useFormikContext } from 'formik';
 
-const PersonalDetails = ({
-  prevStep,
-  nextStep,
-  // formData
-}) => {
+const PersonalDetails = ({ prevStep, nextStep }) => {
   const { values, handleChange } = useFormikContext();
   const handlePrevClick = () => {
     prevStep();
@@ -48,10 +44,10 @@ const PersonalDetails = ({
           Birthday:
           <Field
             placeholder="Type date of birth"
-            type="date"
+            type="text"
             id="birthday"
             name="birthday"
-            data-pattern="**.**.****"
+            // data-pattern="**.**.****"
             onChange={handleChange}
           />
           <ErrorMessage name="birthday" render={msg => <div> {msg} </div>} />
