@@ -1,5 +1,8 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react'; // useEffect
+import {
+  useSelector,
+  // useDispatch
+} from 'react-redux';
 import { getUser } from '../../../redux/user/userSelectors';
 import styles from './styles';
 import {
@@ -10,7 +13,7 @@ import {
 } from '@mui/material';
 import { ReactComponent as PawPrint } from '../../../images/icons/edit.svg';
 
-import { updateInfoUser } from 'redux/user/userOperations';
+// import { updateInfoUser } from 'redux/user/userOperations';
 
 function UserDataItem() {
   const user = useSelector(getUser);
@@ -22,7 +25,7 @@ function UserDataItem() {
     phone: user.phone,
     city: user.city,
   };
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const ChangeData = e => {
     const id = e.currentTarget.id;
@@ -45,7 +48,10 @@ function UserDataItem() {
     return updateInfo;
   };
   function handleClick() {
-    dispatch(updateInfoUser(updateInfo));
+    // useEffect(() => {
+    // dispatch(updateInfo());
+    // }, [dispatch]);
+    // dispatch(updateInfoUser(updateInfo));
   }
   const { name, birthday, email, phone, city } = user;
   return (

@@ -9,13 +9,50 @@ import NoticesPage from 'pages/NoticesPage/NoticesPage';
 import OurFriendsPage from 'pages/OurFriendsPage/OurFriendsPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import UserPage from 'pages/UserPage/UserPage';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import {
+  Navigate,
+  Route,
+  Routes,
+  // useLocation
+} from 'react-router-dom';
 import { PrivateRoute } from 'route/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'route/PublicRoute/PublicRoute';
-  import { ToastContainer } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentUser } from 'redux/user/userOperations';
+import { getAccessToken } from 'redux/auth/authSelectors';
 
 export const App = () => {
+  const accessToken = useSelector(getAccessToken);
+  const dispatch = useDispatch();
+
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+
+  // useEffect(() => {
+  //   const accessToken = queryParams.get('accessToken');
+  //   const refreshToken = queryParams.get('refreshToken');
+  //   console.log(accessToken, refreshToken);
+  // }, [location.search]);
+
+  // const [searchParams] = useSearchParams();
+  //
+  // const accessTokenGoogle = searchParams.get('accessToken');
+
+  // useEffect(() => {
+  //   if (accessToken !== null) {
+  //     dispatch(addAccessToken(accessToken));
+  //     token.set(accessToken);
+  //   }
+  // }, [accessToken, dispatch]);
+
+  useEffect(() => {
+    if (accessToken !== null) {
+      dispatch(getCurrentUser());
+    }
+  }, [accessToken, dispatch]);
   return (
     <>
       <Routes>
@@ -35,7 +72,6 @@ export const App = () => {
           >
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-
           </Route>
           <Route path="" element={<PrivateRoute />}>
             <Route path="user" element={<UserPage />} />
@@ -44,7 +80,7 @@ export const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
-       <ToastContainer />
+      <ToastContainer />
     </>
   );
 };

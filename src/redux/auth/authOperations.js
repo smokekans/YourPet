@@ -48,6 +48,20 @@ export const login = createAsyncThunk(
   }
 );
 
+export const loginWithGoogle = createAsyncThunk(
+  'auth/loginWithGoogle',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('auth/google', credentials);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      toast.error('Missing or not valid field password');
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue, getState }) => {

@@ -3,7 +3,7 @@ import { login, logout, refreshToken, register } from './authOperations';
 
 const authInitialState = {
   user: {},
-  token: null,
+  accessToken: null,
   refreshToken: null,
   isLoggedIn: false,
   isLoading: false,
@@ -17,7 +17,7 @@ function registerFulfilled(state) {
 
 function loginFulfilled(state, { payload }) {
   state.user = payload.user;
-  state.token = payload.token;
+  state.accessToken = payload.accessToken;
   state.refreshToken = payload.refreshToken;
 
   state.isLoading = false;
@@ -29,7 +29,13 @@ function logOutFulfilled(state) {
   state.isLoading = false;
   state.isLoggedIn = false;
   state.user = {};
-  state.token = null;
+  state.accessToken = null;
+  state.refreshToken = null;
+}
+
+function refreshTokenFulfilled(state, { payload }) {
+  state.accessToken = payload.accessToken;
+  state.refreshToken = payload.refreshToken;
 }
 
 export const addAccessToken = createAction('auth/token');
@@ -66,8 +72,14 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      .addCase(refreshToken, (state, { payload }) => {
-        state.token = payload;
+      .addCase(refreshToken.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(refreshToken.fulfilled, refreshTokenFulfilled)
+      .addCase(refreshToken.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       });
   },
 });

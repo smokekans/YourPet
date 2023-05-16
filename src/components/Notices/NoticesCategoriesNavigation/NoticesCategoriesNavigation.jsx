@@ -1,20 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getToken } from 'redux/auth/authSelectors';
+import { getAccessToken } from 'redux/auth/authSelectors';
 // import { ReactComponent as SmallCross } from '../../../images/icons/plus-small.svg';
-import {ReactComponent as Cross} from '../../../images/icons/plus.svg'
+import { ReactComponent as Cross } from '../../../images/icons/plus.svg';
 import { styled } from '@mui/system';
 import { Box } from '@mui/material';
 import styles from './styles';
-
-
 
 const StyledNavLink = styled(NavLink)(styles.link);
 const StyledAddLink = styled(NavLink)(styles.addButton);
 
 const NoticesCategoriesNavigation = () => {
-  const userToken = useSelector(getToken);
+  const userToken = useSelector(getAccessToken);
 
   return (
     <Box sx={styles.navigationContainer}>
@@ -42,16 +40,12 @@ const NoticesCategoriesNavigation = () => {
       <Box sx={styles.addButtonContainer}>
         <StyledAddLink to="/add-pet">
           {/* <Cross className={styles.mobileIcon}/> */}
-           <Cross className={styles.icon}  width="16px"
-          height="16px" 
-           />
+          <Cross className={styles.icon} width="16px" height="16px" />
           Add Pet
-         
-      </StyledAddLink>
-    </Box>
+        </StyledAddLink>
+      </Box>
     </Box>
   );
 };
 
 export default NoticesCategoriesNavigation;
-

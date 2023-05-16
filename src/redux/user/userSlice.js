@@ -16,7 +16,6 @@ const userInitialState = {
   image: '',
   notices: [],
   favorite: [],
-  token: null,
   error: null,
   isLoading: false,
 };
