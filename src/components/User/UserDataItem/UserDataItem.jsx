@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector, useDispatch,  } from 'react-redux';
-import { getUser,isLoading } from '../../../redux/user/userSelectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUser, isLoading } from '../../../redux/user/userSelectors';
 import { updateInfoUser } from 'redux/user/userOperations';
-import { useState } from "react";
+import { useState } from 'react';
 import styles from './styles';
 import {
   Typography,
@@ -15,11 +15,11 @@ import { ReactComponent as Check } from '../../../images/icons/check.svg';
 
 function UserDataItem() {
   const dispatch = useDispatch();
-const [btnName,getName]= useState(true)
-const [btnEmail,getEmail]= useState(true)
-const [btnPhone,getPhone]= useState(true)
-const [btnCity,getCity]= useState(true)
-const [btnBirthday,getBirthday]= useState(true)
+  const [btnName, getName] = useState(true);
+  const [btnEmail, getEmail] = useState(true);
+  const [btnPhone, getPhone] = useState(true);
+  const [btnCity, getCity] = useState(true);
+  const [btnBirthday, getBirthday] = useState(true);
   const user = useSelector(getUser);
   const Loading = useSelector(isLoading);
   console.log(Loading);
@@ -60,7 +60,6 @@ const [btnBirthday,getBirthday]= useState(true)
   return (
     <div>
       <Typography variant="ul" sx={styles.ul}>
-     
         <Typography variant="p" className="name" sx={styles.li}>
           Name:
           <FormControl variant="filled">
@@ -71,18 +70,24 @@ const [btnBirthday,getBirthday]= useState(true)
               defaultValue={name}
               endAdornment={
                 <InputAdornment position="end">
-                  {btnName?<Pencel
-                className="name"
-                onClick={()=>{getName(false)}}
-                edge="end"
-              ></Pencel> : <Check
-              className="name"
-              onClick={()=>{
-                getName(true)
-                handleClick()}}
-              edge="end"
-            ></Check>}
-                 
+                  {btnName ? (
+                    <Pencel
+                      className="name"
+                      onClick={() => {
+                        getName(false);
+                      }}
+                      edge="end"
+                    ></Pencel>
+                  ) : (
+                    <Check
+                      className="name"
+                      onClick={() => {
+                        getName(true);
+                        handleClick();
+                      }}
+                      edge="end"
+                    ></Check>
+                  )}
                 </InputAdornment>
               }
             />
@@ -99,17 +104,24 @@ const [btnBirthday,getBirthday]= useState(true)
               defaultValue={email}
               endAdornment={
                 <InputAdornment position="end">
-                  {btnEmail?<Pencel
-                className="name"
-                onClick={()=>{getEmail(false)}}
-                edge="end"
-              ></Pencel> : <Check
-              className="name"
-              onClick={()=>{
-                getEmail(true)
-                handleClick()}}
-              edge="end"
-            ></Check>}
+                  {btnEmail ? (
+                    <Pencel
+                      className="name"
+                      onClick={() => {
+                        getEmail(false);
+                      }}
+                      edge="end"
+                    ></Pencel>
+                  ) : (
+                    <Check
+                      className="name"
+                      onClick={() => {
+                        getEmail(true);
+                        handleClick();
+                      }}
+                      edge="end"
+                    ></Check>
+                  )}
                 </InputAdornment>
               }
             />
@@ -126,17 +138,24 @@ const [btnBirthday,getBirthday]= useState(true)
               defaultValue={birthday}
               endAdornment={
                 <InputAdornment position="end">
-                  {btnBirthday?<Pencel
-                className="name"
-                onClick={()=>{getBirthday(false)}}
-                edge="end"
-              ></Pencel> : <Check
-              className="name"
-              onClick={()=>{
-                getBirthday(true)
-                handleClick()}}
-              edge="end"
-            ></Check>}
+                  {btnBirthday ? (
+                    <Pencel
+                      className="name"
+                      onClick={() => {
+                        getBirthday(false);
+                      }}
+                      edge="end"
+                    ></Pencel>
+                  ) : (
+                    <Check
+                      className="name"
+                      onClick={() => {
+                        getBirthday(true);
+                        handleClick();
+                      }}
+                      edge="end"
+                    ></Check>
+                  )}
                 </InputAdornment>
               }
             />
@@ -152,17 +171,24 @@ const [btnBirthday,getBirthday]= useState(true)
               defaultValue={phone}
               endAdornment={
                 <InputAdornment position="end">
-                 {btnPhone?<Pencel
-                className="name"
-                onClick={()=>{getPhone(false)}}
-                edge="end"
-              ></Pencel> : <Check
-              className="name"
-              onClick={()=>{
-                getPhone(true)
-                handleClick()}}
-              edge="end"
-            ></Check>}
+                  {btnPhone ? (
+                    <Pencel
+                      className="name"
+                      onClick={() => {
+                        getPhone(false);
+                      }}
+                      edge="end"
+                    ></Pencel>
+                  ) : (
+                    <Check
+                      className="name"
+                      onClick={() => {
+                        getPhone(true);
+                        handleClick();
+                      }}
+                      edge="end"
+                    ></Check>
+                  )}
                 </InputAdornment>
               }
             />
@@ -178,17 +204,24 @@ const [btnBirthday,getBirthday]= useState(true)
               defaultValue={city}
               endAdornment={
                 <InputAdornment position="end">
-                  {btnCity?<Pencel
-                className="name"
-                onClick={()=>{getCity(false)}}
-                edge="end"
-              ></Pencel> : <Check
-              className="name"
-              onClick={()=>{
-                getCity(true)
-                handleClick()}}
-              edge="end"
-            ></Check>}
+                  {btnCity ? (
+                    <Pencel
+                      className="name"
+                      onClick={() => {
+                        getCity(false);
+                      }}
+                      edge="end"
+                    ></Pencel>
+                  ) : (
+                    <Check
+                      className="name"
+                      onClick={() => {
+                        getCity(true);
+                        handleClick();
+                      }}
+                      edge="end"
+                    ></Check>
+                  )}
                 </InputAdornment>
               }
             />
