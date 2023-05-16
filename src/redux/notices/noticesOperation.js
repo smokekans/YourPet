@@ -95,7 +95,7 @@ export const getNoticesByQwery = createAsyncThunk(
 // додає оголошення
 export const createNotice = createAsyncThunk(
   'notices/create',
-  async ({ values, token, avatar }, thunkAPI) => {
+  async ({ values, accessToken, avatar }, thunkAPI) => {
     console.log(avatar);
     try {
       const formData = new FormData();
@@ -114,7 +114,7 @@ export const createNotice = createAsyncThunk(
       const header = {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       };
       const { data } = await axios.post('/notices', formData, header, avatar);
