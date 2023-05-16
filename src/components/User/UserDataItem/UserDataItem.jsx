@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUser } from '../../../redux/user/userSelectors';
+import { getUser,isLoading } from '../../../redux/user/userSelectors';
 import { updateInfoUser } from 'redux/user/userOperations';
 import styles from './styles';
 import {
@@ -13,7 +13,10 @@ import { ReactComponent as PawPrint } from '../../../images/icons/edit.svg';
 
 function UserDataItem() {
   const dispatch = useDispatch();
+
   const user = useSelector(getUser);
+  const Loading = useSelector(isLoading);
+  console.log(Loading);
   console.log(user);
 
   const updateInfo = {
@@ -51,6 +54,7 @@ function UserDataItem() {
   return (
     <div>
       <Typography variant="ul" sx={styles.ul}>
+        
         <Typography variant="p" className="name" sx={styles.li}>
           Name:
           <FormControl variant="filled">

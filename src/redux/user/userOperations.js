@@ -22,7 +22,7 @@ export const getCurrentUser = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.get('user/current');
-      console.log(data);
+      
       return data;
     } catch (e) {
       console.log(e.response.data);

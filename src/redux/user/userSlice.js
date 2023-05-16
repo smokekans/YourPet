@@ -89,7 +89,7 @@ const userSlice = createSlice({
       .addCase(updateInfoUser.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.isLoading = false;
-        // state.user.img = payload;
+        state.user = payload;
         state.error = null;
       })
       .addCase(updateInfoUser.rejected, (state, { payload }) => {

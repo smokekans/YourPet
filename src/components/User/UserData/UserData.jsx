@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import UserLogOut from '../UserLogOut/UserLogOut';
 import UserDataItem from '../UserDataItem/UserDataItem';
 import { updateAvatar } from 'redux/user/userOperations';
-import { getAvatar } from 'redux/user/userSelectors';
+import { getAvatar,isLoading } from 'redux/user/userSelectors';
+
 import { Button, Avatar, FilledInput, Container } from '@mui/material';
 import styles from './styles';
 
@@ -12,7 +13,7 @@ function UserData() {
   const avatarUser = useSelector(getAvatar);
   const avatar = useRef(null);
   // console.log(avatarUser);
-
+  const Loading = useSelector(isLoading);
   function OnSumbit(e) {
     const avatars = e.target.files[0];
     dispatch(updateAvatar({ avatar: avatars }));
@@ -41,8 +42,8 @@ function UserData() {
           onChange={OnSumbit}
         ></FilledInput>
         <Button onClick={handelAvatar}>Button</Button>
-
-        <UserDataItem />
+        {Loading?<div></div>:<UserDataItem />}
+        
       </div>
       <UserLogOut />
     </Container>
