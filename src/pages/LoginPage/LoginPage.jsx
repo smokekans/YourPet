@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
@@ -110,6 +111,11 @@ function LoginPage() {
           <Typography>Don't have an account?</Typography>
           <Link to="/register">Register</Link>
         </Box>
+
+        <a href="http://localhost:3001/api/auth/google">GoogleLocal</a>
+        <a href="https://yourpet-backend.onrender.com/api/auth/google">
+          Google
+        </a>
       </CardContent>
     </Card>
   );
