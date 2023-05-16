@@ -3,7 +3,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
-export const token = {
+export const accessToken = {
   set(accessToken) {
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   },
@@ -16,11 +16,11 @@ export const getCurrentUser = createAsyncThunk(
   'user/current',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const value = getState().auth.token;
+      const value = getState().auth.accessToken;
       if (value === null) {
         return rejectWithValue('Unable to fetch user');
       }
-      token.set(value);
+      accessToken.set(value);
       const { data } = await axios.get('user/current');
       console.log(data);
       return data;
@@ -35,11 +35,11 @@ export const addToFavorites = createAsyncThunk(
   'user/addFavorite',
   async (id, { rejectWithValue, getState }) => {
     try {
-      const value = getState().auth.token;
+      const value = getState().auth.accessToken;
       if (value === null) {
         return rejectWithValue('Unable to fetch user');
       }
-      token.set(value);
+      accessToken.set(value);
       const { data } = await axios.post(`/user/favorite/${id}`);
       return data;
     } catch (error) {
@@ -52,11 +52,11 @@ export const getFavorite = createAsyncThunk(
   'user/getFavorite',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const value = getState().auth.token;
+      const value = getState().auth.accessToken;
       if (value === null) {
         return rejectWithValue('Unable to fetch user');
       }
-      token.set(value);
+      accessToken.set(value);
       const { data } = await axios.get('/user/favorite');
       return data;
     } catch (error) {
@@ -82,11 +82,11 @@ export const updateInfoUser = createAsyncThunk(
   'user/updateInfoUser',
   async (upDateUser, { rejectWithValue, getState }) => {
     try {
-      const value = getState().auth.token;
+      const value = getState().auth.accessToken;
       if (value === null) {
         return rejectWithValue('Unable to patch user');
       }
-      token.set(value);
+      accessToken.set(value);
 
       const { data } = await axios.patch('/user/update', upDateUser);
       console.log(data);
@@ -106,11 +106,11 @@ export const updateAvatar = createAsyncThunk(
     formData.append('avatar', image);
 
     try {
-      const value = getState().auth.token;
+      const value = getState().auth.accessToken;
       if (value === null) {
         return rejectWithValue('Unable to patch user');
       }
-      token.set(value);
+      accessToken.set(value);
       const { data } = await axios.patch('/user/avatars', image, {
         headers: {
           'Content-type': 'multipart/form-data',
@@ -128,11 +128,11 @@ export const deletePets = createAsyncThunk(
   'user/deletePets',
   async (id, { rejectWithValue, getState }) => {
     try {
-      const value = getState().auth.token;
+      const value = getState().auth.accessToken;
       if (value === null) {
         return rejectWithValue('Unable to patch user');
       }
-      token.set(value);
+      accessToken.set(value);
       const { data } = await axios.delete(`/pets/${id}`);
       console.log(data);
       return data;

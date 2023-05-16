@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
-export const token = {
+export const accessToken = {
   set(accessToken) {
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   },
@@ -38,7 +38,7 @@ export const login = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axios.post('auth/login', credentials);
-      token.set(data.token);
+      accessToken.set(data.accessToken);
       dispatch(getCurrentUser());
       return data;
     } catch (error) {
@@ -53,7 +53,7 @@ export const loginWithGoogle = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('auth/google', credentials);
-      token.set(data.token);
+      accessToken.set(data.accessToken);
       return data;
     } catch (error) {
       toast.error('Missing or not valid field password');
@@ -66,10 +66,10 @@ export const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const value = getState().auth.token;
-      token.set(value);
+      const value = getState().auth.accessToken;
+      accessToken.set(value);
       await axios.post('auth/logout');
-      token.unset();
+      accessToken.unset();
     } catch (error) {
       toast.error(error.response.data);
       return rejectWithValue(error.message);
@@ -82,7 +82,7 @@ export const refreshToken = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.get('auth/refresh', credentials);
-      token.set(data.token);
+      accessToken.set(data.accessToken);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
