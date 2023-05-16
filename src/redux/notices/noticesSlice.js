@@ -8,6 +8,8 @@ import {
   getSingleNotice,
   createNotice,
   getUserNotices,
+  getNoticesByQweryOwner,
+  getNoticesByQweryFavorite,
 } from './noticesOperation';
 
 const noticesInitialState = {
@@ -106,6 +108,28 @@ const noticesSlice = createSlice({
         state.error = null;
       })
       .addCase(getNoticesByQwery.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+      .addCase(getNoticesByQweryOwner.pending, state => {
+        handlePending(state);
+      })
+      .addCase(getNoticesByQweryOwner.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices = payload;
+        state.error = null;
+      })
+      .addCase(getNoticesByQweryOwner.rejected, (state, action) => {
+        handleReject(state, action);
+      })
+      .addCase(getNoticesByQweryFavorite.pending, state => {
+        handlePending(state);
+      })
+      .addCase(getNoticesByQweryFavorite.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices = payload;
+        state.error = null;
+      })
+      .addCase(getNoticesByQweryFavorite.rejected, (state, action) => {
         handleReject(state, action);
       });
   },

@@ -126,3 +126,31 @@ export const createNotice = createAsyncThunk(
     }
   }
 );
+
+export const getNoticesByQweryOwner = createAsyncThunk(
+  'notices/getNoticesByQweryOwner',
+  async ({ query, page = 1, limit = 0 }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `notices/owner?title=${query}&page=${page}&limit=${limit}`
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getNoticesByQweryFavorite = createAsyncThunk(
+  'notices/getNoticesByQweryFavorite',
+  async ({ query, page = 1, limit = 0 }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `notices/favorite?title=${query}&page=${page}&limit=${limit}`
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

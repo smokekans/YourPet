@@ -57,6 +57,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
   return (
     <div>
       <Form autoComplete="on" onSubmit={onSubmit}>
+      <Form autoComplete="on" onSubmit={onSubmit}>
         {category !== 'your-pet' && (
           <>
             <p>The Sex</p>

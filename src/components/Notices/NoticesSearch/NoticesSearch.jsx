@@ -3,7 +3,7 @@ import { Box, Input, InputAdornment, IconButton } from "@mui/material";
 import { ReactComponent as IconSearch } from "../../../images/icons/search.svg";
 import { ReactComponent as IconCross } from "../../../images/icons/cross.svg";
 import { useDispatch } from "react-redux";
-import { getNoticesByQwery } from "redux/notices/noticesOperation";
+import { getNoticesByQwery, getNoticesByQweryFavorite, getNoticesByQweryOwner } from "redux/notices/noticesOperation";
 import { useParams } from "react-router-dom";
 
 const NoticesSearch = ({ onSearch }) => {
@@ -15,23 +15,67 @@ const NoticesSearch = ({ onSearch }) => {
     dispatch(getNoticesByQwery());
   }, [dispatch]);
 
-const onSubmit = (event) => {
-  event.preventDefault();
+  const onSubmit = (event) => {
+    event.preventDefault();
 
-  const newQuery = event.target.elements.search.value;
-  dispatch(getNoticesByQwery({ query: newQuery, category: categoryName }));
-  onSearch(newQuery);
-  setQuery(""); 
-};
+    const newQuery = event.target.elements.search.value.trim();
+    if (!newQuery) {
+      return; 
+    }
 
- const handleQueryChange = (event) => {
-  const newQuery = event.target.value;
-  setQuery(newQuery);
+    const requestData = { query: newQuery, category: categoryName };
 
-  if (!newQuery.trim()) {
-    dispatch(getNoticesByQwery({ query: "", category: categoryName }));
-  }
-};
+    // eslint-disable-next-line no-unused-vars
+    let data = [];
+
+    if (categoryName === "favorite") {
+      dispatch(getNoticesByQweryFavorite(requestData))
+        .then((result) => {
+          data = result;
+          onSearch(newQuery);
+          setQuery("");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else if (categoryName === "owner") {
+      dispatch(getNoticesByQweryOwner(requestData))
+        .then((result) => {
+          data = result;
+          onSearch(newQuery);
+          setQuery("");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      dispatch(getNoticesByQwery(requestData))
+        .then((result) => {
+          data = result;
+          onSearch(newQuery);
+          setQuery("");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
+
+  const handleQueryChange = (event) => {
+    const newQuery = event.target.value;
+    setQuery(newQuery);
+
+    if (event.nativeEvent.inputType === "deleteContentBackward" && !newQuery.trim()) {
+      return;
+    }
+
+    if (!newQuery.trim()) {
+      dispatch(getNoticesByQwery({ query: "", category: categoryName }))
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
 
   const handleClearQuery = () => {
     setQuery("");
