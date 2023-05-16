@@ -6,20 +6,31 @@ const styles = {
   },
   navList: {
     p: 0,
-    gap: '40px',
+    gap: { mobile: '20px', tablet: '60px', desktop: '40px' },
     display: 'flex',
+    flexDirection: { mobile: 'column', tablet: 'column', desktop: 'row' },
+    alignItems: 'center',
   },
   navItem: {
     p: 0,
     width: 'auto',
-  },
+    display: 'flex',
 
-  linkText: {
+    flexDirection: { mobile: 'column' },
+  },
+  link: {
     fontFamily: 'Manrope',
     fontStyle: 'normal',
     fontWeight: '500',
-    fontSize: '20px',
-    lineHeight: '27px',
+    fontSize: { tablet: '48px', desktop: '20px' },
+    lineHeight: { tablet: '66px', desktop: '27px' },
+    color: 'black',
+    '&.active': {
+      color: '#FFC107',
+    },
+    '&:hover': {
+      color: '#FFC107',
+    },
   },
 };
 export default styles;

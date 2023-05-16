@@ -6,6 +6,7 @@ import Nav from './Nav/Nav/Nav';
 import UserNavigation from './UserNavigation/UserNavigation';
 import AuthNavigation from './AuthNavigation/AuthNavigation';
 import BurgerMenu from './Nav/BurgerMenu';
+import { Box } from '@mui/system';
 
 function Navigation() {
   const { isMobile } = useMatchMedia();
@@ -17,18 +18,46 @@ function Navigation() {
     <>
       {isDesktop && (
         <>
-          <Nav />
-          {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
+          <Box
+            sx={{
+              width: '100%',
+              alignItems: 'center',
+              display: 'flex',
+              // flexDirection: { tablet: 'row' },
+            }}
+          >
+            <Nav />
+            {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
+          </Box>
         </>
       )}
+
       {isTablet && (
         <>
-          {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
-          <BurgerMenu />
+          <Box
+            sx={{
+              width: '100%',
+              alignItems: 'center',
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          >
+            {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
+            <BurgerMenu />
+          </Box>
         </>
       )}
-      {isMobile && isLoggedIn && <UserNavigation />}
-      {isMobile && <BurgerMenu />}
+      <Box
+        sx={{
+          width: '100%',
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}
+      >
+        {isMobile && isLoggedIn && <UserNavigation />}
+        {isMobile && <BurgerMenu />}
+      </Box>
     </>
   );
 }

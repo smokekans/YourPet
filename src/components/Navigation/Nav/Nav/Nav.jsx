@@ -3,7 +3,7 @@ import { NavLink as RouterLink } from 'react-router-dom';
 // import { NavLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import { Box } from '@mui/system';
-import { List, ListItem, Typography } from '@mui/material';
+import { List, ListItem } from '@mui/material';
 import styles from './styles';
 
 function Nav() {
@@ -12,53 +12,20 @@ function Nav() {
       <Box sx={styles.navContainer}>
         <List sx={styles.navList} component="ul">
           <ListItem sx={styles.navItem}>
-            <Link
-              href="/news"
-              component={RouterLink}
-              to="/news"
-              underline="none"
-              color="black"
-              sx={{
-                '&.active': {
-                  color: '#FFC107',
-                },
-              }}
-            >
-              <Typography sx={styles.linkText}>News</Typography>
+            <Link component={RouterLink} to="/news" sx={styles.link} underline="none">
+              News
             </Link>
           </ListItem>
 
           <ListItem sx={styles.navItem}>
-            <Link
-              href="/notices/sell"
-              component={RouterLink}
-              to="/notices/sell"
-              underline="none"
-              color="black"
-              sx={{
-                '&.active': {
-                  color: '#FFC107',
-                },
-              }}
-            >
-              <Typography sx={styles.linkText}>Find pet</Typography>
+            <Link component={RouterLink} to="/notices/sell" underline="none" sx={styles.link}>
+              Find pet
             </Link>
           </ListItem>
 
           <ListItem sx={styles.navItem}>
-            <Link
-              href="/friends"
-              component={RouterLink}
-              to="/friends"
-              underline="none"
-              color="black"
-              sx={{
-                '&.active': {
-                  color: '#FFC107',
-                },
-              }}
-            >
-              <Typography sx={styles.linkText}>Our friend</Typography>
+            <Link component={RouterLink} to="/friends" underline="none" sx={styles.link}>
+              Our friend
             </Link>
           </ListItem>
         </List>

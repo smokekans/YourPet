@@ -99,6 +99,9 @@ export const createNotice = createAsyncThunk(
     try {
       const formData = new FormData();
       formData.append('image', image);
+      for (const key in values) {
+        formData.append(key, values[key]);
+      }
       const header = {
         headers: {
           Accept: 'application/json',
@@ -106,11 +109,7 @@ export const createNotice = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await axios.post(
-        '/notices',
-        { ...values, formData },
-        header
-      );
+      const { data } = await axios.post('/notices', formData, header);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue();
