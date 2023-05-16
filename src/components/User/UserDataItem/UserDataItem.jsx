@@ -50,7 +50,7 @@ function UserDataItem() {
   const { name, birthday, email, phone, city } = user;
   return (
     <div>
-      <Typography variant="div" sx={styles.ul}>
+      <Typography variant="ul" sx={styles.ul}>
         <Typography variant="p" className="name" sx={styles.li}>
           Name:
           <FormControl variant="filled">
