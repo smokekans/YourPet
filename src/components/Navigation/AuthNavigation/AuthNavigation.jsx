@@ -10,17 +10,7 @@ function AuthNavigation() {
       <Button component={Routerlink} to="/login" variant="outlined" sx={styles.authBtn}>
         <Typography sx={styles.btnText}>
           Log IN
-          <Box
-            sx={{
-              fill: '#FFC107',
-              '&:hover': {
-                fill: 'white',
-              },
-              '&.active': {
-                fill: 'white',
-              },
-            }}
-          >
+          <Box sx={styles.print}>
             <PawPrint />
           </Box>
         </Typography>
