@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react';
+// import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { IconButton } from '@mui/material';
 import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
-import {
-  addToFavorites,
-  deleteFromFavorite,
-  getCurrentUser,
-} from 'redux/user/userOperations';
-import { getFavorite } from 'redux/user/userSelectors';
+import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
 import { getIsLoggedIn, getUser } from 'redux/auth/authSelectors';
 import { addToFavorite } from 'redux/user/userSlice';
 
@@ -23,11 +18,6 @@ const FavoriteIconButton = ({ noticeid }) => {
   //   : Array.from(favoriteElement);
   // const isFavorite = dataArray.includes(noticeid);
 
-  useEffect(() => {
-    dispatch(getCurrentUser());
-    console.log(user);
-  }, [dispatch]);
-
   const handleFavoriteClick = async () => {
     if (!isLoggedIn) {
       toast.info(
@@ -35,7 +25,7 @@ const FavoriteIconButton = ({ noticeid }) => {
       );
       return;
     }
-    dispatch(addToFavorite(user.favorite));
+
     const idCheck = await favorite?.find(oneFav =>
       oneFav._id.includes(noticeid)
     );
@@ -43,11 +33,9 @@ const FavoriteIconButton = ({ noticeid }) => {
       toast.error('Removed from favorites');
       dispatch(deleteFromFavorite(noticeid));
       return;
-    } else {
-      toast('Added to favorites');
-      dispatch(addToFavorites(noticeid));
-      return;
     }
+    toast('Added to favorites');
+    dispatch(addToFavorites(noticeid));
 
     // if (isFavorites) {
     //   toast.error('Removed from favorites');
@@ -59,7 +47,7 @@ const FavoriteIconButton = ({ noticeid }) => {
     //   setIsFavorites(true);
     // }
   };
-
+  console.log(user);
   return (
     <IconButton
       // color={isFavorite ? 'secondary' : 'default'}
