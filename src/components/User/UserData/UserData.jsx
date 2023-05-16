@@ -2,11 +2,8 @@ import {
   useSelector,
   // useDispatch
 } from 'react-redux';
-import {
-  // useEffect,
-  useRef,
-} from 'react';
-import { getUser } from '../../../redux/user/userSelectors';
+import { useRef } from 'react';
+import { getAvatar } from '../../../redux/user/userSelectors';
 import UserLogOut from '../UserLogOut/UserLogOut';
 import UserDataItem from '../UserDataItem/UserDataItem';
 import { Button } from '@mui/material';
@@ -18,10 +15,9 @@ import { Container } from '@mui/material';
 
 function UserData() {
   // const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const avatarUser = useSelector(getAvatar);
   const avatar = useRef(null);
-  const { image } = user;
-
+  console.log(avatarUser);
   function OnSumbit(e) {
     // const avatars = e.target.files[0];
     // useEffect(() => {
@@ -36,7 +32,12 @@ function UserData() {
   return (
     <Container sx={styles.container}>
       <div>
-        <Avatar variant="img" src={image} sx={styles.images} alt={image} />
+        <Avatar
+          variant="img"
+          src={avatarUser}
+          sx={styles.images}
+          alt={avatarUser}
+        />
 
         <br />
         <FilledInput
