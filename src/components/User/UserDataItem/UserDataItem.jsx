@@ -1,7 +1,8 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getUser } from '../../../redux/user/userSelectors';
+import { useSelector, useDispatch,  } from 'react-redux';
+import { getUser,isLoading } from '../../../redux/user/userSelectors';
 import { updateInfoUser } from 'redux/user/userOperations';
+import { useState } from "react";
 import styles from './styles';
 import {
   Typography,
@@ -9,11 +10,19 @@ import {
   FilledInput,
   InputAdornment,
 } from '@mui/material';
-import { ReactComponent as PawPrint } from '../../../images/icons/edit.svg';
+import { ReactComponent as Pencel } from '../../../images/icons/edit.svg';
+import { ReactComponent as Check } from '../../../images/icons/check.svg';
 
 function UserDataItem() {
   const dispatch = useDispatch();
+const [btnName,getName]= useState(true)
+const [btnEmail,getEmail]= useState(true)
+const [btnPhone,getPhone]= useState(true)
+const [btnCity,getCity]= useState(true)
+const [btnBirthday,getBirthday]= useState(true)
   const user = useSelector(getUser);
+  const Loading = useSelector(isLoading);
+  console.log(Loading);
   console.log(user);
 
   const updateInfo = {
@@ -51,6 +60,7 @@ function UserDataItem() {
   return (
     <div>
       <Typography variant="ul" sx={styles.ul}>
+     
         <Typography variant="p" className="name" sx={styles.li}>
           Name:
           <FormControl variant="filled">
@@ -61,11 +71,18 @@ function UserDataItem() {
               defaultValue={name}
               endAdornment={
                 <InputAdornment position="end">
-                  <PawPrint
-                    className="name"
-                    onClick={handleClick}
-                    edge="end"
-                  ></PawPrint>
+                  {btnName?<Pencel
+                className="name"
+                onClick={()=>{getName(false)}}
+                edge="end"
+              ></Pencel> : <Check
+              className="name"
+              onClick={()=>{
+                getName(true)
+                handleClick()}}
+              edge="end"
+            ></Check>}
+                 
                 </InputAdornment>
               }
             />
@@ -82,11 +99,17 @@ function UserDataItem() {
               defaultValue={email}
               endAdornment={
                 <InputAdornment position="end">
-                  <PawPrint
-                    className="email"
-                    onClick={handleClick}
-                    edge="end"
-                  ></PawPrint>
+                  {btnEmail?<Pencel
+                className="name"
+                onClick={()=>{getEmail(false)}}
+                edge="end"
+              ></Pencel> : <Check
+              className="name"
+              onClick={()=>{
+                getEmail(true)
+                handleClick()}}
+              edge="end"
+            ></Check>}
                 </InputAdornment>
               }
             />
@@ -103,11 +126,17 @@ function UserDataItem() {
               defaultValue={birthday}
               endAdornment={
                 <InputAdornment position="end">
-                  <PawPrint
-                    className="birthday"
-                    onClick={handleClick}
-                    edge="end"
-                  ></PawPrint>
+                  {btnBirthday?<Pencel
+                className="name"
+                onClick={()=>{getBirthday(false)}}
+                edge="end"
+              ></Pencel> : <Check
+              className="name"
+              onClick={()=>{
+                getBirthday(true)
+                handleClick()}}
+              edge="end"
+            ></Check>}
                 </InputAdornment>
               }
             />
@@ -123,11 +152,17 @@ function UserDataItem() {
               defaultValue={phone}
               endAdornment={
                 <InputAdornment position="end">
-                  <PawPrint
-                    className="phone"
-                    onClick={handleClick}
-                    edge="end"
-                  ></PawPrint>
+                 {btnPhone?<Pencel
+                className="name"
+                onClick={()=>{getPhone(false)}}
+                edge="end"
+              ></Pencel> : <Check
+              className="name"
+              onClick={()=>{
+                getPhone(true)
+                handleClick()}}
+              edge="end"
+            ></Check>}
                 </InputAdornment>
               }
             />
@@ -143,11 +178,17 @@ function UserDataItem() {
               defaultValue={city}
               endAdornment={
                 <InputAdornment position="end">
-                  <PawPrint
-                    className="city"
-                    onClick={handleClick}
-                    edge="end"
-                  ></PawPrint>
+                  {btnCity?<Pencel
+                className="name"
+                onClick={()=>{getCity(false)}}
+                edge="end"
+              ></Pencel> : <Check
+              className="name"
+              onClick={()=>{
+                getCity(true)
+                handleClick()}}
+              edge="end"
+            ></Check>}
                 </InputAdornment>
               }
             />
