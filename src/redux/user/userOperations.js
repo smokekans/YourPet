@@ -24,7 +24,6 @@ export const getCurrentUser = createAsyncThunk(
       const { data } = await axios.get('user/current');
       return data;
     } catch (e) {
-      console.log(e.response.data);
       return rejectWithValue(e.message);
     }
   }
@@ -57,7 +56,8 @@ export const getFavorite = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.get('/user/favorite');
-      return data.user.favorite;
+
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }

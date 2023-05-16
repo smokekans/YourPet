@@ -65,7 +65,7 @@ const userSlice = createSlice({
       .addCase(getFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.favorite = payload;
+        state.favorite = payload.user.favorite;
       })
       .addCase(getFavorite.rejected, (state, { payload }) => {
         state.notices = { data: [] };

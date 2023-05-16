@@ -11,7 +11,7 @@ const FavoriteIconButton = ({ noticeid }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn);
   // const [isFavorites, setIsFavorites] = useState(false);
-  const favoriteElement = useSelector(state => state.user.favorite);
+  const favoriteElement = useSelector(state => state.user);
   // const dataArray = Array.isArray(favoriteElement)
   // ? favoriteElement
   // : Array.from(favoriteElement);
@@ -25,15 +25,15 @@ const FavoriteIconButton = ({ noticeid }) => {
       return;
     }
 
-    // if (isFavorites) {
-    //   toast.error('Removed from favorites');
-    //   dispatch(deleteFromFavorite(noticeid));
-    //   setIsFavorites(false);
-    // } else {
-    //   toast('Added to favorites');
-    //   dispatch(addToFavorites(noticeid));
-    //   setIsFavorites(true);
-    // }
+    const checkId = favoriteElement.find(oneId => oneId._id === noticeid);
+
+    if (checkId) {
+      toast.error('Removed from favorites');
+      dispatch(deleteFromFavorite(noticeid));
+    } else {
+      toast('Added to favorites');
+      dispatch(addToFavorites(noticeid));
+    }
   };
   console.log(favoriteElement);
   return (
