@@ -4,6 +4,8 @@ import { Formik } from 'formik';
 import ChooseOption from './ChooseOption';
 import PersonalDetails from './PersonalDetails';
 import MoreInfo from './MoreInfo';
+import { Container, Typography } from '@mui/material';
+
 
 const AddPetForm = () => {
   const [step, setStep] = useState(1);
@@ -15,7 +17,7 @@ const AddPetForm = () => {
     birthday: '',
     breed: '',
     sex: '',
-    image: '',
+    avatar: '',
     location: '',
     price: '',
     comments: '',
@@ -34,21 +36,19 @@ const AddPetForm = () => {
       <PersonalDetails
         prevStep={() => setStep(step - 1)}
         nextStep={() => setStep(step + 1)}
-        formData={formData}
       />
     ),
     3: (
       <MoreInfo
         prevStep={() => setStep(step - 1)}
-        formData={formData}
         setFormData={setFormData}
       />
     ),
   };
 
   return (
-    <div>
-      <h1>{step > 1 ? title : 'Add Pet'}</h1>
+   <Container maxWidth="sm">
+       <Typography variant="h4" align="center" color="textPrimary" gutterBottom>{step > 1 ? title : 'Add Pet'}</Typography>
       <Formik
         initialValues={formData}
         // validationSchema={petsValidationSchema}
@@ -67,7 +67,7 @@ const AddPetForm = () => {
           {components[step]}
         </div>
       </Formik>
-    </div>
+       </Container>
   );
 };
 
