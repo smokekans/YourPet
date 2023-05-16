@@ -27,26 +27,15 @@ import { getAccessToken } from 'redux/auth/authSelectors';
 export const App = () => {
   const accessToken = useSelector(getAccessToken);
   const dispatch = useDispatch();
-
   // const location = useLocation();
+
+  // useEffect(() => {
   // const queryParams = new URLSearchParams(location.search);
-
-  // useEffect(() => {
-  //   const accessToken = queryParams.get('accessToken');
-  //   const refreshToken = queryParams.get('refreshToken');
-  //   console.log(accessToken, refreshToken);
+  // const accessToken = queryParams.get('accessToken');
+  // const refreshToken = queryParams.get('refreshToken');
+  // console.log(accessToken`${accessToken}`);
+  // console.log(refreshToken`${refreshToken}`);
   // }, [location.search]);
-
-  // const [searchParams] = useSearchParams();
-  //
-  // const accessTokenGoogle = searchParams.get('accessToken');
-
-  // useEffect(() => {
-  //   if (accessToken !== null) {
-  //     dispatch(addAccessToken(accessToken));
-  //     accessToken.set(accessToken);
-  //   }
-  // }, [accessToken, dispatch]);
 
   useEffect(() => {
     dispatch(getCurrentUser());
