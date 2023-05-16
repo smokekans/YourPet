@@ -17,29 +17,4 @@ const styles = {
     width: 1,
   },
 };
-// export default styles;
-// function Navigation() {
-//   const { isMobile } = useMatchMedia();
-//   const { isTablet } = useMatchMedia();
-//   const { isDesktop } = useMatchMedia();
-//   const accessToken = useSelector(getAccessToken);
-
-//   return (
-//     <>
-//       {isDesktop && (
-//         <>
-//           <Nav />
-//           {accessToken ? <UserNavigation /> : <AuthNavigation />}
-//         </>
-//       )}
-//       {isTablet && (
-//         <>
-//           {accessToken ? <UserNavigation /> : <AuthNavigation />}
-//           <BurgerMenu />
-//         </>
-//       )}
-//       {isMobile && accessToken && <UserNavigation />}
-//       {isMobile && <BurgerMenu />}
-//     </>
-//   );
-// }
+export default styles;

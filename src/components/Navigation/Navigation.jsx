@@ -1,7 +1,7 @@
 import useMatchMedia from 'hooks/useMatchMedia';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getIsLoggedIn } from 'redux/auth/authSelectors';
+import { getAccessToken } from 'redux/auth/authSelectors';
 import Nav from './Nav/Nav/Nav';
 import UserNavigation from './UserNavigation/UserNavigation';
 import AuthNavigation from './AuthNavigation/AuthNavigation';
@@ -12,7 +12,7 @@ function Navigation() {
   const { isMobile } = useMatchMedia();
   const { isTablet } = useMatchMedia();
   const { isDesktop } = useMatchMedia();
-  const isLoggedIn = useSelector(getIsLoggedIn);
+  const accessToken = useSelector(getAccessToken);
 
   return (
     <>
@@ -27,7 +27,7 @@ function Navigation() {
             }}
           >
             <Nav />
-            {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
+            {accessToken ? <UserNavigation /> : <AuthNavigation />}
           </Box>
         </>
       )}
@@ -42,7 +42,7 @@ function Navigation() {
               justifyContent: 'flex-end',
             }}
           >
-            {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
+            {accessToken ? <UserNavigation /> : <AuthNavigation />}
             <BurgerMenu />
           </Box>
         </>
@@ -55,7 +55,7 @@ function Navigation() {
           justifyContent: 'flex-end',
         }}
       >
-        {isMobile && isLoggedIn && <UserNavigation />}
+        {isMobile && accessToken && <UserNavigation />}
         {isMobile && <BurgerMenu />}
       </Box>
     </>
