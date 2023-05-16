@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
@@ -15,7 +16,7 @@ import {
   Box,
   Button,
   InputLabel,
-  FormHelperText,
+  // FormHelperText,
 } from '@mui/material';
 
 function LoginPage() {
@@ -66,8 +67,8 @@ function LoginPage() {
               // autoComplete="off"
               onSubmit={handleSubmit}
             >
-              <Box sx={styles.component} >
-                <InputLabel htmlFor="email" >
+              <Box sx={styles.component}>
+                <InputLabel htmlFor="email">
                   <TextField
                     // sx={styles.input}
                     // id="outlined-basic" variant="outlined"
@@ -94,19 +95,27 @@ function LoginPage() {
                   {/* {errors.password && touched.password && errors.password} */}
                   <ErrorMessage component="div" name="password" />
                 </InputLabel>
-
-                
               </Box>
-              <Button variant="contained" sx={styles.button} type="submit" disabled={isSubmitting}>
-                  Login
-                </Button>
+              <Button
+                variant="contained"
+                sx={styles.button}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                Login
+              </Button>
             </Box>
           )}
         </Formik>
         <Box sx={styles.text}>
-          <Typography >Don't have an account?</Typography>
+          <Typography>Don't have an account?</Typography>
           <Link to="/register">Register</Link>
         </Box>
+
+        <a href="http://localhost:3001/api/auth/google">GoogleLocal</a>
+        <a href="https://yourpet-backend.onrender.com/api/auth/google">
+          Google
+        </a>
       </CardContent>
     </Card>
   );

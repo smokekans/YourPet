@@ -15,6 +15,7 @@ const userInitialState = {
   pets: null,
   image: '',
   notices: [],
+  favorite: [],
   token: null,
   error: null,
   isLoading: false,
@@ -38,6 +39,9 @@ const userSlice = createSlice({
       state.user.pets = payload;
       // state.startDate = payload;
     },
+    addToFavorite: (state, { payload }) => {
+      state.favorite = payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -54,7 +58,6 @@ const userSlice = createSlice({
         state.favorite = payload;
         state.error = null;
       })
-
       .addCase(addToFavorites.rejected, (state, { payload }) => {
         state.notices = { data: [] };
         state.isLoading = false;
@@ -75,12 +78,10 @@ const userSlice = createSlice({
       })
       .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-
         if (Array.isArray(state.favorite)) {
           state.favorite = state.favorite.filter(id => id !== payload.id);
         }
       })
-
       .addCase(deleteFromFavorite.rejected, (state, { payload }) => {
         state.notices = { data: [] };
         state.isLoading = false;
@@ -105,12 +106,12 @@ const userSlice = createSlice({
       .addCase(updateAvatar.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.isLoading = false;
-        state.user.image = payload.image;
+        state.image = payload;
         state.error = null;
       })
-      .addCase(updateAvatar.rejected, (state, { payload }) => {
+      .addCase(updateAvatar.rejected, state => {
         state.isLoading = false;
-        state.error = payload;
+        // state.error = payload;
       })
       .addCase(deletePets.pending, state => {
         state.isLoading = true;
@@ -118,7 +119,6 @@ const userSlice = createSlice({
       .addCase(deletePets.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.isLoading = false;
-
         state.error = null;
       })
       .addCase(deletePets.rejected, (state, { payload }) => {
@@ -129,4 +129,4 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const { deletePet } = userSlice.actions;
+export const { deletePet, addToFavorite } = userSlice.actions;

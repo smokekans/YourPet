@@ -1,7 +1,7 @@
 // '@media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)': `url(${require('../../images/background/bg-mobile@2x.png')}), url(${require('../../images/animal/animal-mobile@2x.png')})`,
-const styled = {
+const styles = {
   animal: {
-    height: { mobile: '601px', tablet: '1193px', desktop: '768px' },
+    height: '100vh',
     backgroundImage: {
       mobile: `url(${require('../../images/background/bg-mobile@2x.png')}), url(${require('../../images/animal/animal-mobile@2x.png')})`,
       tablet: `url(${require('../../images/background/bg-tablet@2x.png')}), url(${require('../../images/animal/animal-tablet@2x.png')})`,
@@ -9,19 +9,20 @@ const styled = {
     },
     backgroundRepeat: { mobile: 'no-repeat' },
     backgroundPosition: {
-      mobile: 'left, bottom',
-      desktop: 'center, right bottom',
+      mobile: 'left, top',
+      tablet: 'left, top -450px',
+      desktop: 'center, right -115px',
     },
     backgroundSize: {
-      mobile: 'contain, 140% 70%',
-      desktop: 'contain, 60% 100%',
+      mobile: 'cover, 140%',
+      tablet: 'cover, 130%',
+      desktop: 'cover, 70%',
     },
   },
   title: {
-    p: 2,
-    // pt: { mobile: '108px', tablet: '148px' },
-    // pr: { tablet: '148px', desktop: '0' },
-    // p: { desktop: 'auto' },
+    pt: { mobile: '25px', tablet: '52px' },
+    pr: { tablet: '148px', desktop: '0' },
+    p: { desktop: 'auto' },
     textAlign: { mobile: 'center', tablet: 'left' },
     display: { desktop: 'flex' },
     alingItems: { desktop: 'center' },
@@ -33,4 +34,4 @@ const styled = {
   },
 };
 
-export default styled;
+export default styles;
