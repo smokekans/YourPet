@@ -115,7 +115,7 @@ const noticesSlice = createSlice({
       })
       .addCase(getNoticesByQweryOwner.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.notices = payload;
+        state.notices.favorite = payload;
         state.error = null;
       })
       .addCase(getNoticesByQweryOwner.rejected, (state, action) => {

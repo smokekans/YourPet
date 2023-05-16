@@ -3,9 +3,9 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
-export const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+export const accessToken = {
+  set(accessToken) {
+    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   },
   unset() {
     axios.defaults.headers.common.Authorization = '';
@@ -26,7 +26,7 @@ export const getFriends = createAsyncThunk(
 // додає картку улюбленця
 export const createPet = createAsyncThunk(
   'pets/create',
-  async ({ values, token, avatar }, thunkAPI) => {
+  async ({ values, accessToken, avatar }, thunkAPI) => {
     try {
       const formData = new FormData();
       formData.append('avatar', avatar);
@@ -37,7 +37,7 @@ export const createPet = createAsyncThunk(
       const header = {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       };
       const { data } = await axios.post('/pets', formData, avatar, header);

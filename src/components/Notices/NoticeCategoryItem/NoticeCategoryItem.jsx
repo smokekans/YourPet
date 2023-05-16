@@ -37,6 +37,7 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFavorites, setIsFavorites] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const userId = useSelector(getUserId);
  
@@ -79,10 +80,16 @@ const handleFavoriteClick = () => {
     setIsDeleteModalOpen(false);
   };
 
+  // const handleDeleteNotice = () => {
+  //   dispatch(deleteNotice( _id ));
+  //   handleDeleteModalClose();
+  // };
+
   const handleDeleteNotice = () => {
-    dispatch(deleteNotice( _id ));
-    handleDeleteModalClose();
-  };
+  dispatch(deleteNotice(_id));
+  handleDeleteModalClose();
+  setIsDeleted(true);
+};
 
 const calcAge = dob => {
   if (dob === null) return '?';
@@ -106,74 +113,81 @@ const calcAge = dob => {
   };
 
   return (
-    <Card sx={styles.root}>
-      <Box
-        // sx={styles.wrapper}
-      >
-        <CardMedia
-          sx={styles.media}
-          image={image || defaultImage}
-          title={title}
-        />
-        <Typography
-          sx={styles.category}
-          // variant="subtitle2"
-        >
-          {CATEGORY[category]}
-        </Typography>
-     
-        <Box sx={styles.favorite}>
-          <FavoriteIconButton noticeid={_id} />
-        </Box>
-        {(owner === userId && isLoggedIn) ?<Box sx={styles.delete}>
-           <IconButton><Busket noticeid={_id} onClick={handleDeleteModalOpen} /></IconButton> 
-          </Box> : ''}
-        <Box sx={styles.components}>
-          <Typography sx={styles.component} variant="subtitle2">
-            <Location /> {location}
-          </Typography>
-          <Typography sx={styles.component} variant="subtitle2">
-            <Clock /> {calcAge(birthday)} year
-          </Typography>
-          <Typography sx={styles.component} variant="subtitle2">
-            <GenderIcon sex={sex} /> {sex}
-          </Typography>
-        </Box>
-        <CardContent sx={styles.content}>
-          <Box>
-            <Typography 
-              variant="h5" sx={styles.title}
-            >{title}</Typography>
-          </Box>
-          <Box sx={styles.buttonWraper}>
-            <Button type="button" onClick={handleLearnMore} sx={styles.button}>
-              Learn more
-            </Button>
-          </Box>
-        </CardContent>
-      </Box>
-      {
     
-        isModalOpen && (
-          <ModalNotice
-            onClose={onClose}
-            onAddToFavorite={handleFavoriteClick}
-          />
-        )
+      isDeleted ? null : (
+        <Card sx={styles.root}>
+          <Box
+          // sx={styles.wrapper}
+          >
+            <CardMedia
+              sx={styles.media}
+              image={image || defaultImage}
+              title={title}
+            />
+            <Typography
+              sx={styles.category}
+            // variant="subtitle2"
+            >
+              {CATEGORY[category]}
+            </Typography>
+     
+            <Box sx={styles.favorite}>
+              <FavoriteIconButton noticeid={_id} />
+            </Box>
+            {(owner === userId && isLoggedIn) ? <Box sx={styles.delete}>
+              <IconButton><Busket noticeid={_id} onClick={handleDeleteModalOpen} /></IconButton>
+            </Box> : ''}
+            <Box sx={styles.components}>
+              <Typography sx={styles.component} variant="subtitle2">
+                <Location /> {location}
+              </Typography>
+              <Typography sx={styles.component} variant="subtitle2">
+                <Clock /> {calcAge(birthday)} year
+              </Typography>
+              <Typography sx={styles.component} variant="subtitle2">
+                <GenderIcon sex={sex} /> {sex}
+              </Typography>
+            </Box>
+            <CardContent sx={styles.content}>
+              <Box>
+                <Typography
+                  variant="h5" sx={styles.title}
+                >{title}</Typography>
+              </Box>
+              <Box sx={styles.buttonWraper}>
+                <Button type="button" onClick={handleLearnMore} sx={styles.button}>
+                  Learn more
+                </Button>
+              </Box>
+            </CardContent>
+          </Box>
+          {
+    
+            isModalOpen && (
+              <ModalNotice
+                onClose={onClose}
+                onAddToFavorite={handleFavoriteClick}
+              />
+            )
       
-      }
+          }
 
-      {isDeleteModalOpen && (
-        <ModalApproveAction
-          title={title}
-          onClose={handleDeleteModalClose}
-          onDelete={handleDeleteNotice}
-        />
-      )}
-    </Card>
+          {isDeleteModalOpen && (
+            <ModalApproveAction
+              title={title}
+              onClose={handleDeleteModalClose}
+              onDelete={handleDeleteNotice}
+            />
+          )}
+        </Card>
+      )
+    
   );
 };
 
 export default NoticeCategoryItem;
+
+
+
 
 

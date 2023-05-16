@@ -9,8 +9,8 @@ const styles = {
     },
     backgroundRepeat: { mobile: 'no-repeat' },
     backgroundPosition: {
-      mobile: 'left, bottom',
-      tablet: 'left, bottom 450px',
+      mobile: 'left, top',
+      tablet: 'left, top -450px',
       desktop: 'center, right -115px',
     },
     backgroundSize: {
@@ -20,7 +20,7 @@ const styles = {
     },
   },
   title: {
-    pt: { mobile: '52px', tablet: '92px' },
+    pt: { mobile: '25px', tablet: '52px' },
     pr: { tablet: '148px', desktop: '0' },
     p: { desktop: 'auto' },
     textAlign: { mobile: 'center', tablet: 'left' },

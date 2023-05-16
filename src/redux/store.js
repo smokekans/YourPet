@@ -21,7 +21,7 @@ import { petsReducer } from './pets/petsSlice';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token', 'isLoggedIn'],
+  whitelist: ['accessToken', 'refreshToken'],
 };
 
 const authPersistedReducer = persistReducer(authPersistConfig, authReducer);
