@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPet } from 'redux/pets/petsOperation';
 import { createNotice } from 'redux/notices/noticesOperation';
-import { getToken } from 'redux/auth/authSelectors';
+import { getAccessToken } from 'redux/auth/authSelectors';
 import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
 import { ReactComponent as IconPlus } from '../../images/icons/plus.svg';
 import { toast } from 'react-toastify';
@@ -13,7 +13,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
   const [fileInput, setFileInput] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useSelector(getToken);
+  const token = useSelector(getAccessToken);
 
   const { values, handleChange, setFieldValue } = useFormikContext();
 

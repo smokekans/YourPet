@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
 export const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  set(accessToken) {
+    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   },
   unset() {
     axios.defaults.headers.common.Authorization = '';
@@ -40,6 +40,20 @@ export const login = createAsyncThunk(
       const { data } = await axios.post('auth/login', credentials);
       token.set(data.token);
       dispatch(getCurrentUser());
+      return data;
+    } catch (error) {
+      toast.error('Missing or not valid field password');
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const loginWithGoogle = createAsyncThunk(
+  'auth/loginWithGoogle',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('auth/google', credentials);
+      token.set(data.token);
       return data;
     } catch (error) {
       toast.error('Missing or not valid field password');
