@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import { ReactComponent as Logout } from '../../../images/icons/logout.svg';
 import styles from '../UserDataItem/styles';
+
 function UserLogOut() {
   const dispatch = useDispatch();
 
