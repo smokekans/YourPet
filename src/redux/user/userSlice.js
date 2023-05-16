@@ -103,7 +103,7 @@ const userSlice = createSlice({
       .addCase(updateAvatar.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.isLoading = false;
-        state.image = payload;
+        state.user.image = payload.image;
         state.error = null;
       })
       .addCase(updateAvatar.rejected, state => {
