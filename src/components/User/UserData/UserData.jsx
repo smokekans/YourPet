@@ -1,28 +1,21 @@
-import {
-  useSelector,
-  // useDispatch
-} from 'react-redux';
 import { useRef } from 'react';
-import { getAvatar } from '../../../redux/user/userSelectors';
+import { useSelector, useDispatch } from 'react-redux';
 import UserLogOut from '../UserLogOut/UserLogOut';
 import UserDataItem from '../UserDataItem/UserDataItem';
-import { Button } from '@mui/material';
+import { updateAvatar } from 'redux/user/userOperations';
+import { getAvatar } from 'redux/user/userSelectors';
+import { Button, Avatar, FilledInput, Container } from '@mui/material';
 import styles from './styles';
-import { Avatar } from '@mui/material';
-import { FilledInput } from '@mui/material';
-import { Container } from '@mui/material';
-// import { updateAvatar } from '../../../redux/user/userOperations';
 
 function UserData() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const avatarUser = useSelector(getAvatar);
   const avatar = useRef(null);
-  console.log(avatarUser);
+  // console.log(avatarUser);
+
   function OnSumbit(e) {
-    // const avatars = e.target.files[0];
-    // useEffect(() => {
-    //   dispatch(updateAvatar({ avatar: avatars }));
-    // }, [dispatch, avatars]);
+    const avatars = e.target.files[0];
+    dispatch(updateAvatar({ avatar: avatars }));
   }
 
   function handelAvatar() {

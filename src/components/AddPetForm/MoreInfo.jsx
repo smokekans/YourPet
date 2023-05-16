@@ -13,7 +13,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
   const [fileInput, setFileInput] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useSelector(getAccessToken);
+  const accessToken = useSelector(getAccessToken);
 
   const { values, handleChange, setFieldValue } = useFormikContext();
 
@@ -36,7 +36,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
     console.log(values);
     if (values.category === 'your-pet') {
       try {
-        await dispatch(createPet({ values, token, avatar: fileInput }));
+        await dispatch(createPet({ values, accessToken, avatar: fileInput }));
         toast.success('Pet card created successfully');
         navigate('/user');
       } catch (error) {
@@ -44,7 +44,9 @@ const MoreInfo = ({ prevStep, setFormData }) => {
       }
     } else {
       try {
-        await dispatch(createNotice({ values, token, avatar: fileInput }));
+        await dispatch(
+          createNotice({ values, accessToken, avatar: fileInput })
+        );
         toast.success('Notice created successfully');
         navigate('/notices/sell');
       } catch (error) {

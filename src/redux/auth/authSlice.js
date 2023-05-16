@@ -38,8 +38,6 @@ function refreshTokenFulfilled(state, { payload }) {
   state.refreshToken = payload.refreshToken;
 }
 
-export const addAccessToken = createAction('auth/token');
-
 const authSlice = createSlice({
   name: 'auth',
   initialState: authInitialState,

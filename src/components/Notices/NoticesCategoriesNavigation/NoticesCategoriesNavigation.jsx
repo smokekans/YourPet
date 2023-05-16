@@ -12,7 +12,7 @@ const StyledNavLink = styled(NavLink)(styles.link);
 const StyledAddLink = styled(NavLink)(styles.addButton);
 
 const NoticesCategoriesNavigation = () => {
-  const userToken = useSelector(getAccessToken);
+  const accessToken = useSelector(getAccessToken);
 
   return (
     <Box sx={styles.navigationContainer}>
@@ -26,7 +26,7 @@ const NoticesCategoriesNavigation = () => {
         <StyledNavLink to="/notices/for-free" activeclassname="active">
           in good hands
         </StyledNavLink>
-        {userToken && (
+        {accessToken && (
           <>
             <StyledNavLink to="/notices/favorite" activeclassname="active">
               favorite ads

@@ -44,15 +44,14 @@ export const App = () => {
   // useEffect(() => {
   //   if (accessToken !== null) {
   //     dispatch(addAccessToken(accessToken));
-  //     token.set(accessToken);
+  //     accessToken.set(accessToken);
   //   }
   // }, [accessToken, dispatch]);
 
   useEffect(() => {
-    if (accessToken !== null) {
-      dispatch(getCurrentUser());
-    }
+    dispatch(getCurrentUser());
   }, [accessToken, dispatch]);
+
   return (
     <>
       <Routes>
