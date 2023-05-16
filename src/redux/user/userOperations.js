@@ -22,8 +22,10 @@ export const getCurrentUser = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.get('user/current');
+
       return data;
     } catch (e) {
+      console.log(e.response.data);
       return rejectWithValue(e.message);
     }
   }
@@ -56,8 +58,7 @@ export const getFavorite = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.get('/user/favorite');
-
-      return data;
+      return data.user.favorite;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -69,7 +70,6 @@ export const deleteFromFavorite = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.delete(`/user/favorite/${id}`);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);

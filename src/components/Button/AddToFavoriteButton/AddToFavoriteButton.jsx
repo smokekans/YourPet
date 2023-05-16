@@ -10,12 +10,13 @@ import {
 } from 'redux/user/userOperations';
 import { getFavorite } from 'redux/user/userSelectors';
 import { getIsLoggedIn } from 'redux/auth/authSelectors';
+import { deleteFavoriteObj } from 'redux/user/userSlice';
 
 const FavoriteIconButton = ({ noticeid }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn);
   // const [isFavorites, setIsFavorites] = useState(false);
-  const favoriteElement = useSelector(state => state.user);
+  const favoriteElement = useSelector(state => state.user.favorite);
   // const dataArray = Array.isArray(favoriteElement)
   // ? favoriteElement
   // : Array.from(favoriteElement);
@@ -28,21 +29,21 @@ const FavoriteIconButton = ({ noticeid }) => {
       );
       return;
     }
-
-    const checkId = favoriteElement.find(oneId => oneId._id === noticeid);
-
+    const checkId = favoriteElement.map(el => el._id).includes(noticeid);
+    console.log(checkId);
     if (checkId) {
-      toast.error('Removed from favorites');
       dispatch(deleteFromFavorite(noticeid));
+      dispatch(deleteFavoriteObj(noticeid));
+      toast.error('Removed from favorites');
     } else {
-      toast('Added to favorites');
       dispatch(addToFavorites(noticeid));
+      toast('Added to favorites');
     }
   };
   console.log(favoriteElement);
   return (
     <IconButton
-      // color={isFavorite ? 'secondary' : 'default'}
+      // color={isFavorites ? 'secondary' : 'default'}
       onClick={handleFavoriteClick}
     >
       <IconHeart />
