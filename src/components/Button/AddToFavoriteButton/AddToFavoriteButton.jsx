@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { IconButton } from '@mui/material';
 import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
-import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
+import {
+  addToFavorites,
+  deleteFromFavorite,
+  getCurrentUser,
+} from 'redux/user/userOperations';
 import { getFavorite } from 'redux/user/userSelectors';
 import { getIsLoggedIn } from 'redux/auth/authSelectors';
 
