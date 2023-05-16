@@ -15,15 +15,14 @@ const MoreInfo = ({ prevStep, setFormData }) => {
   const navigate = useNavigate();
   const token = useSelector(getToken);
 
-   const { values, handleChange, setFieldValue  } = useFormikContext();
+  const { values, handleChange, setFieldValue } = useFormikContext();
 
   const handleAddAvatar = e => {
     const file = e.target.files[0];
-    console.log(file)
     if (file) {
       setFileInput(file);
-      setFieldValue('avatar',file); 
-           setFormData(values => ({ ...values, avatar: file }));
+      setFieldValue('avatar', file);
+      setFormData(values => ({ ...values, avatar: file }));
     }
   };
 
@@ -31,25 +30,23 @@ const MoreInfo = ({ prevStep, setFormData }) => {
     prevStep();
   };
 
-  const onSubmit =async (event) => {
+  const onSubmit = async event => {
     event.preventDefault();
-    setFormData({...values, avatar: fileInput});
-     console.log(values);
+    setFormData({ ...values, avatar: fileInput });
+    console.log(values);
     if (values.category === 'your-pet') {
       try {
-        await dispatch(createPet({ values, token, avatar:fileInput  }));
+        await dispatch(createPet({ values, token, avatar: fileInput }));
         toast.success('Pet card created successfully');
         navigate('/user');
-      }
-      catch (error) {
+      } catch (error) {
         toast.error(`Error creating pet card: ${error.message}`);
       }
     } else {
       try {
-        await dispatch(createNotice({ values, token, avatar:fileInput }));
+        await dispatch(createNotice({ values, token, avatar: fileInput }));
         toast.success('Notice created successfully');
         navigate('/notices/sell');
-    
       } catch (error) {
         toast.error(`Error creating notice: ${error.message}`);
       }
@@ -59,11 +56,11 @@ const MoreInfo = ({ prevStep, setFormData }) => {
   const { category } = values;
   return (
     <div>
-       <Form autoComplete='on' onSubmit={onSubmit}>
+      <Form autoComplete="on" onSubmit={onSubmit}>
         {category !== 'your-pet' && (
           <>
             <p>The Sex</p>
-            <label>
+            <label htmlFor="sex">
               <Field
                 type="radio"
                 id="female"
@@ -78,7 +75,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
               <p>Female</p>
               <ErrorMessage name="sex" render={msg => <div> {msg} </div>} />
             </label>
-            <label>
+            <label htmlFor="sex">
               <Field
                 type="radio"
                 id="male"
@@ -112,7 +109,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
             id="avatar"
             name="avatar"
             accept=".png, .jpg, .jpeg, .webp"
-            onChange={(event) => {
+            onChange={event => {
               handleAddAvatar(event);
               handleChange(event);
             }}

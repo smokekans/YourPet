@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Field, ErrorMessage, useFormikContext } from 'formik';
 
-const PersonalDetails = ({ prevStep, nextStep}) => {
+const PersonalDetails = ({ prevStep, nextStep }) => {
   const { values, handleChange } = useFormikContext();
   const handlePrevClick = () => {
     prevStep();
@@ -15,7 +15,7 @@ const PersonalDetails = ({ prevStep, nextStep}) => {
 
   return (
     <div>
-      <Form autoComplete='on'>
+      <Form autoComplete="on">
         {category !== 'your-pet' && (
           <label htmlFor="title">
             Title of add:
@@ -75,4 +75,3 @@ const PersonalDetails = ({ prevStep, nextStep}) => {
 };
 
 export default PersonalDetails;
-

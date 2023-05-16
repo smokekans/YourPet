@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import { Formik } from 'formik';
-import { petsValidationSchema } from './Yup';
+// import { petsValidationSchema } from './Yup';
 import ChooseOption from './ChooseOption';
 import PersonalDetails from './PersonalDetails';
 import MoreInfo from './MoreInfo';
-import { Container, Typography, Stepper, Step, StepLabel } from '@mui/material';
+import { Container, Typography } from '@mui/material';
+
 
 const AddPetForm = () => {
   const [step, setStep] = useState(1);
@@ -50,7 +51,7 @@ const AddPetForm = () => {
        <Typography variant="h4" align="center" color="textPrimary" gutterBottom>{step > 1 ? title : 'Add Pet'}</Typography>
       <Formik
         initialValues={formData}
-        validationSchema={petsValidationSchema}
+        // validationSchema={petsValidationSchema}
       >
         <div>
           <ul>
