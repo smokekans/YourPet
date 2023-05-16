@@ -4,6 +4,7 @@ import { getNews } from './newsOperations';
 const newsInitialState = {
   news: [],
   status: true,
+  total: 0,
 };
 
 const newsSlice = createSlice({
@@ -16,6 +17,7 @@ const newsSlice = createSlice({
     builder.addCase(getNews.fulfilled, (state, action) => {
       state.news = action.payload.news;
       state.status = false;
+      state.total = action.payload.total;
     });
     builder.addCase(getNews.rejected, (state, _) => {
       state.status = false;

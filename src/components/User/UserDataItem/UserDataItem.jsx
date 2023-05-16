@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from '../../../redux/user/userSelectors';
-import styled from './styledUserDataItem';
+import styles from './styles';
 import {
   Typography,
   FormControl,
@@ -50,13 +50,13 @@ function UserDataItem() {
   const { name, birthday, email, phone, city } = user;
   return (
     <div>
-      <Typography variant="ul" sx={styled.ul}>
-        <Typography variant="p" className="name" sx={styled.li}>
+      <Typography variant="ul" sx={styles.ul}>
+        <Typography variant="p" className="name" sx={styles.li}>
           Name:
           <FormControl variant="filled">
             <FilledInput
               id="name"
-              sx={styled.input}
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={name}
               endAdornment={
@@ -71,13 +71,13 @@ function UserDataItem() {
             />
           </FormControl>
         </Typography>
-        <Typography variant="p" className="email" sx={styled.li}>
+        <Typography variant="p" className="email" sx={styles.li}>
           Email:{' '}
           <FormControl variant="filled">
             <FilledInput
               id="email"
               type="email"
-              sx={styled.input}
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={email}
               endAdornment={
@@ -92,13 +92,13 @@ function UserDataItem() {
             />
           </FormControl>
         </Typography>
-        <Typography variant="p" className="birthday" sx={styled.li}>
+        <Typography variant="p" className="birthday" sx={styles.li}>
           Birthday:{' '}
           <FormControl variant="filled">
             <FilledInput
               id="birthday"
               type="data"
-              sx={styled.input}
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={birthday}
               endAdornment={
@@ -113,12 +113,12 @@ function UserDataItem() {
             />
           </FormControl>
         </Typography>
-        <Typography variant="p" className="phone" sx={styled.li}>
+        <Typography variant="p" className="phone" sx={styles.li}>
           Phone:{' '}
           <FormControl variant="filled">
             <FilledInput
               id="phone"
-              sx={styled.input}
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={phone}
               endAdornment={
@@ -133,12 +133,12 @@ function UserDataItem() {
             />
           </FormControl>
         </Typography>
-        <Typography variant="p" className="city" sx={styled.li}>
+        <Typography variant="p" className="city" sx={styles.li}>
           City:{' '}
           <FormControl variant="filled">
             <FilledInput
               id="city"
-              sx={styled.input}
+              sx={styles.input}
               onChange={ChangeData}
               defaultValue={city}
               endAdornment={

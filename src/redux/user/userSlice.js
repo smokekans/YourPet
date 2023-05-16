@@ -28,7 +28,6 @@ function UserFulfilled(state, { payload }) {
   state.pets = payload.pets;
   state.isLoading = false;
   state.error = null;
-  console.log(payload);
 }
 
 const userSlice = createSlice({
@@ -56,7 +55,6 @@ const userSlice = createSlice({
         state.favorite = payload;
         state.error = null;
       })
-
       .addCase(addToFavorites.rejected, (state, { payload }) => {
         state.notices = { data: [] };
         state.isLoading = false;
@@ -77,12 +75,10 @@ const userSlice = createSlice({
       })
       .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-
         if (Array.isArray(state.favorite)) {
           state.favorite = state.favorite.filter(id => id !== payload.id);
         }
       })
-
       .addCase(deleteFromFavorite.rejected, (state, { payload }) => {
         state.notices = { data: [] };
         state.isLoading = false;
@@ -120,7 +116,6 @@ const userSlice = createSlice({
       .addCase(deletePets.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.isLoading = false;
-
         state.error = null;
       })
       .addCase(deletePets.rejected, (state, { payload }) => {

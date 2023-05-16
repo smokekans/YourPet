@@ -95,26 +95,62 @@ export const getNoticesByQwery = createAsyncThunk(
 // додає оголошення
 export const createNotice = createAsyncThunk(
   'notices/create',
-  async ({ values, token, image }, thunkAPI) => {
+  async ({ values, token, avatar }, thunkAPI) => {
+    console.log(avatar);
     try {
       const formData = new FormData();
-      formData.append('image', image);
+      formData.append('avatar', avatar);
+      formData.append('category', values.category);
+      formData.append('title', values.title);
+      formData.append('name', values.name);
+      formData.append('birthday', values.birthday);
+      formData.append('breed', values.breed);
+      formData.append('sex', values.sex);
+      formData.append('location', values.location);
+      formData.append('comments', values.comments);
+      if (values.category === 'sell') {
+        formData.append('price', values.price);
+      }
       const header = {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await axios.post(
-        '/notices',
-        { ...values, formData },
-        header
-      );
+      const { data } = await axios.post('/notices', formData, header, avatar);
+      console.log('Image uploaded successfully!');
       return data;
     } catch (error) {
+      console.error('Error uploading image:', error);
       return thunkAPI.rejectWithValue();
     }
   }
 );
 
+export const getNoticesByQweryOwner = createAsyncThunk(
+  'notices/getNoticesByQweryOwner',
+  async ({ query, page = 1, limit = 0 }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `notices/owner?title=${query}&page=${page}&limit=${limit}`
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getNoticesByQweryFavorite = createAsyncThunk(
+  'notices/getNoticesByQweryFavorite',
+  async ({ query, page = 1, limit = 0 }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `notices/favorite?title=${query}&page=${page}&limit=${limit}`
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

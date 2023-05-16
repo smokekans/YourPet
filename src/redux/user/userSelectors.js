@@ -6,9 +6,7 @@ export const isPets = state => state.user.pets;
 
 export const getFavorites = state => state.user.favorite;
 export const getFavorite = state => {
-    console.log('Favorite state:', state.user.favorite);
+    //   console.log('Favorite state:', state.user.favorite);
     return state.user.favorite;
 };
 export const getUserId = state => state.user.user.id;
-
-

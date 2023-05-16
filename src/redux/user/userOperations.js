@@ -58,7 +58,6 @@ export const getFavorite = createAsyncThunk(
       }
       token.set(value);
       const { data } = await axios.get('/user/favorite');
-      // console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -97,6 +96,7 @@ export const updateInfoUser = createAsyncThunk(
     }
   }
 );
+
 export const updateAvatar = createAsyncThunk(
   'user/updateAvatar',
   async (image, { rejectWithValue, getState }) => {
@@ -111,7 +111,6 @@ export const updateAvatar = createAsyncThunk(
         return rejectWithValue('Unable to patch user');
       }
       token.set(value);
-
       const { data } = await axios.patch('/user/avatars', image, {
         headers: {
           'Content-type': 'multipart/form-data',
@@ -124,6 +123,7 @@ export const updateAvatar = createAsyncThunk(
     }
   }
 );
+
 export const deletePets = createAsyncThunk(
   'user/deletePets',
   async (id, { rejectWithValue, getState }) => {
@@ -133,7 +133,6 @@ export const deletePets = createAsyncThunk(
         return rejectWithValue('Unable to patch user');
       }
       token.set(value);
-
       const { data } = await axios.delete(`/pets/${id}`);
       console.log(data);
       return data;

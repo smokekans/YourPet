@@ -4,7 +4,7 @@ import { getUser } from '../../../redux/user/userSelectors';
 import UserLogOut from '../UserLogOut/UserLogOut';
 import UserDataItem from '../UserDataItem/UserDataItem';
 import { Button } from '@mui/material';
-import styled from './styledUserData';
+import styles from './styles';
 import { Avatar } from '@mui/material';
 import { FilledInput } from '@mui/material';
 import { Container } from '@mui/material';
@@ -24,19 +24,19 @@ function UserData() {
   function handelAvatar() {
     avatar.current.click();
   }
-
   const { image } = user;
-  console.log(image);
+  
   return (
-    <Container sx={styled.container}>
+    <Container sx={styles.container}>
       <div>
-        <Avatar variant="img" src={image} sx={styled.images} alt={image} />
+        <Avatar variant="img" src={image} sx={styles.images} alt={image} />
+
         <br />
         <FilledInput
           autoComplete="Edit photo"
           inputRef={avatar}
           type="file"
-          sx={styled.input}
+          sx={styles.input}
           onChange={OnSumbit}
         ></FilledInput>
         <Button onClick={handelAvatar}>Button</Button>

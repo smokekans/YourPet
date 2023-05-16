@@ -16,33 +16,31 @@ export const getFriends = createAsyncThunk(
   'current/user',
   async (credentials, { rejectWithValue }) => {
     try {
-      await axios.get('/user/current', credentials);
+      await axios.get('/pets/current', credentials);
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
 
-
 // додає картку улюбленця
 export const createPet = createAsyncThunk(
   'pets/create',
-  async ({ values, token, image }, thunkAPI) => {
+  async ({ values, token, avatar }, thunkAPI) => {
     try {
       const formData = new FormData();
-      formData.append('image', image);
+      formData.append('avatar', avatar);
+      formData.append('name', values.name);
+      formData.append('birthday', values.birthday);
+      formData.append('breed', values.breed);
+      formData.append('comments', values.comments);
       const header = {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await axios.post(
-        '/pets',
-        { ...values, formData },
-        header
-      );
+      const { data } = await axios.post('/pets', formData, avatar, header);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue();
