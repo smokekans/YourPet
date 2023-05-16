@@ -23,8 +23,14 @@ const authPersistConfig = {
   storage,
   whitelist: ['token', 'isLoggedIn'],
 };
-
 const authPersistedReducer = persistReducer(authPersistConfig, authReducer);
+
+const userPersistConfig = {
+  key: 'favorite',
+  storage,
+  whitelist: ['favorite'],
+};
+const userPersistedReducer = persistReducer(userPersistConfig, userReducer);
 
 const rootRersistConfig = {
   key: 'root',
@@ -37,7 +43,7 @@ const rootReducer = combineReducers({
   news: newsReducer,
   notices: noticesReducer,
   friends: friendsReducer,
-  user: userReducer,
+  user: userPersistedReducer,
   pets: petsReducer,
 });
 

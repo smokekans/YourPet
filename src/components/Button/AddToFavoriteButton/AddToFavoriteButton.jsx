@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { IconButton } from '@mui/material';
@@ -9,17 +9,24 @@ import {
   getCurrentUser,
 } from 'redux/user/userOperations';
 import { getFavorite } from 'redux/user/userSelectors';
-import { getIsLoggedIn } from 'redux/auth/authSelectors';
+import { getIsLoggedIn, getUser } from 'redux/auth/authSelectors';
+import { addToFavorite } from 'redux/user/userSlice';
 
 const FavoriteIconButton = ({ noticeid }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn);
   // const [isFavorites, setIsFavorites] = useState(false);
-  const favorite = useSelector(state => state.user.user.favorite);
+  const user = useSelector(getUser);
+  const favorite = useSelector(state => state.user.favorite);
   // const dataArray = Array.isArray(favoriteElement)
   //   ? favoriteElement
   //   : Array.from(favoriteElement);
   // const isFavorite = dataArray.includes(noticeid);
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+    console.log(user);
+  }, [dispatch]);
 
   const handleFavoriteClick = async () => {
     if (!isLoggedIn) {
@@ -28,11 +35,11 @@ const FavoriteIconButton = ({ noticeid }) => {
       );
       return;
     }
-    await dispatch(getCurrentUser());
-    console.log('favoriteState', favorite);
-    const idCheck = favorite.find(oneFav => oneFav._id.includes(noticeid));
-
-    if (idCheck) {
+    dispatch(addToFavorite(user.favorite));
+    const idCheck = await favorite?.find(oneFav =>
+      oneFav._id.includes(noticeid)
+    );
+    if (Boolean(idCheck)) {
       toast.error('Removed from favorites');
       dispatch(deleteFromFavorite(noticeid));
       return;
