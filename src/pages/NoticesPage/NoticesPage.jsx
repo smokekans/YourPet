@@ -12,7 +12,7 @@ import {
   getUserNotices,
 } from 'redux/notices/noticesOperation';
 import {
-  getNoteceIsLoadig,
+  getNoticeIsLoadig,
   getNotices,
   getOwnNotices,
 } from 'redux/notices/noticesSelectors';
@@ -24,9 +24,10 @@ import Typography from '@mui/material/Typography';
 function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
-  const isLoading = useSelector(getNoteceIsLoadig);
+  const isLoading = useSelector(getNoticeIsLoadig);
   const favoriteNotices = useSelector(getFavorites);
-  const favoriteAds = favoriteNotices || [];
+  console.log(favoriteNotices)
+  // const favoriteAds = favoriteNotices || [];
   const ownNotices = useSelector(getOwnNotices);
 
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ function NoticesPage() {
 
   const dataToRender =
     categoryName === 'favorite'
-      ? favoriteAds
+      ? favoriteNotices
       : categoryName === 'owner'
       ? ownNotices
       : notices.notices;
@@ -82,7 +83,9 @@ function NoticesPage() {
         />
         <NoticesCategoriesNavigation />
 
-        {!isLoading && dataToRender && dataToRender.length === 0 ? null : (
+       {isLoading ? (
+          <Loader />
+        ) : (
           <NoticesCategoriesList
             categoryName={categoryName}
             data={dataToRender}
@@ -97,4 +100,5 @@ function NoticesPage() {
 }
 
 export default NoticesPage;
+
 

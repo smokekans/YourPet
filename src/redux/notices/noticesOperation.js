@@ -81,11 +81,12 @@ export const getUserNotices = createAsyncThunk(
 
 export const getNoticesByQwery = createAsyncThunk(
   'notices/getNoticesByQwery',
-  async ({ query, category, page = 1, limit = 0 }, { rejectWithValue }) => {
+  async ({ query, category, page = 1, limit = 10 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `notices/find?title=${query}&category=${category}&page=${page}&limit=${limit}`
       );
+      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -129,11 +130,12 @@ export const createNotice = createAsyncThunk(
 
 export const getNoticesByQweryOwner = createAsyncThunk(
   'notices/getNoticesByQweryOwner',
-  async ({ query, page = 1, limit = 0 }, { rejectWithValue }) => {
+  async ({ query, page = 1, limit = 10 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `notices/owner?title=${query}&page=${page}&limit=${limit}`
       );
+      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -143,7 +145,7 @@ export const getNoticesByQweryOwner = createAsyncThunk(
 
 export const getNoticesByQweryFavorite = createAsyncThunk(
   'notices/getNoticesByQweryFavorite',
-  async ({ query, page = 1, limit = 0 }, { rejectWithValue }) => {
+  async ({ query, page = 1, limit = 10 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `notices/favorite?title=${query}&page=${page}&limit=${limit}`

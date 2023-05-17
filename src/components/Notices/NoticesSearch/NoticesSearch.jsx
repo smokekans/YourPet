@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Box, Input, InputAdornment, IconButton } from "@mui/material";
-import { ReactComponent as IconSearch } from "../../../images/icons/search.svg";
-import { ReactComponent as IconCross } from "../../../images/icons/cross.svg";
-import { useDispatch } from "react-redux";
-import { getNoticesByQwery, getNoticesByQweryFavorite, getNoticesByQweryOwner } from "redux/notices/noticesOperation";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Box, Input, InputAdornment, IconButton } from '@mui/material';
+import { ReactComponent as IconSearch } from '../../../images/icons/search.svg';
+import { ReactComponent as IconCross } from '../../../images/icons/cross.svg';
+import { useDispatch } from 'react-redux';
+import {
+  getNoticesByQwery,
+  getNoticesByQweryFavorite,
+  getNoticesByQweryOwner,
+} from 'redux/notices/noticesOperation';
+import { useParams } from 'react-router-dom';
 
 const NoticesSearch = ({ onSearch }) => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
+  const [data, setData] = useState([]); 
   const dispatch = useDispatch();
   const { categoryName } = useParams();
 
@@ -15,70 +20,77 @@ const NoticesSearch = ({ onSearch }) => {
     dispatch(getNoticesByQwery());
   }, [dispatch]);
 
-  const onSubmit = (event) => {
+  const onSubmit = event => {
     event.preventDefault();
 
     const newQuery = event.target.elements.search.value.trim();
     if (!newQuery) {
-      return; 
+      return;
     }
 
     const requestData = { query: newQuery, category: categoryName };
 
-    // eslint-disable-next-line no-unused-vars
-    let data = [];
-
-    if (categoryName === "favorite") {
-      dispatch(getNoticesByQweryFavorite(requestData))
-        .then((result) => {
-          data = result;
-          onSearch(newQuery);
-          setQuery("");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else if (categoryName === "owner") {
-      dispatch(getNoticesByQweryOwner(requestData))
-        .then((result) => {
-          data = result;
-          onSearch(newQuery);
-          setQuery("");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    let action;
+    if (categoryName === 'favorite') {
+      action = getNoticesByQweryFavorite(requestData);
+    } else if (categoryName === 'owner') {
+      action = getNoticesByQweryOwner(requestData);
     } else {
-      dispatch(getNoticesByQwery(requestData))
-        .then((result) => {
-          data = result;
-          onSearch(newQuery);
-          setQuery("");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      action = getNoticesByQwery(requestData);
     }
+
+    dispatch(action)
+      .then(data => {
+        setData(data); 
+        onSearch(newQuery);
+        setQuery('');
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
 
-  const handleQueryChange = (event) => {
-    const newQuery = event.target.value;
-    setQuery(newQuery);
+const handleQueryChange = event => {
+  const newQuery = event.target.value;
+  setQuery(newQuery);
 
-    if (event.nativeEvent.inputType === "deleteContentBackward" && !newQuery.trim()) {
-      return;
+  if (event.nativeEvent.inputType === 'deleteContentBackward' && !newQuery.trim()) {
+    return;
+  }
+
+  if (!newQuery.trim()) {
+    let action;
+
+    if (categoryName === 'favorite') {
+      action = getNoticesByQweryFavorite({
+        query: '',
+        // category: categoryName
+      });
+    } else if (categoryName === 'owner') {
+      action = getNoticesByQweryOwner({
+        query: '',
+        // category: categoryName
+
+      });
+    } else {
+      action = getNoticesByQwery({ query: '', category: categoryName });
     }
 
-    if (!newQuery.trim()) {
-      dispatch(getNoticesByQwery({ query: "", category: categoryName }))
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  };
+    dispatch(action)
+      .then(result => {
+        setData(result); 
+        setQuery("");
+       
+        onSearch(newQuery); 
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+};
 
   const handleClearQuery = () => {
-    setQuery("");
+    setQuery('');
   };
 
   return (
@@ -86,10 +98,10 @@ const NoticesSearch = ({ onSearch }) => {
       component="form"
       onSubmit={onSubmit}
       sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "40px",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '40px',
       }}
     >
       <Input
@@ -99,13 +111,13 @@ const NoticesSearch = ({ onSearch }) => {
         onChange={handleQueryChange}
         disableUnderline
         sx={{
-          width: "608px",
-          height: "44px",
+          width: '608px',
+          height: '44px',
           boxShadow: 2,
-          borderRadius: "20px",
-          paddingLeft: "12px",
-          paddingRight: "44px",
-          position: "relative",
+          borderRadius: '20px',
+          paddingLeft: '12px',
+          paddingRight: '44px',
+          position: 'relative',
         }}
         endAdornment={
           <>
@@ -116,7 +128,10 @@ const NoticesSearch = ({ onSearch }) => {
                 </IconButton>
               </InputAdornment>
             )}
-            <InputAdornment position="end" sx={{ position: "absolute", right: 0 }}>
+            <InputAdornment
+              position="end"
+              sx={{ position: 'absolute', right: 0 }}
+            >
               <IconButton type="submit" size="small">
                 <IconSearch />
               </IconButton>
@@ -129,3 +144,163 @@ const NoticesSearch = ({ onSearch }) => {
 };
 
 export default NoticesSearch;
+
+
+
+
+// import React, { useEffect, useState } from "react";
+// import { Box, Input, InputAdornment, IconButton } from "@mui/material";
+// import { ReactComponent as IconSearch } from "../../../images/icons/search.svg";
+// import { ReactComponent as IconCross } from "../../../images/icons/cross.svg";
+// import { useDispatch } from "react-redux";
+// import { getNoticesByQwery, getNoticesByQweryFavorite, getNoticesByQweryOwner } from "redux/notices/noticesOperation";
+// import { useParams } from "react-router-dom";
+
+// const NoticesSearch = ({ onSearch }) => {
+//   const [query, setQuery] = useState("");
+//   const dispatch = useDispatch();
+//   const { categoryName } = useParams();
+
+//   useEffect(() => {
+//     dispatch(getNoticesByQwery());
+//   }, [dispatch]);
+
+//   const onSubmit = (event) => {
+//     event.preventDefault();
+
+//     const newQuery = event.target.elements.search.value.trim();
+//     if (!newQuery) {
+//       return;
+//     }
+
+//     const requestData = { query: newQuery, category: categoryName };
+
+//     // eslint-disable-next-line no-unused-vars
+//     let data = [];
+
+//     if (categoryName === "favorite") {
+//       dispatch(getNoticesByQweryFavorite(requestData))
+//         .then((result) => {
+//           data = result;
+//           onSearch(newQuery);
+//           setQuery("");
+//         })
+//         .catch((error) => {
+//           console.error(error);
+//         });
+//     } else if (categoryName === "owner") {
+//       dispatch(getNoticesByQweryOwner(requestData))
+//         .then((result) => {
+//           data = result;
+//           onSearch(newQuery);
+//           setQuery("");
+//         })
+//         .catch((error) => {
+//           console.error(error);
+//         });
+//     } else {
+//       dispatch(getNoticesByQwery(requestData))
+//         .then((result) => {
+//           data = result;
+//           onSearch(newQuery);
+//           setQuery("");
+//         })
+//         .catch((error) => {
+//           console.error(error);
+//         });
+//     }
+//   };
+
+//   // const handleQueryChange = (event) => {
+//   //   const newQuery = event.target.value;
+//   //   setQuery(newQuery);
+
+//   //   if (event.nativeEvent.inputType === "deleteContentBackward" && !newQuery.trim()) {
+//   //     return;
+//   //   }
+
+//   //   if (!newQuery.trim()) {
+//   //     dispatch(getNoticesByQwery({ query: "", category: categoryName }))
+//   //       .catch((error) => {
+//   //         console.error(error);
+//   //       });
+//   //   }
+//   // };
+
+//   const handleQueryChange = (event) => {
+//   const newQuery = event.target.value;
+//   setQuery(newQuery);
+
+//   if (event.nativeEvent.inputType === "deleteContentBackward" && !newQuery.trim()) {
+//     return;
+//   }
+
+//   if (!newQuery.trim()) {
+//     let action;
+
+//     if (categoryName === "favorite") {
+//       action = getNoticesByQweryFavorite({ query: "", category: categoryName });
+//     } else if (categoryName === "owner") {
+//       action = getNoticesByQweryOwner({ query: "", category: categoryName });
+//     } else {
+//       action = getNoticesByQwery({ query: "", category: categoryName });
+//     }
+
+//     dispatch(action).catch((error) => {
+//       console.error(error);
+//     });
+//   }
+// };
+
+//   const handleClearQuery = () => {
+//     setQuery("");
+//   };
+
+//   return (
+//     <Box
+//       component="form"
+//       onSubmit={onSubmit}
+//       sx={{
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         marginTop: "40px",
+//       }}
+//     >
+//       <Input
+//         placeholder="Search"
+//         name="search"
+//         value={query}
+//         onChange={handleQueryChange}
+//         disableUnderline
+//         sx={{
+//           width: "608px",
+//           height: "44px",
+//           boxShadow: 2,
+//           borderRadius: "20px",
+//           paddingLeft: "12px",
+//           paddingRight: "44px",
+//           position: "relative",
+//         }}
+//         endAdornment={
+//           <>
+//             {query && (
+//               <InputAdornment position="end">
+//                 <IconButton onClick={handleClearQuery} size="small">
+//                   <IconCross />
+//                 </IconButton>
+//               </InputAdornment>
+//             )}
+//             <InputAdornment position="end" sx={{ position: "absolute", right: 0 }}>
+//               <IconButton type="submit" size="small">
+//                 <IconSearch />
+//               </IconButton>
+//             </InputAdornment>
+//           </>
+//         }
+//       />
+//     </Box>
+//   );
+// };
+
+// export default NoticesSearch;

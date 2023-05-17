@@ -11,6 +11,7 @@ import {
   getNoticesByQweryOwner,
   getNoticesByQweryFavorite,
 } from './noticesOperation';
+import { getFavorite } from 'redux/user/userOperations';
 
 const noticesInitialState = {
   notices: [],
@@ -115,7 +116,7 @@ const noticesSlice = createSlice({
       })
       .addCase(getNoticesByQweryOwner.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.notices.favorite = payload;
+        state.notices = payload;
         state.error = null;
       })
       .addCase(getNoticesByQweryOwner.rejected, (state, action) => {
@@ -126,11 +127,16 @@ const noticesSlice = createSlice({
       })
       .addCase(getNoticesByQweryFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.notices = payload;
+        state.notices = payload.notices;
         state.error = null;
       })
       .addCase(getNoticesByQweryFavorite.rejected, (state, action) => {
         handleReject(state, action);
+      })
+      .addCase(getFavorite.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices = payload;
+        state.error = null;
       });
   },
   reducers: {
