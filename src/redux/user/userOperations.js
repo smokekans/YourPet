@@ -50,15 +50,16 @@ export const addToFavorites = createAsyncThunk(
 
 export const getFavorite = createAsyncThunk(
   'user/getFavorite',
-  async (_, { rejectWithValue, getState }) => {
+  async ({ page = 1 }, { rejectWithValue, getState }) => {
     try {
       const value = getState().auth.accessToken;
       if (value === null) {
         return rejectWithValue('Unable to fetch user');
       }
       accessToken.set(value);
-      const { data } = await axios.get('/user/favorite');
-      return data.user.favorite;
+      const { data } = await axios.get(`/user/favorite?page=${page}&limit=10`);
+      console.log(data);
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }

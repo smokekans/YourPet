@@ -121,6 +121,7 @@ import { clearNotices } from 'redux/notices/noticesSlice';
 import { getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
 import Typography from '@mui/material/Typography';
+import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
 
 function NoticesPage() {
   const { categoryName } = useParams();
@@ -192,7 +193,11 @@ function NoticesPage() {
 
         {isLoading && <Loader />}
       </Container>
-      <NoticesPagination />
+      {categoryName === 'favorite' ? (
+        <NoticesPaginationFavorite />
+      ) : (
+        <NoticesPagination />
+      )}
     </>
   );
 }

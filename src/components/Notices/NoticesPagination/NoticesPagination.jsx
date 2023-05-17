@@ -5,22 +5,60 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/dist';
 import { getNoticeByCategory } from 'redux/notices/noticesOperation';
 import { getNotices } from 'redux/notices/noticesSelectors';
+import { getFavorite } from 'redux/user/userOperations';
 
 export const NoticesPagination = () => {
   const { total } = useSelector(getNotices);
+  const favorite = useSelector(state => state.user.favorite);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const { categoryName } = useParams();
 
   useEffect(() => {
-    dispatch(
-      getNoticeByCategory({
-        category: categoryName,
-        page: page,
-        limit: 10,
-      })
-    );
+    switch (categoryName) {
+      case 'sell':
+        dispatch(
+          getNoticeByCategory({
+            category: 'sell',
+            page: page,
+            limit: 10,
+          })
+        );
+        break;
+
+      case 'lost-found':
+        dispatch(
+          getNoticeByCategory({
+            category: 'lost-found',
+            page: page,
+            limit: 10,
+          })
+        );
+        break;
+      case 'for-free':
+        dispatch(
+          getNoticeByCategory({
+            category: 'for-free',
+            page: page,
+            limit: 10,
+          })
+        );
+        break;
+      case 'favorite':
+        dispatch(getFavorite({ page: page }));
+        break;
+
+      default:
+        dispatch(
+          getNoticeByCategory({
+            category: 'sell',
+            page: page,
+            limit: 10,
+          })
+        );
+    }
   }, [categoryName, dispatch, page]);
+  console.log(favorite);
   return (
     <div>
       {total > 10 ? (
