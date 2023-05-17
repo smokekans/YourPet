@@ -4,7 +4,7 @@ const styles = {
     flexDirection: 'column',
     height: { mobile: '441px', tablet: '481px' },
     width: { mobile: '280px', tablet: '608px' },
-    position: 'relative',
+    // position: 'relative',
     boxShadow: '3px 8px 14px rgba(136, 198, 253, 0.19)',
     borderRadius: '20px',
     marginTop: { mobile: '44px', tablet: '80px' },
@@ -48,15 +48,31 @@ const styles = {
     // textAlign: 'center',
     color: "#888888",
   },
-  button: {
-    width: '256px',
-    padding: '10px 100px',
-    fontWeight: '500',
-    fontSize: '24px',
-    lineHeight: '33px',
-    textDecoration: 'none',
+ button: {
+    textTransform: 'none',
+     width:'100%',
+    // minWidth: '129px',
+    height: '40px',
+    border: '2px solid #54ADFF',
     borderRadius: '40px',
-    mb: '24px',
+    fontSize: 16,
+    padding: '9px 20px',
+   lineHeight: 1.37,
+    backgroundColor: 'rgba(84, 173, 255, 1)',
+    color: 'rgba(255, 255, 255, 1)',
+    '&:hover': {
+      backgroundColor: '#54ADFF',
+      color: '#FEF9F9',
+    },
+    
+    '&:active': {
+      backgroundColor: '#54ADFF',
+      color: '#FEF9F9',
+    },
+    '&:focus': {
+      backgroundColor: '#54ADFF',
+      color: '#FEF9F9',
+    },
   },
   // media: {
   //   height: 288,
