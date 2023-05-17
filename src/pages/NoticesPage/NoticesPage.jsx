@@ -121,6 +121,8 @@ import { clearNotices } from 'redux/notices/noticesSlice';
 import { getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
 import Typography from '@mui/material/Typography';
+import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
+import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
 
 function NoticesPage() {
   const { categoryName } = useParams();
@@ -138,7 +140,7 @@ function NoticesPage() {
     if (categoryName === 'favorite') {
       dispatch(getFavorite());
     } else if (categoryName === 'owner') {
-      dispatch(getUserNotices());
+      dispatch(getUserNotices({ page: 1 }));
     } else {
       dispatch(getNoticeByCategory({ category: categoryName }));
     }
@@ -192,7 +194,13 @@ function NoticesPage() {
 
         {isLoading && <Loader />}
       </Container>
-      <NoticesPagination />
+      {categoryName === 'favorite' ? (
+        <NoticesPaginationFavorite />
+      ) : categoryName === 'owner' ? (
+        <NoticesPaginationMyads />
+      ) : (
+        <NoticesPagination />
+      )}
     </>
   );
 }

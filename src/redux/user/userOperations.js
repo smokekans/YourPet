@@ -25,7 +25,6 @@ export const getCurrentUser = createAsyncThunk(
 
       return data;
     } catch (e) {
-      console.log(e.response.data);
       return rejectWithValue(e.message);
     }
   }
@@ -41,7 +40,8 @@ export const addToFavorites = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.post(`/user/favorite/${id}`);
-      return data;
+      console.log(data);
+      return data.user.favorite;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -50,15 +50,16 @@ export const addToFavorites = createAsyncThunk(
 
 export const getFavorite = createAsyncThunk(
   'user/getFavorite',
-  async (_, { rejectWithValue, getState }) => {
+  async ({ page = 1 }, { rejectWithValue, getState }) => {
     try {
       const value = getState().auth.accessToken;
       if (value === null) {
         return rejectWithValue('Unable to fetch user');
       }
       accessToken.set(value);
-      const { data } = await axios.get('/user/favorite');
-      return data.user.favorite;
+      const { data } = await axios.get(`/user/favorite?page=${page}&limit=10`);
+
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }

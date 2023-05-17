@@ -3,30 +3,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/dist';
-import { getNoticeByCategory } from 'redux/notices/noticesOperation';
-import { getNotices } from 'redux/notices/noticesSelectors';
+import { getFavorite } from 'redux/user/userOperations';
 
-export const NoticesPagination = () => {
-  const { total } = useSelector(getNotices);
+export const NoticesPaginationFavorite = () => {
+  const total = useSelector(state => state.user.favoriteTotal);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const { categoryName } = useParams();
 
   useEffect(() => {
-    if (categoryName !== 'owner') {
-      dispatch(
-        getNoticeByCategory({
-          category: categoryName,
-          page: page,
-          limit: 10,
-        })
-      );
-    }
+    dispatch(getFavorite({ page: page }));
   }, [categoryName, dispatch, page]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [categoryName]);
 
   return (
     <div>
