@@ -29,7 +29,7 @@ const FavoriteIconButton = ({ noticeid }) => {
       toast('Added to favorites');
     }
   };
-
+  console.log(favoriteElement);
   return (
     <IconButton
       // color={isFavorites ? 'secondary' : 'default'}

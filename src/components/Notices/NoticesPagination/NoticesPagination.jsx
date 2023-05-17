@@ -44,10 +44,6 @@ export const NoticesPagination = () => {
           })
         );
         break;
-      case 'favorite':
-        dispatch(getFavorite({ page: page }));
-        break;
-
       default:
         dispatch(
           getNoticeByCategory({
@@ -58,7 +54,7 @@ export const NoticesPagination = () => {
         );
     }
   }, [categoryName, dispatch, page]);
-  console.log(favorite);
+
   return (
     <div>
       {total > 10 ? (

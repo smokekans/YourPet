@@ -17,7 +17,7 @@ export const NoticesPaginationFavorite = () => {
 
   return (
     <div>
-      {total >= 10 ? (
+      {total > 10 ? (
         <PaginationControl
           page={page}
           between={4}

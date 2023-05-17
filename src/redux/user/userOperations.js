@@ -41,7 +41,8 @@ export const addToFavorites = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.post(`/user/favorite/${id}`);
-      return data;
+      console.log(data);
+      return data.user.favorite;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -58,7 +59,7 @@ export const getFavorite = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.get(`/user/favorite?page=${page}&limit=10`);
-      console.log(data);
+
       return data;
     } catch (error) {
       return rejectWithValue(error);
