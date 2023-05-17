@@ -11,8 +11,6 @@ const styles = {
   },
   headerList: {
     display: 'flex',
-    // justifyContent: 'space-between',
-    // justifyContent: 'flex-start',
     alignItems: 'center',
     width: 1,
   },
