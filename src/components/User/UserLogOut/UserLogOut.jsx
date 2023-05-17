@@ -23,6 +23,7 @@ const BootstrapDialog = styled(Dialog)(() => ({
   },
 }));
 
+
 function UserLogOut() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);

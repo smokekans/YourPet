@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { IconButton, Menu, MenuItem } from '@mui/material';
-import Nav from './Nav';
+import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import Nav from '../Nav/Nav';
 import MenuIcon from '@mui/icons-material/Menu';
 import useMatchMedia from 'hooks/useMatchMedia';
-import AuthNavigation from '../AuthNavigation/AuthNavigation';
-import { getIsLoggedIn } from 'redux/auth/authSelectors';
+import AuthNavigation from '../../AuthNavigation/AuthNavigation';
+import { getAccessToken } from 'redux/auth/authSelectors';
 import { useSelector } from 'react-redux';
+import Logo from 'components/Logo/Logo';
+import { ReactComponent as Cross } from '../../../../images/icons/cross.svg';
+import styles from './styles';
 
 function BurgerMenu() {
   const { isMobile } = useMatchMedia();
   const { isTablet } = useMatchMedia();
 
-  const isLoggedIn = useSelector(getIsLoggedIn);
+  const accessToken = useSelector(getAccessToken);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -26,6 +29,7 @@ function BurgerMenu() {
   return (
     <>
       <IconButton
+        sx={styles.iconBtn}
         aria-label="menu"
         aria-controls="menu"
         aria-haspopup="true"
@@ -33,27 +37,20 @@ function BurgerMenu() {
       >
         <MenuIcon />
       </IconButton>
+
       <Menu
         id="menu"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
-        sx={{
-          '& .MuiPaper-root': {
-            width: '100vw',
-            height: '100vh',
-          },
-        }}
+        sx={styles.menu}
       >
-        <MenuItem
-          onClick={handleMenuClose}
-          sx={{
-            flexDirection: 'column',
-            cursor: 'auto',
-            '&:hover': { bgcolor: 'background.default' },
-          }}
-        >
-          {isMobile && !isLoggedIn && <AuthNavigation />}
+        <Box sx={styles.box}>
+          <Logo />
+          <Cross onClick={handleMenuClose} />
+        </Box>
+        <MenuItem onClick={handleMenuClose} sx={styles.menuItem}>
+          {isMobile && !accessToken && <AuthNavigation />}
           {isMobile && <Nav />}
           {isTablet && <Nav />}
         </MenuItem>
