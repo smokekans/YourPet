@@ -69,9 +69,9 @@ export const deleteNotice = createAsyncThunk(
 
 export const getUserNotices = createAsyncThunk(
   'notices/getUserNotices',
-  async (_, { rejectWithValue }) => {
+  async ({ page }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`notices/user`);
+      const { data } = await axios.get(`notices/user?page=${page}&limit=10`);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

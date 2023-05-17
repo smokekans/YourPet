@@ -19,6 +19,7 @@ const noticesInitialState = {
   oneNotice: null,
   favorite: [],
   own: [],
+  ownTotal: 0,
   error: null,
   isLoading: false,
   total: 0,
@@ -94,7 +95,7 @@ const noticesSlice = createSlice({
       .addCase(getUserNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.own = payload;
+        state.own = payload.notices;
       })
       .addCase(getUserNotices.rejected, (state, action) => {
         handleReject(state, action);

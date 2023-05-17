@@ -25,7 +25,6 @@ export const getCurrentUser = createAsyncThunk(
 
       return data;
     } catch (e) {
-      console.log(e.response.data);
       return rejectWithValue(e.message);
     }
   }
