@@ -1,6 +1,7 @@
 import React from 'react';
+import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUser, isLoading } from '../../../redux/user/userSelectors';
+import { getUser } from '../../../redux/user/userSelectors';
 import { updateInfoUser } from 'redux/user/userOperations';
 import { useState } from 'react';
 import styles from './styles';
@@ -20,10 +21,31 @@ function UserDataItem() {
   const [btnPhone, getPhone] = useState(true);
   const [btnCity, getCity] = useState(true);
   const [btnBirthday, getBirthday] = useState(true);
+  const nameUser = useRef(null);
+  const nameEmail = useRef(null);
+  const namePhone = useRef(null);
+  const nameCity = useRef(null);
+  const nameBirtday = useRef(null);
   const user = useSelector(getUser);
-  const Loading = useSelector(isLoading);
-  console.log(Loading);
-  console.log(user);
+ 
+  
+
+  function clickName() {
+    nameUser.current.focus()
+    getName(false);
+  }function clickEmail() {
+    nameEmail.current.focus()
+    getEmail(false);
+  }function clickPhone() {
+    namePhone.current.focus()
+    getPhone(false);
+  }function clickCity() {
+    nameCity.current.focus()
+    getCity(false);
+  }function clickBirthday() {
+    nameBirtday.current.focus()
+    getBirthday(false);
+  }
 
   const updateInfo = {
     email: user.email,
@@ -59,22 +81,25 @@ function UserDataItem() {
   const { name, birthday, email, phone, city } = user;
   return (
     <div>
-      <Typography variant="ul" sx={styles.ul}>
+      <Typography variant="div" sx={styles.ul}>
         <Typography variant="p" className="name" sx={styles.li}>
           Name:
-          <FormControl variant="filled">
+          <FormControl variant="filled" sx={{ml:'auto',}}>
             <FilledInput
               id="name"
               sx={styles.input}
               onChange={ChangeData}
+              inputRef={nameUser}
               defaultValue={name}
+             
               endAdornment={
-                <InputAdornment position="end">
+                <InputAdornment position="end" sx={{pt:'12px'}}>
                   {btnName ? (
                     <Pencel
                       className="name"
                       onClick={() => {
-                        getName(false);
+                        clickName()
+                        
                       }}
                       edge="end"
                     ></Pencel>
@@ -94,21 +119,23 @@ function UserDataItem() {
           </FormControl>
         </Typography>
         <Typography variant="p" className="email" sx={styles.li}>
-          Email:{' '}
-          <FormControl variant="filled">
+          Email:
+          <FormControl variant="filled" sx={{ml:'auto',}}>
             <FilledInput
               id="email"
               type="email"
               sx={styles.input}
               onChange={ChangeData}
+              inputRef={nameEmail}
               defaultValue={email}
               endAdornment={
-                <InputAdornment position="end">
+                <InputAdornment position="end" sx={{pt:'12px'}}>
                   {btnEmail ? (
                     <Pencel
+                    
                       className="name"
                       onClick={() => {
-                        getEmail(false);
+                        clickEmail()
                       }}
                       edge="end"
                     ></Pencel>
@@ -129,20 +156,21 @@ function UserDataItem() {
         </Typography>
         <Typography variant="p" className="birthday" sx={styles.li}>
           Birthday:{' '}
-          <FormControl variant="filled">
+          <FormControl variant="filled" sx={{ml:'auto',}}>
             <FilledInput
               id="birthday"
               type="data"
               sx={styles.input}
               onChange={ChangeData}
+              inputRef={nameBirtday}
               defaultValue={birthday}
               endAdornment={
-                <InputAdornment position="end">
+                <InputAdornment position="end" sx={{pt:'12px'}}>
                   {btnBirthday ? (
                     <Pencel
                       className="name"
                       onClick={() => {
-                        getBirthday(false);
+                        clickBirthday()
                       }}
                       edge="end"
                     ></Pencel>
@@ -163,19 +191,20 @@ function UserDataItem() {
         </Typography>
         <Typography variant="p" className="phone" sx={styles.li}>
           Phone:{' '}
-          <FormControl variant="filled">
+          <FormControl variant="filled"  sx={{ml:'auto',}}>
             <FilledInput
               id="phone"
               sx={styles.input}
               onChange={ChangeData}
+              inputRef={namePhone}
               defaultValue={phone}
               endAdornment={
-                <InputAdornment position="end">
+                <InputAdornment position="end" sx={{pt:'12px'}}>
                   {btnPhone ? (
                     <Pencel
                       className="name"
                       onClick={() => {
-                        getPhone(false);
+                        clickPhone()
                       }}
                       edge="end"
                     ></Pencel>
@@ -196,19 +225,20 @@ function UserDataItem() {
         </Typography>
         <Typography variant="p" className="city" sx={styles.li}>
           City:{' '}
-          <FormControl variant="filled">
+          <FormControl variant="filled" sx={{ml:'auto',}}>
             <FilledInput
               id="city"
               sx={styles.input}
               onChange={ChangeData}
+              inputRef={nameCity}
               defaultValue={city}
               endAdornment={
-                <InputAdornment position="end">
+                <InputAdornment position="end" sx={{pt:'12px'}}>
                   {btnCity ? (
                     <Pencel
                       className="name"
                       onClick={() => {
-                        getCity(false);
+                        clickCity()
                       }}
                       edge="end"
                     ></Pencel>

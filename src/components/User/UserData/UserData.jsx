@@ -10,7 +10,7 @@ import {
   FilledInput,
   Container,
   Box,
-  IconButton,
+ 
   Stack,
 } from '@mui/material';
 import styles from './styles';
@@ -33,7 +33,8 @@ function UserData() {
 
   return (
     <Container sx={styles.container}>
-      <Box>
+      <Box sx={styles.boxContainer}>
+        <Box>
         <Avatar
           variant="img"
           src={avatarUser}
@@ -48,19 +49,14 @@ function UserData() {
           onChange={OnSumbit}
         ></FilledInput>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="label"
-            onClick={handelAvatar}
-          >
-            <PawPrint className="name" edge="end"></PawPrint>
-          </IconButton>
-          <Button variant="contained" component="label" onClick={handelAvatar}>
+        
+          <Button variant="contained" sx={styles.editPhoto} component="label" onClick={handelAvatar} startIcon={<PawPrint sx={styles.editPhotoIcon}/>}>
             Edit photo
-            <input hidden accept="image/*" multiple type="file" />
+            
           </Button>
         </Stack>
+        </Box>
+       
         {Loading ? <div></div> : <UserDataItem />}
       </Box>
       <UserLogOut />
