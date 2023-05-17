@@ -23,6 +23,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from 'redux/user/userOperations';
 import { getAccessToken } from 'redux/auth/authSelectors';
+// import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
 
 export const App = () => {
   const accessToken = useSelector(getAccessToken);
@@ -59,6 +60,8 @@ export const App = () => {
             element={<PublicRoute redirectTo="notices/sell" restricted />}
           >
             <Route path="login" element={<LoginPage />} />
+          </Route>
+          <Route path="" element={<PublicRoute redirectTo="user" restricted />}>
             <Route path="register" element={<RegisterPage />} />
           </Route>
           <Route path="" element={<PrivateRoute />}>
