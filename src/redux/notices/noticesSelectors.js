@@ -4,6 +4,6 @@ export const getOneNotice = state => state.notices.oneNotice;
 export const getNoticeIsLoadig = state => state.notices.isLoading;
 export const getNotices = state => state.notices.notices;
 
-export const getOwnNotices = state => state.notices.own.notices
+export const getOwnNotices = state => state.notices.own
 
 

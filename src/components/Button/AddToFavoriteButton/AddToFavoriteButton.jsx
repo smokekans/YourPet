@@ -20,7 +20,6 @@ const FavoriteIconButton = ({ noticeid }) => {
       return;
     }
     const checkId = favoriteElement.map(el => el._id).includes(noticeid);
-    console.log(checkId);
     if (checkId) {
       dispatch(deleteFromFavorite(noticeid));
       dispatch(deleteFavoriteObj(noticeid));
@@ -30,7 +29,6 @@ const FavoriteIconButton = ({ noticeid }) => {
       toast('Added to favorites');
     }
   };
-
   return (
     <IconButton
       // color={isFavorites ? 'secondary' : 'default'}

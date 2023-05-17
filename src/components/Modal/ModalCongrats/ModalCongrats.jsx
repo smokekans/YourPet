@@ -1,98 +1,75 @@
-// import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
-// import Modal from '@mui/material/Modal';
+import React from 'react';
+import { Dialog, Box, Card, IconButton, DialogActions, DialogContent,Typography, Button, SvgIcon, } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { ReactComponent as IconClose } from '../../../images/icons/cross-small.svg';
+import { ReactComponent as IconPaw } from '../../../images/icons/pawprint.svg';
 
-// const style = {
-//   position: 'absolute',
-//   top: '50%',
-//   left: '50%',
-//   transform: 'translate(-50%, -50%)',
-//   width: 400,
-//   bgcolor: 'background.paper',
-//   border: '2px solid #000',
-//   boxShadow: 24,
-//   p: 4,
-// };
+import styles from './styles';
 
-// export default function BasicModal() {
-//   const [open, setOpen] = React.useState(false);
-//   const handleOpen = () => setOpen(true);
-//   const handleClose = () => setOpen(false);
-
-//   return (
-//     <div>
-//       <div onClick={handleOpen}>Registration</div>
-//       <Modal
-//         open={open}
-//         onClose={handleClose}
-//         aria-labelledby="modal-modal-title"
-//         aria-describedby="modal-modal-description"
-//       >
-//         <Box sx={style}>
-//           <Typography id="modal-modal-title" variant="h6" component="h2">
-//             Text in a modal
-//           </Typography>
-//           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-//             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-//           </Typography>
-//         </Box>
-//       </Modal>
-//     </div>
-//   );
-// }
-
-import React from // useEffect
-'react';
-import { createPortal } from 'react-dom';
-import css from './Modal.module.css';
-import { Modal } from '@mui/material';
-
-const modalRoot = document.querySelector('#modal-root');
+const BootstrapDialog = styled(Dialog)(() => ({
+  '& .MuiPaper-root': {
+    borderRadius: '20px',
+    '@media (min-width: 768px)': { borderRadius: '40px' },
+    p: 0,
+  },
+  '& .MuiDialogContent-root': {
+    padding: '0px 0px 12px 0px',
+  },
+}));
 
 function ModalCongrats({ onClick }) {
   const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => setOpen(!open);
 
-  // useEffect(() => {
-  //   window.addEventListener('keydown', handleEscape);
-  //   function handleEscape(e) {
-  //     if (e.code === 'Escape') onClick();
-  //   }
-  //   return () => {
-  //     window.removeEventListener('keydown', handleEscape);
-  //   };
-  // }, [onClick]);
 
-  // const handleBackdrop = e => {
-  //   if (e.target === e.currentTarget) onClick();
-  // };
-
-  return createPortal(
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="parent-modal-title"
-      aria-describedby="parent-modal-description"
-      className={css.Overlay}
-      // onClick={handleBackdrop}
-    >
-      <div className={css.Modal}>
-        <h1>Congrats!</h1>
-        <p>Your registration is success</p>
-        <button
-          onClick={() => {
-            onClick();
-          }}
+  return <BootstrapDialog
+              // open={isModalOpen}
+              // onClose={onClose}
+              // scroll={scroll}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-descriptionDialogActions"
+  >
+    <Card sx={styles.root}>
+      <IconButton
+        onClick={handleClose}
+        autoFocus
+        sx={{
+          position: 'absolute',
+          zIndex: '2000',
+          right: { mobile: 12, tablet: 26 },
+          top: { mobile: 12, tablet: 23 },
+          p: 0,
+          m: 0,
+        }}
+      >
+        <SvgIcon
+            component={IconClose}
+            inheritViewBox
+            htmlColor="rgba(254, 249, 249, 1)"
+          />
+        <IconClose/>
+      </IconButton>
+      <DialogContent>
+        <Box sx={styles.content}>
+          <Typography sx={styles.title} component={'h1'}>Congrats!</Typography>
+         <Typography sx={styles.commentText} component={'p'}>Your registration is successful</Typography></Box>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          onClick={handleClose}
+          sx={styles.button}
+          // aria-label="add"
         >
-          Go to profile
-        </button>
-      </div>
-    </Modal>,
-    modalRoot
-  );
+          Go to profile &nbsp;
+          <SvgIcon
+            component={IconPaw}
+            inheritViewBox
+            htmlColor="rgba(254, 249, 249, 0)"
+          />
+        </Button>
+      </DialogActions>
+    </Card>
+                  </BootstrapDialog>
 }
 
 export default ModalCongrats;

@@ -5,13 +5,14 @@ import { ReactComponent as IconCross } from '../../../images/icons/cross.svg';
 import { useDispatch } from 'react-redux';
 import {
   getNoticesByQwery,
-  getNoticesByQweryFavorite,
-  getNoticesByQweryOwner,
+  getUserNotices,
 } from 'redux/notices/noticesOperation';
 import { useParams } from 'react-router-dom';
+import { getFavorite } from 'redux/user/userOperations';
 
 const NoticesSearch = ({ onSearch }) => {
   const [query, setQuery] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState([]); 
   const dispatch = useDispatch();
   const { categoryName } = useParams();
@@ -32,9 +33,9 @@ const NoticesSearch = ({ onSearch }) => {
 
     let action;
     if (categoryName === 'favorite') {
-      action = getNoticesByQweryFavorite(requestData);
+      action = getFavorite(requestData);
     } else if (categoryName === 'owner') {
-      action = getNoticesByQweryOwner(requestData);
+      action =  getUserNotices(requestData);
     } else {
       action = getNoticesByQwery(requestData);
     }
@@ -62,12 +63,12 @@ const handleQueryChange = event => {
     let action;
 
     if (categoryName === 'favorite') {
-      action = getNoticesByQweryFavorite({
+      action = getFavorite({
         query: '',
         // category: categoryName
       });
     } else if (categoryName === 'owner') {
-      action = getNoticesByQweryOwner({
+      action =  getUserNotices({
         query: '',
         // category: categoryName
 

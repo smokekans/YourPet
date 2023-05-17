@@ -20,6 +20,8 @@ import { clearNotices } from 'redux/notices/noticesSlice';
 import { getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
 import Typography from '@mui/material/Typography';
+import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
+import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
 
 function NoticesPage() {
   const { categoryName } = useParams();
@@ -38,7 +40,7 @@ function NoticesPage() {
     if (categoryName === 'favorite') {
       dispatch(getFavorite());
     } else if (categoryName === 'owner') {
-      dispatch(getUserNotices());
+      dispatch(getUserNotices({ page: 1 }));
     } else {
       dispatch(getNoticeByCategory({ category: categoryName }));
     }
@@ -83,18 +85,26 @@ function NoticesPage() {
         />
         <NoticesCategoriesNavigation />
 
-       {isLoading ? (
-          <Loader />
-        ) : (
-          <NoticesCategoriesList
-            categoryName={categoryName}
-            data={dataToRender}
-          />
-        )}
+   {isLoading ? (
+  <Loader /> 
+) : dataToRender && dataToRender.length === 0 ? (
+  <img src={`../../images/notFound/notFound-desktop@2x.png?${Math.random()}`} alt="Placeholder" /> 
+) : (
+  <NoticesCategoriesList
+    categoryName={categoryName}
+    data={dataToRender}
+  /> 
+)}
 
         {isLoading && <Loader />}
       </Container>
-      <NoticesPagination />
+      {categoryName === 'favorite' ? (
+        <NoticesPaginationFavorite />
+      ) : categoryName === 'owner' ? (
+        <NoticesPaginationMyads />
+      ) : (
+        <NoticesPagination />
+      )}
     </>
   );
 }

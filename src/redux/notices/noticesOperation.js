@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
 axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
 
 export const getNoticeByCategory = createAsyncThunk(
@@ -59,8 +60,8 @@ export const deleteNotice = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     console.log(id);
     try {
-      await axios.delete(`notices/${id}`);
-      return id;
+      const { data } = await axios.delete(`notices/${id}`);
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -69,9 +70,10 @@ export const deleteNotice = createAsyncThunk(
 
 export const getUserNotices = createAsyncThunk(
   'notices/getUserNotices',
-  async (_, { rejectWithValue }) => {
+  async ({ page, query = "" }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`notices/user`);
+      const { data } = await axios.get(`notices/user?page=${page}&limit=10&title=${query}`);
+      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

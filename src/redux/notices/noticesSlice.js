@@ -20,6 +20,7 @@ const noticesInitialState = {
   oneNotice: null,
   favorite: [],
   own: [],
+  ownTotal: 0,
   error: null,
   isLoading: false,
   total: 0,
@@ -77,8 +78,8 @@ const noticesSlice = createSlice({
         state.notices = state.notices.filter(({ _id }) => _id !== payload);
         state.isLoading = false;
       })
-      .addCase(deleteNotice.rejected, (state, { payload }) => {
-        handleReject(state, payload);
+      .addCase(deleteNotice.rejected, (state, action) => {
+        handleReject(state, action);
       })
       // додає оголошення
       .addCase(createNotice.pending, state => {
@@ -95,7 +96,7 @@ const noticesSlice = createSlice({
       .addCase(getUserNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.own = payload;
+        state.own = payload.notices;
       })
       .addCase(getUserNotices.rejected, (state, action) => {
         handleReject(state, action);
@@ -147,6 +148,7 @@ const noticesSlice = createSlice({
     changeFavoritesNotices(state, { payload }) {
       state.notices = state.notices.filter(notice => notice._id !== payload);
     },
+
   },
 });
 
