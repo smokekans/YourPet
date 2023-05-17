@@ -22,6 +22,7 @@ import { getFavorites } from 'redux/user/userSelectors';
 import Typography from '@mui/material/Typography';
 import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
 import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
+import NotFound from 'components/NotFound/NotFound';
 
 function NoticesPage() {
   const { categoryName } = useParams();
@@ -88,7 +89,7 @@ function NoticesPage() {
    {isLoading ? (
   <Loader /> 
 ) : dataToRender && dataToRender.length === 0 ? (
-  <img src={`../../images/notFound/notFound-desktop@2x.png?${Math.random()}`} alt="Placeholder" /> 
+  <NotFound/>
 ) : (
   <NoticesCategoriesList
     categoryName={categoryName}
