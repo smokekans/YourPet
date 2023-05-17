@@ -30,13 +30,22 @@ import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
 import ModalApproveAction from 'components/Modal/ModalApproveAction/ModalApproveAction';
 import { getUserId } from 'redux/user/userSelectors';
 
-const BootstrapDialog = styled(Dialog)(({theme}) => ({
+const BootstrapDialog = styled(Dialog)(() => ({
   '& .MuiPaper-root': {
-    borderRadius: '40px',
-    p: 0
+    borderRadius: '20px',
+    '@media (min-width: 768px)': { borderRadius: '40px' },
+    p: 0,
   },
   '& .MuiDialogContent-root': {
-    padding: '32px',
+    padding: '0px 0px 12px 0px',
+  },
+  '& .MuiDialogActions-root': {
+    flexDirection: 'column',
+    gap: '9px',
+    '@media (min-width: 768px)': {
+      flexDirection: 'row',
+      gap: '8px',
+    },
   },
 }));
 
@@ -50,11 +59,13 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   const [isFavorites, setIsFavorites] = useState(false);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const userId = useSelector(getUserId);
+  const [scroll, setScroll] = useState('body');
 
   // console.log(userId)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleLearnMore = () => {
+    setScroll('body');
     setIsModalOpen(!isModalOpen);
     dispatch(getSingleNotice(_id));
   };
@@ -163,42 +174,34 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
             </Typography>
           </Box>
           <Box sx={styles.buttonWraper}>
-            <Button type="button"
-              onClick={handleLearnMore}
-              sx={styles.button}
-            >
+            <Button type="button" onClick={handleLearnMore} sx={styles.button}>
               Learn more
             </Button>
             <BootstrapDialog
               open={isModalOpen}
               onClose={onClose}
-              // onAddToFavorite={handleFavoriteClick}
+              scroll={scroll}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-descriptionDialogActions"
             >
-              <ModalNotice onClose={onClose} onhandleFavoriteClick={handleFavoriteClick}/>
+              <ModalNotice
+                onClose={onClose}
+                onhandleFavoriteClick={handleFavoriteClick}
+              />
             </BootstrapDialog>
           </Box>
         </CardContent>
       </Box>
-      {/* {
-    
-        isModalOpen && (
-          <ModalNotice
-            onClose={onClose}
-            onAddToFavorite={handleFavoriteClick}
-          />
-        )
-      
-      } */}
-
-      {isDeleteModalOpen && (
+      <BootstrapDialog
+        open={isDeleteModalOpen}
+        onClose={handleDeleteModalClose}
+      >
         <ModalApproveAction
           title={title}
           onClose={handleDeleteModalClose}
           onDelete={handleDeleteNotice}
         />
-      )}
+      </BootstrapDialog>
     </Card>
   );
 };

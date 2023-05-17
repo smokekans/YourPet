@@ -12,15 +12,17 @@ import {
   Typography,
   List,
   ListItem,
-  ListItemText,
   IconButton,
+  SvgIcon,
 } from '@mui/material';
 import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
 import { ReactComponent as IconClose } from '../../../images/icons/cross-small.svg';
 import styles from './styles';
+// import { getFavorites } from 'redux/user/userSelectors';
 
 function ModalNotice({ onClose, onhandleFavoriteClick }) {
   const getOne = useSelector(getOneNotice);
+  // const isfavorite = useSelector(getFavorites);
 
   const {
     image,
@@ -34,6 +36,7 @@ function ModalNotice({ onClose, onhandleFavoriteClick }) {
     breed,
     email,
     category,
+    price,
   } = getOne || {};
 
   return (
@@ -44,22 +47,20 @@ function ModalNotice({ onClose, onhandleFavoriteClick }) {
         sx={{
           position: 'absolute',
           zIndex: '2000',
-          // display: 'inline-block',
-          right: 26,
-          top: 23,
+          right: { mobile: 12, tablet: 26 },
+          top: { mobile: 12, tablet: 23 },
           p: 0,
           m: 0,
         }}
       >
-        <IconClose />
+        {/* <SvgIcon
+            component={IconClose}
+            inheritViewBox
+            htmlColor="rgba(254, 249, 249, 1)"
+          /> */}
+        <IconClose/>
       </IconButton>
       <DialogContent>
-        {/* <Box
-          onClick={onClose}
-          sx={styles.close}
-        >
-                <IconClose />
-        </Box> */}
         <Box sx={styles.content}>
           <CardMedia
             component="img"
@@ -67,127 +68,105 @@ function ModalNotice({ onClose, onhandleFavoriteClick }) {
             sx={styles.media}
             title={title}
           />
-          <Typography
-            sx={styles.category}
-            // variant="subtitle2"
-          >
-            {CATEGORY[category]}
-          </Typography>
+          <Typography sx={styles.category}>{CATEGORY[category]}</Typography>
           <Box sx={styles.contentText}>
             <Typography component="h1" sx={styles.title}>
               {title}
             </Typography>
             <List sx={styles.list}>
               <ListItem sx={styles.listItem}>
-                Name:
-                <ListItemText sx={styles.listItemText}> {name}</ListItemText>
+                Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}> {name}</Typography>
               </ListItem>
               <ListItem sx={styles.listItem}>
                 Birthday:
-                <ListItemText sx={styles.listItemText}>{birthday}</ListItemText>
+                <Typography sx={styles.listItemText}>{birthday}</Typography>
               </ListItem>
               <ListItem sx={styles.listItem}>
-                Breed:
-                <ListItemText sx={styles.listItemText}>{breed}</ListItemText>
+                Breed: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>{breed}</Typography>
               </ListItem>
               <ListItem sx={styles.listItem}>
-                Place:
-                <ListItemText sx={styles.listItemText}>
-                  {' '}
-                  {location}
-                </ListItemText>
+                Place: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>{location}</Typography>
               </ListItem>
               <ListItem sx={styles.listItem}>
-                The sex:
-                <ListItemText sx={styles.listItemText}>{sex}</ListItemText>
+                The sex: &nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>{sex}</Typography>
+              </ListItem>
+              {category === 'sell' && (
+                <ListItem sx={styles.listItem}>
+                  Price: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <Typography sx={styles.listItemText}>{price}</Typography>
+                </ListItem>
+              )}
+              <ListItem sx={styles.listItem}>
+                Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>
+                  <Typography
+                    component="a"
+                    sx={styles.linkT}
+                    href={`mailto:${email}`}
+                  >
+                    {email}
+                  </Typography>
+                </Typography>
               </ListItem>
               <ListItem sx={styles.listItem}>
-                Email:
-                <ListItemText sx={styles.listItemText}>
-                  <a href="mailto:{email}">{email}</a>
-                </ListItemText>
-              </ListItem>
-              <ListItem sx={styles.listItem}>
-                Phone:
-                <ListItemText sx={styles.listItemText}>
-                  <a href="tell:{phone}">{phone}</a>
-                </ListItemText>
+                Phone: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>
+                  <Typography
+                    component="a"
+                    sx={styles.linkT}
+                    href={`tel:${phone}`}
+                  >
+                    {phone}
+                  </Typography>
+                </Typography>
               </ListItem>
             </List>
           </Box>
         </Box>
 
         <Box>
-          <span>Comments: </span>
-          {comments}
+          <Typography sx={styles.comment} component="span">
+            Comments:{' '}
+          </Typography><Typography sx={styles.commentText} component="span">
+           {comments}
+          </Typography>
+          
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onhandleFavoriteClick}>
-          Add to <IconHeart />
+        <Button
+          onClick={onhandleFavoriteClick}
+          sx={styles.button}
+          aria-label="add"
+        >
+          {/* {!isfavorite ? "Remove from" : "Add to"} */}
+          Add to &nbsp;
+          <SvgIcon
+            component={IconHeart}
+            inheritViewBox
+            htmlColor="rgba(254, 249, 249, 0)"
+          />
         </Button>
-        <Button onClick={onClose} autoFocus>
-          Contact
+        <Button sx={styles.button}>
+          <Typography
+            component="a"
+            sx={{
+              textDecoration: 'none',
+              color: 'inherit',
+              '&:hover': { color: 'inherit' },
+            }}
+            href={`tel:${phone}`}
+          >
+            Contact
+          </Typography>
         </Button>
       </DialogActions>
     </Card>
   );
-
-  // return createPortal(
-  //   <div className={css.Overlay} onClick={handleBackdrop}>
-  //     <div className={css.Modal}>
-  //       <span
-  //         onClick={() => {
-  //           onClose();
-  //         }}
-  //       >
-  //         Close
-  //       </span>
-  //       <img src={image} alt={title} width="150" height="150px" />
-  //       <h1>{title}</h1>
-  //       <ul>
-  //         <li>
-  //           <span>Name: </span>
-  //           {name}
-  //         </li>
-  //         <li>
-  //           <span>Birthday: </span>
-  //           {birthday}
-  //         </li>
-  //         <li>
-  //           <span>Breed: </span>
-  //           {breed}
-  //         </li>
-  //         <li>
-  //           <span>Place: </span>
-  //           {location}
-  //         </li>
-  //         <li>
-  //           <span>The sex: </span>
-  //           {sex}
-  //         </li>
-  //         <li>
-  //           <span>Email: </span>
-  //           <a href="mailto:{email}">{email}</a>
-  //         </li>
-  //         <li>
-  //           <span>Phone: </span>
-  //           <a href="tell:{phone}">{phone}</a>
-  //         </li>
-  //       </ul>
-  //       <p>
-  //         <span>Comments: </span>
-  //         {comments}
-  //       </p>
-  //       {/* {isFavorite ? <button onClick={AddAndClose}>Remove from favorite</button> : <button onClick={AddAndClose}>Add to favorite</button>} */}
-  //       <button onClick={AddAndClose}>Add to favorite</button>
-  //       <button>
-  //         <a href="tell:{phone}">Contact</a>
-  //       </button>
-  //     </div>
-  //   </div>,
-  //   modalRoot
-  // );
 }
 
 export default ModalNotice;

@@ -1,20 +1,18 @@
 import React from 'react';
 import {
-  Box,
   Card,
   IconButton,
   DialogActions,
   DialogContent,
-  Typography,
   Button,
   SvgIcon,
 } from '@mui/material';
-import { ReactComponent as IconClose } from '../../../images/icons/cross-small.svg';
-import { ReactComponent as IconTrash } from '../../../images/icons/trash.svg';
+import { ReactComponent as IconClose } from '../../images/icons/cross-small.svg';
+import { ReactComponent as IconLogOut } from '../../images/icons/logout.svg';
 
 import styles from './styles';
 
-function ModalApproveAction({ title, onClose, onDelete }) {
+function ModalApproveLogOut({ onClose, onConfirm }) {
   return (
     <Card sx={styles.root}>
       <IconButton
@@ -35,28 +33,15 @@ function ModalApproveAction({ title, onClose, onDelete }) {
           htmlColor="rgba(254, 249, 249, 1)"
         />
       </IconButton>
-      <DialogContent>
-        <Box sx={styles.content}>
-          <Typography sx={styles.title}>Delete adverstiment?</Typography>
-          <Typography sx={styles.commentText} component={'p'}>
-            Are you sure you want to delete "
-            <Typography sx={styles.titleText} component={'span'}>
-              {title}
-            </Typography>
-            "? <br />
-            You can't undo this action.
-          </Typography>
-        </Box>
-      </DialogContent>
+      <DialogContent sx={styles.title}>Already leaving?</DialogContent>
       <DialogActions sx={styles.buttonBox}>
-        {' '}
         <Button onClick={onClose} sx={styles.button}>
           Cancel
         </Button>
-        <Button onClick={onDelete} sx={styles.button}>
+        <Button onClick={onConfirm} sx={styles.button}>
           Yes
           <SvgIcon
-            component={IconTrash}
+            component={IconLogOut}
             inheritViewBox
             htmlColor="rgba(254, 249, 249, 0)"
           />
@@ -66,4 +51,4 @@ function ModalApproveAction({ title, onClose, onDelete }) {
   );
 }
 
-export default ModalApproveAction;
+export default ModalApproveLogOut;
