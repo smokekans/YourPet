@@ -9,7 +9,8 @@ import { Typography } from '@mui/material';
 function UserPage() {
   return (
     <>
-      <Container sx={{mt:"62px",}}>
+      <Container sx={{mt:"62px",justifyContent: 'center',
+    display: 'grid',}}>
         <Box sx={styles.headlines}>
           <Typography variant="h2" sx={styles.information}>
             My information:
