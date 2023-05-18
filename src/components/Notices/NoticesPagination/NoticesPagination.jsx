@@ -13,14 +13,21 @@ export const NoticesPagination = () => {
   const { categoryName } = useParams();
 
   useEffect(() => {
-    dispatch(
-      getNoticeByCategory({
-        category: categoryName,
-        page: page,
-        limit: 10,
-      })
-    );
+    if (categoryName !== 'owner') {
+      dispatch(
+        getNoticeByCategory({
+          category: categoryName,
+          page: page,
+          limit: 10,
+        })
+      );
+    }
   }, [categoryName, dispatch, page]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [categoryName]);
+
   return (
     <div>
       {total > 10 ? (

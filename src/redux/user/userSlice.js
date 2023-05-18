@@ -16,6 +16,7 @@ const userInitialState = {
   image: '',
   notices: [],
   favorite: [],
+  favoriteTotal: 0,
   error: null,
   isLoading: false,
 };
@@ -25,6 +26,7 @@ function UserFulfilled(state, { payload }) {
   state.image = payload.image;
   state.userName = payload.name;
   state.pets = payload.pets;
+  state.favorite = payload.favorite;
   state.isLoading = false;
   state.error = null;
 }
@@ -54,7 +56,7 @@ const userSlice = createSlice({
       .addCase(addToFavorites.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         // state.favorite.push(payload);
-        state.favorite = payload.user.favorite;
+        state.favorite = payload;
         state.error = null;
       })
       .addCase(addToFavorites.rejected, (state, { payload }) => {
@@ -68,7 +70,8 @@ const userSlice = createSlice({
       .addCase(getFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.favorite = payload;
+        state.favorite = payload.user.favorite;
+        state.favoriteTotal = payload.total;
       })
       .addCase(getFavorite.rejected, (state, { payload }) => {
         state.notices = { data: [] };

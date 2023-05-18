@@ -1,38 +1,45 @@
 const styles = {
   authContainer: {
     ml: {
-      //       mobile: '20px 20px 0 20px',
-      //   tablet: '167px',
       tablet: 'auto',
-
       desktop: 'auto',
     },
     display: 'flex',
-    flexDirection: { mobile: 'column' },
+    flexDirection: { mobile: 'column', tablet: 'row' },
     gap: { mobile: '12px', tablet: '20px', desktop: '20px' },
-    mb: { mobile: '40px' },
+    mb: { mobile: '40px', tablet: 0, desktop: 0 },
   },
   authBtn: {
-    height: '38px',
-    width: '142px',
+    height: { mobile: '36px', tablet: '36px', desktop: '40px' },
+    width: { mobile: '165px', tablet: '142px', desktop: '165px' },
     borderRadius: '40px',
     color: 'accent.main',
-
     border: '2px solid #FFC107',
-    //   '& .MuiBox-root css-1dp9lam': {
+    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
 
-    // },
+    '& svg': {
+      // fill: '#FEF9F9',
+      // fill: '#FFC107',
+    },
     '&:hover': {
       border: '2px solid #FFC107',
       color: 'text.light',
       backgroundColor: 'accent.main',
-      fill: 'white',
+      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+      fill: '#FEF9F9',
+    },
+    '&:hover svg': {
+      fill: '#FEF9F9',
+      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
     },
     '&.active': {
       backgroundColor: 'accent.main',
       color: 'text.light',
       borderColor: 'accent.main',
-      fill: 'white',
+      fill: '#FEF9F9',
+    },
+    '&:active svg': {
+      fill: '#FEF9F9',
     },
   },
   btnText: {
@@ -42,6 +49,22 @@ const styles = {
     fontWeight: 700,
     fontSize: '16px',
     lineHeight: '22px',
+    textTransform: 'none',
+    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  print: {
+    fill: '#FFC107',
+    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+
+    '&:hover': {
+      fill: '#FEF9F9',
+      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+    },
+    '&.active': {
+      fill: '#FEF9F9',
+      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+    },
   },
 };
+
 export default styles;

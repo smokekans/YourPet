@@ -1,82 +1,49 @@
-// import * as React from 'react';
-// import Button from '@mui/material/Button';
-// import Dialog from '@mui/material/Dialog';
-// import DialogActions from '@mui/material/DialogActions';
-// import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
-// import DialogTitle from '@mui/material/DialogTitle';
-
-// export default function ModalNotice() {
-//   // const [open, setOpen] = React.useState(false);
-
-//   // const handleClickOpen = () => {
-//   //   setOpen(true);
-//   // };
-
-//   // const handleClose = () => {
-//   //   setOpen(false);
-//   // };
-
-//   return (
-//     <div>
-//       {/* <Button variant="outlined" onClick={handleClickOpen}>
-//         Learn more
-//       </Button>
-//       <Dialog
-//         open={open}
-//         onClose={handleClose}
-//         aria-labelledby="alert-dialog-title"
-//         aria-describedby="alert-dialog-description"
-//       > */}
-//         <DialogTitle id="alert-dialog-title">
-//           {"Use Google's location service?"}
-//         </DialogTitle>
-//         <DialogContent>
-//           <DialogContentText id="alert-dialog-description">
-//             Let Google help apps determine location. This means sending anonymous
-//             location data to Google, even when no apps are running.
-//           </DialogContentText>
-//         </DialogContent>
-//         {/* <DialogActions>
-//           <Button onClick={handleClose}>Disagree</Button>
-//           <Button onClick={handleClose} autoFocus>
-//             Agree
-//           </Button>
-//         </DialogActions> */}
-//       {/* </Dialog> */}
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import React, { useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import css from './Modal.module.css';
-import { useSelector } from 'react-redux';
-// import { getFavorite } from 'redux/user/userSelectors';
+import React, { useState } from 'react';
+import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
+import { toast } from 'react-toastify';
+// import { getFavorites } from 'redux/user/userSelectors';
+import { deleteFavoriteObj } from 'redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { getOneNotice } from 'redux/notices/noticesSelectors';
+import { Button, Card, CardMedia, DialogActions, DialogContent, IconButton, List, ListItem, Typography } from '@mui/material';
+import styles from './styles';
+import { Box } from '@mui/system';
+import CATEGORY from 'utils/constants';
+import { ReactComponent as IconClose } from '../../../images/icons/cross-small-1.svg';
+import { ReactComponent as IconHeart } from '../../../images/icons/heart-1.svg';
+import { getAccessToken } from 'redux/auth/authSelectors';
 
-const modalRoot = document.querySelector('#modal-root');
-
-function ModalNotice({ onClose, onAddToFavorite }) {
+function ModalNotice({ noticeid, onClose }) {
+  const dispatch = useDispatch();
+  const favorites = useSelector(state => state.user.favorite);
+  const isFavorite = favorites.some((favorite) => favorite._id === noticeid);
+  const isLoggedIn = useSelector(getAccessToken);
+console.log("!!!!!!!!!favorites", favorites)
   const getOne = useSelector(getOneNotice);
+  const [isFavorites, setIsFavorites] = useState(false);
+  console.log(isFavorites)
+const handleFavoriteClick = () => {
+    if (!isLoggedIn) {
+      toast.info(
+        'You must be registered or logged in to continue the operation'
+      );
+      return;
+    }
 
-  // console.log(getOne)
-
+    if (isFavorite) {
+      toast.error('Removed from favorites');
+      dispatch(deleteFromFavorite(noticeid));
+      dispatch(deleteFavoriteObj(noticeid));
+      setIsFavorites(false);
+    } else {
+      toast('Added to favorites');
+      dispatch(addToFavorites(noticeid));
+      setIsFavorites(true);
+    }
+  };
+  
   const {
-    // _id,
+    _id,
     image,
     name,
     comments,
@@ -87,92 +54,139 @@ function ModalNotice({ onClose, onAddToFavorite }) {
     sex,
     breed,
     email,
+    category,
+    price,
   } = getOne || {};
 
-  // const favorite = useSelector(getFavorite);
-  // console.log(favorite)
-  // const favoritePet = favorite.find(p => (p._id === _id))
-  //     const favoriteElement = useSelector(getFavorite);
-  // const dataArray = Array.isArray(favoriteElement) ? favoriteElement : [favoriteElement];
-  //   console.log(dataArray);
+  return (
+    <Card sx={styles.root}>
+      <IconButton
+        onClick={onClose}
+        autoFocus
+        sx={{
+          position: 'absolute',
+          zIndex: '2000',
+          right: { mobile: 12, tablet: 24 },
+          top: { mobile: 12, tablet: 24 },
+          p: 0,
+          m: 0,
+          width: '24px',
+          height: '24px',
+          '& svg': {
+            stroke: '#54ADFF',
+          },
+        }}
+      >
+        <IconClose />
+      </IconButton>
+      <DialogContent >
+        <Box sx={styles.content}>
+          <CardMedia
+            component="img"
+            src={image}
+            sx={styles.media}
+            title={title}
+          />
+          <Typography sx={styles.category}>{CATEGORY[category]}</Typography>
+          <Box sx={styles.contentText}>
+            <Typography component="h1" sx={styles.title}>
+              {title}
+            </Typography>
+            <List sx={styles.list}>
+              <ListItem sx={styles.listItem}>
+                Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}> {name}</Typography>
+              </ListItem>
+              <ListItem sx={styles.listItem}>
+                Birthday:
+                <Typography sx={styles.listItemText}>{birthday}</Typography>
+              </ListItem>
+              <ListItem sx={styles.listItem}>
+                Breed: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>{breed}</Typography>
+              </ListItem>
+              <ListItem sx={styles.listItem}>
+                Place: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>{location}</Typography>
+              </ListItem>
+              <ListItem sx={styles.listItem}>
+                The sex: &nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>{sex}</Typography>
+              </ListItem>
+              {category === 'sell' && (
+                <ListItem sx={styles.listItem}>
+                  Price: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <Typography sx={styles.listItemText}>{price}&#8364;</Typography>
+                </ListItem>
+              )}
+              <ListItem sx={styles.listItem}>
+                Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>
+                  <Typography
+                    component="a"
+                    sx={styles.linkT}
+                    href={`mailto:${email}`}
+                  >
+                    {email}
+                  </Typography>
+                </Typography>
+              </ListItem>
+              <ListItem sx={styles.listItem}>
+                Phone: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography sx={styles.listItemText}>
+                  <Typography
+                    component="a"
+                    sx={styles.linkT}
+                    href={`tel:${phone}`}
+                  >
+                    {phone}
+                  </Typography>
+                </Typography>
+              </ListItem>
+            </List>
+          </Box>
+        </Box>
 
-  //   console.log(favoriteElement); // Проверка значения favoriteElement
-  //   const isFavorite = dataArray.includes(_id);
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleEscape);
-    function handleEscape(e) {
-      if (e.code === 'Escape') onClose();
-    }
-    return () => {
-      window.removeEventListener('keydown', handleEscape);
-    };
-  }, [onClose]);
-
-  const handleBackdrop = e => {
-    if (e.target === e.currentTarget) onClose();
-  };
-
-  const AddAndClose = () => {
-    onAddToFavorite();
-    onClose();
-  };
-
-  return createPortal(
-    <div className={css.Overlay} onClick={handleBackdrop}>
-      <div className={css.Modal}>
-        <span
+        <Box>
+          <Typography sx={styles.comment} component="span">
+            Comments:{' '}
+          </Typography>
+          <Typography sx={styles.commentText} component="span">
+            {comments}
+          </Typography>
+        </Box>
+      </DialogContent>
+      <DialogActions >
+        <Button
           onClick={() => {
-            onClose();
-          }}
+            handleFavoriteClick(_id)
+            onClose()
+          }} aria-label={isFavorite ? 'Remove from' : 'Add to'}
+          sx={styles.button}
+
         >
-          Close
-        </span>
-        <img src={image} alt={title} width="150" height="150px" />
-        <h1>{title}</h1>
-        <ul>
-          <li>
-            <span>Name: </span>
-            {name}
-          </li>
-          <li>
-            <span>Birthday: </span>
-            {birthday}
-          </li>
-          <li>
-            <span>Breed: </span>
-            {breed}
-          </li>
-          <li>
-            <span>Place: </span>
-            {location}
-          </li>
-          <li>
-            <span>The sex: </span>
-            {sex}
-          </li>
-          <li>
-            <span>Email: </span>
-            <a href="mailto:{email}">{email}</a>
-          </li>
-          <li>
-            <span>Phone: </span>
-            <a href="tell:{phone}">{phone}</a>
-          </li>
-        </ul>
-        <p>
-          <span>Comments: </span>
-          {comments}
-        </p>
-        {/* {isFavorite ? <button onClick={AddAndClose}>Remove from favorite</button> : <button onClick={AddAndClose}>Add to favorite</button>} */}
-        <button onClick={AddAndClose}>Add to favorite</button>
-        <button>
-          <a href="tell:{phone}">Contact</a>
-        </button>
-      </div>
-    </div>,
-    modalRoot
+        {isFavorite ? 'Remove from' : 'Add to'}
+          &nbsp;
+            <IconHeart width="24px"/>
+        </Button>
+        <Button sx={styles.button}>
+          <Typography
+            component="a"
+            sx={{
+              textDecoration: 'none',
+              color: 'inherit',
+              '&:hover': { color: 'inherit' },
+            }}
+            href={`tel:${phone}`}
+          >
+            Contact
+          </Typography>
+        </Button>
+      </DialogActions>
+    </Card>
   );
 }
 
 export default ModalNotice;
+
+

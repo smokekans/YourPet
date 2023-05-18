@@ -10,11 +10,9 @@ const styles = {
     },
   },
   headerList: {
+    width: { mobile: '320px', tablet: '768px', desktop: '1280px' },
     display: 'flex',
-    // justifyContent: 'space-between',
-    // justifyContent: 'flex-start',
     alignItems: 'center',
-    width: 1,
   },
 };
 export default styles;

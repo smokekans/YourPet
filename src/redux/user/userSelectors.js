@@ -7,5 +7,4 @@ export const isPets = state => state.user.pets;
 
 export const getAvatar = state => state.user.user.image;
 export const getFavorites = state => state.user.favorite;
-export const getFavorite = state => state.user.favorite;
 export const getUserId = state => state.user.user.id;

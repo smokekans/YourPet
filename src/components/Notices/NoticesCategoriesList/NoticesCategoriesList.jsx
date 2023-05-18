@@ -1,17 +1,33 @@
 import React from 'react';
-import {
-  // CardContent,
-  Grid
-} from '@mui/material';
+import { Container, List } from '@mui/material';
 
 import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
 
 function NoticesCategoriesList({ data, categoryName }) {
   const dataArray = Array.isArray(data) ? data : [data];
+  // const dataArray = data || [];
   console.log('NoticesCategoriesList ~ dataArray:', dataArray);
 
   return (
-    <Grid container spacing={2} sx={{ flexGrow: 1,  marginLeft: 0  }}>
+    <Container sx={{
+    mr: 'auto',
+    ml: 'auto',
+    width: { mobile: '320px', tablet: '768px', desktop: '100%' },
+    pr: { mobile: '20px', tablet: '32px', desktop: '16px' },
+    pl: { mobile: '20px', tablet: '32px', desktop: '16px' },
+  }}>
+    <List
+      container
+      spacing={2}
+      sx={{
+        display: 'flex',
+        alingItems: 'center',
+        justifyContent: 'space-around',
+        flexWrap: 'wrap',
+        // p: 0,
+        gap: { mobile: '20px' },
+      }}
+    >
       {dataArray
         .slice()
         .reverse()
@@ -24,15 +40,14 @@ function NoticesCategoriesList({ data, categoryName }) {
               categoryName === 'favorite')
         )
         .map(item => (
-          <Grid item key={item._id}
-           sx={{ paddingLeft: 0, paddingTop: 0, paddingBottom: 0 }}
-          >
-            <div sx={{ padding: '8px '}}>
-              <NoticeCategoryItem data={item} categoryName={categoryName} />
-            </div>
-          </Grid>
+          <li item key={item._id}>
+            {/* <div sx={{ padding: '8px' }}> */}
+            <NoticeCategoryItem data={item} categoryName={categoryName} />
+            {/* </div> */}
+          </li>
         ))}
-    </Grid>
+      </List>
+      </Container>
   );
 }
 

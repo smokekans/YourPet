@@ -4,21 +4,18 @@ import UserData from 'components/User/UserData/UserData';
 import PetsData from 'components/Pets/PetsData/PetsData';
 import styles from './styles';
 import { Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+// import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
+// import { useSelector } from 'react-redux';
+// import { getIsNewUser } from 'redux/auth/authSelectors';
 
 function UserPage() {
+  // const isNewUser = useSelector(getIsNewUser);
   return (
     <>
-      <Container>
+      <Container sx={{ mt: '62px', justifyContent: 'center', display: 'grid' }}>
         <Box sx={styles.headlines}>
           <Typography variant="h2" sx={styles.information}>
             My information:
-          </Typography>
-          <Typography variant="h2" sx={styles.pets}>
-            My pets:
-            <NavLink to="/add-pet" sx={styles.btnAdd}>
-              Add pets +
-            </NavLink>
           </Typography>
         </Box>
         <Box sx={styles.container}>
@@ -26,6 +23,7 @@ function UserPage() {
           <PetsData />
         </Box>
       </Container>
+      {/* {isNewUser ? <ModalCongrats /> : null} */}
     </>
   );
 }

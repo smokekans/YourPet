@@ -1,48 +1,67 @@
-import React, { useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import css from './Modal.module.css';
-const modalRoot = document.querySelector('#modal-root');
+import React from 'react';
+import {
+  Box,
+  Card,
+  IconButton,
+  DialogActions,
+  DialogContent,
+  Typography,
+  Button,
+} from '@mui/material';
+import { ReactComponent as IconClose } from '../../../images/icons/cross-small-1.svg';
+import { ReactComponent as IconTrash } from '../../../images/icons/trash-2.svg';
+
+import styles from './styles';
 
 function ModalApproveAction({ title, onClose, onDelete }) {
-  useEffect(() => {
-    window.addEventListener('keydown', handleEscape);
-    function handleEscape(e) {
-      if (e.code === 'Escape') onClose();
-    }
-    return () => {
-      window.removeEventListener('keydown', handleEscape);
-    };
-  }, [onClose]);
-
-  const handleBackdrop = e => {
-    if (e.target === e.currentTarget) onClose();
-  };
-
-  return createPortal(
-    <div className={css.Overlay} onClick={handleBackdrop}>
-      <div className={css.Modal}>
-        <span onClick={()=>{onClose()}}>*</span>
-        <h1>Delete adverstiment?</h1>
-        <p>
-          Are you sure you want to delete ${title}? You can`t undo this action.
-        </p>
-        <button onClick={()=>{onClose()}}>Cancel</button>
-        <button onClick={()=>{onDelete()}}>Yes</button>
-      </div>
-    </div>,
-    modalRoot
+  return (
+    <Card sx={styles.root}>
+     <IconButton
+        onClick={onClose}
+        autoFocus
+        sx={{
+          position: 'absolute',
+          zIndex: '2000',
+          right: { mobile: 12, tablet: 24 },
+          top: { mobile: 12, tablet: 24 },
+          p: 0,
+          m: 0,
+          width: '24px',
+          height: '24px',
+          '& svg': {
+            stroke: '#54ADFF',
+          },
+        }}
+      >
+        <IconClose/>
+      </IconButton>
+      <DialogContent>
+        <Box sx={styles.content}>
+          <Typography sx={styles.title}>Delete adverstiment?</Typography>
+          <Typography sx={styles.commentText} component={'p'}>
+            Are you sure you want to delete "
+            <Typography sx={styles.titleText} component={'span'}>
+              {title}
+            </Typography>
+            "? <br />
+            You can't undo this action.
+          </Typography>
+        </Box>
+      </DialogContent>
+      <DialogActions sx={styles.buttonBox}>
+        {' '}
+        <Button onClick={onClose} sx={styles.button}>
+          Cancel
+        </Button>
+        <Button onClick={onDelete} sx={styles.button}>
+          Yes
+          <IconTrash
+            width="24px"
+          />
+        </Button>
+      </DialogActions>
+    </Card>
   );
-  // <div>
-  //   <div>
-  //     <span>*</span>
-  //     <h1>Delete adverstiment?</h1>
-  //     <p>
-  //       Are you sure you want to delete ${title}? You can`t undo this action.
-  //     </p>
-  //     <button>Cancel</button>
-  //     <button>Yes</button>
-  //   </div>
-  // </div>
 }
 
 export default ModalApproveAction;

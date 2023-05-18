@@ -11,6 +11,7 @@ import {
   getNoticesByQweryOwner,
   getNoticesByQweryFavorite,
 } from './noticesOperation';
+import { getFavorite } from 'redux/user/userOperations';
 
 const noticesInitialState = {
   notices: [],
@@ -19,6 +20,7 @@ const noticesInitialState = {
   oneNotice: null,
   favorite: [],
   own: [],
+  ownTotal: 0,
   error: null,
   isLoading: false,
   total: 0,
@@ -76,8 +78,8 @@ const noticesSlice = createSlice({
         state.notices = state.notices.filter(({ _id }) => _id !== payload);
         state.isLoading = false;
       })
-      .addCase(deleteNotice.rejected, (state, { payload }) => {
-        handleReject(state, payload);
+      .addCase(deleteNotice.rejected, (state, action) => {
+        handleReject(state, action);
       })
       // додає оголошення
       .addCase(createNotice.pending, state => {
@@ -94,7 +96,7 @@ const noticesSlice = createSlice({
       .addCase(getUserNotices.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.own = payload;
+        state.own = payload.notices;
       })
       .addCase(getUserNotices.rejected, (state, action) => {
         handleReject(state, action);
@@ -126,11 +128,16 @@ const noticesSlice = createSlice({
       })
       .addCase(getNoticesByQweryFavorite.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.notices = payload;
+        state.notices = payload.notices;
         state.error = null;
       })
       .addCase(getNoticesByQweryFavorite.rejected, (state, action) => {
         handleReject(state, action);
+      })
+      .addCase(getFavorite.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.notices = payload;
+        state.error = null;
       });
   },
   reducers: {
@@ -141,6 +148,7 @@ const noticesSlice = createSlice({
     changeFavoritesNotices(state, { payload }) {
       state.notices = state.notices.filter(notice => notice._id !== payload);
     },
+
   },
 });
 
