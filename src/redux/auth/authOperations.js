@@ -27,7 +27,7 @@ export const register = createAsyncThunk(
         })
       );
     } catch (error) {
-      toast.error('Missing or not valid field password or email');
+      toast.error('Email is used');
       return rejectWithValue(error.message);
     }
   }
@@ -42,7 +42,7 @@ export const login = createAsyncThunk(
       dispatch(getCurrentUser());
       return data;
     } catch (error) {
-      toast.error('Missing or not valid field password');
+      toast.error('Email or password is wrong');
       return rejectWithValue(error.message);
     }
   }

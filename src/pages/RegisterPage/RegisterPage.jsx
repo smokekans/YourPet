@@ -1,40 +1,38 @@
 import React, { useState } from 'react';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/authOperations';
-import { Container } from '@mui/material';
-import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
-// import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
-// import { toast } from 'react-toastify';
+import { Container, styled, SvgIcon } from '@mui/material';
 import styles from './styles';
 import {
   Card,
   TextField,
-  CardContent,
   Typography,
   Box,
   Button,
-  InputLabel,
-  // FormHelperText,
+  InputAdornment,
+  IconButton,
 } from '@mui/material';
-// import BasicModal from 'components/Modal/ModalCongrats/ModalCongrats';
-// import {
-//   // Typography,
-//   FormControl,
-//   FilledInput,
-//   InputAdornment,
-// } from '@mui/material';
-// import { ReactComponent as PawPrint } from '../../images/icons/edit.svg';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { ReactComponent as IconGoogle } from '../../images/icons/google-icon.svg';
+import { ReactComponent as IconClose } from '../../images/icons/cross-small-red.svg';
+import { ReactComponent as IconCheck } from '../../images/icons/check.svg';
+
+const ValidationTextField = styled(TextField)({
+  '& .MuiInputBase-root.MuiOutlinedInput-root': {
+    borderRadius: '40px',
+    color: '#888888',
+  },
+  '& .MuiFormHelperText-root': {
+    color: '#00C3AD',
+  },
+});
 
 function RegisterPage() {
   const dispatch = useDispatch();
-
-  // на стор профілю
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  // на стор профілю
-
   const regValidationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email format')
@@ -52,145 +50,473 @@ function RegisterPage() {
       .oneOf([Yup.ref('password'), null], 'Passwords must match!'),
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isPasswordSecure, setIsPasswordSecure] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isConfirmPassword, setIsConfirmPassword] = useState(false);
+  const [pass, setPass] = useState('');
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const handlePasswordChange = event => {
+    const { value } = event.target;
+    const isValidPassword =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,16}$/.test(value);
+    setIsPasswordSecure(isValidPassword);
+    setPass(value)
+  };
+
+  const handleConfirmPasswordChange = event => {
+    const { value } = event.target;
+      setIsConfirmPassword(value === pass);
+  
+  };
+
+  const handleEmailChange = event => {
+    const { value } = event.target;
+    const isValidEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
+      value
+    );
+    setIsEmailValid(isValidEmail);
+  };
+
   return (
-    <>
-      <Container>
-        <Card sx={styles.root}>
-          <CardContent sx={styles.box}>
-            <Typography sx={styles.title}>Registration</Typography>
-            <Formik
-              initialValues={{
-                email: '',
-                password: '',
-                confirmPassword: '',
-              }}
-              validationSchema={regValidationSchema}
-              onSubmit={(values, { resetForm }) => {
-                const newUser = {
-                  email: values.email,
-                  password: values.password,
-                };
-                dispatch(register(newUser));
-                resetForm();
-                console.log(newUser);
-              }}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isSubmitting,
-              }) => (
-                <Box
-                  component="form"
-                  sx={{
-                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                  }}
-                  noValidate
-                  // autoComplete="off"
-                  onSubmit={handleSubmit}
-                >
-                  {/* <FormControl variant="filled">
-            <FilledInput
-              id="email"
-              type='email'
-              sx={styles.input}
-              // onChange={ChangeData}
-              // defaultValue={email}
-              endAdornment={
-                <InputAdornment position="end">
-                  <PawPrint
-                    className="email"
-                    // onClick={handleClick}
-
-                    edge="end"
-                  ></PawPrint>
-                </InputAdornment>
-              }
-            />
-          </FormControl> */}
-                  <InputLabel htmlFor="email">
-                    <TextField
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.email}
-                    />
-                    {/* {errors.email && touched.email && errors.email} */}
-                    <ErrorMessage component="div" name="email" />
-                  </InputLabel>
-
-                  <InputLabel htmlFor="password">
-                    <TextField
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
-                    />
-                    {/* {errors.password && touched.password && errors.password} */}
-                    <ErrorMessage component="div" name="password" />
-                  </InputLabel>
-
-                  <InputLabel htmlFor="passwordRepeat">
-                    <TextField
-                      type="password"
-                      name="confirmPassword"
-                      placeholder="Confirm password"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.confirmPassword}
-                    />
-                    {/* {errors.password && touched.password && errors.password} */}
-                    <ErrorMessage component="div" name="confirmPassword" />
-                  </InputLabel>
-
-                  <Button
-                    variant="contained"
-                    sx={styles.button}
-                    type="submit"
-                    disabled={isSubmitting}
-
-                    // на стор профілю
-                    // onClick={() => {
-                    //   setIsModalOpen(!isModalOpen);
-                    // }}
-                    // на стор профілю
-                  >
-                    Registration
-                    {/* <BasicModal /> */}
-                  </Button>
-                  {
-                    // на стор профілю
-                    isModalOpen && (
-                      <ModalCongrats
-                        onClick={
-                          () => {
-                            setIsModalOpen(!isModalOpen);
-                          }
-                          // на стор профілю
-                        }
-                      />
-                    )
-                  }
-                  <Box sx={styles.text}>
-                    <p>Already have an account?</p>
-                    <Link to="/login">Login</Link>
-                  </Box>
-                </Box>
-              )}
-            </Formik>
-          </CardContent>
-        </Card>
-      </Container>
-    </>
+    <Container>
+      <Card sx={styles.root}>
+        <Typography sx={styles.title}>Registration</Typography>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
+          validationSchema={regValidationSchema}
+          onSubmit={(values, { resetForm }) => {
+            const newUser = {
+              email: values.email,
+              password: values.password,
+            };
+            dispatch(register(newUser));
+            resetForm();
+          }}
+        >
+          {({
+            values,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            errors,
+            touched,
+          }) => (
+            <Form onSubmit={handleSubmit}>
+              <Field
+                as={ValidationTextField}
+                type="email"
+                name="email"
+                placeholder="Email"
+                fullWidth
+                focused
+                margin="dense"
+                variant="outlined"
+                onChange={event => {
+                  handleChange(event);
+                  handleEmailChange(event);
+                }}
+                onBlur={handleBlur}
+                error={!!(touched.email && errors.email)}
+                helperText={
+                  touched.email && errors.email ? (
+                    <ErrorMessage name="email" />
+                  ) : isEmailValid ? (
+                    'Email is valid'
+                  ) : (
+                    ' '
+                  )
+                }
+                value={values.email}
+                InputProps={{
+                  color:
+                    touched.email && errors.email
+                      ? 'error'
+                      : isEmailValid
+                      ? 'success'
+                      : 'primary',
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {touched.email && errors.email ? (
+                        <IconClose />
+                      ) : isEmailValid ? (
+                        <IconCheck stroke="#00C3AD" />
+                      ) : null}
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Field
+                as={ValidationTextField}
+                name="password"
+                placeholder="Password"
+                type={showPassword ? 'text' : 'password'}
+                fullWidth
+                focused
+                margin="dense"
+                variant="outlined"
+                onChange={event => {
+                  handleChange(event);
+                  handlePasswordChange(event);
+                }}
+                onBlur={handleBlur}
+                value={values.password}
+                error={!!(touched.password && errors.password)}
+                helperText={
+                  touched.password && errors.password ? (
+                    <ErrorMessage name="password" />
+                  ) : isPasswordSecure ? (
+                    'Password is secure'
+                  ) : (
+                    ' '
+                  )
+                }
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {touched.password && errors.password ? (
+                        <IconButton
+                          onClick={togglePasswordVisibility}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      ) : isPasswordSecure ? (
+                        <IconCheck stroke="#00C3AD" />
+                      ) : (
+                        <IconButton
+                          onClick={togglePasswordVisibility}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      )}
+                    </InputAdornment>
+                  ),
+                }}
+                color={
+                  touched.password && errors.password
+                    ? 'error'
+                    : isPasswordSecure
+                    ? 'success'
+                    : 'primary'
+                }
+              />
+              <Field
+                as={ValidationTextField}
+                name="confirmPassword"
+                placeholder="Confirm password"
+                type={showConfirmPassword ? 'text' : 'password'}
+                fullWidth
+                focused
+                margin="dense"
+                variant="outlined"
+                onChange={event => {
+                  handleChange(event);
+                  handleConfirmPasswordChange(event);
+                }}
+                onBlur={handleBlur}
+                value={values.confirmPassword}
+                error={!!(touched.confirmPassword && errors.confirmPassword)}
+                helperText={
+                   touched.confirmPassword && errors.confirmPassword ? (
+    <ErrorMessage name="confirmPassword" />
+  ) : isConfirmPassword ? (
+    'Passwords match'
+  ) : (
+    ' '
+  )
+                }
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {touched.confirmPassword && errors.confirmPassword ? (
+                        <IconButton
+                          onClick={toggleConfirmPasswordVisibility}
+                          edge="end"
+                        >
+                          {showConfirmPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      ) : isConfirmPassword ? (
+                        <IconCheck stroke="#00C3AD" />
+                      ) : (
+                        <IconButton
+                          onClick={toggleConfirmPasswordVisibility}
+                          edge="end"
+                        >
+                          {showConfirmPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      )}
+                    </InputAdornment>
+                  ),
+                }}
+                color={
+                  touched.confirmPassword && errors.confirmPassword
+                    ? 'error'
+                    : isConfirmPassword
+                    ? 'success'
+                    : 'primary'
+                }
+              />
+              <Button
+                variant="contained"
+                sx={styles.button}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                Registration
+              </Button>
+            </Form>
+          )}
+        </Formik>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <Typography component="p" sx={styles.text}>
+            Already have an account?{' '}
+            <Link to="/login">
+              <Typography component="span" sx={styles.linkT}>
+                Login
+              </Typography>
+            </Link>
+          </Typography>
+          <Typography
+            component="a"
+            href="https://yourpet-backend.onrender.com/api/auth/google"
+            sx={styles.textLink}
+          >
+            Register with &nbsp;&nbsp;
+            <SvgIcon width="24px" height="24px" inheritViewBox>
+              <IconGoogle />
+            </SvgIcon>
+          </Typography>
+        </Box>
+      </Card>
+    </Container>
   );
 }
 
+// import React, { useState } from 'react';
+// import { Formik, ErrorMessage } from 'formik';
+// import { Link } from 'react-router-dom';
+// import * as Yup from 'yup';
+// import { useDispatch } from 'react-redux';
+// import { register } from 'redux/auth/authOperations';
+// import { Container } from '@mui/material';
+// import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
+// // import ModalCongrats from 'components/Modal/ModalCongrats/ModalCongrats';
+// // import { toast } from 'react-toastify';
+// import styles from './styles';
+// import {
+//   Card,
+//   TextField,
+//   CardContent,
+//   Typography,
+//   Box,
+//   Button,
+//   InputLabel,
+//   // FormHelperText,
+// } from '@mui/material';
+// // import BasicModal from 'components/Modal/ModalCongrats/ModalCongrats';
+// // import {
+// //   // Typography,
+// //   FormControl,
+// //   FilledInput,
+// //   InputAdornment,
+// // } from '@mui/material';
+// // import { ReactComponent as PawPrint } from '../../images/icons/edit.svg';
+
+// function RegisterPage() {
+//   const dispatch = useDispatch();
+
+//   // на стор профілю
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   // на стор профілю
+
+//   const regValidationSchema = Yup.object().shape({
+//     email: Yup.string()
+//       .email('Invalid email format')
+//       .required('Mail is required'),
+//     password: Yup.string()
+//       .required()
+//       .min(6)
+//       .max(16)
+//       .matches(
+//         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,16}$/,
+//         'Password must contain at least 1 UPPERCASE letter, 1 lowercase letter, and 1 number.'
+//       ),
+//     confirmPassword: Yup.string()
+//       .required('Fill the gap')
+//       .oneOf([Yup.ref('password'), null], 'Passwords must match!'),
+//   });
+
+//   return (
+//     <>
+//       <Container>
+//         <Card sx={styles.root}>
+//           <CardContent sx={styles.box}>
+//             <Typography sx={styles.title}>Registration</Typography>
+//             <Formik
+//               initialValues={{
+//                 email: '',
+//                 password: '',
+//                 confirmPassword: '',
+//               }}
+//               validationSchema={regValidationSchema}
+//               onSubmit={(values, { resetForm }) => {
+//                 const newUser = {
+//                   email: values.email,
+//                   password: values.password,
+//                 };
+//                 dispatch(register(newUser));
+//                 resetForm();
+//                 console.log(newUser);
+//               }}
+//             >
+//               {({
+//                 values,
+//                 errors,
+//                 touched,
+//                 handleChange,
+//                 handleBlur,
+//                 handleSubmit,
+//                 isSubmitting,
+//               }) => (
+//                 <Box
+//                   component="form"
+//                   sx={{
+//                     '& .MuiTextField-root': { m: 1, width: '25ch' },
+//                   }}
+//                   noValidate
+//                   // autoComplete="off"
+//                   onSubmit={handleSubmit}
+//                 >
+//                   {/* <FormControl variant="filled">
+//             <FilledInput
+//               id="email"
+//               type='email'
+//               sx={styles.input}
+//               // onChange={ChangeData}
+//               // defaultValue={email}
+//               endAdornment={
+//                 <InputAdornment position="end">
+//                   <PawPrint
+//                     className="email"
+//                     // onClick={handleClick}
+
+//                     edge="end"
+//                   ></PawPrint>
+//                 </InputAdornment>
+//               }
+//             />
+//           </FormControl> */}
+//                   <InputLabel htmlFor="email">
+//                     <TextField
+//                       type="email"
+//                       name="email"
+//                       placeholder="Email"
+//                       onChange={handleChange}
+//                       onBlur={handleBlur}
+//                       value={values.email}
+//                     />
+//                     {/* {errors.email && touched.email && errors.email} */}
+//                     <ErrorMessage component="div" name="email" />
+//                   </InputLabel>
+
+//                   <InputLabel htmlFor="password">
+//                     <TextField
+//                       type="password"
+//                       name="password"
+//                       placeholder="Password"
+//                       onChange={handleChange}
+//                       onBlur={handleBlur}
+//                       value={values.password}
+//                     />
+//                     {/* {errors.password && touched.password && errors.password} */}
+//                     <ErrorMessage component="div" name="password" />
+//                   </InputLabel>
+
+//                   <InputLabel htmlFor="passwordRepeat">
+//                     <TextField
+//                       type="password"
+//                       name="confirmPassword"
+//                       placeholder="Confirm password"
+//                       onChange={handleChange}
+//                       onBlur={handleBlur}
+//                       value={values.confirmPassword}
+//                     />
+//                     {/* {errors.password && touched.password && errors.password} */}
+//                     <ErrorMessage component="div" name="confirmPassword" />
+//                   </InputLabel>
+
+//                   <Button
+//                     variant="contained"
+//                     sx={styles.button}
+//                     type="submit"
+//                     disabled={isSubmitting}
+
+//                     // на стор профілю
+//                     // onClick={() => {
+//                     //   setIsModalOpen(!isModalOpen);
+//                     // }}
+//                     // на стор профілю
+//                   >
+//                     Registration
+//                     {/* <BasicModal /> */}
+//                   </Button>
+//                   {
+//                     // на стор профілю
+//                     isModalOpen && (
+//                       <ModalCongrats
+//                         onClick={
+//                           () => {
+//                             setIsModalOpen(!isModalOpen);
+//                           }
+//                           // на стор профілю
+//                         }
+//                       />
+//                     )
+//                   }
+//                   <Box sx={styles.text}>
+//                     <p>Already have an account?</p>
+//                     <Link to="/login">Login</Link>
+//                   </Box>
+//                 </Box>
+//               )}
+//             </Formik>
+//           </CardContent>
+//         </Card>
+//       </Container>
+//     </>
+//   );
+// }
+
 export default RegisterPage;
+
+//  onSubmit={(values, { resetForm }) => {
+//                 const newUser = {
+//                   email: values.email,
+//                   password: values.password,
+//                 };
+//                 dispatch(register(newUser));
+//                 resetForm();
+//                 console.log(newUser);

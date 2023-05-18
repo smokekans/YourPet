@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, Box, Card, IconButton, DialogActions, DialogContent,Typography, Button, SvgIcon, } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { ReactComponent as IconClose } from '../../../images/icons/cross-small.svg';
+import { ReactComponent as IconClose } from '../../../images/icons/cross-small-1.svg';
 import { ReactComponent as IconPaw } from '../../../images/icons/pawprint.svg';
 
 import styles from './styles';
@@ -30,23 +30,26 @@ function ModalCongrats({ onClick }) {
               aria-describedby="alert-dialog-descriptionDialogActions"
   >
     <Card sx={styles.root}>
-      <IconButton
-        onClick={handleClose}
+     <IconButton
+        // onClick={onClose}
         autoFocus
         sx={{
           position: 'absolute',
           zIndex: '2000',
-          right: { mobile: 12, tablet: 26 },
-          top: { mobile: 12, tablet: 23 },
+          right: { mobile: 12, tablet: 24 },
+          top: { mobile: 12, tablet: 24 },
           p: 0,
           m: 0,
+          width: '24px',
+          height: '24px',
+          '& svg': {
+            stroke: '#54ADFF',
+          },
+          '&:hover': {
+            border: '1px solid #54ADFF',
+          },
         }}
       >
-        <SvgIcon
-            component={IconClose}
-            inheritViewBox
-            htmlColor="rgba(254, 249, 249, 1)"
-          />
         <IconClose/>
       </IconButton>
       <DialogContent>

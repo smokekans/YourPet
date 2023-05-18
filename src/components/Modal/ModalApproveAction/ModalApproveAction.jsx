@@ -7,17 +7,16 @@ import {
   DialogContent,
   Typography,
   Button,
-  SvgIcon,
 } from '@mui/material';
-import { ReactComponent as IconClose } from '../../../images/icons/cross-small.svg';
-import { ReactComponent as IconTrash } from '../../../images/icons/trash.svg';
+import { ReactComponent as IconClose } from '../../../images/icons/cross-small-1.svg';
+import { ReactComponent as IconTrash } from '../../../images/icons/trash-2.svg';
 
 import styles from './styles';
 
 function ModalApproveAction({ title, onClose, onDelete }) {
   return (
     <Card sx={styles.root}>
-      <IconButton
+     <IconButton
         onClick={onClose}
         autoFocus
         sx={{
@@ -27,13 +26,17 @@ function ModalApproveAction({ title, onClose, onDelete }) {
           top: { mobile: 12, tablet: 24 },
           p: 0,
           m: 0,
+          width: '24px',
+          height: '24px',
+          '& svg': {
+            stroke: '#54ADFF',
+          },
+          '&:hover': {
+            border: '1px solid #54ADFF',
+          },
         }}
       >
-        <SvgIcon
-          component={IconClose}
-          inheritViewBox
-          htmlColor="rgba(254, 249, 249, 1)"
-        />
+        <IconClose/>
       </IconButton>
       <DialogContent>
         <Box sx={styles.content}>
@@ -55,10 +58,8 @@ function ModalApproveAction({ title, onClose, onDelete }) {
         </Button>
         <Button onClick={onDelete} sx={styles.button}>
           Yes
-          <SvgIcon
-            component={IconTrash}
-            inheritViewBox
-            htmlColor="rgba(254, 249, 249, 0)"
+          <IconTrash
+            width="24px"
           />
         </Button>
       </DialogActions>
