@@ -1,4 +1,4 @@
-import {  Container } from '@mui/material';
+import { Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
@@ -38,7 +38,8 @@ function NoticesPage() {
 
   const [query, setQuery] = useState('');
 
-  useEffect(() => { dispatch(getCurrentUser());
+  useEffect(() => {
+    dispatch(getCurrentUser());
   }, [accessToken, dispatch]);
 
   useEffect(() => {
@@ -90,10 +91,8 @@ function NoticesPage() {
         />
 
         <NoticesCategoriesNavigation />
-        
-        {
-          isLoading &&
-          accessToken ? (
+
+        {isLoading && accessToken ? (
           <Loader />
         ) : dataToRender && dataToRender.length === 0 ? (
           <NotFound />

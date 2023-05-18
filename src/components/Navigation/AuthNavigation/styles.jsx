@@ -15,6 +15,8 @@ const styles = {
     borderRadius: '40px',
     color: 'accent.main',
     border: '2px solid #FFC107',
+    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+
     '& svg': {
       // fill: '#FEF9F9',
       // fill: '#FFC107',
@@ -23,11 +25,12 @@ const styles = {
       border: '2px solid #FFC107',
       color: 'text.light',
       backgroundColor: 'accent.main',
-
-      // fill: '#FEF9F9',
+      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+      fill: '#FEF9F9',
     },
     '&:hover svg': {
       fill: '#FEF9F9',
+      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
     },
     '&.active': {
       backgroundColor: 'accent.main',
@@ -36,9 +39,6 @@ const styles = {
       fill: '#FEF9F9',
     },
     '&:active svg': {
-      fill: '#FEF9F9',
-    },
-    '&:focus svg': {
       fill: '#FEF9F9',
     },
   },
@@ -50,17 +50,20 @@ const styles = {
     fontSize: '16px',
     lineHeight: '22px',
     textTransform: 'none',
+    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
   },
   print: {
-    // stroke: '#FFC107',
     fill: '#FFC107',
+    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
 
-    // '&:hover': {
-    //   fill: '#FEF9F9',
-    // },
-    // '&.active': {
-    //   fill: '#FEF9F9',
-    // },
+    '&:hover': {
+      fill: '#FEF9F9',
+      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+    },
+    '&.active': {
+      fill: '#FEF9F9',
+      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+    },
   },
 };
 
