@@ -27,3 +27,4 @@ function NewsList({ query }) {
 }
 
 export default NewsList;
+

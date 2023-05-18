@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getIsLoggedIn } from 'redux/auth/authSelectors';
@@ -9,13 +9,12 @@ import { ReactComponent as Clock } from '../../../images/icons/clock.svg';
 import { ReactComponent as Male } from '../../../images/icons/male.svg';
 import { ReactComponent as Female } from '../../../images/icons/female.svg';
 import { ReactComponent as Busket } from '../../../images/icons/trash.svg';
-import { deleteNotice, getSingleNotice } from 'redux/notices/noticesOperation';
+import { deleteNotice, getSingleNotice, getUserNotices } from 'redux/notices/noticesOperation';
 
 import styles from './styles';
 import { styled } from '@mui/material/styles';
 import {
   Card,
-  // CardActionArea,
   CardMedia,
   CardContent,
   Typography,
@@ -29,6 +28,7 @@ import ModalNotice from 'components/Modal/ModalNotice/ModalNotice';
 import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
 import ModalApproveAction from 'components/Modal/ModalApproveAction/ModalApproveAction';
 import { getUserId } from 'redux/user/userSelectors';
+// import { useNavigate } from 'react-router-dom';
 
 const BootstrapDialog = styled(Dialog)(() => ({
   '& .MuiPaper-root': {
@@ -61,8 +61,9 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   const userId = useSelector(getUserId);
   const [scroll, setScroll] = useState('body');
 
-  // console.log(userId)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+// const navigate = useNavigate();
 
   const handleLearnMore = () => {
     setScroll('body');
@@ -102,10 +103,16 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   };
 
   const handleDeleteNotice = () => {
-    dispatch(deleteNotice(_id));
-    handleDeleteModalClose();
-  };
-
+     dispatch(deleteNotice(_id))
+      .then(() => {
+        handleDeleteModalClose();
+        dispatch(getUserNotices({ page: 1 }))
+      })
+      .catch((error) => {
+        console.log('Error deleting notice:', error);
+      });
+      
+  }
   const calcAge = dob => {
     if (dob === null) return '?';
 
