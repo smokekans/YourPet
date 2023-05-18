@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Logo from 'components/Logo/Logo';
 import { ReactComponent as Cross } from '../../../../images/icons/cross.svg';
 import styles from './styles';
+import UserNavigation from 'components/Navigation/UserNavigation/UserNavigation';
 
 function BurgerMenu() {
   const { isMobile } = useMatchMedia();
@@ -50,8 +51,12 @@ function BurgerMenu() {
           <Cross onClick={handleMenuClose} />
         </Box>
         <MenuItem onClick={handleMenuClose} sx={styles.menuItem}>
-          {isMobile && !accessToken && <AuthNavigation />}
-          {isMobile && <Nav />}
+          {isMobile && (
+            <>
+              {accessToken ? <UserNavigation /> : <AuthNavigation />}
+              <Nav />
+            </>
+          )}
           {isTablet && <Nav />}
         </MenuItem>
       </Menu>

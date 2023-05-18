@@ -12,6 +12,7 @@ const styles = {
       width: '100vw',
       height: '100vh',
       position: 'unset',
+      bgcolor: ' #FEF9F9',
     },
   },
   box: {

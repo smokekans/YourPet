@@ -15,7 +15,6 @@ const styles = {
     p: 0,
     width: 'auto',
     display: 'flex',
-
     flexDirection: { mobile: 'column' },
   },
   link: {
@@ -30,6 +29,7 @@ const styles = {
     },
     '&:hover': {
       color: '#FFC107',
+      transition: 'color 300ms cubic-bezier(0.4, 0, 0.2, 1)',
     },
   },
 };

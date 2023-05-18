@@ -8,6 +8,7 @@ import AuthNavigation from '../AuthNavigation/AuthNavigation';
 import BurgerMenu from '../Nav/BurgerMenu/BurgerMenu';
 import { Box } from '@mui/system';
 import styles from './styles';
+import MobileNav from '../Nav/MobileNav';
 
 function Navigation() {
   const { isMobile } = useMatchMedia();
@@ -38,8 +39,7 @@ function Navigation() {
       {isMobile && (
         <>
           <Box sx={styles.mobile}>
-            {isMobile && accessToken && <UserNavigation />}
-            {isMobile && <BurgerMenu />}
+            <MobileNav />
           </Box>
         </>
       )}
