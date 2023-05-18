@@ -22,7 +22,6 @@ export const getCurrentUser = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.get('user/current');
-      console.log(data);
       return data;
     } catch (e) {
       return rejectWithValue(e.message);
@@ -40,7 +39,6 @@ export const addToFavorites = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.post(`/user/favorite/${id}`);
-      console.log(data);
       return data.user.favorite;
     } catch (error) {
       return rejectWithValue(error);
@@ -60,8 +58,6 @@ export const getFavorite = createAsyncThunk(
       const { data } = await axios.get(
         `/user/favorite?page=${page}&limit=10&title=${query}`
       );
-      console.log(data);
-
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -90,9 +86,7 @@ export const updateInfoUser = createAsyncThunk(
         return rejectWithValue('Unable to patch user');
       }
       accessToken.set(value);
-
       const { data } = await axios.patch('/user/update', upDateUser);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -103,11 +97,8 @@ export const updateInfoUser = createAsyncThunk(
 export const updateAvatar = createAsyncThunk(
   'user/updateAvatar',
   async (image, { rejectWithValue, getState }) => {
-    console.log(image);
-
     const formData = new FormData();
     formData.append('avatar', image);
-
     try {
       const value = getState().auth.accessToken;
       if (value === null) {
@@ -119,7 +110,6 @@ export const updateAvatar = createAsyncThunk(
           'Content-type': 'multipart/form-data',
         },
       });
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -137,7 +127,6 @@ export const deletePets = createAsyncThunk(
       }
       accessToken.set(value);
       const { data } = await axios.delete(`/pets/${id}`);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
