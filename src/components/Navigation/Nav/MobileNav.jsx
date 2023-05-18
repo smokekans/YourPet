@@ -1,7 +1,7 @@
 // import useMatchMedia from 'hooks/useMatchMedia';
 // import React, { useState } from 'react';
 // import { useSelector } from 'react-redux';
-// import { getIsLoggedIn } from 'redux/auth/authSelectors';
+// import { getAccessToken } from 'redux/auth/authSelectors';
 // import BurgerMenu from './BurgerMenu/BurgerMenu';
 // import UserNavigation from '../UserNavigation/UserNavigation';
 // import AuthNavigation from '../AuthNavigation/AuthNavigation';
@@ -9,7 +9,7 @@
 
 // function MobileNav() {
 //   const { isMobile } = useMatchMedia();
-//   const isLoggedIn = useSelector(getIsLoggedIn);
+//  const accessToken = useSelector(getAccessToken);
 //   const [isOpen, setOpen] = useState(false);
 
 //   return (
@@ -19,7 +19,7 @@
 //         <nav>
 //           {isMobile && (
 //             <div onClick={() => setOpen()}>
-//               {isLoggedIn ? <UserNavigation /> : <AuthNavigation />}
+//               {accessToken ? <UserNavigation /> : <AuthNavigation />}
 //             </div>
 //           )}
 //           <Nav />
