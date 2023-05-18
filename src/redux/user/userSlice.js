@@ -26,6 +26,7 @@ function UserFulfilled(state, { payload }) {
   state.image = payload.image;
   state.userName = payload.name;
   state.pets = payload.pets;
+  state.favorite = payload.favorite;
   state.isLoading = false;
   state.error = null;
 }

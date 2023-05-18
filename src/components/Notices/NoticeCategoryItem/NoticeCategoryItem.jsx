@@ -1,7 +1,7 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { getAccessToken, getIsLoggedIn } from 'redux/auth/authSelectors';
+import { getAccessToken } from 'redux/auth/authSelectors';
 import CATEGORY from 'utils/constants';
 import defaultImage from '../../../images/not-found.jpg';
 import { ReactComponent as Location } from '../../../images/icons/location.svg';
@@ -10,7 +10,11 @@ import { ReactComponent as Male } from '../../../images/icons/male.svg';
 import { ReactComponent as Female } from '../../../images/icons/female.svg';
 import { ReactComponent as Busket } from '../../../images/icons/trash.svg';
 import { ReactComponent as PawIcon } from '../../../images/icons/pawprint.svg';
-import { deleteNotice, getSingleNotice, getUserNotices } from 'redux/notices/noticesOperation';
+import {
+  deleteNotice,
+  getSingleNotice,
+  getUserNotices,
+} from 'redux/notices/noticesOperation';
 
 import styles from './styles';
 import { styled } from '@mui/material/styles';
@@ -59,14 +63,13 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFavorites, setIsFavorites] = useState(false);
-  const isLoggedIn = useSelector(getIsLoggedIn);
   const userId = useSelector(getUserId);
   const [scroll, setScroll] = useState('body');
-    const accessToken = useSelector(getAccessToken);
+  const accessToken = useSelector(getAccessToken);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-// const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleLearnMore = () => {
     setScroll('body');
@@ -79,7 +82,7 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   };
 
   const handleFavoriteClick = () => {
-    if (!isLoggedIn) {
+    if (!accessToken) {
       toast.info(
         'You must be registered or logged in to continue the operation'
       );
@@ -106,16 +109,15 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   };
 
   const handleDeleteNotice = () => {
-     dispatch(deleteNotice(_id))
+    dispatch(deleteNotice(_id))
       .then(() => {
         handleDeleteModalClose();
-        dispatch(getUserNotices({ page: 1 }))
+        dispatch(getUserNotices({ page: 1 }));
       })
-      .catch((error) => {
+      .catch(error => {
         console.log('Error deleting notice:', error);
       });
-      
-  }
+  };
   const calcAge = dob => {
     if (dob === null) return '?';
 
@@ -167,24 +169,24 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
           ''
         )}
 
- <Box sx={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
-     
-
-        <Box sx={styles.components}>
-          <Typography sx={styles.component} variant="subtitle2">
-            <Location /> {location}
-          </Typography>
-          <Typography sx={styles.component} variant="subtitle2">
-            <Clock /> {calcAge(birthday)} year
-          </Typography>
-          <Typography sx={styles.component} variant="subtitle2">
-            <GenderIcon sex={sex} /> {sex}
-          </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Box sx={styles.components}>
+            <Typography sx={styles.component} variant="subtitle2">
+              <Location /> {location}
+            </Typography>
+            <Typography sx={styles.component} variant="subtitle2">
+              <Clock /> {calcAge(birthday)} year
+            </Typography>
+            <Typography sx={styles.component} variant="subtitle2">
+              <GenderIcon sex={sex} /> {sex}
+            </Typography>
           </Box>
-             </Box>
+        </Box>
         <CardContent sx={styles.content}>
           <Box>
             <Typography variant="h5" sx={styles.title}>
@@ -192,7 +194,12 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
             </Typography>
           </Box>
           <Box sx={styles.buttonWraper}>
-            <Button type="button" onClick={handleLearnMore} sx={styles.button} endIcon={<PawIcon fill='#54ADFF' />}>
+            <Button
+              type="button"
+              onClick={handleLearnMore}
+              sx={styles.button}
+              endIcon={<PawIcon fill="#54ADFF" />}
+            >
               Learn more
             </Button>
             <BootstrapDialog

@@ -5,7 +5,6 @@ const authInitialState = {
   user: {},
   accessToken: null,
   refreshToken: null,
-  isLoggedIn: false,
   isLoading: false,
   error: null,
 };
@@ -19,15 +18,11 @@ function loginFulfilled(state, { payload }) {
   state.user = payload.user;
   state.accessToken = payload.accessToken;
   state.refreshToken = payload.refreshToken;
-
-  // state.isLoading = false;
-  state.isLoggedIn = true;
   state.error = null;
 }
 
 function logOutFulfilled(state) {
   state.isLoading = false;
-  state.isLoggedIn = false;
   state.user = {};
   state.accessToken = null;
   state.refreshToken = null;
