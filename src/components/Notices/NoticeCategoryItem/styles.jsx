@@ -77,11 +77,12 @@ const styles = {
     color: 'primary',
     borderRadius: 16,
     height: 28,
-    width: 80,
-    margin: '0 5px',
+    width: 'fit-content',
+    // margin: '0 5px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: '0 8px',
   },
   buttonWraper: {
     display: 'flex',
@@ -104,6 +105,15 @@ const styles = {
 
     border: '2px solid #54ADFF',
     borderRadius: '40px',
+
+    '&:hover': {
+      backgroundColor: '#54ADFF',
+      color: '#FEF9F9',
+    },
+    '&:hover svg': {
+      fill: '#FEF9F9',
+    },
+
   },
 };
 

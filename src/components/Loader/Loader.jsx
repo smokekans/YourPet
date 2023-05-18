@@ -6,7 +6,7 @@ export const Loader = () => {
       height="250"
       width="250"
       radius="48"
-      color="accent.main"
+      color="#FFC107"
       ariaLabel="watch-loading"
       wrapperStyle={{
         position: 'fixed',
@@ -25,3 +25,4 @@ export const Loader = () => {
 };
 
 export default Loader;
+

@@ -9,8 +9,7 @@ boxContainer:{
   container: {
     width: { mobile: '280px', tablet: '704px', desktop: '395px' }, 
     height: { mobile: '517px', tablet: '268px', desktop: '520px' }, 
-
-  
+pt:{ mobile: '5px'}, 
     ml: { mobile: '0', tablet: '16px', desktop: '16px' },
     marginRight: '0',
     background: '#FFFFFF',
