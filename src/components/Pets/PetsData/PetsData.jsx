@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isPets } from '../../../redux/user/userSelectors';
-import { Container } from '@mui/material';
+import { Container, IconButton } from '@mui/material';
 import { Typography, Button } from '@mui/material';
 import styles from './styles';
 import { Avatar } from '@mui/material';
@@ -93,11 +93,11 @@ function PetsData() {
                       <br />
                     </Typography>
                   </Typography>
-                  <Button
+                  <IconButton
                     sx={styles.btnTrash}
-                    startIcon={<Trash sx={styles.btnTrash}/>}
+                    // startIcon={<Trash sx={styles.icon}/>}
                     onClick={() => delet(_id)}
-                  ></Button>
+                  ><Trash /></IconButton>
                 </Typography>
               );
             })}
