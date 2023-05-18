@@ -14,22 +14,32 @@ const styles = {
     width: { mobile: '165px', tablet: '142px', desktop: '165px' },
     borderRadius: '40px',
     color: 'accent.main',
-
     border: '2px solid #FFC107',
-    //   '& .MuiBox-root css-1dp9lam': {
-
-    // },
+    '& svg': {
+      // fill: '#FEF9F9',
+      // fill: '#FFC107',
+    },
     '&:hover': {
       border: '2px solid #FFC107',
       color: 'text.light',
       backgroundColor: 'accent.main',
-      fill: 'white',
+
+      // fill: '#FEF9F9',
+    },
+    '&:hover svg': {
+      fill: '#FEF9F9',
     },
     '&.active': {
       backgroundColor: 'accent.main',
       color: 'text.light',
       borderColor: 'accent.main',
-      fill: 'white',
+      fill: '#FEF9F9',
+    },
+    '&:active svg': {
+      fill: '#FEF9F9',
+    },
+    '&:focus svg': {
+      fill: '#FEF9F9',
     },
   },
   btnText: {
@@ -39,15 +49,19 @@ const styles = {
     fontWeight: 700,
     fontSize: '16px',
     lineHeight: '22px',
+    textTransform: 'none',
   },
   print: {
+    // stroke: '#FFC107',
     fill: '#FFC107',
-    '&:hover': {
-      fill: 'white',
-    },
-    '&.active': {
-      fill: 'white',
-    },
+
+    // '&:hover': {
+    //   fill: '#FEF9F9',
+    // },
+    // '&.active': {
+    //   fill: '#FEF9F9',
+    // },
   },
 };
+
 export default styles;
