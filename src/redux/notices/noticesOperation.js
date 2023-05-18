@@ -96,7 +96,6 @@ export const getNoticesByQwery = createAsyncThunk(
 export const createNotice = createAsyncThunk(
   'notices/create',
   async ({ values, accessToken, avatar }, thunkAPI) => {
-    console.log(avatar);
     try {
       const formData = new FormData();
       formData.append('avatar', avatar);
@@ -118,10 +117,8 @@ export const createNotice = createAsyncThunk(
         },
       };
       const { data } = await axios.post('/notices', formData, header, avatar);
-      console.log('Image uploaded successfully!');
       return data;
     } catch (error) {
-      console.error('Error uploading image:', error);
       return thunkAPI.rejectWithValue();
     }
   }

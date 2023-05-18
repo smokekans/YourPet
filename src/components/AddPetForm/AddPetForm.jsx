@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 // import { petsValidationSchema } from './Yup';
-import ChooseOption from './ChooseOption';
-import PersonalDetails from './PersonalDetails';
-import MoreInfo from './MoreInfo';
+import ChooseOption from './ChooseOption/ChooseOption';
+import PersonalDetails from './PersonalDetails/PersonalDetails';
+import MoreInfo from './MoreInfo/MoreInfo';
 import { Container, Typography } from '@mui/material';
 
 const AddPetForm = () => {

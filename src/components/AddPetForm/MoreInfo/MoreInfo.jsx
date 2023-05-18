@@ -6,7 +6,7 @@ import { createPet } from 'redux/pets/petsOperation';
 import { createNotice } from 'redux/notices/noticesOperation';
 import { getAccessToken } from 'redux/auth/authSelectors';
 import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
-import { ReactComponent as IconPlus } from '../../images/icons/plus.svg';
+import { ReactComponent as IconPlus } from '../../../images/icons/plus.svg';
 import { toast } from 'react-toastify';
 
 const MoreInfo = ({ prevStep, setFormData }) => {
@@ -30,25 +30,24 @@ const MoreInfo = ({ prevStep, setFormData }) => {
     prevStep();
   };
 
-  const onSubmit = async event => {
-    event.preventDefault();
+  const onSubmit = async ({ resetForm }) => {
     setFormData({ ...values, avatar: fileInput });
-    console.log(values);
     if (values.category === 'your-pet') {
       try {
         await dispatch(createPet({ values, accessToken, avatar: fileInput }));
         toast.success('Pet card created successfully');
         navigate('/user');
+        resetForm();
       } catch (error) {
         toast.error(`Error creating pet card: ${error.message}`);
       }
     } else {
       try {
         await dispatch(
-          createNotice({ values, accessToken, avatar: fileInput })
-        );
+        createNotice({ values, accessToken, avatar: fileInput }));
         toast.success('Notice created successfully');
         navigate('/notices/sell');
+        resetForm();
       } catch (error) {
         toast.error(`Error creating notice: ${error.message}`);
       }

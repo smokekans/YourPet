@@ -8,7 +8,7 @@ const ChooseOption = ({ nextStep, setTitle }) => {
 
   const categoryTitles = {
     'your-pet': 'Add my pet',
-    sell: 'Add pet for sell',
+    'sell': 'Add pet for sell',
     'lost-found': 'Add to lost or found pet',
     'for-free': 'Add to give a Pet for Adoption',
   };
