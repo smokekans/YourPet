@@ -24,8 +24,8 @@ import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/
 import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
 import NotFound from 'components/NotFound/NotFound';
 import { getAccessToken } from 'redux/auth/authSelectors';
-import InfiniteScroll from 'components/Notices/NoticesPagination/InfiniteScroll/InfiniteScroll';
 import { isMobile } from 'react-device-detect';
+import InfiniteScrollMobile from 'components/Notices/NoticesPagination/InfiniteScroll/InfiniteScroll';
 
 function NoticesPage() {
   const { categoryName } = useParams();
@@ -47,6 +47,7 @@ function NoticesPage() {
     } else if (categoryName === 'owner') {
       dispatch(getUserNotices({ page: 1 }));
     } else {
+      console.log('this');
       dispatch(getNoticeByCategory({ category: categoryName }));
     }
     return () => dispatch(clearNotices([]));
@@ -105,7 +106,7 @@ function NoticesPage() {
         {isLoading && <Loader />}
       </Container>
       {isMobile ? (
-        <InfiniteScroll />
+        <InfiniteScrollMobile />
       ) : categoryName === 'favorite' ? (
         <NoticesPaginationFavorite />
       ) : categoryName === 'owner' ? (
