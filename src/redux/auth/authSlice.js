@@ -20,7 +20,7 @@ function loginFulfilled(state, { payload }) {
   state.accessToken = payload.accessToken;
   state.refreshToken = payload.refreshToken;
 
-  state.isLoading = false;
+  // state.isLoading = false;
   state.isLoggedIn = true;
   state.error = null;
 }

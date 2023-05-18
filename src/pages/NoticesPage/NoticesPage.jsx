@@ -29,7 +29,6 @@ function NoticesPage() {
   const notices = useSelector(getNotices);
   const isLoading = useSelector(getNoticeIsLoadig);
   const favoriteNotices = useSelector(getFavorites);
-  console.log(favoriteNotices)
   // const favoriteAds = favoriteNotices || [];
   const ownNotices = useSelector(getOwnNotices);
 
@@ -86,16 +85,16 @@ function NoticesPage() {
         />
         <NoticesCategoriesNavigation />
 
-   {isLoading ? (
-  <Loader /> 
-) : dataToRender && dataToRender.length === 0 ? (
-  <NotFound/>
-) : (
-  <NoticesCategoriesList
-    categoryName={categoryName}
-    data={dataToRender}
-  /> 
-)}
+        {isLoading ? (
+          <Loader />
+        ) : dataToRender && dataToRender.length === 0 ? (
+          <NotFound />
+        ) : (
+          <NoticesCategoriesList
+            categoryName={categoryName}
+            data={dataToRender}
+          />
+        )}
 
         {isLoading && <Loader />}
       </Container>
@@ -111,5 +110,3 @@ function NoticesPage() {
 }
 
 export default NoticesPage;
-
-
