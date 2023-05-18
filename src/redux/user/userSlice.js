@@ -71,7 +71,6 @@ const userSlice = createSlice({
         state.error = null;
         state.favorite = payload.user.favorite;
         state.favoriteTotal = payload.total;
-        state.favoriteTotal = payload.total;
       })
       .addCase(getFavorite.rejected, (state, { payload }) => {
         state.notices = { data: [] };
