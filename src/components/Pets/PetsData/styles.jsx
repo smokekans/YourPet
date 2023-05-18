@@ -68,7 +68,7 @@ const styles = {
     position: 'absolute',
     width: '129px',
     height: '40px',
-    left: { mobile: '150px', tablet: '550px', desktop: '1127px' },
+    left: { mobile: '50%', tablet: '550px', desktop: '1127px' },
     top: { mobile: '', tablet: '480px', desktop: '128px' },
     background: '#54ADFF',
     borderRadius: '40px',
@@ -79,6 +79,11 @@ const styles = {
     letterSpacing: '0.04em',
     textTransform: 'none',
     color: '#FEF9F9',
+    '&:hover': {
+      backgroundColor: '#FEF9F9',
+      color:'#54ADFF',
+      border: '1px solid #54ADFF',
+    },
   },
   image: {
     width: '161px',
@@ -92,9 +97,23 @@ const styles = {
   btnTrash: {
     width: '24px',
     height: '24px',
+    padding:'0',
     mt: { mobile: '-365px', tablet: '20px', desktop: '20px' },
-    mr: { mobile: '', tablet: '0', desktop: '0' },
-    ml:{ mobile: '230px', tablet: '0', desktop: '0' },
+    mr: { mobile: '', tablet: '20px', desktop: '40px' },
+    ml:{ mobile: '240px', tablet: '0', desktop: '0' },
+    'svg':{
+      stroke:'#54ADFF',
+    },
+    '&:hover svg': {
+      stroke: '#FFC107',
+    },
+  },
+  icon:{
+    stroke:'#0a0a0a',
+    
+    '&:hover ': {
+      stroke: '#0a0a0a',
+    },
   },
 };
 

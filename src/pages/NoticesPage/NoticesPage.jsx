@@ -17,24 +17,28 @@ import {
   getOwnNotices,
 } from 'redux/notices/noticesSelectors';
 import { clearNotices } from 'redux/notices/noticesSlice';
-import { getFavorite } from 'redux/user/userOperations';
+import { getCurrentUser, getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
 import Typography from '@mui/material/Typography';
 import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
 import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
 import NotFound from 'components/NotFound/NotFound';
-import { isMobile } from 'react-device-detect';
-import InfiniteScroll from 'components/Notices/NoticesPagination/InfiniteScroll/InfiniteScroll';
+import { getAccessToken } from 'redux/auth/authSelectors';
 
 function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
   const isLoading = useSelector(getNoticeIsLoadig);
   const favoriteNotices = useSelector(getFavorites);
-  // const favoriteAds = favoriteNotices || [];
+  console.log(favoriteNotices);
+  const accessToken = useSelector(getAccessToken);
   const ownNotices = useSelector(getOwnNotices);
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [accessToken, dispatch]);
 
   useEffect(() => {
     if (categoryName === 'favorite') {
@@ -83,9 +87,10 @@ function NoticesPage() {
           onSearch={handleSearch}
           onClearQuery={handleClearQuery}
         />
+
         <NoticesCategoriesNavigation />
 
-        {isLoading ? (
+        {isLoading && accessToken ? (
           <Loader />
         ) : dataToRender && dataToRender.length === 0 ? (
           <NotFound />

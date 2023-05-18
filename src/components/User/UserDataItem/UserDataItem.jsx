@@ -106,6 +106,7 @@ function UserDataItem() {
                   ) : (
                     <Check
                       className="name"
+                      stroke="#54ADFF"
                       onClick={() => {
                         getName(true);
                         handleClick();
@@ -142,6 +143,7 @@ function UserDataItem() {
                   ) : (
                     <Check
                       className="name"
+                      stroke="#54ADFF"
                       onClick={() => {
                         getEmail(true);
                         handleClick();
@@ -177,6 +179,7 @@ function UserDataItem() {
                   ) : (
                     <Check
                       className="name"
+                      stroke="#54ADFF"
                       onClick={() => {
                         getBirthday(true);
                         handleClick();
@@ -211,6 +214,7 @@ function UserDataItem() {
                   ) : (
                     <Check
                       className="name"
+                      stroke="#54ADFF"
                       onClick={() => {
                         getPhone(true);
                         handleClick();
@@ -245,6 +249,7 @@ function UserDataItem() {
                   ) : (
                     <Check
                       className="name"
+                      stroke="#54ADFF"
                       onClick={() => {
                         getCity(true);
                         handleClick();
@@ -263,3 +268,9 @@ function UserDataItem() {
 }
 
 export default UserDataItem;
+// '&::before': {
+//       borderBottom: 'none',
+//     },
+//     '&:hover::before': {
+//       borderBottom: 'none',
+//     },
