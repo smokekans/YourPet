@@ -32,26 +32,29 @@ const styles = {
     padding: '9px 20px',
     lineHeight: 1.37,
     color: '#54ADFF',
+    '& svg': {
+      stroke: '#54ADFF' ,
+    },
     '&:hover': {
       backgroundColor: '#54ADFF',
       color: '#FEF9F9',
     },
     '&:hover svg': {
-      fill: 'rgba(254, 249, 249, 1)',
+       stroke: '#FEF9F9',
     },
     '&:active': {
       backgroundColor: '#54ADFF',
       color: '#FEF9F9',
     },
     '&:active svg': {
-      fill: 'rgba(254, 249, 249, 1)',
+       stroke: '#FEF9F9',
     },
     '&:focus': {
       backgroundColor: '#54ADFF',
       color: '#FEF9F9',
     },
     '&:focus svg': {
-      fill: 'rgba(254, 249, 249, 1)',
+       stroke: '#FEF9F9',
     },
   },
 };

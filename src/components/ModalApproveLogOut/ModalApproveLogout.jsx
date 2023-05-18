@@ -7,15 +7,15 @@ import {
   Button,
   SvgIcon,
 } from '@mui/material';
-import { ReactComponent as IconClose } from '../../images/icons/cross-small.svg';
-import { ReactComponent as IconLogOut } from '../../images/icons/logout.svg';
+import { ReactComponent as IconClose } from '../../images/icons/cross-small-1.svg';
+import { ReactComponent as IconLogOut } from '../../images/icons/logout-2.svg';
 
 import styles from './styles';
 
 function ModalApproveLogOut({ onClose, onConfirm }) {
   return (
     <Card sx={styles.root}>
-      <IconButton
+       <IconButton
         onClick={onClose}
         autoFocus
         sx={{
@@ -25,13 +25,17 @@ function ModalApproveLogOut({ onClose, onConfirm }) {
           top: { mobile: 12, tablet: 24 },
           p: 0,
           m: 0,
+          width: '24px',
+          height: '24px',
+          '& svg': {
+            stroke: '#54ADFF',
+          },
+          '&:hover': {
+            border: '1px solid #54ADFF',
+          },
         }}
       >
-        <SvgIcon
-          component={IconClose}
-          inheritViewBox
-          htmlColor="rgba(254, 249, 249, 1)"
-        />
+        <IconClose/>
       </IconButton>
       <DialogContent sx={styles.title}>Already leaving?</DialogContent>
       <DialogActions sx={styles.buttonBox}>
@@ -39,7 +43,7 @@ function ModalApproveLogOut({ onClose, onConfirm }) {
           Cancel
         </Button>
         <Button onClick={onConfirm} sx={styles.button}>
-          Yes
+          Yes  &nbsp;
           <SvgIcon
             component={IconLogOut}
             inheritViewBox

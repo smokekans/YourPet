@@ -13,10 +13,9 @@ import {
   List,
   ListItem,
   IconButton,
-  SvgIcon,
 } from '@mui/material';
-import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
-import { ReactComponent as IconClose } from '../../../images/icons/cross-small.svg';
+import { ReactComponent as IconHeart } from '../../../images/icons/heart-1.svg';
+import { ReactComponent as IconClose } from '../../../images/icons/cross-small-1.svg';
 import styles from './styles';
 // import { getFavorites } from 'redux/user/userSelectors';
 
@@ -47,17 +46,20 @@ function ModalNotice({ onClose, onhandleFavoriteClick }) {
         sx={{
           position: 'absolute',
           zIndex: '2000',
-          right: { mobile: 12, tablet: 26 },
-          top: { mobile: 12, tablet: 23 },
+          right: { mobile: 12, tablet: 24 },
+          top: { mobile: 12, tablet: 24 },
           p: 0,
           m: 0,
+          width: '24px',
+          height: '24px',
+          '& svg': {
+            stroke: '#54ADFF',
+          },
+          '&:hover': {
+            border: '1px solid #54ADFF',
+          },
         }}
       >
-        {/* <SvgIcon
-            component={IconClose}
-            inheritViewBox
-            htmlColor="rgba(254, 249, 249, 1)"
-          /> */}
         <IconClose/>
       </IconButton>
       <DialogContent>
@@ -131,10 +133,10 @@ function ModalNotice({ onClose, onhandleFavoriteClick }) {
         <Box>
           <Typography sx={styles.comment} component="span">
             Comments:{' '}
-          </Typography><Typography sx={styles.commentText} component="span">
-           {comments}
           </Typography>
-          
+          <Typography sx={styles.commentText} component="span">
+            {comments}
+          </Typography>
         </Box>
       </DialogContent>
       <DialogActions>
@@ -145,11 +147,7 @@ function ModalNotice({ onClose, onhandleFavoriteClick }) {
         >
           {/* {!isfavorite ? "Remove from" : "Add to"} */}
           Add to &nbsp;
-          <SvgIcon
-            component={IconHeart}
-            inheritViewBox
-            htmlColor="rgba(254, 249, 249, 0)"
-          />
+            <IconHeart width="24px"/>
         </Button>
         <Button sx={styles.button}>
           <Typography
