@@ -7,15 +7,18 @@ const authInitialState = {
   refreshToken: null,
   isLoading: false,
   error: null,
+  isNewUser: false,
 };
 
-function registerFulfilled(state) {
+function registerFulfilled(state, { payload }) {
+  state.isNewUser = true;
   state.isLoading = false;
   state.error = null;
 }
 
 function loginFulfilled(state, { payload }) {
   state.user = payload.user;
+  // state.isNewUser = false;
   state.accessToken = payload.accessToken;
   state.refreshToken = payload.refreshToken;
   state.error = null;
@@ -33,7 +36,7 @@ function refreshTokenFulfilled(state, { payload }) {
   state.refreshToken = payload.refreshToken;
 }
 
-const authSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState: authInitialState,
   extraReducers: builder => {
@@ -75,6 +78,15 @@ const authSlice = createSlice({
         state.error = payload;
       });
   },
+  reducers: {
+    setAccessToken: (state, { payload }) => {
+      state.accessToken = payload;
+    },
+    setRefreshToken: (state, { payload }) => {
+      state.refreshToken = payload;
+    },
+  },
 });
 
+export const { setAccessToken, setRefreshToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;

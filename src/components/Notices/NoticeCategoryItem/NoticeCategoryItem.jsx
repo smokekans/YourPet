@@ -69,8 +69,6 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // const navigate = useNavigate();
-
   const handleLearnMore = () => {
     setScroll('body');
     setIsModalOpen(!isModalOpen);
