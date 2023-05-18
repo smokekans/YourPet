@@ -1,5 +1,5 @@
 import React from 'react';
-import { List } from '@mui/material';
+import { Container, List } from '@mui/material';
 
 import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
 
@@ -9,6 +9,13 @@ function NoticesCategoriesList({ data, categoryName }) {
   console.log('NoticesCategoriesList ~ dataArray:', dataArray);
 
   return (
+    <Container sx={{
+    mr: 'auto',
+    ml: 'auto',
+    width: { mobile: '320px', tablet: '768px', desktop: '100%' },
+    pr: { mobile: '20px', tablet: '32px', desktop: '16px' },
+    pl: { mobile: '20px', tablet: '32px', desktop: '16px' },
+  }}>
     <List
       container
       spacing={2}
@@ -18,7 +25,7 @@ function NoticesCategoriesList({ data, categoryName }) {
         justifyContent: 'space-around',
         flexWrap: 'wrap',
         // p: 0,
-        gap: { mobile: '20px', tablet: '32px' },
+        gap: { mobile: '20px' },
       }}
     >
       {dataArray
@@ -39,7 +46,8 @@ function NoticesCategoriesList({ data, categoryName }) {
             {/* </div> */}
           </li>
         ))}
-    </List>
+      </List>
+      </Container>
   );
 }
 
