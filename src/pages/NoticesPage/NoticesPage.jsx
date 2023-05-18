@@ -24,13 +24,14 @@ import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/
 import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
 import NotFound from 'components/NotFound/NotFound';
 import { getAccessToken } from 'redux/auth/authSelectors';
+import InfiniteScroll from 'components/Notices/NoticesPagination/InfiniteScroll/InfiniteScroll';
+import { isMobile } from 'react-device-detect';
 
 function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
   const isLoading = useSelector(getNoticeIsLoadig);
   const favoriteNotices = useSelector(getFavorites);
-  console.log(favoriteNotices);
   const accessToken = useSelector(getAccessToken);
   const ownNotices = useSelector(getOwnNotices);
   const dispatch = useDispatch();

@@ -26,7 +26,6 @@ const FavoriteIconButton = ({ noticeid }) => {
       );
       return;
     }
-
     if (check) {
       dispatch(deleteFromFavorite(noticeid));
       dispatch(deleteFavoriteObj(noticeid));
@@ -36,7 +35,7 @@ const FavoriteIconButton = ({ noticeid }) => {
       toast('Added to favorites');
     }
   };
-  console.log(check);
+
   return (
     <IconButton onClick={handleFavoriteClick}>
       <IconHeart fill={check ? '#54ADFF' : 'none'} />
