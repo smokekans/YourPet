@@ -6,7 +6,6 @@ import { getNews } from 'redux/news/newsOperations';
 export const NewsPagination = () => {
   const total = useSelector(state => state.news.total);
   const [page, setPage] = useState(1);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

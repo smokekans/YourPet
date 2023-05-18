@@ -23,18 +23,17 @@ import Typography from '@mui/material/Typography';
 import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
 import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
 import NotFound from 'components/NotFound/NotFound';
+import { isMobile } from 'react-device-detect';
+import InfiniteScroll from 'components/Notices/NoticesPagination/InfiniteScroll/InfiniteScroll';
 
 function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
   const isLoading = useSelector(getNoticeIsLoadig);
   const favoriteNotices = useSelector(getFavorites);
-  console.log(favoriteNotices)
   // const favoriteAds = favoriteNotices || [];
   const ownNotices = useSelector(getOwnNotices);
-
   const dispatch = useDispatch();
-
   const [query, setQuery] = useState('');
 
   useEffect(() => {
@@ -86,20 +85,22 @@ function NoticesPage() {
         />
         <NoticesCategoriesNavigation />
 
-   {isLoading ? (
-  <Loader /> 
-) : dataToRender && dataToRender.length === 0 ? (
-  <NotFound/>
-) : (
-  <NoticesCategoriesList
-    categoryName={categoryName}
-    data={dataToRender}
-  /> 
-)}
+        {isLoading ? (
+          <Loader />
+        ) : dataToRender && dataToRender.length === 0 ? (
+          <NotFound />
+        ) : (
+          <NoticesCategoriesList
+            categoryName={categoryName}
+            data={dataToRender}
+          />
+        )}
 
         {isLoading && <Loader />}
       </Container>
-      {categoryName === 'favorite' ? (
+      {isMobile ? (
+        <InfiniteScroll />
+      ) : categoryName === 'favorite' ? (
         <NoticesPaginationFavorite />
       ) : categoryName === 'owner' ? (
         <NoticesPaginationMyads />
@@ -111,5 +112,3 @@ function NoticesPage() {
 }
 
 export default NoticesPage;
-
-
