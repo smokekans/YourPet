@@ -35,18 +35,18 @@ function RegisterPage() {
   const dispatch = useDispatch();
   const regValidationSchema = Yup.object().shape({
     email: Yup.string()
-      .email('Invalid email format')
-      .required('Mail is required'),
+      .email('Enter a valid Email')
+      .required('Email is required'),
     password: Yup.string()
-      .required()
-      .min(6)
-      .max(16)
+      .required('Password is required')
+      .min(6, 'Enter more than 6 characters')
+      .max(16, 'Max 16')
       .matches(
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,16}$/,
-        'Password must contain at least 1 UPPERCASE letter, 1 lowercase letter, and 1 number.'
+        'Enter a strong password'
       ),
     confirmPassword: Yup.string()
-      .required('Fill the gap')
+      .required('Confirm your password')
       .oneOf([Yup.ref('password'), null], 'Passwords must match!'),
   });
 
@@ -87,7 +87,7 @@ function RegisterPage() {
   };
 
   return (
-    <Container>
+    <Container sx={styles.image}>
       <Card sx={styles.root}>
         <Typography sx={styles.title}>Registration</Typography>
         <Formik
@@ -104,6 +104,9 @@ function RegisterPage() {
             };
             dispatch(register(newUser));
             resetForm();
+            setIsPasswordSecure(false)
+            setIsEmailValid(false)
+            setIsConfirmPassword(false)
           }}
         >
           {({

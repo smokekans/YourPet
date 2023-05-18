@@ -210,6 +210,7 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
               aria-describedby="alert-dialog-descriptionDialogActions"
             >
               <ModalNotice
+                noticeid={_id}
                 onClose={onClose}
                 onhandleFavoriteClick={handleFavoriteClick}
               />

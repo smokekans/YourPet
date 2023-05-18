@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/authOperations';
-import { Container, styled, SvgIcon } from '@mui/material';
+import { styled, SvgIcon } from '@mui/material';
 import styles from './styles';
 import {
   Card,
@@ -20,6 +20,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { ReactComponent as IconGoogle } from '../../images/icons/google-icon.svg';
 import { ReactComponent as IconClose } from '../../images/icons/cross-small-red.svg';
 import { ReactComponent as IconCheck } from '../../images/icons/check.svg';
+import { Container } from '@mui/system';
+// import { useTheme } from '@material-ui/core/styles';
 
 const ValidationTextField = styled(TextField)({
   '& .MuiInputBase-root.MuiOutlinedInput-root': {
@@ -35,19 +37,18 @@ function LoginPage() {
   const dispatch = useDispatch();
   const logValidationSchema = Yup.object().shape({
     email: Yup.string()
-      .required('Fill the gap')
+      .required('Email is required')
       .email('Enter a valid Email')
-      .max(254, 'Max 254')
       .test('validEmail', 'Email is valid', value => {
         return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
       }),
     password: Yup.string()
-      .required('Fill the gap')
+      .required('Password is required')
       .min(6, 'Enter more than 6 characters')
       .max(16, 'Max 16')
       .matches(
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,16}$/,
-        'Password must contain at least 1 UPPERCASE, 1 lowercase letter, and 1 number.'
+        'Enter a strong password'
       ),
   });
 
@@ -74,8 +75,8 @@ function LoginPage() {
     setIsEmailValid(isValidEmail);
   };
 
-  return (
-    <Container>
+  return (<>
+     <Container sx={styles.image}>
       <Card sx={styles.root}>
         <Typography sx={styles.title}>Login</Typography>
         <Formik
@@ -87,6 +88,8 @@ function LoginPage() {
           onSubmit={(values, { resetForm }) => {
             dispatch(login(values));
             resetForm();
+            setIsPasswordSecure(false);
+            setIsEmailValid(false);
           }}
         >
           {({
@@ -99,106 +102,105 @@ function LoginPage() {
             touched,
           }) => (
             <Form onSubmit={handleSubmit}>
-          
-                <Field
-                  as={ValidationTextField}
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  fullWidth
-                  focused
-                  margin="dense"
-                  variant="outlined"
-                  onChange={event => {
-                    handleChange(event);
-                    handleEmailChange(event);
-                  }}
-                  onBlur={handleBlur}
-                  error={!!(touched.email && errors.email)}
-                  helperText={
-                    touched.email && errors.email ? (
-                      <ErrorMessage name="email" />
-                    ) : isEmailValid ? (
-                      'Email is valid'
-                    ) : (
-                      ' '
-                    )
-                  }
-                  value={values.email}
-                  InputProps={{
-                    color:
-                      touched.email && errors.email
-                        ? 'error'
-                        : isEmailValid
-                        ? 'success'
-                        : 'primary',
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        {touched.email && errors.email ? (
-                          <IconClose />
-                        ) : isEmailValid ? (
-                          <IconCheck stroke="#00C3AD" />
-                        ) : null}
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                 <Field
-                  as={ValidationTextField}
-                  name="password"
-                  placeholder="Password"
-                  type={showPassword ? 'text' : 'password'}
-                  fullWidth
-                  focused
-                  margin="dense"
-                  variant="outlined"
-                  onChange={event => {
-                    handleChange(event);
-                    handlePasswordChange(event);
-                  }}
-                  onBlur={handleBlur}
-                  value={values.password}
-                  error={!!(touched.password && errors.password)}
-                  helperText={
-                    touched.password && errors.password ? (
-                      <ErrorMessage name="password" />
-                    ) : isPasswordSecure ? (
-                      'Password is secure'
-                    ) : (
-                      ' '
-                    )
-                  }
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        {touched.password && errors.password ? (
-                          <IconButton
-                            onClick={togglePasswordVisibility}
-                            edge="end"
-                          >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        ) : isPasswordSecure ? (
-                          <IconCheck stroke="#00C3AD" />
-                        ) : (
-                          <IconButton
-                            onClick={togglePasswordVisibility}
-                            edge="end"
-                          >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        )}
-                      </InputAdornment>
-                    ),
-                  }}
-                  color={
-                    touched.password && errors.password
+              <Field
+                as={ValidationTextField}
+                type="email"
+                name="email"
+                placeholder="Email"
+                fullWidth
+                focused
+                margin="dense"
+                variant="outlined"
+                onChange={event => {
+                  handleChange(event);
+                  handleEmailChange(event);
+                }}
+                onBlur={handleBlur}
+                error={!!(touched.email && errors.email)}
+                helperText={
+                  touched.email && errors.email ? (
+                    <ErrorMessage name="email" />
+                  ) : isEmailValid ? (
+                    'Email is valid'
+                  ) : (
+                    ' '
+                  )
+                }
+                value={values.email}
+                InputProps={{
+                  color:
+                    touched.email && errors.email
                       ? 'error'
-                      : isPasswordSecure
+                      : isEmailValid
                       ? 'success'
-                      : 'primary'
-                  }
-                />
+                      : 'primary',
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {touched.email && errors.email ? (
+                        <IconClose />
+                      ) : isEmailValid ? (
+                        <IconCheck stroke="#00C3AD" />
+                      ) : null}
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Field
+                as={ValidationTextField}
+                name="password"
+                placeholder="Password"
+                type={showPassword ? 'text' : 'password'}
+                fullWidth
+                focused
+                margin="dense"
+                variant="outlined"
+                onChange={event => {
+                  handleChange(event);
+                  handlePasswordChange(event);
+                }}
+                onBlur={handleBlur}
+                value={values.password}
+                error={!!(touched.password && errors.password)}
+                helperText={
+                  touched.password && errors.password ? (
+                    <ErrorMessage name="password" />
+                  ) : isPasswordSecure ? (
+                    'Password is secure'
+                  ) : (
+                    ' '
+                  )
+                }
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {touched.password && errors.password ? (
+                        <IconButton
+                          onClick={togglePasswordVisibility}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      ) : isPasswordSecure ? (
+                        <IconCheck stroke="#00C3AD" />
+                      ) : (
+                        <IconButton
+                          onClick={togglePasswordVisibility}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      )}
+                    </InputAdornment>
+                  ),
+                }}
+                color={
+                  touched.password && errors.password
+                    ? 'error'
+                    : isPasswordSecure
+                    ? 'success'
+                    : 'primary'
+                }
+              />
               <Button
                 variant="contained"
                 sx={styles.button}
@@ -231,7 +233,7 @@ function LoginPage() {
           </Typography>
         </Box>
       </Card>
-    </Container>
+    </Container></>
   );
 }
 
