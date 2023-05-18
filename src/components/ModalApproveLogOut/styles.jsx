@@ -16,15 +16,15 @@ const styles = {
     lineHeight: { mobile: '40px', tablet: '49px' },
     fontFamily: 'typography.fontFamily',
   },
- 
+
   buttonBox: {
     gap: '17px',
-      alignItems: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
   },
   button: {
     textTransform: 'none',
-     minWidth: { mobile: '256px', tablet: '129px' },
+    minWidth: { mobile: '256px', tablet: '129px' },
     height: '40px',
     border: '2px solid #54ADFF',
     borderRadius: '40px',
@@ -33,28 +33,28 @@ const styles = {
     lineHeight: 1.37,
     color: '#54ADFF',
     '& svg': {
-      stroke: '#54ADFF' ,
+      stroke: '#54ADFF',
     },
     '&:hover': {
       backgroundColor: '#54ADFF',
       color: '#FEF9F9',
     },
     '&:hover svg': {
-       stroke: '#FEF9F9',
+      stroke: '#FEF9F9',
     },
     '&:active': {
       backgroundColor: '#54ADFF',
       color: '#FEF9F9',
     },
     '&:active svg': {
-       stroke: '#FEF9F9',
+      stroke: '#FEF9F9',
     },
     '&:focus': {
       backgroundColor: '#54ADFF',
       color: '#FEF9F9',
     },
     '&:focus svg': {
-       stroke: '#FEF9F9',
+      stroke: '#FEF9F9',
     },
   },
 };
