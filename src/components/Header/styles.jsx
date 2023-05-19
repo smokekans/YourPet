@@ -10,7 +10,7 @@ const styles = {
     },
   },
   headerList: {
-    width: { mobile: '320px', tablet: '768px', desktop: '1280px' },
+    width: '1',
     display: 'flex',
     alignItems: 'center',
   },
