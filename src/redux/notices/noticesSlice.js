@@ -10,7 +10,7 @@ import {
   getUserNotices,
   getNoticesByQweryOwner,
   getNoticesByQweryFavorite,
-} from './noticesOperation';
+} from './noticesOperations';
 import { getFavorite } from 'redux/user/userOperations';
 
 const noticesInitialState = {
@@ -148,7 +148,6 @@ const noticesSlice = createSlice({
     changeFavoritesNotices(state, { payload }) {
       state.notices = state.notices.filter(notice => notice._id !== payload);
     },
-
   },
 });
 

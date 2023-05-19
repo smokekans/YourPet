@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectFriends } from 'redux/friends/friendsSelectors';
+import { getFriends } from 'redux/friends/friendsSelectors';
 import OurFriendsItem from '../OurFriendsItem/OurFriendsItem';
 import styles from './styles';
 import { Container, List } from '@mui/material';
 
 function OurFriendsList() {
-  const friends = useSelector(selectFriends);
+  const friends = useSelector(getFriends);
   return (
     <>
       {friends && (

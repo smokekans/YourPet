@@ -3,9 +3,9 @@ import axios from 'axios';
 import { getCurrentUser } from 'redux/user/userOperations';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
+axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api/';
 
-export const accessToken = {
+export const token = {
   set(accessToken) {
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   },
@@ -38,25 +38,11 @@ export const login = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axios.post('auth/login', credentials);
-      accessToken.set(data.accessToken);
+      token.set(data.accessToken);
       dispatch(getCurrentUser());
       return data;
     } catch (error) {
       toast.error('Email or password is wrong');
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const loginWithGoogle = createAsyncThunk(
-  'auth/loginWithGoogle',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post('auth/google', credentials);
-      accessToken.set(data.accessToken);
-      return data;
-    } catch (error) {
-      toast.error('Missing or not valid field password');
       return rejectWithValue(error.message);
     }
   }
@@ -67,9 +53,9 @@ export const logout = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const value = getState().auth.accessToken;
-      accessToken.set(value);
+      token.set(value);
       await axios.post('auth/logout');
-      accessToken.unset();
+      token.unset();
     } catch (error) {
       toast.error(error.response.data);
       return rejectWithValue(error.message);
@@ -82,9 +68,10 @@ export const refreshToken = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.get('auth/refresh', credentials);
-      accessToken.set(data.accessToken);
+      token.set(data.accessToken);
       return data;
     } catch (error) {
+      token.unset();
       return rejectWithValue(error.message);
     }
   }

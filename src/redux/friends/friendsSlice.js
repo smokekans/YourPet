@@ -3,7 +3,7 @@ import { getFriends } from './friendsOperations';
 
 const friendsInitialState = {
   friends: [],
-  isLoaded: false,
+  isLoading: false,
 };
 
 const friendsSlice = createSlice({
@@ -11,15 +11,15 @@ const friendsSlice = createSlice({
   initialState: friendsInitialState,
   extraReducers: builder => {
     builder
-      .addCase(getFriends.pending, (state, action) => {
-        state.isLoaded = false;
+      .addCase(getFriends.pending, state => {
+        state.isLoading = false;
       })
-      .addCase(getFriends.fulfilled, (state, action) => {
-        state.friends = action.payload;
-        state.isLoaded = true;
+      .addCase(getFriends.fulfilled, (state, { payload }) => {
+        state.friends = payload;
+        state.isLoading = true;
       })
-      .addCase(getFriends.rejected, (state, action) => {
-        state.isLoaded = false;
+      .addCase(getFriends.rejected, state => {
+        state.isLoading = false;
       });
   },
 });
