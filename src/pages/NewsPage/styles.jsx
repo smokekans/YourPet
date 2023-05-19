@@ -2,7 +2,7 @@ const styles = {
   container: {
     p: 0,
     pt: { mobile: '40px', tablet: '80px', desktop: '80px' },
-    pb: { mobile: '147px', tablet: '221px', desktop: '555px' },
+    pb: { mobile: '40px', tablet: '80px', desktop: '80px' },
   },
   title: {
     textAlign: 'center',

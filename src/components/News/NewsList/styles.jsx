@@ -4,8 +4,6 @@ const styles = {
     ml: 'auto',
     mb: { mobile: '40px', tablet: '60px', desktop: '60px' },
     width: { mobile: '320px', tablet: '768px', desktop: '1280px' },
-    height: { mobile: '320px', tablet: '768px', desktop: '1136px' },
-
     pr: { mobile: '20px', tablet: '32px', desktop: '16px' },
     pl: { mobile: '20px', tablet: '32px', desktop: '16px' },
   },
