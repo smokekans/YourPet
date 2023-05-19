@@ -27,32 +27,7 @@ function UserDataItem() {
   const nameCity = useRef(null);
   const nameBirtday = useRef(null);
   const user = useSelector(getUser);
-
-
-  function clickName(e) {
-   
-    nameUser.current.focus();
-    
-    getName(false);
-    
-  }
-  function clickEmail() {
-    nameEmail.current.focus();
-    getEmail(false);
-  }
-  function clickPhone() {
-    namePhone.current.focus();
-    getPhone(false);
-  }
-  function clickCity() {
-    nameCity.current.focus();
-    getCity(false);
-  }
-  function clickBirthday() {
-    nameBirtday.current.focus();
-    getBirthday(false);
-  }
-
+  
   const updateInfo = {
     email: user.email,
     name: user.name,
@@ -60,6 +35,67 @@ function UserDataItem() {
     phone: user.phone,
     city: user.city,
   };
+
+  function clickName(e) {
+    const inputName = document.querySelector('#name')
+   console.log(inputName)
+   inputName.removeAttribute("disabled")
+    nameUser.current.focus();
+    
+    getName(false);
+    
+  }
+  function clickEmail() {
+    const inputName = document.querySelector('#email')
+    inputName.removeAttribute("disabled")
+    nameEmail.current.focus();
+    getEmail(false);
+  }
+  function clickPhone() {
+    const inputName = document.querySelector('#phone')
+    inputName.removeAttribute("disabled")
+    namePhone.current.focus();
+    getPhone(false);
+  }
+  function clickCity() {
+    const inputName = document.querySelector('#city')
+    inputName.removeAttribute("disabled")
+    nameCity.current.focus();
+    getCity(false);
+  }
+  function clickBirthday() {
+    const inputName = document.querySelector('#birthday')
+    inputName.removeAttribute("disabled")
+    nameBirtday.current.focus();
+    getBirthday(false);
+  }
+   function handleClick(atribut) {
+    console.log(atribut)
+    if(atribut==='name'){
+      const inputName = document.querySelector('#name')
+    inputName.setAttribute("disabled", "true")
+    }
+    else if(atribut==='email'){
+      const inputName = document.querySelector('#email')
+    inputName.setAttribute("disabled", "true")
+    }
+    else if(atribut==='birthday'){
+      const inputName = document.querySelector('#birthday')
+    inputName.setAttribute("disabled", "true")
+    }
+    else if(atribut==='city'){
+      const inputName = document.querySelector('#city')
+    inputName.setAttribute("disabled", "true")
+    }
+    else if(atribut==='phone'){
+      const inputName = document.querySelector('#phone')
+    inputName.setAttribute("disabled", "true")
+    }
+  
+    dispatch(updateInfoUser(updateInfo));
+  }
+
+  
 
   const ChangeData = e => {
     const id = e.currentTarget.id;
@@ -78,9 +114,7 @@ function UserDataItem() {
     }
     return updateInfo;
   };
-  function handleClick() {
-    dispatch(updateInfoUser(updateInfo));
-  }
+ 
 
  
   const { name, birthday, email, phone, city } = user;
@@ -106,7 +140,7 @@ else{
               onChange={ChangeData}
               inputRef={nameUser}
               defaultValue={userName(name)}
-   
+   disabled
               endAdornment={
                 <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnName ? (
@@ -123,7 +157,8 @@ else{
                       stroke="#54ADFF"
                       onClick={() => {
                         getName(true);
-                        handleClick();
+                       
+                        handleClick('name');
                       }}
                       edge="end"
                     ></Check>
@@ -143,11 +178,12 @@ else{
               onChange={ChangeData}
               inputRef={nameEmail}
               defaultValue={email}
+              disabled
               endAdornment={
                 <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnEmail ? (
                     <Pencel
-                      className="name"
+                      className="email"
                       onClick={() => {
                         clickEmail();
                       }}
@@ -155,11 +191,11 @@ else{
                     ></Pencel>
                   ) : (
                     <Check
-                      className="name"
+                      className="email"
                       stroke="#54ADFF"
                       onClick={() => {
                         getEmail(true);
-                        handleClick();
+                        handleClick('email');
                       }}
                       edge="end"
                     ></Check>
@@ -179,6 +215,7 @@ else{
               onChange={ChangeData}
               inputRef={nameBirtday}
               defaultValue={birthday}
+              disabled
               endAdornment={
                 <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnBirthday ? (
@@ -195,7 +232,7 @@ else{
                       stroke="#54ADFF"
                       onClick={() => {
                         getBirthday(true);
-                        handleClick();
+                        handleClick("birthday");
                       }}
                       edge="end"
                     ></Check>
@@ -214,6 +251,7 @@ else{
               onChange={ChangeData}
               inputRef={namePhone}
               defaultValue={phone}
+              disabled
               endAdornment={
                 <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnPhone ? (
@@ -230,7 +268,7 @@ else{
                       stroke="#54ADFF"
                       onClick={() => {
                         getPhone(true);
-                        handleClick();
+                        handleClick("phone");
                       }}
                       edge="end"
                     ></Check>
@@ -249,6 +287,7 @@ else{
               onChange={ChangeData}
               inputRef={nameCity}
               defaultValue={city}
+              disabled
               endAdornment={
                 <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnCity ? (
@@ -265,7 +304,7 @@ else{
                       stroke="#54ADFF"
                       onClick={() => {
                         getCity(true);
-                        handleClick();
+                        handleClick("city");
                       }}
                       edge="end"
                     ></Check>
