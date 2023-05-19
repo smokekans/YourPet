@@ -1,7 +1,7 @@
 const styles = {
   container: {
     width: { mobile: '280px', tablet: '703px', desktop: '821px' },
-    marginLeft: { mobile: '0', tablet: '-30px', desktop: '20px' },
+    marginLeft: { mobile: '0', tablet: 'auto', desktop: '20px' },
     pl: { mobile: '0', tablet: '', desktop: '' },
   },
   cssContainer: { 
@@ -52,9 +52,9 @@ const styles = {
     mt: '-9px',
     ml: '40px',
     display: 'flex',
-    alignItems: 'center',
+    
     letterSpacing: '0.04em',
-
+    alignItems: 'flex-start',
     /* Черный */
 
     color: '#111111',
@@ -98,7 +98,7 @@ const styles = {
     width: '24px',
     height: '24px',
     padding:'0',
-    mt: { mobile: '-365px', tablet: '20px', desktop: '20px' },
+    mt: { mobile: '-430px', tablet: '20px', desktop: '20px' },
     mr: { mobile: '', tablet: '20px', desktop: '40px' },
     ml:{ mobile: '240px', tablet: '0', desktop: '0' },
     'svg':{

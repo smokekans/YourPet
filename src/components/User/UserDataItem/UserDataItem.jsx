@@ -28,9 +28,13 @@ function UserDataItem() {
   const nameBirtday = useRef(null);
   const user = useSelector(getUser);
 
-  function clickName() {
+
+  function clickName(e) {
+   
     nameUser.current.focus();
+    
     getName(false);
+    
   }
   function clickEmail() {
     nameEmail.current.focus();
@@ -77,7 +81,17 @@ function UserDataItem() {
   function handleClick() {
     dispatch(updateInfoUser(updateInfo));
   }
+
+ 
   const { name, birthday, email, phone, city } = user;
+  function userName(name){
+if(name ==='Name'){
+  return email.split('@')[0]
+}
+else{
+ return  name
+}
+  }
 
   return (
     <div>
@@ -87,17 +101,19 @@ function UserDataItem() {
           <FormControl variant="filled" sx={{ ml: 'auto' }}>
             <FilledInput
               id="name"
+              
               sx={styles.input}
               onChange={ChangeData}
               inputRef={nameUser}
-              defaultValue={name}
+              defaultValue={userName(name)}
+   
               endAdornment={
                 <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnName ? (
                     <Pencel
                       className="name"
-                      onClick={() => {
-                        clickName();
+                      onClick={(e) => {
+                        clickName(e);
                       }}
                       edge="end"
                     ></Pencel>

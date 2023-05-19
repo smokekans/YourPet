@@ -71,7 +71,7 @@ const styles = {
   btnLogOut: {
     height: '22px',
     ml: { tablet: '53px', desktop: '20px' },
-
+    mt: '-10px',
     fontFamily: 'Manrope',
     fontStyle: 'normal',
     fontWeight: '500',

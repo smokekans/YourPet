@@ -2,6 +2,7 @@ const styles = {
   container: {
     display: { mobile: '', tablet: '', desktop: 'flex' },
   },
+  
   information: {
     width: '207px',
     height: '38px',

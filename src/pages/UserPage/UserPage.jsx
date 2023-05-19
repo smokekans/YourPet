@@ -12,7 +12,7 @@ function UserPage() {
   // const isNewUser = useSelector(getIsNewUser);
   return (
     <>
-      <Container sx={{ mt: '62px', justifyContent: 'center', display: 'grid' }}>
+      <Container sx={{ mt: '62px', justifyContent: 'center', display: 'grid' ,}}>
         <Box sx={styles.headlines}>
           <Typography variant="h2" sx={styles.information}>
             My information:
