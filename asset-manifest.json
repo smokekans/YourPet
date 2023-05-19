@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/YourPet/static/css/main.bb45d7c6.css",
-    "main.js": "/YourPet/static/js/main.82a50725.js",
+    "main.js": "/YourPet/static/js/main.c941a2f4.js",
     "static/media/animal-desktop@2x.png": "/YourPet/static/media/animal-desktop@2x.f7dbfdb815a6aeeb0df9.png",
     "static/media/animal-tablet@2x.png": "/YourPet/static/media/animal-tablet@2x.ab29a402ee04ba4ac9b1.png",
     "static/media/animal-mobile@2x.png": "/YourPet/static/media/animal-mobile@2x.a35fc0a2931c9119b4b1.png",
@@ -21,7 +21,6 @@
     "static/media/pawprint-1.svg": "/YourPet/static/media/pawprint-1.26de1d556426504d6fe2f3c6d0187bfb.svg",
     "index.html": "/YourPet/index.html",
     "static/media/edit.svg": "/YourPet/static/media/edit.8f394d4128bbe14a9429e841fcf6d51d.svg",
-    "static/media/plus.svg": "/YourPet/static/media/plus.20e9b47fbfb8acb12fbeb0d390439d34.svg",
     "static/media/google-icon.svg": "/YourPet/static/media/google-icon.81c7fbea450132850a693495fa18f22c.svg",
     "static/media/search.svg": "/YourPet/static/media/search.41d49a9ae2e0cf1b87a3b9eb48d223c9.svg",
     "static/media/heart-1.svg": "/YourPet/static/media/heart-1.8fe0607f29956b34cf4eaf522beb8704.svg",
@@ -37,15 +36,17 @@
     "static/media/trash.svg": "/YourPet/static/media/trash.575eb9fd93eb6c383d7c1ad33f90b8ae.svg",
     "static/media/logout.svg": "/YourPet/static/media/logout.8790af7bde245471313fc2a3bdb4b2da.svg",
     "static/media/logout-2.svg": "/YourPet/static/media/logout-2.1afadc87db93acf40fabd99c0812ad0d.svg",
+    "static/media/arrow-left.svg": "/YourPet/static/media/arrow-left.6317051980f61481aee044e42b84bc39.svg",
     "static/media/cross.svg": "/YourPet/static/media/cross.db25bdefd99ea642bd2f8f8649b1d229.svg",
     "static/media/cross-small-red.svg": "/YourPet/static/media/cross-small-red.979527430babc874f1a86f2736f96771.svg",
     "static/media/check.svg": "/YourPet/static/media/check.2a64553bc65df77be06926ee8669f056.svg",
+    "static/media/plus.svg": "/YourPet/static/media/plus.15fb208dd53f0ee16fabd7b0cbf24320.svg",
     "static/media/plus-small.svg": "/YourPet/static/media/plus-small.650a349c690cb7c18bf2c342e62dc09b.svg",
     "main.bb45d7c6.css.map": "/YourPet/static/css/main.bb45d7c6.css.map",
-    "main.82a50725.js.map": "/YourPet/static/js/main.82a50725.js.map"
+    "main.c941a2f4.js.map": "/YourPet/static/js/main.c941a2f4.js.map"
   },
   "entrypoints": [
     "static/css/main.bb45d7c6.css",
-    "static/js/main.82a50725.js"
+    "static/js/main.c941a2f4.js"
   ]
 }
