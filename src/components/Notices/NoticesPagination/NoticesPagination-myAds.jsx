@@ -3,11 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserNotices } from 'redux/notices/noticesOperations';
+import { getIsLoading } from 'redux/notices/noticesSelectors';
 
 export const NoticesPaginationMyads = () => {
   const total = useSelector(state => state.notices.ownTotal);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
 
   useEffect(() => {
     dispatch(getUserNotices({ page }));
@@ -15,12 +17,12 @@ export const NoticesPaginationMyads = () => {
 
   return (
     <div>
-      {total > 10 ? (
+      {total > 12 && !isLoading ? (
         <PaginationControl
           page={page}
           between={4}
           total={total}
-          limit={10}
+          limit={12}
           last={true}
           changePage={page => {
             setPage(page);
