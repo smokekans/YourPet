@@ -22,7 +22,7 @@ import { getFavorites } from 'redux/user/userSelectors';
 import Typography from '@mui/material/Typography';
 import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
 import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
-import NotFound from 'components/NotFound/NotFound';
+import NotFoundNotices from 'components/NotFound/NotFoundNotices';
 import { getAccessToken } from 'redux/auth/authSelectors';
 
 function NoticesPage() {
@@ -94,7 +94,7 @@ function NoticesPage() {
         {isLoading && accessToken ? (
           <Loader />
         ) : dataToRender && dataToRender.length === 0 ? (
-          <NotFound />
+          <NotFoundNotices />
         ) : (
           <NoticesCategoriesList
             categoryName={categoryName}
