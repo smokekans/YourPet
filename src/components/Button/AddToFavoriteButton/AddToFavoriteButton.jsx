@@ -4,16 +4,16 @@ import { IconButton } from '@mui/material';
 import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
 import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
 
-import { getIsLoggedIn } from 'redux/auth/authSelectors';
+import { getAccessToken } from 'redux/auth/authSelectors';
 import { deleteFavoriteObj } from 'redux/user/userSlice';
 
 const FavoriteIconButton = ({ noticeid }) => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(getIsLoggedIn);
   const favoriteElement = useSelector(state => state.user.favorite);
+  const accessToken = useSelector(getAccessToken);
 
   const handleFavoriteClick = () => {
-    if (!isLoggedIn) {
+    if (!accessToken) {
       toast.info(
         'You must be registered or logged in to continue the operation'
       );
@@ -23,7 +23,7 @@ const FavoriteIconButton = ({ noticeid }) => {
     if (checkId) {
       dispatch(deleteFromFavorite(noticeid));
       dispatch(deleteFavoriteObj(noticeid));
-      toast.error('Removed from favorites');
+      toast.warning('Removed from favorites');
     } else {
       dispatch(addToFavorites(noticeid));
       toast('Added to favorites');
