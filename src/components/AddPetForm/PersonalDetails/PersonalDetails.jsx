@@ -1,5 +1,9 @@
 import React from 'react';
 import { Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import { ReactComponent as IconBack } from '../../../images/icons/arrow-left.svg';
+import { ReactComponent as IconPaws } from '../../../images/icons/pawprint.svg';
+import { Box, Button } from '@mui/material';
+import styles from './styles';
 
 const PersonalDetails = ({ prevStep, nextStep }) => {
   const { values, handleChange } = useFormikContext();
@@ -12,9 +16,9 @@ const PersonalDetails = ({ prevStep, nextStep }) => {
   };
 
   const { category } = values;
-
+  
   return (
-    <div>
+   <Box>
       <Form autoComplete="on">
         {category !== 'your-pet' && (
           <label htmlFor="title">
@@ -63,14 +67,15 @@ const PersonalDetails = ({ prevStep, nextStep }) => {
           />
           <ErrorMessage name="breed" render={msg => <div> {msg} </div>} />
         </label>
-        <button type="button" onClick={handlePrevClick}>
+        <Button sx={styles.btn} type="button" onClick={handlePrevClick}>
+          <IconBack/>
           Back
-        </button>
-        <button type="button" onClick={handleNextClick}>
+        </Button>
+        <Button  sx={styles.button} type="button" onClick={handleNextClick} endIcon={<IconPaws fill="#FEF9F9" />}>
           Next
-        </button>
+        </Button>
       </Form>
-    </div>
+    </Box>
   );
 };
 

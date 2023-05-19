@@ -6,7 +6,11 @@ import { createPet } from 'redux/pets/petsOperations';
 import { createNotice } from 'redux/notices/noticesOperations';
 import { getAccessToken } from 'redux/auth/authSelectors';
 import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
-import { ReactComponent as IconPlus } from '../../images/icons/plus.svg';
+import { ReactComponent as IconPlus } from '../../../images/icons/plus.svg';
+import { ReactComponent as IconBack } from '../../../images/icons/arrow-left.svg';
+import { ReactComponent as IconPaws } from '../../../images/icons/pawprint.svg';
+import { Box, Button, IconButton, FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import styles from './styles';
 import { toast } from 'react-toastify';
 
 const MoreInfo = ({ prevStep, setFormData }) => {
@@ -30,25 +34,24 @@ const MoreInfo = ({ prevStep, setFormData }) => {
     prevStep();
   };
 
-  const onSubmit = async event => {
-    event.preventDefault();
+  const onSubmit = async ({ resetForm }) => {
     setFormData({ ...values, avatar: fileInput });
-    console.log(values);
     if (values.category === 'your-pet') {
       try {
         await dispatch(createPet({ values, accessToken, avatar: fileInput }));
         toast.success('Pet card created successfully');
         navigate('/user');
+        resetForm();
       } catch (error) {
         toast.error(`Error creating pet card: ${error.message}`);
       }
     } else {
       try {
         await dispatch(
-          createNotice({ values, accessToken, avatar: fileInput })
-        );
+        createNotice({ values, accessToken, avatar: fileInput }));
         toast.success('Notice created successfully');
         navigate('/notices/sell');
+        resetForm();
       } catch (error) {
         toast.error(`Error creating notice: ${error.message}`);
       }
@@ -69,7 +72,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
                 name="sex"
                 value="female"
                 alt="female"
-                // hidden
+                hidden
               />
               <span>
                 <BsGenderFemale fill="#F43F5E" />
@@ -84,7 +87,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
                 name="sex"
                 value="male"
                 alt="male"
-                // hidden
+                hidden
               />
               <span>
                 <BsGenderMale fill="#54ADFF" />
@@ -115,6 +118,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
               handleAddAvatar(event);
               handleChange(event);
             }}
+            hidden
           />
           <ErrorMessage name="image" render={msg => <div> {msg} </div>} />
         </label>
@@ -152,8 +156,12 @@ const MoreInfo = ({ prevStep, setFormData }) => {
           />
           <ErrorMessage name="comments" render={msg => <div> {msg} </div>} />
         </label>
-        <button onClick={handlePrevClick}>Back</button>
-        <button type="submit">Done</button>
+        <Button sx={styles.btn} onClick={handlePrevClick}>
+           <IconBack/>
+          Back
+        </Button>
+        <Button  sx={styles.button} type="submit" endIcon={<IconPaws fill="#FEF9F9" />}>
+          Done</Button>
       </Form>
     </div>
   );

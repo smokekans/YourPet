@@ -117,7 +117,6 @@ export const createNotice = createAsyncThunk(
       const { data } = await axios.post('/notices', formData, header, avatar);
       return data;
     } catch (error) {
-      console.error('Error uploading image:', error);
       return thunkAPI.rejectWithValue();
     }
   }
