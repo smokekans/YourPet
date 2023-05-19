@@ -1,4 +1,11 @@
-import { Box, Container, IconButton, Input, InputAdornment, Typography } from '@mui/material';
+import {
+  Box,
+  Container,
+  IconButton,
+  Input,
+  InputAdornment,
+  Typography,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Search } from '../../images/icons/search.svg';
 import { ReactComponent as Cross } from '../../images/icons/cross.svg';
@@ -72,7 +79,10 @@ function NewsPage() {
                     </IconButton>
                   </InputAdornment>
                 )}
-                <InputAdornment position="end" sx={{ position: 'absolute', right: 0, pr: '14px' }}>
+                <InputAdornment
+                  position="end"
+                  sx={{ position: 'absolute', right: 0, pr: '14px' }}
+                >
                   <IconButton type="submit" size="small">
                     <Search />
                   </IconButton>
