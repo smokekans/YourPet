@@ -63,7 +63,7 @@ function PetsData() {
         </NavLink>
       </Box>
       {!Pets ? (
-        <div></div>
+    <div></div>
       ) : (
         <Container sx={styles.cssContainer}>
           <Typography variant="div">
@@ -93,7 +93,7 @@ function PetsData() {
                         variant="p"
                         key={_id + 3}
                       >
-                        Name: {name}
+                        Name: <Typography sx={{fw:'400',}}>{name}</Typography>
                       </Typography>
                       <br />
                       <Typography
@@ -101,7 +101,7 @@ function PetsData() {
                         variant="p"
                         key={_id + 4}
                       >
-                        Data of dirth: {birthday}
+                        Data of dirth: <Typography sx={{fw:'400',}}>{birthday}</Typography>
                       </Typography>
 
                       <br />
@@ -110,7 +110,7 @@ function PetsData() {
                         variant="p"
                         key={_id + 5}
                       >
-                        Breed:{breed}
+                        Breed:<Typography sx={{fw:'400',}}>{breed}</Typography>
                       </Typography>
                       <br />
                       <Typography
@@ -118,7 +118,7 @@ function PetsData() {
                         variant="p"
                         key={_id + 6}
                       >
-                        Comments: {comments}
+                        Comments: <Typography sx={{fw:'400',}}>{comments}</Typography>
                       </Typography>
                       <br />
                     </Typography>
