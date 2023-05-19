@@ -9,7 +9,11 @@ import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
 import { ReactComponent as IconPlus } from '../../../images/icons/plus.svg';
 import { ReactComponent as IconBack } from '../../../images/icons/arrow-left.svg';
 import { ReactComponent as IconPaws } from '../../../images/icons/pawprint.svg';
-import { Box, Button, IconButton, FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import {
+  // Box,
+  Button,
+  // IconButton, FormControl, RadioGroup, FormControlLabel, Radio
+} from '@mui/material';
 import styles from './styles';
 import { toast } from 'react-toastify';
 
@@ -48,9 +52,10 @@ const MoreInfo = ({ prevStep, setFormData }) => {
     } else {
       try {
         await dispatch(
-        createNotice({ values, accessToken, avatar: fileInput }));
+          createNotice({ values, accessToken, avatar: fileInput })
+        );
         toast.success('Notice created successfully');
-        navigate('/notices/sell');
+        navigate('/notices/owner');
         resetForm();
       } catch (error) {
         toast.error(`Error creating notice: ${error.message}`);
@@ -157,11 +162,16 @@ const MoreInfo = ({ prevStep, setFormData }) => {
           <ErrorMessage name="comments" render={msg => <div> {msg} </div>} />
         </label>
         <Button sx={styles.btn} onClick={handlePrevClick}>
-           <IconBack/>
+          <IconBack />
           Back
         </Button>
-        <Button  sx={styles.button} type="submit" endIcon={<IconPaws fill="#FEF9F9" />}>
-          Done</Button>
+        <Button
+          sx={styles.button}
+          type="submit"
+          endIcon={<IconPaws fill="#FEF9F9" />}
+        >
+          Done
+        </Button>
       </Form>
     </div>
   );

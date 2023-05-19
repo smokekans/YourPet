@@ -34,7 +34,7 @@ const styles = {
     height: '35px',
     mr: 'auto',
     ml: 'auto',
-    height: '40px',
+    // height: '40px',
     textTransform: 'none',
     fontWeight: 700,
     fontSize: '16px',
@@ -52,10 +52,10 @@ const styles = {
     display: 'flex',
     flexDirection: { mobile: 'column-reverse', tablet: 'row' },
   },
-    radio: {
-        display: 'flex',
-        alignItems: ' center',
-             justifyContent: 'center',
+  radio: {
+    display: 'flex',
+    alignItems: ' center',
+    justifyContent: 'center',
     width: '107px',
     height: '35px',
     backgroundColor: '#CCE4FB',
@@ -63,7 +63,7 @@ const styles = {
     fontWeight: '500',
     fontSize: '14px',
     lineHeight: '19px',
-    
+
     color: ' #54ADFF',
     '&:hover': {
       backgroundColor: '#54ADFF',
@@ -76,9 +76,9 @@ const styles = {
   },
   box: {
     display: 'flex',
-      flexDirection: 'column',
+    flexDirection: 'column',
     gap: '12px',
-  margin:{ mobile: '20px 0 95px', tablet: '40px 0 137px' },
+    margin: { mobile: '20px 0 95px', tablet: '40px 0 137px' },
   },
 };
 

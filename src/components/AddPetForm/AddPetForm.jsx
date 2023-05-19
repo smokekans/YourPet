@@ -4,7 +4,13 @@ import { petsValidationSchema } from './Yup';
 import ChooseOption from './ChooseOption/ChooseOption';
 import PersonalDetails from './PersonalDetails/PersonalDetails';
 import MoreInfo from './MoreInfo/MoreInfo';
-import { Card, Typography, List, ListItem, Box } from '@mui/material';
+import {
+  Card,
+  Typography,
+  List,
+  ListItem,
+  // Box
+} from '@mui/material';
 import { styled } from '@mui/system';
 import styles from './styles';
 
@@ -61,12 +67,12 @@ const AddPetForm = () => {
     padding: '0 0 16px 0',
     fontFamily: 'Manrope',
     fontWeight: '500',
-    fontSize: '10px', 
-    lineHeight: '13.66px', 
+    fontSize: '10px',
+    lineHeight: '13.66px',
     position: 'relative',
     // textAlign: 'start',
     // alignItems: 'base-line',
-  
+
     '&::after': {
       content: '""',
       position: 'absolute',
@@ -85,10 +91,7 @@ const AddPetForm = () => {
   return (
     <Card sx={styles.root}>
       <Typography sx={styles.title}>{step > 1 ? title : 'Add Pet'}</Typography>
-      <Formik
-        initialValues={formData}
-        validationSchema={petsValidationSchema}
-      >
+      <Formik initialValues={formData} validationSchema={petsValidationSchema}>
         <div>
           <List sx={styles.ul}>
             {steps.map((stepName, index) => {
@@ -108,8 +111,7 @@ const AddPetForm = () => {
             })}
           </List>
           {components[step]}
-
-          </div>
+        </div>
       </Formik>
     </Card>
   );
