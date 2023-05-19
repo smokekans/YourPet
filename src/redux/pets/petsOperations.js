@@ -1,29 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
-
-export const accessToken = {
-  set(accessToken) {
-    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
-// змінила назву з getPet на getFriends
-export const getFriends = createAsyncThunk(
-  'current/user',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      await axios.get('/pets/current', credentials);
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-// додає картку улюбленця
 export const createPet = createAsyncThunk(
   'pets/create',
   async ({ values, accessToken, avatar }, thunkAPI) => {

@@ -14,7 +14,7 @@ import {
   deleteNotice,
   getSingleNotice,
   getUserNotices,
-} from 'redux/notices/noticesOperation';
+} from 'redux/notices/noticesOperations';
 
 import styles from './styles';
 import { styled } from '@mui/material/styles';

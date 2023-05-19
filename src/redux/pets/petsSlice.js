@@ -1,28 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getFriends } from './petsOperation';
-import { createPet} from './petsOperation';
-
-const userInitialState = {
-  user: {},
-  pets: {},
-};
-
-function UserFulfilled(state, { payload }) {
-  console.log(payload);
-  state.user = payload.user;
-  state.error = null;
-}
-const friendsSlice = createSlice({
-  name: 'user',
-  initialState: userInitialState,
-  extraReducers: builder => {
-    builder
-      .addCase(getFriends.fulfilled, UserFulfilled)
-      .addCase(getFriends.rejected, (state, { payload }) => {
-        state.error = payload;
-      });
-  },
-});
+import { createPet } from './petsOperations';
 
 const petsInitialState = {
   pets: [],
@@ -58,7 +35,7 @@ const petsSlice = createSlice({
       });
   },
   reducers: {
-    clearPets(state, { payload }) {
+    clearPets(state) {
       state.pets = [];
     },
   },
@@ -66,4 +43,3 @@ const petsSlice = createSlice({
 
 export const petsReducer = petsSlice.reducer;
 export const { clearPets } = petsSlice.actions;
-export const friendsReducer = friendsSlice.reducer;

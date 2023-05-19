@@ -11,14 +11,13 @@ const authInitialState = {
 };
 
 function registerFulfilled(state, { payload }) {
-  state.isNewUser = true;
+  state.isNewUser = payload.user.isNewUser;
   state.isLoading = false;
   state.error = null;
 }
 
 function loginFulfilled(state, { payload }) {
   state.user = payload.user;
-  // state.isNewUser = false;
   state.accessToken = payload.accessToken;
   state.refreshToken = payload.refreshToken;
   state.error = null;

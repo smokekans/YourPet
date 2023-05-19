@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { isPets } from '../../../redux/user/userSelectors';
+import { getPets } from '../../../redux/user/userSelectors';
 import { Container, IconButton } from '@mui/material';
 import { Typography, Button } from '@mui/material';
 import styles from './styles';
@@ -11,7 +11,7 @@ import { getCurrentUser } from 'redux/user/userOperations';
 import { NavLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 function PetsData() {
-  const Pets = useSelector(isPets);
+  const Pets = useSelector(getPets);
   const dispatch = useDispatch();
 
   console.log(Pets);
@@ -29,18 +29,16 @@ function PetsData() {
   return (
     <Container sx={styles.container}>
       <Box variant="div" sx={styles.pets}>
-            My pets:
-            <NavLink to="/add-pet" >
-              <Button sx={styles.btnAdd}> Add Pet +</Button>
-             
-            </NavLink>
-          </Box>
+        My pets:
+        <NavLink to="/add-pet">
+          <Button sx={styles.btnAdd}> Add Pet +</Button>
+        </NavLink>
+      </Box>
       {!Pets ? (
         <div></div>
       ) : (
         <Container sx={styles.cssContainer}>
-           
-          <Typography variant="div" >
+          <Typography variant="div">
             {Pets.map(({ _id, birthday, comments, image, name, breed }) => {
               return (
                 <Typography sx={styles.cardPets} variant="div" key={_id + 7}>
@@ -52,19 +50,24 @@ function PetsData() {
                     height="161"
                     key={_id + 1}
                   />
-                  <Typography variant="div" key={_id} sx={{width:'580px', mt:'8px'}}>
+                  <Typography
+                    variant="div"
+                    key={_id}
+                    sx={{ width: '580px', mt: '8px' }}
+                  >
                     <Typography
                       sx={styles.contInfo}
                       variant="div"
                       key={_id + 2}
                     >
-                       <Typography
+                      <Typography
                         sx={styles.infoPets}
                         variant="p"
                         key={_id + 3}
                       >
                         Name: {name}
-                      </Typography><br />
+                      </Typography>
+                      <br />
                       <Typography
                         sx={styles.infoPets}
                         variant="p"
@@ -72,8 +75,7 @@ function PetsData() {
                       >
                         Data of dirth: {birthday}
                       </Typography>
-                      
-                     
+
                       <br />
                       <Typography
                         sx={styles.infoPets}
@@ -97,7 +99,9 @@ function PetsData() {
                     sx={styles.btnTrash}
                     // startIcon={<Trash sx={styles.icon}/>}
                     onClick={() => delet(_id)}
-                  ><Trash /></IconButton>
+                  >
+                    <Trash />
+                  </IconButton>
                 </Typography>
               );
             })}
