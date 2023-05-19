@@ -30,7 +30,7 @@ export const NoticesPagination = () => {
   }, [categoryName]);
 
   return (
-    <div>
+    <>
       {total > 12 && !isLoading ? (
         <PaginationControl
           page={page}
@@ -45,6 +45,6 @@ export const NoticesPagination = () => {
       ) : (
         ''
       )}
-    </div>
+    </>
   );
 };
