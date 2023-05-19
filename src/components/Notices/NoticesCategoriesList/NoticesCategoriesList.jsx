@@ -5,8 +5,6 @@ import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
 
 function NoticesCategoriesList({ data, categoryName }) {
   const dataArray = Array.isArray(data) ? data : [data];
-  // const dataArray = data || [];
-  console.log('NoticesCategoriesList ~ dataArray:', dataArray);
 
   return (
     <Container sx={{
@@ -17,7 +15,7 @@ function NoticesCategoriesList({ data, categoryName }) {
     pl: { mobile: '20px', tablet: '32px', desktop: '16px' },
   }}>
     <List
-      container
+     
       spacing={2}
       sx={{
         display: 'flex',
@@ -40,7 +38,7 @@ function NoticesCategoriesList({ data, categoryName }) {
               categoryName === 'favorite')
         )
         .map(item => (
-          <li item key={item._id}>
+          <li key={item._id}>
             {/* <div sx={{ padding: '8px' }}> */}
             <NoticeCategoryItem data={item} categoryName={categoryName} />
             {/* </div> */}

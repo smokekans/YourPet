@@ -105,7 +105,6 @@ const styles = {
     position: 'absolute',
     width: '248px',
     height: '38px',
-    left: '16px',
     top: '394px',
 
     border: '2px solid #54ADFF',
