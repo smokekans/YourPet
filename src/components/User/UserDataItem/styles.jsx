@@ -58,15 +58,22 @@ const styles = {
     '&::before': {
       borderBottom: 'none',
       transition: 'none',
+      
     },
     '&::after': {
       borderBottom: 'none',
       transition: 'none',
     },
-    '&:hover:not(.Mui-disabled, .Mui-error):before': {
-      borderBottom: 'none',
-      transition: 'none',
+    '&.Mui-disabled': {
+      backgroundColor: '#fff',
+     
     },
+    '&.Mui-disabled:before': {
+      
+      borderBottomStyle:'hidden'
+    },
+
+   
   },
   btnLogOut: {
     height: '22px',
