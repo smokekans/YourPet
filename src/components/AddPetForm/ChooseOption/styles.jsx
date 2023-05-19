@@ -31,7 +31,6 @@ const styles = {
     border: 'none',
     minWidth: '76px',
     maxWidth: '131px',
-    height: '35px',
     mr: 'auto',
     ml: 'auto',
     height: '40px',
@@ -63,7 +62,6 @@ const styles = {
     fontWeight: '500',
     fontSize: '14px',
     lineHeight: '19px',
-    
     color: ' #54ADFF',
     '&:hover': {
       backgroundColor: '#54ADFF',
