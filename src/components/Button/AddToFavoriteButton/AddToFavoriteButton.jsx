@@ -30,7 +30,7 @@ const FavoriteIconButton = ({ noticeid }) => {
     if (check) {
       dispatch(deleteFromFavorite(noticeid));
       dispatch(deleteFavoriteObj(noticeid));
-      toast.error('Removed from favorites');
+      toast.warning('Removed from favorites');
     } else {
       dispatch(addToFavorites(noticeid));
       toast('Added to favorites');
