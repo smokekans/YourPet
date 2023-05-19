@@ -2,7 +2,7 @@ import { Box, Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
-// import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
+import { NoticesPagination } from 'components/Notices/NoticesPagination/NoticesPagination';
 import NoticesSearch from 'components/Notices/NoticesSearch/NoticesSearch';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,12 +20,10 @@ import { clearNotices } from 'redux/notices/noticesSlice';
 import { getCurrentUser, getFavorite } from 'redux/user/userOperations';
 import { getFavorites } from 'redux/user/userSelectors';
 import Typography from '@mui/material/Typography';
-// import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
-// import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
+import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
+import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
 import NotFound from 'components/NotFound/NotFound';
 import { getAccessToken } from 'redux/auth/authSelectors';
-import { isMobile } from 'react-device-detect';
-import InfiniteScrollMobile from 'components/Notices/NoticesPagination/InfiniteScroll/InfiniteScroll';
 
 function NoticesPage() {
   const { categoryName } = useParams();
@@ -104,18 +102,24 @@ function NoticesPage() {
         )}
 
         {isLoading && <Loader />}
-        <Box sx={{ mt: '60px' }}>
-          {/* {isMobile ? ( */}
-          <InfiniteScrollMobile />
-          {/* // ) : categoryName === 'favorite' ? (
-          //   <NoticesPaginationFavorite />
-          // ) : categoryName === 'owner' ? (
-          //   <NoticesPaginationMyads />
-          // ) : (
-          //   <NoticesPagination />
-          // )} */}
-        </Box>
       </Container>
+      <Box
+        sx={{
+          width: '100%',
+          mt: '60px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {categoryName === 'favorite' ? (
+          <NoticesPaginationFavorite />
+        ) : categoryName === 'owner' ? (
+          <NoticesPaginationMyads />
+        ) : (
+          <NoticesPagination />
+        )}
+      </Box>
     </>
   );
 }
