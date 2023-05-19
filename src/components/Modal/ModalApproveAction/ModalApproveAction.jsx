@@ -31,9 +31,6 @@ function ModalApproveAction({ title, onClose, onDelete }) {
           '& svg': {
             stroke: '#54ADFF',
           },
-          '&:hover': {
-            border: '1px solid #54ADFF',
-          },
         }}
       >
         <IconClose/>

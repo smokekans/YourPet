@@ -10,9 +10,9 @@ import { useParams } from 'react-router-dom';
 import {
   getNoticeByCategory,
   getUserNotices,
-} from 'redux/notices/noticesOperation';
+} from 'redux/notices/noticesOperations';
 import {
-  getNoticeIsLoadig,
+  getIsLoading,
   getNotices,
   getOwnNotices,
 } from 'redux/notices/noticesSelectors';
@@ -28,9 +28,8 @@ import { getAccessToken } from 'redux/auth/authSelectors';
 function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
-  const isLoading = useSelector(getNoticeIsLoadig);
+  const isLoading = useSelector(getIsLoading);
   const favoriteNotices = useSelector(getFavorites);
-  console.log(favoriteNotices);
   const accessToken = useSelector(getAccessToken);
   const ownNotices = useSelector(getOwnNotices);
 
@@ -38,7 +37,8 @@ function NoticesPage() {
 
   const [query, setQuery] = useState('');
 
-  useEffect(() => { dispatch(getCurrentUser());
+  useEffect(() => {
+    dispatch(getCurrentUser());
   }, [accessToken, dispatch]);
 
   useEffect(() => {
@@ -90,10 +90,8 @@ function NoticesPage() {
         />
 
         <NoticesCategoriesNavigation />
-        
-        {
-          isLoading &&
-          accessToken ? (
+
+        {isLoading && accessToken ? (
           <Loader />
         ) : dataToRender && dataToRender.length === 0 ? (
           <NotFound />

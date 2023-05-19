@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import {
   getNoticesByQwery,
   getUserNotices,
-} from 'redux/notices/noticesOperation';
+} from 'redux/notices/noticesOperations';
 import { useParams } from 'react-router-dom';
 import { getFavorite } from 'redux/user/userOperations';
 

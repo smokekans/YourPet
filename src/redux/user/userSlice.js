@@ -26,6 +26,7 @@ function UserFulfilled(state, { payload }) {
   state.image = payload.image;
   state.userName = payload.name;
   state.pets = payload.pets;
+  state.favorite = payload.favorite;
   state.isLoading = false;
   state.error = null;
 }
@@ -70,7 +71,6 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.favorite = payload.user.favorite;
-        state.favoriteTotal = payload.total;
         state.favoriteTotal = payload.total;
       })
       .addCase(getFavorite.rejected, (state, { payload }) => {

@@ -1,11 +1,9 @@
 const styles = {
-
-
   ul: {
     margin: '200px',
-    width:{ mobile: '264px', tablet: '', desktop: '' },
-    ml:'16px',
-    mr:'24px',
+    width: { mobile: '264px' },
+    ml: '16px',
+    mr: '24px',
   },
   li: {
     height: '25px',
@@ -22,9 +20,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     letterSpacing: '0.04em',
-
-    /* Черный */
-
     color: '#111111',
   },
 
@@ -49,12 +44,12 @@ const styles = {
   input: {
     boxSizing: 'border-box',
     outline: 'none',
-    backgroundColor:'#fff',
+    backgroundColor: '#fff',
     borderBottom: 'none',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    transition:'none',
+    transition: 'none',
     paddingBottom: '15px ',
     width: { mobile: '180px', tablet: '255px', desktop: '255px' },
     height: '32px',
@@ -62,30 +57,31 @@ const styles = {
     borderRadius: '20px',
     '&::before': {
       borderBottom: 'none',
-      transition:'none',
+      transition: 'none',
+    },
+    '&::after': {
+      borderBottom: 'none',
+      transition: 'none',
     },
     '&:hover:not(.Mui-disabled, .Mui-error):before': {
       borderBottom: 'none',
-      transition:'none',
+      transition: 'none',
     },
   },
   btnLogOut: {
-   
     height: '22px',
-ml:{ mobile: '', tablet: '53px', desktop: '20px' },
+    ml: { tablet: '53px', desktop: '20px' },
+
     fontFamily: 'Manrope',
     fontStyle: 'normal',
     fontWeight: '500',
     fontSize: '16px',
     lineHeight: '22px',
-  textTransform:'none',
+    textTransform: 'none',
 
     display: 'flex',
     alignItems: 'center',
     letterSpacing: '0.04em',
-
-    /* Cерый */
-
     color: '#888888',
   },
   btn: {
