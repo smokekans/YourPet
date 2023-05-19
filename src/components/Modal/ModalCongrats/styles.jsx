@@ -10,60 +10,58 @@ const styles = {
     p: { mobile: '12px 12px 16px 12px', tablet: '32px 31px 24px 32px' },
   },
   content: {
-    display: { mobile: 'block', tablet: 'flex' },
-    gap: '24px',
-    mb: { mobile: '12px', tablet: '28px' },
-    position: 'relative',
+    // display: { mobile: 'block', tablet: 'flex' },
+    // gap: '24px',
+    pb: { mobile: '20px', tablet: '52px' },
+    pt: { mobile: '28px', tablet: '12px' },
+     display: 'flex',
+    flexDirection: 'column',
+    gap: { mobile: '20px', tablet: '52px' },
+    // position: 'relative',
   },
   contentText: {
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   title: {
-    fontWeight: '700',
-    fontSize: { mobile: '24px', tablet: '28px' },
-    lineHeight: { mobile: '33px', tablet: '38px' },
+    fontWeight: 500,
+    fontSize: { mobile: '24px', tablet: '36px' },
+    lineHeight: { mobile: '33px', tablet: '49px' },
     fontFamily: 'typography.fontFamily',
+    textAlign: 'center'
   },
   commentText: {
     fontWeight: 500,
-   fontSize: { mobile: '14px', tablet: '16px'},
-    lineHeight: { mobile: '19px', tablet: '24px' },
+   fontSize: { mobile: '16px', tablet: '24px'},
+    lineHeight: { mobile: '22px', tablet: '33px' },
     alignItems: 'center',
-    // lineHeight: '24px',
+        textAlign: 'center'
+
   },
   button: {
     textTransform: 'none',
-     minWidth: { mobile: '256px', tablet: '129px' },
+    minWidth: { mobile: '256px', tablet: '248px' },
     // minWidth: '129px',
+    fontWeight: 700,
     height: '40px',
     border: '2px solid #54ADFF',
     borderRadius: '40px',
     fontSize: 16,
     padding: '9px 20px',
     lineHeight: 1.37,
-    color: '#54ADFF',
+    color: '#FEF9F9',
+     backgroundColor: '#54ADFF',
+    '& svg': {
+      width: '24px',
+      height: '24px',
+      stroke: '#FEF9F9',
+    },
     '&:hover': {
       backgroundColor: '#54ADFF',
       color: '#FEF9F9',
-    },
-    '&:hover svg': {
-      fill: 'rgba(254, 249, 249, 1)',
-    },
-    '&:active': {
-      backgroundColor: '#54ADFF',
-      color: '#FEF9F9',
-    },
-    '&:active svg': {
-      fill: 'rgba(254, 249, 249, 1)',
-    },
-    '&:focus': {
-      backgroundColor: '#54ADFF',
-      color: '#FEF9F9',
-    },
-    '&:focus svg': {
-      fill: 'rgba(254, 249, 249, 1)',
     },
   },
 };

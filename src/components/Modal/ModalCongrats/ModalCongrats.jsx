@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Dialog,
   Box,
   Card,
   IconButton,
@@ -10,38 +9,31 @@ import {
   Button,
   SvgIcon,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
+// import { styled } from '@mui/material/styles';
 import { ReactComponent as IconClose } from '../../../images/icons/cross-small-1.svg';
 import { ReactComponent as IconPaw } from '../../../images/icons/pawprint.svg';
 
 import styles from './styles';
 
-const BootstrapDialog = styled(Dialog)(() => ({
-  '& .MuiPaper-root': {
-    borderRadius: '20px',
-    '@media (min-width: 768px)': { borderRadius: '40px' },
-    p: 0,
-  },
-  '& .MuiDialogContent-root': {
-    padding: '0px 0px 12px 0px',
-  },
-}));
+// const BootstrapDialog = styled(Dialog)(() => ({
+//   '& .MuiPaper-root': {
+//     borderRadius: '20px',
+//     '@media (min-width: 768px)': { borderRadius: '40px' },
+//     p: 0,
+//   },
+//   '& .MuiDialogContent-root': {
+//     padding: '0px 0px 12px 0px',
+//   },
+// }));
 
 function ModalCongrats({ onClick }) {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(!open);
+  // const [open, setOpen] = React.useState(false);
+  // const handleClose = () => setOpen(!open);
 
   return (
-    <BootstrapDialog
-      open={!open}
-      onClose={handleClose}
-      // scroll={scroll}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-descriptionDialogActions"
-    >
       <Card sx={styles.root}>
         <IconButton
-          // onClick={onClose}
+          onClick={onClick}
           autoFocus
           sx={{
             position: 'absolute',
@@ -54,6 +46,8 @@ function ModalCongrats({ onClick }) {
             height: '24px',
             '& svg': {
               stroke: '#54ADFF',
+               width: '24px',
+            height: '24px',
             },
           }}
         >
@@ -71,7 +65,7 @@ function ModalCongrats({ onClick }) {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={handleClose}
+            onClick={onClick}
             sx={styles.button}
             // aria-label="add"
           >
@@ -84,7 +78,6 @@ function ModalCongrats({ onClick }) {
           </Button>
         </DialogActions>
       </Card>
-    </BootstrapDialog>
   );
 }
 

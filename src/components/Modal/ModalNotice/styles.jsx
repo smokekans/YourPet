@@ -3,10 +3,8 @@ const styles = {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    // height: { mobile: '786px', tablet: '540px' },
     minHeight: 'max-content',
     width: { mobile: '280px', tablet: '681px' },
-    // borderRadius: { mobile: '20px', tablet: '40px'},
     p: { mobile: '12px 12px 16px 12px', tablet: '32px 31px 24px 32px' },
   },
   media: {
@@ -86,7 +84,6 @@ const styles = {
     fontWeight: 600,
     fontSize: { mobile: '14px', tablet: '16px' },
     lineHeight: { mobile: '19px', tablet: '24px' },
-    // lineHeight: '24px',
     m: 0,
     p: 0,
   },
@@ -94,12 +91,11 @@ const styles = {
     fontWeight: 500,
     fontSize: { mobile: '14px', tablet: '16px' },
     lineHeight: { mobile: '19px', tablet: '24px' },
-    // lineHeight: '24px',
+
   },
   button: {
     textTransform: 'none',
     minWidth: { mobile: '256px', tablet: '129px' },
-    // minWidth: '129px',
     height: '40px',
     border: '2px solid #54ADFF',
     borderRadius: '40px',
@@ -133,6 +129,28 @@ const styles = {
     },
     '&:focus svg': {
       stroke: '#FEF9F9',
+    },
+  },
+  buttonAdd: {
+    textTransform: 'none',
+    minWidth: { mobile: '256px', tablet: '129px' },
+    // minWidth: '129px',
+    height: '40px',
+    border: '2px solid #54ADFF',
+    borderRadius: '40px',
+    fontSize: 16,
+    padding: '9px 20px',
+    lineHeight: 1.37,
+    color: '#FEF9F9',
+     backgroundColor: '#54ADFF',
+    '& svg': {
+      width: '24px',
+      height: '24px',
+      stroke: '#FEF9F9',
+    },
+    '&:hover': {
+      backgroundColor: '#54ADFF',
+      color: '#FEF9F9',
     },
   },
 };

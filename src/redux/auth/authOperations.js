@@ -27,7 +27,7 @@ export const register = createAsyncThunk(
         })
       );
     } catch (error) {
-      toast.error('Email is used');
+      toast.error('Email is invalid or it is used');
       return rejectWithValue(error.message);
     }
   }

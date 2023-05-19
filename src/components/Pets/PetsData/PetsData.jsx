@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPets } from '../../../redux/user/userSelectors';
-import { Container, IconButton } from '@mui/material';
+import { Container, Dialog, IconButton, styled } from '@mui/material';
 import { Typography, Button } from '@mui/material';
 import styles from './styles';
 import { Avatar } from '@mui/material';
@@ -10,9 +10,37 @@ import { deletePets } from 'redux/user/userOperations';
 import { getCurrentUser } from 'redux/user/userOperations';
 import { NavLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
+import ModalApproveAction from 'components/Modal/ModalApproveAction/ModalApproveAction';
+
+const BootstrapDialog = styled(Dialog)(() => ({
+  '& .MuiPaper-root': {
+    borderRadius: '20px',
+    '@media (min-width: 768px)': { borderRadius: '40px' },
+    p: 0,
+  },
+  '& .MuiDialogContent-root': {
+    padding: '0px 0px 12px 0px',
+  },
+  '& .MuiDialogActions-root': {
+    flexDirection: 'column',
+    gap: '9px',
+    '@media (min-width: 768px)': {
+      flexDirection: 'row',
+      gap: '8px',
+    },
+  },
+}));
 function PetsData() {
   const Pets = useSelector(getPets);
   const dispatch = useDispatch();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const handleDeleteModalOpen = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
 
   console.log(Pets);
 
@@ -98,10 +126,20 @@ function PetsData() {
                   <IconButton
                     sx={styles.btnTrash}
                     // startIcon={<Trash sx={styles.icon}/>}
-                    onClick={() => delet(_id)}
+                    onClick={handleDeleteModalOpen}
                   >
                     <Trash />
                   </IconButton>
+                  <BootstrapDialog
+                    open={isDeleteModalOpen}
+                    onClose={handleDeleteModalClose}
+                  >
+                    <ModalApproveAction
+                      title={name}
+                      onClose={handleDeleteModalClose}
+                      onDelete={() => delet(_id)}
+                    />
+                  </BootstrapDialog>
                 </Typography>
               );
             })}
