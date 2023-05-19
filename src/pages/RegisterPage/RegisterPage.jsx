@@ -56,6 +56,7 @@ function RegisterPage() {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isConfirmPassword, setIsConfirmPassword] = useState(false);
   const [pass, setPass] = useState('');
+  // const isNewUser = useSelector(getIsNewUser);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -107,6 +108,7 @@ function RegisterPage() {
             setIsPasswordSecure(false)
             setIsEmailValid(false)
             setIsConfirmPassword(false)
+            // dispatch(isNewUser(true));
           }}
         >
           {({

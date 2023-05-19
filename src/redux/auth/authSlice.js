@@ -11,7 +11,7 @@ const authInitialState = {
 };
 
 function registerFulfilled(state, { payload }) {
-  state.isNewUser = payload.user.isNewUser;
+  state.isNewUser = true;
   state.isLoading = false;
   state.error = null;
 }
@@ -78,6 +78,9 @@ export const authSlice = createSlice({
       });
   },
   reducers: {
+    setIsNewUser: (state, { payload }) => {
+      state.isNewUser = payload;
+    },
     setAccessToken: (state, { payload }) => {
       state.accessToken = payload;
     },
@@ -87,5 +90,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAccessToken, setRefreshToken } = authSlice.actions;
+export const { setAccessToken, setRefreshToken, setIsNewUser } = authSlice.actions;
 export const authReducer = authSlice.reducer;
