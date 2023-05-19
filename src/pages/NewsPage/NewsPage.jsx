@@ -92,7 +92,9 @@ function NewsPage() {
           />
         </Box>
         {!isLoad ? <NewsList query={query} /> : <Loader />}
-        <NewsPagination />
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <NewsPagination />
+        </Box>
       </Container>
     </>
   );
