@@ -1,8 +1,7 @@
 import * as Yup from 'yup';
 
 export const petsValidationSchema = Yup.object().shape({
-  category: Yup.string()
-    .required('Category is required'),
+  category: Yup.string().required('Category is required'),
   title: Yup.string()
     .min(2, 'Name must be at least 2 characters')
     .max(16, 'Name must be at most 16 characters')
@@ -25,12 +24,9 @@ export const petsValidationSchema = Yup.object().shape({
       'File too large',
       value => value && value.size <= 3 * 1024 * 1024
     ),
-  sex: Yup.string()
-      .required('The sex is required'),
-  location: Yup.string()
-    .required('Enter a location'),
-  price: Yup.number()
-      .required('Enter a price'),
+  sex: Yup.string().required('The sex is required'),
+  location: Yup.string().required('Enter a location'),
+  price: Yup.string().required('Enter a price'),
   comments: Yup.string()
     .min(8, 'Comments must be at least 8 characters')
     .max(120, 'Comments must be at most 120 characters'),

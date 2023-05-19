@@ -62,19 +62,19 @@ const AddPetForm = () => {
     fontFamily: 'Manrope',
     fontWeight: '500',
     fontSize: '10px',
-    lineHeight: '13.66px', 
-    '@media (min-width: 768px)': {lineHeight: '26.5px',fontSize: '14px' },
+    lineHeight: '13.66px',
+    '@media (min-width: 768px)': { lineHeight: '26.5px', fontSize: '14px' },
     position: 'relative',
     // textAlign: 'start',
     alignItems: 'base-line',
-  
+
     '&::after': {
       content: '""',
       position: 'absolute',
       top: '100%',
       left: 0,
       width: '80px',
-      '@media (min-width: 768px)': { width: '110px', },
+      '@media (min-width: 768px)': { width: '110px' },
       height: '8px',
       borderRadius: '8px',
       marginRight: '16px',
@@ -85,10 +85,7 @@ const AddPetForm = () => {
   return (
     <Card sx={styles.root}>
       <Typography sx={styles.title}>{step > 1 ? title : 'Add Pet'}</Typography>
-      <Formik
-        initialValues={formData}
-        validationSchema={petsValidationSchema}
-      >
+      <Formik initialValues={formData} validationSchema={petsValidationSchema}>
         <div>
           <List sx={styles.ul}>
             {steps.map((stepName, index) => {
@@ -108,8 +105,7 @@ const AddPetForm = () => {
             })}
           </List>
           {components[step]}
-
-          </div>
+        </div>
       </Formik>
     </Card>
   );
