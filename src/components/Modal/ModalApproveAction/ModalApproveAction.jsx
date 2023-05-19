@@ -57,6 +57,7 @@ function ModalApproveAction({ title, onClose, onDelete }) {
           Yes
           <IconTrash
             width="24px"
+            height="24px"
           />
         </Button>
       </DialogActions>

@@ -1,17 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
-axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
-
 export const getNoticeByCategory = createAsyncThunk(
   'notices/getNoticeByCategory',
-  async ({ category, page = 1, limit = 10 }, { rejectWithValue }) => {
+  async ({ category, page = 1, limit = 12 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `/notices?category=${category}&page=${page}&limit=${limit}`
       );
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -58,7 +54,6 @@ export const addNotices = createAsyncThunk(
 export const deleteNotice = createAsyncThunk(
   'notices/deleteNotice',
   async (id, { rejectWithValue }) => {
-    console.log(id);
     try {
       const { data } = await axios.delete(`notices/${id}`);
       return data;
@@ -70,10 +65,11 @@ export const deleteNotice = createAsyncThunk(
 
 export const getUserNotices = createAsyncThunk(
   'notices/getUserNotices',
-  async ({ page, query = "" }, { rejectWithValue }) => {
+  async ({ page, query = '' }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`notices/user?page=${page}&limit=10&title=${query}`);
-      console.log(data)
+      const { data } = await axios.get(
+        `notices/user?page=${page}&limit=10&title=${query}`
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -83,19 +79,18 @@ export const getUserNotices = createAsyncThunk(
 
 export const getNoticesByQwery = createAsyncThunk(
   'notices/getNoticesByQwery',
-  async ({ query, category, page = 1, limit = 10 }, { rejectWithValue }) => {
+  async ({ query, category, page = 1, limit = 12 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `notices/find?title=${query}&category=${category}&page=${page}&limit=${limit}`
       );
-      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-// додає оголошення
+
 export const createNotice = createAsyncThunk(
   'notices/create',
   async ({ values, accessToken, avatar }, thunkAPI) => {
@@ -129,12 +124,11 @@ export const createNotice = createAsyncThunk(
 
 export const getNoticesByQweryOwner = createAsyncThunk(
   'notices/getNoticesByQweryOwner',
-  async ({ query, page = 1, limit = 10 }, { rejectWithValue }) => {
+  async ({ query, page = 1, limit = 12 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `notices/owner?title=${query}&page=${page}&limit=${limit}`
       );
-      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -144,12 +138,11 @@ export const getNoticesByQweryOwner = createAsyncThunk(
 
 export const getNoticesByQweryFavorite = createAsyncThunk(
   'notices/getNoticesByQweryFavorite',
-  async ({ query, page = 1, limit = 10 }, { rejectWithValue }) => {
+  async ({ query, page = 1, limit = 12 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `notices/favorite?title=${query}&page=${page}&limit=${limit}`
       );
-      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

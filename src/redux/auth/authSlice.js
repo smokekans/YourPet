@@ -18,7 +18,6 @@ function registerFulfilled(state, { payload }) {
 
 function loginFulfilled(state, { payload }) {
   state.user = payload.user;
-  // state.isNewUser = false;
   state.accessToken = payload.accessToken;
   state.refreshToken = payload.refreshToken;
   state.error = null;
@@ -79,6 +78,9 @@ export const authSlice = createSlice({
       });
   },
   reducers: {
+    setIsNewUser: (state, { payload }) => {
+      state.isNewUser = payload;
+    },
     setAccessToken: (state, { payload }) => {
       state.accessToken = payload;
     },
@@ -88,5 +90,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAccessToken, setRefreshToken } = authSlice.actions;
+export const { setAccessToken, setRefreshToken, setIsNewUser } = authSlice.actions;
 export const authReducer = authSlice.reducer;

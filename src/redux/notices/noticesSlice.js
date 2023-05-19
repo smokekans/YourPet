@@ -10,7 +10,7 @@ import {
   getUserNotices,
   getNoticesByQweryOwner,
   getNoticesByQweryFavorite,
-} from './noticesOperation';
+} from './noticesOperations';
 import { getFavorite } from 'redux/user/userOperations';
 
 const noticesInitialState = {
@@ -47,6 +47,7 @@ const noticesSlice = createSlice({
       .addCase(getNoticeByCategory.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.notices = payload;
+        state.total = payload.total;
         state.error = null;
       })
       .addCase(getNoticeByCategory.rejected, (state, action) => {
@@ -148,7 +149,6 @@ const noticesSlice = createSlice({
     changeFavoritesNotices(state, { payload }) {
       state.notices = state.notices.filter(notice => notice._id !== payload);
     },
-
   },
 });
 

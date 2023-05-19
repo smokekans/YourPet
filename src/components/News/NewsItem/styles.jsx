@@ -73,6 +73,7 @@ const styles = {
     fontSize: '16px',
     textDecoration: 'none',
     color: '#54ADFF',
+    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
   },
 };
 

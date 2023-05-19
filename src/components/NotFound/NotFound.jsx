@@ -7,7 +7,7 @@ import { NavLink as RouterLink } from 'react-router-dom';
 function NotFound() {
   return (
     <>
-      <Container sx={styles.image}>
+      <Container sx={styles.imageNF}>
         <Typography variant="h3" sx={styles.title}>
           Ooops!
           <br />

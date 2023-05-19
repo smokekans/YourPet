@@ -18,7 +18,7 @@ function ModalNotice({ noticeid, onClose }) {
   const favorites = useSelector(state => state.user.favorite);
   const isFavorite = favorites.some((favorite) => favorite._id === noticeid);
   const isLoggedIn = useSelector(getAccessToken);
-console.log("!!!!!!!!!favorites", favorites)
+// console.log("!!!!!!!!!favorites", favorites)
   const getOne = useSelector(getOneNotice);
   const [isFavorites, setIsFavorites] = useState(false);
   console.log(isFavorites)
@@ -31,7 +31,7 @@ const handleFavoriteClick = () => {
     }
 
     if (isFavorite) {
-      toast.error('Removed from favorites');
+      toast.warning('Removed from favorites');
       dispatch(deleteFromFavorite(noticeid));
       dispatch(deleteFavoriteObj(noticeid));
       setIsFavorites(false);
@@ -116,7 +116,7 @@ const handleFavoriteClick = () => {
               {category === 'sell' && (
                 <ListItem sx={styles.listItem}>
                   Price: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <Typography sx={styles.listItemText}>{price}&#8364;</Typography>
+                  <Typography sx={styles.listItemText}>{price}</Typography>
                 </ListItem>
               )}
               <ListItem sx={styles.listItem}>
@@ -162,7 +162,7 @@ const handleFavoriteClick = () => {
             handleFavoriteClick(_id)
             onClose()
           }} aria-label={isFavorite ? 'Remove from' : 'Add to'}
-          sx={styles.button}
+          sx={styles.buttonAdd}
 
         >
         {isFavorite ? 'Remove from' : 'Add to'}

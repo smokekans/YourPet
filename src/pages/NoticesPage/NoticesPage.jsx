@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
@@ -10,9 +10,9 @@ import { useParams } from 'react-router-dom';
 import {
   getNoticeByCategory,
   getUserNotices,
-} from 'redux/notices/noticesOperation';
+} from 'redux/notices/noticesOperations';
 import {
-  getNoticeIsLoadig,
+  getIsLoading,
   getNotices,
   getOwnNotices,
 } from 'redux/notices/noticesSelectors';
@@ -28,14 +28,11 @@ import { getAccessToken } from 'redux/auth/authSelectors';
 function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
-  const isLoading = useSelector(getNoticeIsLoadig);
+  const isLoading = useSelector(getIsLoading);
   const favoriteNotices = useSelector(getFavorites);
-  console.log(favoriteNotices);
   const accessToken = useSelector(getAccessToken);
   const ownNotices = useSelector(getOwnNotices);
-
   const dispatch = useDispatch();
-
   const [query, setQuery] = useState('');
 
   useEffect(() => {
@@ -48,6 +45,7 @@ function NoticesPage() {
     } else if (categoryName === 'owner') {
       dispatch(getUserNotices({ page: 1 }));
     } else {
+      console.log('this');
       dispatch(getNoticeByCategory({ category: categoryName }));
     }
     return () => dispatch(clearNotices([]));
@@ -105,13 +103,23 @@ function NoticesPage() {
 
         {isLoading && <Loader />}
       </Container>
-      {categoryName === 'favorite' ? (
-        <NoticesPaginationFavorite />
-      ) : categoryName === 'owner' ? (
-        <NoticesPaginationMyads />
-      ) : (
-        <NoticesPagination />
-      )}
+      <Box
+        sx={{
+          width: '100%',
+          mt: '60px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {categoryName === 'favorite' ? (
+          <NoticesPaginationFavorite />
+        ) : categoryName === 'owner' ? (
+          <NoticesPaginationMyads />
+        ) : (
+          <NoticesPagination />
+        )}
+      </Box>
     </>
   );
 }
