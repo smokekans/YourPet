@@ -6,14 +6,14 @@ import { useDispatch } from 'react-redux';
 import {
   getNoticesByQwery,
   getUserNotices,
-} from 'redux/notices/noticesOperation';
+} from 'redux/notices/noticesOperations';
 import { useParams } from 'react-router-dom';
 import { getFavorite } from 'redux/user/userOperations';
 
 const NoticesSearch = ({ onSearch }) => {
   const [query, setQuery] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [data, setData] = useState([]); 
+  const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const { categoryName } = useParams();
 
@@ -35,14 +35,14 @@ const NoticesSearch = ({ onSearch }) => {
     if (categoryName === 'favorite') {
       action = getFavorite(requestData);
     } else if (categoryName === 'owner') {
-      action =  getUserNotices(requestData);
+      action = getUserNotices(requestData);
     } else {
       action = getNoticesByQwery(requestData);
     }
 
     dispatch(action)
       .then(data => {
-        setData(data); 
+        setData(data);
         onSearch(newQuery);
         setQuery('');
       })
@@ -51,44 +51,46 @@ const NoticesSearch = ({ onSearch }) => {
       });
   };
 
-const handleQueryChange = event => {
-  const newQuery = event.target.value;
-  setQuery(newQuery);
+  const handleQueryChange = event => {
+    const newQuery = event.target.value;
+    setQuery(newQuery);
 
-  if (event.nativeEvent.inputType === 'deleteContentBackward' && !newQuery.trim()) {
-    return;
-  }
-
-  if (!newQuery.trim()) {
-    let action;
-
-    if (categoryName === 'favorite') {
-      action = getFavorite({
-        query: '',
-        // category: categoryName
-      });
-    } else if (categoryName === 'owner') {
-      action =  getUserNotices({
-        query: '',
-        // category: categoryName
-
-      });
-    } else {
-      action = getNoticesByQwery({ query: '', category: categoryName });
+    if (
+      event.nativeEvent.inputType === 'deleteContentBackward' &&
+      !newQuery.trim()
+    ) {
+      return;
     }
 
-    dispatch(action)
-      .then(result => {
-        setData(result); 
-        setQuery("");
-       
-        onSearch(newQuery); 
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-};
+    if (!newQuery.trim()) {
+      let action;
+
+      if (categoryName === 'favorite') {
+        action = getFavorite({
+          query: '',
+          // category: categoryName
+        });
+      } else if (categoryName === 'owner') {
+        action = getUserNotices({
+          query: '',
+          // category: categoryName
+        });
+      } else {
+        action = getNoticesByQwery({ query: '', category: categoryName });
+      }
+
+      dispatch(action)
+        .then(result => {
+          setData(result);
+          setQuery('');
+
+          onSearch(newQuery);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  };
 
   const handleClearQuery = () => {
     setQuery('');
@@ -145,9 +147,6 @@ const handleQueryChange = event => {
 };
 
 export default NoticesSearch;
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import { Box, Input, InputAdornment, IconButton } from "@mui/material";

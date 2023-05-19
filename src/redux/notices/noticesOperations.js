@@ -1,9 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
-axios.defaults.baseURL = 'https://yourpet-backend.onrender.com/api';
-
 export const getNoticeByCategory = createAsyncThunk(
   'notices/getNoticeByCategory',
   async ({ category, page = 1, limit = 10 }, { rejectWithValue }) => {
@@ -58,7 +55,6 @@ export const addNotices = createAsyncThunk(
 export const deleteNotice = createAsyncThunk(
   'notices/deleteNotice',
   async (id, { rejectWithValue }) => {
-    console.log(id);
     try {
       const { data } = await axios.delete(`notices/${id}`);
       return data;
@@ -70,10 +66,11 @@ export const deleteNotice = createAsyncThunk(
 
 export const getUserNotices = createAsyncThunk(
   'notices/getUserNotices',
-  async ({ page, query = "" }, { rejectWithValue }) => {
+  async ({ page, query = '' }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`notices/user?page=${page}&limit=10&title=${query}`);
-      console.log(data)
+      const { data } = await axios.get(
+        `notices/user?page=${page}&limit=10&title=${query}`
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -88,18 +85,16 @@ export const getNoticesByQwery = createAsyncThunk(
       const { data } = await axios.get(
         `notices/find?title=${query}&category=${category}&page=${page}&limit=${limit}`
       );
-      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-// додає оголошення
+
 export const createNotice = createAsyncThunk(
   'notices/create',
   async ({ values, accessToken, avatar }, thunkAPI) => {
-    console.log(avatar);
     try {
       const formData = new FormData();
       formData.append('avatar', avatar);
@@ -121,7 +116,6 @@ export const createNotice = createAsyncThunk(
         },
       };
       const { data } = await axios.post('/notices', formData, header, avatar);
-      console.log('Image uploaded successfully!');
       return data;
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -137,7 +131,6 @@ export const getNoticesByQweryOwner = createAsyncThunk(
       const { data } = await axios.get(
         `notices/owner?title=${query}&page=${page}&limit=${limit}`
       );
-      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -152,7 +145,6 @@ export const getNoticesByQweryFavorite = createAsyncThunk(
       const { data } = await axios.get(
         `notices/favorite?title=${query}&page=${page}&limit=${limit}`
       );
-      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

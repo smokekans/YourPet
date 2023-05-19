@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const getFriends = createAsyncThunk(
-  'friends/getfriends',
+  'friends/getFriends',
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get('/friends');

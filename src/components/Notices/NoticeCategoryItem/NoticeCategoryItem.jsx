@@ -14,7 +14,7 @@ import {
   deleteNotice,
   getSingleNotice,
   getUserNotices,
-} from 'redux/notices/noticesOperation';
+} from 'redux/notices/noticesOperations';
 
 import styles from './styles';
 import { styled } from '@mui/material/styles';
@@ -68,8 +68,6 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
   const accessToken = useSelector(getAccessToken);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  // const navigate = useNavigate();
 
   const handleLearnMore = () => {
     setScroll('body');
@@ -210,6 +208,7 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
               aria-describedby="alert-dialog-descriptionDialogActions"
             >
               <ModalNotice
+                noticeid={_id}
                 onClose={onClose}
                 onhandleFavoriteClick={handleFavoriteClick}
               />

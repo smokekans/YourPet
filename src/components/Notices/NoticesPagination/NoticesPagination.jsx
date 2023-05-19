@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/dist';
-import { getNoticeByCategory } from 'redux/notices/noticesOperation';
+import { getNoticeByCategory } from 'redux/notices/noticesOperations';
 import { getNotices } from 'redux/notices/noticesSelectors';
 
 export const NoticesPagination = () => {
