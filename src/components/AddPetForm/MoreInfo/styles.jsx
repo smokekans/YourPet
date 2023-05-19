@@ -45,6 +45,18 @@ const styles = {
       backgroundColor: '#FFFFFF',
     },
   },
+  more: {
+    display: 'flex',
+    
+  },
+  primary: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  secondary: {
+    display: 'flex',
+     flexDirection: 'column',
+  },
 };
 
 export default styles;

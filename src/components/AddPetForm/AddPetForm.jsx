@@ -4,13 +4,7 @@ import { petsValidationSchema } from './Yup';
 import ChooseOption from './ChooseOption/ChooseOption';
 import PersonalDetails from './PersonalDetails/PersonalDetails';
 import MoreInfo from './MoreInfo/MoreInfo';
-import {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  // Box
-} from '@mui/material';
+import { Card, Typography, List, ListItem } from '@mui/material';
 import { styled } from '@mui/system';
 import styles from './styles';
 
@@ -69,9 +63,10 @@ const AddPetForm = () => {
     fontWeight: '500',
     fontSize: '10px',
     lineHeight: '13.66px',
+    '@media (min-width: 768px)': { lineHeight: '26.5px', fontSize: '14px' },
     position: 'relative',
     // textAlign: 'start',
-    // alignItems: 'base-line',
+    alignItems: 'base-line',
 
     '&::after': {
       content: '""',
@@ -79,11 +74,10 @@ const AddPetForm = () => {
       top: '100%',
       left: 0,
       width: '80px',
+      '@media (min-width: 768px)': { width: '110px' },
       height: '8px',
       borderRadius: '8px',
       marginRight: '16px',
-      // display: 'flex',
-      // gap: '16px',
       backgroundColor: stepStyles[stepState].backgroundColor,
     },
   }));
