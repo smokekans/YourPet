@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, List } from '@mui/material';
-
 import NoticeCategoryItem from '../NoticeCategoryItem/NoticeCategoryItem';
 
 function NoticesCategoriesList({ data, categoryName }) {
@@ -14,38 +13,35 @@ function NoticesCategoriesList({ data, categoryName }) {
     pr: { mobile: '20px', tablet: '32px', desktop: '16px' },
     pl: { mobile: '20px', tablet: '32px', desktop: '16px' },
   }}>
-    <List
-     
-      spacing={2}
-      sx={{
-        display: 'flex',
-        alingItems: 'center',
-        justifyContent: 'stretch',
-        flexWrap: 'wrap',
-        p: 0,
-        gap: { mobile: '20px' },
-      }}
-    >
-      {dataArray
-        .slice()
-        .reverse()
-        .filter(
-          item =>
-            item &&
-            item.category &&
-            (item.category === categoryName ||
-              categoryName === 'owner' ||
-              categoryName === 'favorite')
-        )
-        .map(item => (
-          <li key={item._id}>
-            {/* <div sx={{ padding: '8px' }}> */}
-            <NoticeCategoryItem data={item} categoryName={categoryName} />
-            {/* </div> */}
-          </li>
-        ))}
+      <List
+        spacing={2}
+        sx={{
+          display: 'flex',
+          alingItems: 'center',
+          justifyContent: 'stretch',
+          flexWrap: 'wrap',
+          p: 0,
+          gap: { mobile: '20px' },
+        }}
+      >
+        {dataArray
+          .slice()
+          .reverse()
+          .filter(
+            item =>
+              item &&
+              item.category &&
+              (item.category === categoryName ||
+                categoryName === 'owner' ||
+                categoryName === 'favorite')
+          )
+          .map(item => (
+            <li key={item._id}>
+              <NoticeCategoryItem data={item} categoryName={categoryName} />
+            </li>
+          ))}
       </List>
-      </Container>
+    </Container>
   );
 }
 

@@ -47,6 +47,7 @@ const noticesSlice = createSlice({
       .addCase(getNoticeByCategory.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.notices = payload;
+        state.total = payload.total;
         state.error = null;
       })
       .addCase(getNoticeByCategory.rejected, (state, action) => {
