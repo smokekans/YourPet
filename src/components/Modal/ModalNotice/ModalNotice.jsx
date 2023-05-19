@@ -116,7 +116,7 @@ const handleFavoriteClick = () => {
               {category === 'sell' && (
                 <ListItem sx={styles.listItem}>
                   Price: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <Typography sx={styles.listItemText}>{price}&#8364;</Typography>
+                  <Typography sx={styles.listItemText}>{price}</Typography>
                 </ListItem>
               )}
               <ListItem sx={styles.listItem}>

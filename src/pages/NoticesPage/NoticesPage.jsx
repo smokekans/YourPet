@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import {  Box, Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
@@ -103,14 +103,16 @@ function NoticesPage() {
         )}
 
         {isLoading && <Loader />}
-      </Container>
+      <Box sx={{mt:'60px'}}>
       {categoryName === 'favorite' ? (
         <NoticesPaginationFavorite />
       ) : categoryName === 'owner' ? (
         <NoticesPaginationMyads />
       ) : (
         <NoticesPagination />
-      )}
+          )}
+          </Box>
+        </Container>
     </>
   );
 }

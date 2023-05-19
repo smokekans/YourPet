@@ -10,7 +10,7 @@ function AuthNavigation() {
       <Button component={Routerlink} to="/login" variant="outlined" sx={styles.authBtn}>
         <Typography sx={styles.btnText}>
           Log IN
-          <SvgIcon component={PawPrint} inheritViewBox sx={styles.print} />
+          <SvgIcon component={PawPrint} inheritViewBox />
         </Typography>
       </Button>
       <Button component={Routerlink} to="/register" variant="outlined" sx={styles.authBtn}>
