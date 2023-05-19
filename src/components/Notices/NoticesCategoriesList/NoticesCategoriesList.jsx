@@ -8,23 +8,13 @@ function NoticesCategoriesList({ data, categoryName }) {
   // const dataArray = data || [];
 
   return (
-    <Container sx={{
-    mr: 'auto',
-    ml: 'auto',
-    width: { mobile: '320px', tablet: '768px', desktop: '1248px' },
-    pr: { mobile: '20px', tablet: '32px', desktop: '16px' },
-    pl: { mobile: '20px', tablet: '32px', desktop: '16px' },
-  }}>
-    <List
-      container
-      spacing={2}
+    <Container
       sx={{
-        display: 'flex',
-        alingItems: 'center',
-        justifyContent: 'stretch',
-        flexWrap: 'wrap',
-        p: 0,
-        gap: { mobile: '20px' },
+        mr: 'auto',
+        ml: 'auto',
+        width: { mobile: '320px', tablet: '768px', desktop: '1248px' },
+        pr: { mobile: '20px', tablet: '32px', desktop: '16px' },
+        pl: { mobile: '20px', tablet: '32px', desktop: '16px' },
       }}
     >
       <List
@@ -33,9 +23,9 @@ function NoticesCategoriesList({ data, categoryName }) {
         sx={{
           display: 'flex',
           alingItems: 'center',
-          justifyContent: 'space-around',
+          justifyContent: 'stretch',
           flexWrap: 'wrap',
-          // p: 0,
+          p: 0,
           gap: { mobile: '20px' },
         }}
       >
