@@ -1,4 +1,16 @@
 const styles = {
+  image: {
+     pt: { mobile: '44px', tablet: '80px', desktop: '80px' },
+    height: '100vh',
+    backgroundImage: {
+      mobile: `url(${require('../../images/background/bg-mobile@2x.png')})`,
+      tablet: `url(${require('../../images/background/bg-tablet@1x.png')})`,
+      desktop: `url(${require('../../images/background/bg-desktop@2x.png')})`,
+    },
+    backgroundRepeat: { mobile: 'no-repeat', tablet: 'repeat', desktop: 'no-repeat' },
+    backgroundPosition: 'top',
+    backgroundSize: 'contain',
+  },
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -7,9 +19,10 @@ const styles = {
     width: { mobile: '280px', tablet: '608px' },
     boxShadow: '3px 8px 14px rgba(136, 198, 253, 0.19)',
     borderRadius: { mobile: '20px', tablet: '40px' },
-    marginTop: { mobile: '44px', tablet: '70px' },
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    
+    ml: 'auto',
+    mr: 'auto',
+    mb: { mobile: '36px', tablet: '119px' },
     padding: { mobile: '35px 12px', tablet: '50px 75px' },
     justifyContent: 'center',
     alignItems: 'center',
@@ -50,6 +63,7 @@ const styles = {
     },
   },
   button: {
+     boxShadow: "none",
     mt: { mobile: '10px', tablet: '20px' },
     textTransform: 'none',
     width: '100%',

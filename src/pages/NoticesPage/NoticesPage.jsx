@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
@@ -10,9 +10,9 @@ import { useParams } from 'react-router-dom';
 import {
   getNoticeByCategory,
   getUserNotices,
-} from 'redux/notices/noticesOperation';
+} from 'redux/notices/noticesOperations';
 import {
-  getNoticeIsLoadig,
+  getIsLoading,
   getNotices,
   getOwnNotices,
 } from 'redux/notices/noticesSelectors';
@@ -30,7 +30,7 @@ import InfiniteScrollMobile from 'components/Notices/NoticesPagination/InfiniteS
 function NoticesPage() {
   const { categoryName } = useParams();
   const notices = useSelector(getNotices);
-  const isLoading = useSelector(getNoticeIsLoadig);
+  const isLoading = useSelector(getIsLoading);
   const favoriteNotices = useSelector(getFavorites);
   const accessToken = useSelector(getAccessToken);
   const ownNotices = useSelector(getOwnNotices);
@@ -105,15 +105,17 @@ function NoticesPage() {
 
         {isLoading && <Loader />}
       </Container>
-      {isMobile ? (
-        <InfiniteScrollMobile />
-      ) : categoryName === 'favorite' ? (
-        <NoticesPaginationFavorite />
-      ) : categoryName === 'owner' ? (
-        <NoticesPaginationMyads />
-      ) : (
-        <NoticesPagination />
-      )}
+      <Box sx={{ mt: '60px' }}>
+        {isMobile ? (
+          <InfiniteScrollMobile />
+        ) : categoryName === 'favorite' ? (
+          <NoticesPaginationFavorite />
+        ) : categoryName === 'owner' ? (
+          <NoticesPaginationMyads />
+        ) : (
+          <NoticesPagination />
+        )}
+      </Box>
     </>
   );
 }

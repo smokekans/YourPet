@@ -17,29 +17,16 @@ const styles = {
     border: '2px solid #FFC107',
     transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
 
-    '& svg': {
-      // fill: '#FEF9F9',
-      // fill: '#FFC107',
-    },
     '&:hover': {
       border: '2px solid #FFC107',
       color: 'text.light',
       backgroundColor: 'accent.main',
-      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-      fill: '#FEF9F9',
     },
-    '&:hover svg': {
-      fill: '#FEF9F9',
-      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-    },
+
     '&.active': {
       backgroundColor: 'accent.main',
       color: 'text.light',
       borderColor: 'accent.main',
-      fill: '#FEF9F9',
-    },
-    '&:active svg': {
-      fill: '#FEF9F9',
     },
   },
   btnText: {
@@ -50,20 +37,6 @@ const styles = {
     fontSize: '16px',
     lineHeight: '22px',
     textTransform: 'none',
-    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-  },
-  print: {
-    fill: '#FFC107',
-    transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-
-    '&:hover': {
-      fill: '#FEF9F9',
-      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-    },
-    '&.active': {
-      fill: '#FEF9F9',
-      transition: 'color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-    },
   },
 };
 

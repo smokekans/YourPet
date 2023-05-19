@@ -71,10 +71,16 @@ const styles = {
     m: 0,
     p: 0,
   },
-  linkT: {
+   linkT: {
     fontSize: { mobile: '14px', tablet: '16px' },
     lineHeight: { mobile: '19px', tablet: '22px' },
     color: '#FFC107',
+        '&:hover': {
+      color: '#54ADFF',
+    },
+    '&:focus': {
+      color: '#54ADFF',
+    },
   },
   comment: {
     fontWeight: 600,

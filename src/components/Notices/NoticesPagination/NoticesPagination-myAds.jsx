@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserNotices } from 'redux/notices/noticesOperation';
+import { getUserNotices } from 'redux/notices/noticesOperations';
 
 export const NoticesPaginationMyads = () => {
   const total = useSelector(state => state.notices.ownTotal);

@@ -27,23 +27,25 @@ function UserDataItem() {
   const nameCity = useRef(null);
   const nameBirtday = useRef(null);
   const user = useSelector(getUser);
- 
-  
 
   function clickName() {
-    nameUser.current.focus()
+    nameUser.current.focus();
     getName(false);
-  }function clickEmail() {
-    nameEmail.current.focus()
+  }
+  function clickEmail() {
+    nameEmail.current.focus();
     getEmail(false);
-  }function clickPhone() {
-    namePhone.current.focus()
+  }
+  function clickPhone() {
+    namePhone.current.focus();
     getPhone(false);
-  }function clickCity() {
-    nameCity.current.focus()
+  }
+  function clickCity() {
+    nameCity.current.focus();
     getCity(false);
-  }function clickBirthday() {
-    nameBirtday.current.focus()
+  }
+  function clickBirthday() {
+    nameBirtday.current.focus();
     getBirthday(false);
   }
 
@@ -57,7 +59,6 @@ function UserDataItem() {
 
   const ChangeData = e => {
     const id = e.currentTarget.id;
-
     const value = e.currentTarget.value;
 
     if (id === 'name') {
@@ -71,35 +72,32 @@ function UserDataItem() {
     } else if (id === 'phone') {
       updateInfo.phone = value;
     }
-
-    console.log(updateInfo);
     return updateInfo;
   };
   function handleClick() {
     dispatch(updateInfoUser(updateInfo));
   }
   const { name, birthday, email, phone, city } = user;
+
   return (
     <div>
       <Typography variant="div" sx={styles.ul}>
         <Typography variant="p" className="name" sx={styles.li}>
           Name:
-          <FormControl variant="filled" sx={{ml:'auto',}}>
+          <FormControl variant="filled" sx={{ ml: 'auto' }}>
             <FilledInput
               id="name"
               sx={styles.input}
               onChange={ChangeData}
               inputRef={nameUser}
               defaultValue={name}
-             
               endAdornment={
-                <InputAdornment position="end" sx={{pt:'12px'}}>
+                <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnName ? (
                     <Pencel
                       className="name"
                       onClick={() => {
-                        clickName()
-                        
+                        clickName();
                       }}
                       edge="end"
                     ></Pencel>
@@ -121,7 +119,7 @@ function UserDataItem() {
         </Typography>
         <Typography variant="p" className="email" sx={styles.li}>
           Email:
-          <FormControl variant="filled" sx={{ml:'auto',}}>
+          <FormControl variant="filled" sx={{ ml: 'auto' }}>
             <FilledInput
               id="email"
               type="email"
@@ -130,13 +128,12 @@ function UserDataItem() {
               inputRef={nameEmail}
               defaultValue={email}
               endAdornment={
-                <InputAdornment position="end" sx={{pt:'12px'}}>
+                <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnEmail ? (
                     <Pencel
-                    
                       className="name"
                       onClick={() => {
-                        clickEmail()
+                        clickEmail();
                       }}
                       edge="end"
                     ></Pencel>
@@ -158,7 +155,7 @@ function UserDataItem() {
         </Typography>
         <Typography variant="p" className="birthday" sx={styles.li}>
           Birthday:{' '}
-          <FormControl variant="filled" sx={{ml:'auto',}}>
+          <FormControl variant="filled" sx={{ ml: 'auto' }}>
             <FilledInput
               id="birthday"
               type="data"
@@ -167,12 +164,12 @@ function UserDataItem() {
               inputRef={nameBirtday}
               defaultValue={birthday}
               endAdornment={
-                <InputAdornment position="end" sx={{pt:'12px'}}>
+                <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnBirthday ? (
                     <Pencel
                       className="name"
                       onClick={() => {
-                        clickBirthday()
+                        clickBirthday();
                       }}
                       edge="end"
                     ></Pencel>
@@ -194,7 +191,7 @@ function UserDataItem() {
         </Typography>
         <Typography variant="p" className="phone" sx={styles.li}>
           Phone:{' '}
-          <FormControl variant="filled"  sx={{ml:'auto',}}>
+          <FormControl variant="filled" sx={{ ml: 'auto' }}>
             <FilledInput
               id="phone"
               sx={styles.input}
@@ -202,12 +199,12 @@ function UserDataItem() {
               inputRef={namePhone}
               defaultValue={phone}
               endAdornment={
-                <InputAdornment position="end" sx={{pt:'12px'}}>
+                <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnPhone ? (
                     <Pencel
                       className="name"
                       onClick={() => {
-                        clickPhone()
+                        clickPhone();
                       }}
                       edge="end"
                     ></Pencel>
@@ -229,7 +226,7 @@ function UserDataItem() {
         </Typography>
         <Typography variant="p" className="city" sx={styles.li}>
           City:{' '}
-          <FormControl variant="filled" sx={{ml:'auto',}}>
+          <FormControl variant="filled" sx={{ ml: 'auto' }}>
             <FilledInput
               id="city"
               sx={styles.input}
@@ -237,12 +234,12 @@ function UserDataItem() {
               inputRef={nameCity}
               defaultValue={city}
               endAdornment={
-                <InputAdornment position="end" sx={{pt:'12px'}}>
+                <InputAdornment position="end" sx={{ pt: '12px' }}>
                   {btnCity ? (
                     <Pencel
                       className="name"
                       onClick={() => {
-                        clickCity()
+                        clickCity();
                       }}
                       edge="end"
                     ></Pencel>
@@ -268,9 +265,3 @@ function UserDataItem() {
 }
 
 export default UserDataItem;
-// '&::before': {
-//       borderBottom: 'none',
-//     },
-//     '&:hover::before': {
-//       borderBottom: 'none',
-//     },

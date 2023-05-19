@@ -1,29 +1,49 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { getOneNotice } from 'redux/notices/noticesSelectors';
-import CATEGORY from 'utils/constants';
-import DialogContent from '@mui/material/DialogContent';
-import {
-  Button,
-  DialogActions,
-  Card,
-  CardMedia,
-  Box,
-  Typography,
-  List,
-  ListItem,
-  IconButton,
-} from '@mui/material';
-import { ReactComponent as IconHeart } from '../../../images/icons/heart-1.svg';
-import { ReactComponent as IconClose } from '../../../images/icons/cross-small-1.svg';
-import styles from './styles';
+import React, { useState } from 'react';
+import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
+import { toast } from 'react-toastify';
 // import { getFavorites } from 'redux/user/userSelectors';
+import { deleteFavoriteObj } from 'redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOneNotice } from 'redux/notices/noticesSelectors';
+import { Button, Card, CardMedia, DialogActions, DialogContent, IconButton, List, ListItem, Typography } from '@mui/material';
+import styles from './styles';
+import { Box } from '@mui/system';
+import CATEGORY from 'utils/constants';
+import { ReactComponent as IconClose } from '../../../images/icons/cross-small-1.svg';
+import { ReactComponent as IconHeart } from '../../../images/icons/heart-1.svg';
+import { getAccessToken } from 'redux/auth/authSelectors';
 
-function ModalNotice({ onClose, onhandleFavoriteClick }) {
+function ModalNotice({ noticeid, onClose }) {
+  const dispatch = useDispatch();
+  const favorites = useSelector(state => state.user.favorite);
+  const isFavorite = favorites.some((favorite) => favorite._id === noticeid);
+  const isLoggedIn = useSelector(getAccessToken);
+console.log("!!!!!!!!!favorites", favorites)
   const getOne = useSelector(getOneNotice);
-  // const isfavorite = useSelector(getFavorites);
+  const [isFavorites, setIsFavorites] = useState(false);
+  console.log(isFavorites)
+const handleFavoriteClick = () => {
+    if (!isLoggedIn) {
+      toast.info(
+        'You must be registered or logged in to continue the operation'
+      );
+      return;
+    }
 
+    if (isFavorite) {
+      toast.error('Removed from favorites');
+      dispatch(deleteFromFavorite(noticeid));
+      dispatch(deleteFavoriteObj(noticeid));
+      setIsFavorites(false);
+    } else {
+      toast('Added to favorites');
+      dispatch(addToFavorites(noticeid));
+      setIsFavorites(true);
+    }
+  };
+  
   const {
+    _id,
     image,
     name,
     comments,
@@ -55,14 +75,11 @@ function ModalNotice({ onClose, onhandleFavoriteClick }) {
           '& svg': {
             stroke: '#54ADFF',
           },
-          '&:hover': {
-            border: '1px solid #54ADFF',
-          },
         }}
       >
-        <IconClose/>
+        <IconClose />
       </IconButton>
-      <DialogContent>
+      <DialogContent >
         <Box sx={styles.content}>
           <CardMedia
             component="img"
@@ -139,14 +156,17 @@ function ModalNotice({ onClose, onhandleFavoriteClick }) {
           </Typography>
         </Box>
       </DialogContent>
-      <DialogActions>
+      <DialogActions >
         <Button
-          onClick={onhandleFavoriteClick}
+          onClick={() => {
+            handleFavoriteClick(_id)
+            onClose()
+          }} aria-label={isFavorite ? 'Remove from' : 'Add to'}
           sx={styles.button}
-          aria-label="add"
+
         >
-          {/* {!isfavorite ? "Remove from" : "Add to"} */}
-          Add to &nbsp;
+        {isFavorite ? 'Remove from' : 'Add to'}
+          &nbsp;
             <IconHeart width="24px"/>
         </Button>
         <Button sx={styles.button}>
@@ -168,3 +188,5 @@ function ModalNotice({ onClose, onhandleFavoriteClick }) {
 }
 
 export default ModalNotice;
+
+

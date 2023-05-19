@@ -1,9 +1,5 @@
 import { createTheme } from '@mui/material';
 
-// :hover
-// 'linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%)';
-// вписувати напряму в елемент sx={{ background: 'linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%)', }}
-
 const theme = createTheme({
   palette: {
     background: {
