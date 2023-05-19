@@ -34,8 +34,6 @@ import { addToFavorites, deleteFromFavorite } from 'redux/user/userOperations';
 import ModalApproveAction from 'components/Modal/ModalApproveAction/ModalApproveAction';
 import { getUserId } from 'redux/user/userSelectors';
 
-// import { useNavigate } from 'react-router-dom';
-
 const BootstrapDialog = styled(Dialog)(() => ({
   '& .MuiPaper-root': {
     borderRadius: '20px',
@@ -58,7 +56,6 @@ const BootstrapDialog = styled(Dialog)(() => ({
 const NoticeCategoryItem = ({ data, categoryName }) => {
   const { _id, image, category, title, location, sex, birthday, owner } =
     data || {};
-  // console.log(data)
 
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -160,7 +157,7 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
         {owner === userId && accessToken ? (
           <Box sx={styles.delete}>
             <IconButton>
-              <Busket noticeid={_id} onClick={handleDeleteModalOpen} />
+              <Busket noticeid={_id} onClick={handleDeleteModalOpen} stroke='#54ADFF'/>
             </IconButton>
           </Box>
         ) : (
@@ -188,18 +185,16 @@ const NoticeCategoryItem = ({ data, categoryName }) => {
         <CardContent sx={styles.content}>
           <Box>
             <Typography variant="h5" sx={styles.title}>
-              {title}
+             {title}
+              
             </Typography>
           </Box>
           <Box sx={styles.buttonWraper}>
-            <Button
-              type="button"
-              onClick={handleLearnMore}
-              sx={styles.button}
-              endIcon={<PawIcon fill="#54ADFF" />}
-            >
+           
+            <Button type="button" onClick={handleLearnMore} sx={styles.button} endIcon={<PawIcon fill='#54ADFF' />}>
               Learn more
             </Button>
+            
             <BootstrapDialog
               open={isModalOpen}
               onClose={onClose}

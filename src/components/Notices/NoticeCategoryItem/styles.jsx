@@ -2,18 +2,16 @@ const styles = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    // height: 456,
     minHeight: 'max-content',
     width: { mobile: '280px', tablet: '336px', desktop: '288px' },
     position: 'relative',
     borderRadius: '0px 0px 40px 40px',
     padding: '0px',
-    // marginTop: { mobile: '24px', tablet: '87px', desktop: '42px' }
+   '&:hover': {
+ boxShadow: 2,
+    },
   },
-  // wrapper: {
-  //   padding: 0,
-  //   marginTop: { mobile: '24px', tablet: '87px', desktop: '42px' },
-  // },
+
   media: {
     height: 288,
   },
@@ -27,6 +25,10 @@ const styles = {
     fontSize: '28px',
     lineHeight: '38px',
     fontFamily: 'typography.fontFamily',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+   
   },
   category: {
     position: 'absolute',
@@ -84,10 +86,13 @@ const styles = {
     alignItems: 'center',
     padding: '0 8px',
   },
+  
   buttonWraper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
   },
   button: {
     display: 'flex',
@@ -100,7 +105,6 @@ const styles = {
     position: 'absolute',
     width: '248px',
     height: '38px',
-    left: '16px',
     top: '394px',
 
     border: '2px solid #54ADFF',

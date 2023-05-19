@@ -1,50 +1,50 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { getAccessToken } from 'redux/auth/authSelectors';
-// import { ReactComponent as SmallCross } from '../../../images/icons/plus-small.svg';
-import { ReactComponent as Cross } from '../../../images/icons/plus.svg';
-import { styled } from '@mui/system';
-import { Box } from '@mui/material';
+import { Box, Button, Container } from '@mui/material';
 import styles from './styles';
+import AddPetButton from 'components/Button/AddPetButton/AddPetButton';
+import { NavLink as Routerlink } from 'react-router-dom';
 
-const StyledNavLink = styled(NavLink)(styles.link);
-const StyledAddLink = styled(NavLink)(styles.addButton);
 
 const NoticesCategoriesNavigation = () => {
   const accessToken = useSelector(getAccessToken);
 
   return (
+    <>
+      <Container sx={styles.container}>
     <Box sx={styles.navigationContainer}>
       <Box sx={styles.linksContainer}>
-        <StyledNavLink to="/notices/sell" activeclassname="active">
+        <Button sx={styles.link}
+            component={Routerlink} to="/notices/sell" activeclassname="active">
           sell
-        </StyledNavLink>
-        <StyledNavLink to="/notices/lost-found" activeclassname="active">
+        </Button>
+          <Button sx={styles.link}
+            component={Routerlink} to="/notices/lost-found" activeclassname="active">
           lost/found
-        </StyledNavLink>
-        <StyledNavLink to="/notices/for-free" activeclassname="active">
+        </Button>
+          <Button sx={styles.link}
+            component={Routerlink} to="/notices/for-free" activeclassname="active">
           in good hands
-        </StyledNavLink>
+        </Button>
         {accessToken && (
           <>
-            <StyledNavLink to="/notices/favorite" activeclassname="active">
+              <Button sx={styles.link}
+                component={Routerlink} to="/notices/favorite" activeclassname="active">
               favorite ads
-            </StyledNavLink>
-            <StyledNavLink to="/notices/owner" activeclassname="active">
+            </Button>
+              <Button sx={styles.link}
+                component={Routerlink} to="/notices/owner" activeclassname="active">
               my ads
-            </StyledNavLink>
+            </Button>
           </>
         )}
       </Box>
-      <Box sx={styles.addButtonContainer}>
-        <StyledAddLink to="/add-pet">
-          {/* <Cross className={styles.mobileIcon}/> */}
-          <Cross className={styles.icon} width="16px" height="16px" />
-          Add Pet
-        </StyledAddLink>
-      </Box>
-    </Box>
+      <AddPetButton/>
+        </Box>
+        </Container>
+    </>
+    
   );
 };
 

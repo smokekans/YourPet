@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import {  Box, Container } from '@mui/material';
 import Loader from 'components/Loader/Loader';
 import NoticesCategoriesList from 'components/Notices/NoticesCategoriesList/NoticesCategoriesList';
 import NoticesCategoriesNavigation from 'components/Notices/NoticesCategoriesNavigation/NoticesCategoriesNavigation';
@@ -22,7 +22,7 @@ import { getFavorites } from 'redux/user/userSelectors';
 import Typography from '@mui/material/Typography';
 import { NoticesPaginationFavorite } from 'components/Notices/NoticesPagination/NoticesPagination-favorites';
 import { NoticesPaginationMyads } from 'components/Notices/NoticesPagination/NoticesPagination-myAds';
-import NotFound from 'components/NotFound/NotFound';
+import NotFoundNotices from 'components/NotFound/NotFoundNotices';
 import { getAccessToken } from 'redux/auth/authSelectors';
 
 function NoticesPage() {
@@ -94,7 +94,7 @@ function NoticesPage() {
         {isLoading && accessToken ? (
           <Loader />
         ) : dataToRender && dataToRender.length === 0 ? (
-          <NotFound />
+          <NotFoundNotices />
         ) : (
           <NoticesCategoriesList
             categoryName={categoryName}
@@ -103,14 +103,16 @@ function NoticesPage() {
         )}
 
         {isLoading && <Loader />}
-      </Container>
+      <Box sx={{mt:'60px'}}>
       {categoryName === 'favorite' ? (
         <NoticesPaginationFavorite />
       ) : categoryName === 'owner' ? (
         <NoticesPaginationMyads />
       ) : (
         <NoticesPagination />
-      )}
+          )}
+          </Box>
+        </Container>
     </>
   );
 }

@@ -8,7 +8,6 @@ export const getNoticeByCategory = createAsyncThunk(
       const { data } = await axios.get(
         `/notices?category=${category}&page=${page}&limit=${limit}`
       );
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
