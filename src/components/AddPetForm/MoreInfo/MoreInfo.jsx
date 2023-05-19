@@ -9,7 +9,7 @@ import { BsGenderFemale, BsGenderMale } from 'react-icons/bs';
 import { ReactComponent as IconPlus } from '../../../images/icons/plus.svg';
 import { ReactComponent as IconBack } from '../../../images/icons/arrow-left.svg';
 import { ReactComponent as IconPaws } from '../../../images/icons/pawprint.svg';
-import { Box, Button, styled, TextField } from '@mui/material';
+import { Box, Button, styled, TextField, Typography } from '@mui/material';
 import styles from './styles';
 import { toast } from 'react-toastify';
 
@@ -48,14 +48,16 @@ const MoreInfo = ({ prevStep, setFormData }) => {
     prevStep();
   };
 
-  const onSubmit = async ({ resetForm }) => {
+  const onSubmit = async event => {
+    event.preventDefault();
     setFormData({ ...values, avatar: fileInput });
+    console.log(values);
     if (values.category === 'your-pet') {
       try {
         await dispatch(createPet({ values, accessToken, avatar: fileInput }));
         toast.success('Pet card created successfully');
         navigate('/user');
-        resetForm();
+        // resetForm();
       } catch (error) {
         toast.error(`Error creating pet card: ${error.message}`);
       }
@@ -66,10 +68,10 @@ const MoreInfo = ({ prevStep, setFormData }) => {
         );
         toast.success('Notice created successfully');
         navigate('/notices/owner');
-        resetForm();
       } catch (error) {
         toast.error(`Error creating notice: ${error.message}`);
       }
+      console.log(setFormData({ values }));
     }
   };
 
@@ -82,6 +84,11 @@ const MoreInfo = ({ prevStep, setFormData }) => {
             <>
               <p>The Sex</p>
               <label htmlFor="sex">
+                <Typography component="span">Female</Typography>
+
+                <span>
+                  <BsGenderFemale fill="#F43F5E" />
+                </span>
                 <Field
                   as={ValidationTextField}
                   type="radio"
@@ -89,19 +96,19 @@ const MoreInfo = ({ prevStep, setFormData }) => {
                   name="sex"
                   value="female"
                   alt="female"
-                  hidden
+                  // hidden
                   focused
                   onBlur={handleBlur}
                   error={!!(touched.sex && errors.sex)}
                   helperText={touched.sex && errors.sex ? errors.sex : ' '}
                   color={touched.sex && errors.sex ? 'error' : 'primary'}
                 />
-                <span>
-                  <BsGenderFemale fill="#F43F5E" />
-                </span>
-                <p>Female</p>
               </label>
               <label htmlFor="sex">
+                <Typography component="span">Male</Typography>
+                <span>
+                  <BsGenderMale fill="#54ADFF" />
+                </span>
                 <Field
                   as={ValidationTextField}
                   type="radio"
@@ -109,17 +116,13 @@ const MoreInfo = ({ prevStep, setFormData }) => {
                   name="sex"
                   value="male"
                   alt="male"
-                  hidden
+                  // hidden
                   focused
                   onBlur={handleBlur}
                   error={!!(touched.sex && errors.sex)}
                   helperText={touched.sex && errors.sex ? errors.sex : ' '}
                   color={touched.sex && errors.sex ? 'error' : 'primary'}
                 />
-                <span>
-                  <BsGenderMale fill="#54ADFF" />
-                </span>
-                <p>Male</p>
               </label>
             </>
           )}
@@ -136,7 +139,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
               <IconPlus />
             )}
             <Field
-              as={ValidationTextField}
+              // as={ValidationTextField}
               type="file"
               id="avatar"
               name="avatar"
@@ -182,7 +185,7 @@ const MoreInfo = ({ prevStep, setFormData }) => {
               <Field
                 as={ValidationTextField}
                 placeholder="Type of price"
-                type="number"
+                type="text"
                 id="price"
                 name="price"
                 focused

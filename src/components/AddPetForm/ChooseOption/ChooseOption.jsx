@@ -1,11 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Form,
-  // Field,
-  ErrorMessage,
-  useFormikContext,
-} from 'formik';
+import { Form, ErrorMessage, useFormikContext } from 'formik';
 import {
   Box,
   Button,
@@ -72,7 +67,7 @@ const ChooseOption = ({ nextStep, setTitle }) => {
           labelPlacement="end"
           onChange={handleChange}
         />
-        <ErrorMessage name="category" render={msg => <div>{msg}</div>} />
+        <ErrorMessage name="category" />
       </Box>
       <Box sx={styles.boxbtn}>
         <Button sx={styles.btn} type="button" onClick={handleCancelClick}>
