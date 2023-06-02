@@ -25,16 +25,6 @@ The Your Pet web application offers the following features:
 6.Partner Contacts:
   Users can access a directory of partner organizations or individuals who support animals.
   This section provides contact information, including phone numbers, email addresses, and website links.
-  
-Getting Started
-To run the Your Pet web application locally, follow these steps:
-
-Clone the repository from GitHub: git clone https://github.com/your-pet-app.git
-Navigate to the project directory: cd your-pet-app
-Install the necessary dependencies: npm install
-Configure the application settings, such as the database connection details, in the .env file.
-Start the application: npm start
-Access the application in your web browser at http://localhost:3000.
 
 Technologies Used
 Your Pet is built using the following technologies: 
